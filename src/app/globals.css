@@ -39,6 +39,22 @@ body {
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+
+    /* Font Size */
+    --font-size-hero: 48px;
+    --font-size-title: 40px;
+    --font-size-subtitle: 32px;
+    --font-size-heading: 24px;
+    --font-size-subheading: 20px;
+    --font-size-paragraph: 16px;
+    --font-size-caption: 14px;
+    --font-size-microtext: 12px;
+
+    /* Font Weight */
+    --font-weight-bold: 700;
+    --font-weight-semi-bold: 600;
+    --font-weight-regular: 400;
+    --font-weight-light: 300;
   }
   .dark {
     --background: 0 0% 3.9%;
