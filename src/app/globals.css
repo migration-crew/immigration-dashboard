@@ -40,6 +40,18 @@ body {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
 
+    /* Style Color */
+    --primary-red: #ad2320;
+    --primary-black: #000000;
+    --primary-gray: #f3f3f3;
+    --primary-white: #fff;
+    --dark-gray: #373737;
+    --medium-gray: #5e5e5e;
+    --gray: #cbcbcb;
+    --light-gray: #f5f6fa;
+    --green: #0c9986;
+    --blue: #4880ff;
+
     /* Font Size */
     --font-size-hero: 48px;
     --font-size-title: 40px;
