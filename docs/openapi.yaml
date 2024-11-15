@@ -1,0 +1,209 @@
+openapi: 3.0.0
+info:
+  title: "Dashboard API"
+  version: "1.0.0"
+  description: "Basically, a client doesn't need to pass a current user ID because we're gonna pass a token from Clerk which has a current user ID."
+tags:
+  - name: Inbox
+    description: Inbox section.
+  - name: Profile
+    description: Profile section.<br>(There is no API to create a user because it is created in Clerk dashboard.)
+
+security:
+  - BearerAuth: []
+
+paths:
+  /channels:
+    post:
+      summary: Create a new channel
+      tags: [ 'Inbox' ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                members:
+                  type: array
+                  items:
+                    type: string
+                  example: [ "userID1", "userID2" ]
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Channel'
+    get:
+      summary: Get all channels which the current user is a member of
+      tags: [ 'Inbox' ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Channel'
+  /channels/{channelId}/messages:
+    post:
+      summary: Create a new message
+      tags: [ 'Inbox' ]
+      parameters:
+        - name: channelId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+    get:
+      summary: Get messages info by channel id (Paginated)
+      tags: [ 'Inbox' ]
+      parameters:
+        - name: channelId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            example: 0
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            example: 20
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Message'
+  /user:
+    put:
+      summary: Update user
+      tags: [ 'Profile' ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPutRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    get:
+      summary: Get user info by id
+      tags: [ 'Profile' ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+components:
+  schemas:
+    UserPutRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        nationality:
+          type: string
+        language:
+          type: string
+        address:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        gender:
+          type: string
+        email:
+          type: string
+          format: email
+        imageURl:
+          type: string
+          format: uri
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        nationality:
+          type: string
+        language:
+          type: string
+        address:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        gender:
+          type: string
+        email:
+          type: string
+          format: email
+        imageURl:
+          type: string
+          format: uri
+    Channel:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        user:
+          $ref: '#/components/schemas/User'
