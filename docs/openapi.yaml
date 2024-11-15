@@ -6,6 +6,8 @@ info:
 tags:
   - name: Application
     description: Application section.
+  - name: Calendar
+    description: Calendar section.
   - name: Appointment
     description: Appointment section.
   - name: Inbox
@@ -17,6 +19,36 @@ security:
   - BearerAuth: []
 
 paths:
+  /events:
+    post:
+      summary: Create a new event
+      tags: [ 'Calendar' ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EventPostRequest"
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+    get:
+      summary: Get all events
+      tags: [ 'Calendar' ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  $ref: "#/components/schemas/Event"
   /applications:
     get:
       summary: Get all applications
@@ -390,4 +422,35 @@ components:
     ApplicationTaskPutRequest:
       properties:
         status:
+          type: string
+    Event:
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+        duration:
+          type: integer
+        description:
+          type: string
+        format:
+          type: string
+        appointmentType:
+          $ref: '#/components/schemas/AppointmentType'
+    EventPostRequest:
+      type: object
+      properties:
+        title:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+        description:
+          type: string
+        format:
+          type: string
+        appointmentTypeId:
           type: string
