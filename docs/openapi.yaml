@@ -6,6 +6,8 @@ info:
 tags:
   - name: Application
     description: Application section.
+  - name: Payment
+    description: Payment section.
   - name: Calendar
     description: Calendar section.
   - name: Appointment
@@ -19,6 +21,48 @@ security:
   - BearerAuth: []
 
 paths:
+  /payments:
+    post:
+      summary: Create a new payment
+      tags: [ 'Payment' ]
+      parameters:
+        - name: applicationId
+          in: query
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PaymentPostRequest"
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Payment"
+    get:
+      summary: Get all payments
+      tags: [ 'Payment' ]
+      parameters:
+        - name: applicationId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  $ref: "#/components/schemas/Payment"
   /events:
     post:
       summary: Create a new event
@@ -63,13 +107,13 @@ paths:
                 items:
                   type: object
                   $ref: "#/components/schemas/Application"
-  /applications/{applicationId}/tasks:
+  /applications/tasks:
     get:
       summary: Get an application
       tags: [ 'Application' ]
       parameters:
         - name: applicationId
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -83,18 +127,17 @@ paths:
                 items:
                   type: object
                   $ref: "#/components/schemas/ApplicationTask"
-  /applications/{applicationId}/tasks/{taskId}:
     put:
       summary: Update an application task
       tags: [ 'Application' ]
       parameters:
         - name: applicationId
-          in: path
+          in: query
           required: true
           schema:
             type: string
         - name: taskId
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -454,3 +497,39 @@ components:
           type: string
         appointmentTypeId:
           type: string
+    
+    Payment:
+      type: object
+      properties:
+        id:
+          type: string
+        amount:
+          type: integer
+          example: 150
+        currency:
+          type: string
+          example: "CAD"
+        status:
+          type: string
+          example: "paid"
+        paymentMethod:
+          type: string
+          example: "credit card"
+        createdAt:
+          type: string
+          format: date-time
+        invoice:
+          type: string
+          format: uri
+    PaymentPostRequest:
+      type: object
+      properties:
+        amount:
+          type: integer
+          example: 150
+        currency:
+          type: string
+          example: "CAD"
+        paymentMethod:
+          type: string
+          example: "credit card"
