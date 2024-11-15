@@ -8,6 +8,8 @@ tags:
     description: Application section.
   - name: Payment
     description: Payment section.
+  - name: Document
+    description: Document section.
   - name: Calendar
     description: Calendar section.
   - name: Appointment
@@ -21,6 +23,54 @@ security:
   - BearerAuth: []
 
 paths:
+  /documents:
+    get:
+      summary: Get all documents
+      tags: [ 'Document' ]
+      parameters:
+        - name: applicationId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  $ref: "#/components/schemas/Document"
+    put:
+      summary: Update a document
+      tags: [ 'Document' ]
+      parameters:
+        - name: applicationId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: documentId
+          in: query
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DocumentPutRequest"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/Document"
   /payments:
     post:
       summary: Create a new payment
@@ -533,3 +583,29 @@ components:
         paymentMethod:
           type: string
           example: "credit card"
+    Document:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        format:
+          type: string
+        status:
+          type: string
+        dueDate:
+          type: string
+          format: date
+        url:
+          type: string
+          format: uri
+    DocumentPutRequest:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "submitted"
+        documentURL:
+          type: string
+          format: uri
