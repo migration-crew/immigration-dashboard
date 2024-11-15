@@ -4,6 +4,8 @@ info:
   version: "1.0.0"
   description: "Basically, a client doesn't need to pass a current user ID because we're gonna pass a token from Clerk which has a current user ID and user role."
 tags:
+  - name: Application
+    description: Application section.
   - name: Appointment
     description: Appointment section.
   - name: Inbox
@@ -15,6 +17,70 @@ security:
   - BearerAuth: []
 
 paths:
+  /applications:
+    get:
+      summary: Get all applications
+      tags: [ 'Application' ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  $ref: "#/components/schemas/Application"
+  /applications/{applicationId}/tasks:
+    get:
+      summary: Get an application
+      tags: [ 'Application' ]
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  $ref: "#/components/schemas/ApplicationTask"
+  /applications/{applicationId}/tasks/{taskId}:
+    put:
+      summary: Update an application task
+      tags: [ 'Application' ]
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApplicationTaskPutRequest"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/ApplicationTask"
+
   /appointments/types:
     get:
       summary: Get an appointment type
@@ -282,3 +348,46 @@ components:
           format: date-time
         user:
           $ref: '#/components/schemas/User'
+    
+    Application:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    ApplicationTask:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        dueDate:
+          type: string
+          format: date
+        comments:
+          type: array
+          items:
+            type: object
+            $ref: "#/components/schemas/ApplicationComment"
+        documentURLs:
+          type: array
+          items:
+            type: string
+            format: uri
+    ApplicationComment:
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    ApplicationTaskPutRequest:
+      properties:
+        status:
+          type: string
