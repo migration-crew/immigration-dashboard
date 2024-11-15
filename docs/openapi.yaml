@@ -2,8 +2,10 @@ openapi: 3.0.0
 info:
   title: "Dashboard API"
   version: "1.0.0"
-  description: "Basically, a client doesn't need to pass a current user ID because we're gonna pass a token from Clerk which has a current user ID."
+  description: "Basically, a client doesn't need to pass a current user ID because we're gonna pass a token from Clerk which has a current user ID and user role."
 tags:
+  - name: Appointment
+    description: Appointment section.
   - name: Inbox
     description: Inbox section.
   - name: Profile
@@ -13,9 +15,42 @@ security:
   - BearerAuth: []
 
 paths:
+  /appointments/types:
+    get:
+      summary: Get an appointment type
+      tags: [ 'Appointment' ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  $ref: '#/components/schemas/AppointmentType'
+  /appointments:
+    post:
+      summary: Create a new appointment
+      tags: [ 'Appointment' ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: '#/components/schemas/AppointmentPostRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/Appointment'
   /channels:
     post:
-      summary: Create a new channel
+      summary: Create a new channel. Only admin users can create.
       tags: [ 'Inbox' ]
       requestBody:
         required: true
@@ -203,6 +238,46 @@ components:
         content:
           type: string
         createdAt:
+          type: string
+          format: date-time
+        user:
+          $ref: '#/components/schemas/User'
+    
+    AppointmentType:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        duration:
+          type: integer
+          example: 50
+        currency:
+          type: string
+          example: "CAD"
+        price:
+          type: integer
+          example: 150
+    AppointmentPostRequest:
+      type: object
+      properties:
+        appointmentTypeId:
+          type: string
+        date:
+          type: string
+          format: date-time
+        userId:
+          type: string
+          description: We're gonna differentiate the user role by the token from Clerk.
+    Appointment:
+      type: object
+      properties:
+        id:
+          type: string
+        appointmentType:
+          $ref: '#/components/schemas/AppointmentType'
+        date:
           type: string
           format: date-time
         user:
