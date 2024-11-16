@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: "Dashboard API"
   version: "1.0.0"
-  description: "Basically, a client doesn't need to pass a current user ID because we're gonna pass a token from Clerk which has a current user ID and user role."
+  description: "Basically, a client doesn't need to pass a current user ID because we're gonna pass a token from Clerk which has a current user ID and user role.<br> To record all updates, most of post and put APIs should update event table. (e.g. Update a document, Update an application task to show in Latest Updates in dashboard section.)"
 tags:
   - name: Application
     description: Application section.
@@ -72,28 +72,28 @@ paths:
                 type: object
                 $ref: "#/components/schemas/Document"
   /payments:
-    post:
-      summary: Create a new payment
-      tags: [ 'Payment' ]
-      parameters:
-        - name: applicationId
-          in: query
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PaymentPostRequest"
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Payment"
+    # post:
+    #   summary: Create a new payment
+    #   tags: [ 'Payment' ]
+    #   parameters:
+    #     - name: applicationId
+    #       in: query
+    #       required: true
+    #       schema:
+    #         type: string
+    #   requestBody:
+    #     required: true
+    #     content:
+    #       application/json:
+    #         schema:
+    #           $ref: "#/components/schemas/PaymentPostRequest"
+    #   responses:
+    #     '201':
+    #       description: Created
+    #       content:
+    #         application/json:
+    #           schema:
+    #             $ref: "#/components/schemas/Payment"
     get:
       summary: Get all payments
       tags: [ 'Payment' ]
@@ -114,22 +114,22 @@ paths:
                   type: object
                   $ref: "#/components/schemas/Payment"
   /events:
-    post:
-      summary: Create a new event
-      tags: [ 'Calendar' ]
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/EventPostRequest"
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Event"
+    # post:
+    #   summary: Create a new event
+    #   tags: [ 'Calendar' ]
+    #   requestBody:
+    #     required: true
+    #     content:
+    #       application/json:
+    #         schema:
+    #           $ref: "#/components/schemas/EventPostRequest"
+    #   responses:
+    #     '201':
+    #       description: Created
+    #       content:
+    #         application/json:
+    #           schema:
+    #             $ref: "#/components/schemas/Event"
     get:
       summary: Get all events
       tags: [ 'Calendar' ]
@@ -143,6 +143,24 @@ paths:
                 items:
                   type: object
                   $ref: "#/components/schemas/Event"
+  /events/availability:
+    post:
+      summary: Register admin user's availability
+      tags: [ 'Calendar' ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AvailabilityPostRequest"
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/Availability"
   /applications:
     get:
       summary: Get all applications
@@ -234,6 +252,30 @@ paths:
       responses:
         '201':
           description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/Appointment'
+    put:
+      summary: Update an appointment
+      tags: [ 'Appointment' ]
+      parameters:
+        - name: appointmentId
+          in: query
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: '#/components/schemas/AppointmentPutRequest'
+      responses:
+        '200':
+          description: OK
           content:
             application/json:
               schema:
@@ -480,6 +522,8 @@ components:
           type: string
         name:
           type: string
+        type:
+          type: string
     ApplicationTask:
       properties:
         id:
@@ -568,7 +612,7 @@ components:
         createdAt:
           type: string
           format: date-time
-        invoice:
+        invoiceURL:
           type: string
           format: uri
     PaymentPostRequest:
@@ -609,3 +653,29 @@ components:
         documentURL:
           type: string
           format: uri
+    AvailabilityPostRequest:
+      type: object
+      properties:
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+    Availability:
+      type: object
+      properties:
+        id:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+    AppointmentPutRequest:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
