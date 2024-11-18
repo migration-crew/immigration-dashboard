@@ -19,30 +19,17 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 
-const frameworks = [
-  {
-    value: "next.js",
-    label: "Next.js",
-  },
-  {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
-];
+export type Props = {
+  className?: string;
+  applications: ApplicationType[];
+};
 
-function ApplicationSwitcher() {
+export type ApplicationType = {
+  value: string;
+  label: string;
+};
+
+function ApplicationSwitcher({ applications }: Props) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
 
@@ -56,7 +43,8 @@ function ApplicationSwitcher() {
           className="w-[200px] justify-between"
         >
           {value
-            ? frameworks.find((framework) => framework.value === value)?.label
+            ? applications.find((application) => application.value === value)
+                ?.label
             : "Select framework..."}
           <ChevronsUpDown className="opacity-50" />
         </Button>
@@ -67,20 +55,20 @@ function ApplicationSwitcher() {
           <CommandList>
             <CommandEmpty>No framework found.</CommandEmpty>
             <CommandGroup>
-              {frameworks.map((framework) => (
+              {applications.map((application) => (
                 <CommandItem
-                  key={framework.value}
-                  value={framework.value}
+                  key={application.value}
+                  value={application.value}
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue);
                     setOpen(false);
                   }}
                 >
-                  {framework.label}
+                  {application.label}
                   <Check
                     className={cn(
                       "ml-auto",
-                      value === framework.value ? "opacity-100" : "opacity-0"
+                      value === application.value ? "opacity-100" : "opacity-0"
                     )}
                   />
                 </CommandItem>
