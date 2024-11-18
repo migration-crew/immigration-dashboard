@@ -41,6 +41,9 @@ const YukiPage = () => {
 
     <Button>default</Button>
     <Button disabled>default disabled</Button>
+
+    <Button variant="secondary">secondary</Button>
+    <Button variant="secondary" disabled>secondary disabled</Button>
     </div>
   )
 }
