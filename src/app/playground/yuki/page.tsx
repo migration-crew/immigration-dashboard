@@ -15,11 +15,12 @@ import { Subtitle } from '@/components/common/text/Subtitle'
 import { SubtitleRegular } from '@/components/common/text/SubtitleRegular'
 import { Title } from '@/components/common/text/Title'
 import { TitleLight } from '@/components/common/text/TitleLight'
+import { Button } from '@/components/ui/upImmigrationButton'
 import React from 'react'
 
 const YukiPage = () => {
   return (
-    <>
+    <div className='bg-primary-gray'>
     <Hero>Hero</Hero>
     <HeroLight>HeroLight</HeroLight>
     <Title>Title</Title>
@@ -37,7 +38,10 @@ const YukiPage = () => {
     <CaptionSemi>CaptionSemi</CaptionSemi>
     <Microtext>Microtext</Microtext>
     <MicrotextSemi>MicrotextSemi</MicrotextSemi>
-    </>
+
+    <Button>default</Button>
+    <Button disabled>default disabled</Button>
+    </div>
   )
 }
 
