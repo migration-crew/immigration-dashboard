@@ -20,7 +20,7 @@ export function BreadcrumbListComponent({ links }: Props) {
         const isLast = index === links.length - 1;
         return (
           <React.Fragment key={link.href}>
-            <BreadcrumbItem>
+            <BreadcrumbItem className="text-primary-black">
               {isLast ? (
                 <BreadcrumbPage className="text-primary-red">
                   <HeadingSemi>{link.name}</HeadingSemi>
