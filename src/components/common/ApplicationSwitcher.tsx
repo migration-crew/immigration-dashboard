@@ -1,8 +1,5 @@
 "use client";
 
-import { Check, ChevronDown, ChevronUp } from "lucide-react";
-import * as React from "react";
-
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -18,6 +15,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { Check } from "lucide-react";
+import * as React from "react";
+import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 
 export type Props = {
   className?: string;
@@ -60,9 +60,9 @@ function ApplicationSwitcher({ applications }: Props) {
               )?.label
             : "Choose your application..."}
           {open ? (
-            <ChevronUp className="ml-2 h-4 w-4 shrink-0 opacity-50 transition-transform" />
+            <IoMdArrowDropup className="ml-2 h-4 w-4 shrink-0 opacity-50 transition-transform" />
           ) : (
-            <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50 transition-transform" />
+            <IoMdArrowDropdown className="ml-2 h-4 w-4 shrink-0 opacity-50 transition-transform" />
           )}
         </Button>
       </PopoverTrigger>
