@@ -1,0 +1,681 @@
+openapi: 3.0.0
+info:
+  title: "Dashboard API"
+  version: "1.0.0"
+  description: "Basically, a client doesn't need to pass a current user ID because we're gonna pass a token from Clerk which has a current user ID and user role.<br> To record all updates, most of post and put APIs should update event table. (e.g. Update a document, Update an application task to show in Latest Updates in dashboard section.)"
+tags:
+  - name: Application
+    description: Application section.
+  - name: Payment
+    description: Payment section.
+  - name: Document
+    description: Document section.
+  - name: Calendar
+    description: Calendar section.
+  - name: Appointment
+    description: Appointment section.
+  - name: Inbox
+    description: Inbox section.
+  - name: Profile
+    description: Profile section.<br>(There is no API to create a user because it is created in Clerk dashboard.)
+
+security:
+  - BearerAuth: []
+
+paths:
+  /documents:
+    get:
+      summary: Get all documents
+      tags: [ 'Document' ]
+      parameters:
+        - name: applicationId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  $ref: "#/components/schemas/Document"
+    put:
+      summary: Update a document
+      tags: [ 'Document' ]
+      parameters:
+        - name: applicationId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: documentId
+          in: query
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DocumentPutRequest"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/Document"
+  /payments:
+    # post:
+    #   summary: Create a new payment
+    #   tags: [ 'Payment' ]
+    #   parameters:
+    #     - name: applicationId
+    #       in: query
+    #       required: true
+    #       schema:
+    #         type: string
+    #   requestBody:
+    #     required: true
+    #     content:
+    #       application/json:
+    #         schema:
+    #           $ref: "#/components/schemas/PaymentPostRequest"
+    #   responses:
+    #     '201':
+    #       description: Created
+    #       content:
+    #         application/json:
+    #           schema:
+    #             $ref: "#/components/schemas/Payment"
+    get:
+      summary: Get all payments
+      tags: [ 'Payment' ]
+      parameters:
+        - name: applicationId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  $ref: "#/components/schemas/Payment"
+  /events:
+    # post:
+    #   summary: Create a new event
+    #   tags: [ 'Calendar' ]
+    #   requestBody:
+    #     required: true
+    #     content:
+    #       application/json:
+    #         schema:
+    #           $ref: "#/components/schemas/EventPostRequest"
+    #   responses:
+    #     '201':
+    #       description: Created
+    #       content:
+    #         application/json:
+    #           schema:
+    #             $ref: "#/components/schemas/Event"
+    get:
+      summary: Get all events
+      tags: [ 'Calendar' ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  $ref: "#/components/schemas/Event"
+  /events/availability:
+    post:
+      summary: Register admin user's availability
+      tags: [ 'Calendar' ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AvailabilityPostRequest"
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/Availability"
+  /applications:
+    get:
+      summary: Get all applications
+      tags: [ 'Application' ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  $ref: "#/components/schemas/Application"
+  /applications/tasks:
+    get:
+      summary: Get an application
+      tags: [ 'Application' ]
+      parameters:
+        - name: applicationId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  $ref: "#/components/schemas/ApplicationTask"
+    put:
+      summary: Update an application task
+      tags: [ 'Application' ]
+      parameters:
+        - name: applicationId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: taskId
+          in: query
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApplicationTaskPutRequest"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/ApplicationTask"
+
+  /appointments/types:
+    get:
+      summary: Get an appointment type
+      tags: [ 'Appointment' ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  $ref: '#/components/schemas/AppointmentType'
+  /appointments:
+    post:
+      summary: Create a new appointment
+      tags: [ 'Appointment' ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: '#/components/schemas/AppointmentPostRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/Appointment'
+    put:
+      summary: Update an appointment
+      tags: [ 'Appointment' ]
+      parameters:
+        - name: appointmentId
+          in: query
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: '#/components/schemas/AppointmentPutRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/Appointment'
+  /channels:
+    post:
+      summary: Create a new channel. Only admin users can create.
+      tags: [ 'Inbox' ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                members:
+                  type: array
+                  items:
+                    type: string
+                  example: [ "userID1", "userID2" ]
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Channel'
+    get:
+      summary: Get all channels which the current user is a member of
+      tags: [ 'Inbox' ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Channel'
+  /channels/{channelId}/messages:
+    post:
+      summary: Create a new message
+      tags: [ 'Inbox' ]
+      parameters:
+        - name: channelId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+    get:
+      summary: Get messages info by channel id (Paginated)
+      tags: [ 'Inbox' ]
+      parameters:
+        - name: channelId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            example: 0
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            example: 20
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Message'
+  /user:
+    put:
+      summary: Update user
+      tags: [ 'Profile' ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPutRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    get:
+      summary: Get user info by id
+      tags: [ 'Profile' ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+components:
+  schemas:
+    UserPutRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        nationality:
+          type: string
+        language:
+          type: string
+        address:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        gender:
+          type: string
+        email:
+          type: string
+          format: email
+        imageURl:
+          type: string
+          format: uri
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        nationality:
+          type: string
+        language:
+          type: string
+        address:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        gender:
+          type: string
+        email:
+          type: string
+          format: email
+        imageURl:
+          type: string
+          format: uri
+    Channel:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        user:
+          $ref: '#/components/schemas/User'
+    
+    AppointmentType:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        duration:
+          type: integer
+          example: 50
+        currency:
+          type: string
+          example: "CAD"
+        price:
+          type: integer
+          example: 150
+    AppointmentPostRequest:
+      type: object
+      properties:
+        appointmentTypeId:
+          type: string
+        date:
+          type: string
+          format: date-time
+        userId:
+          type: string
+          description: We're gonna differentiate the user role by the token from Clerk.
+    Appointment:
+      type: object
+      properties:
+        id:
+          type: string
+        appointmentType:
+          $ref: '#/components/schemas/AppointmentType'
+        date:
+          type: string
+          format: date-time
+        user:
+          $ref: '#/components/schemas/User'
+    
+    Application:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+    ApplicationTask:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        dueDate:
+          type: string
+          format: date
+        comments:
+          type: array
+          items:
+            type: object
+            $ref: "#/components/schemas/ApplicationComment"
+        documentURLs:
+          type: array
+          items:
+            type: string
+            format: uri
+    ApplicationComment:
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    ApplicationTaskPutRequest:
+      properties:
+        status:
+          type: string
+    Event:
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+        duration:
+          type: integer
+        description:
+          type: string
+        format:
+          type: string
+        appointmentType:
+          $ref: '#/components/schemas/AppointmentType'
+    EventPostRequest:
+      type: object
+      properties:
+        title:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+        description:
+          type: string
+        format:
+          type: string
+        appointmentTypeId:
+          type: string
+    
+    Payment:
+      type: object
+      properties:
+        id:
+          type: string
+        amount:
+          type: integer
+          example: 150
+        currency:
+          type: string
+          example: "CAD"
+        status:
+          type: string
+          example: "paid"
+        paymentMethod:
+          type: string
+          example: "credit card"
+        createdAt:
+          type: string
+          format: date-time
+        invoiceURL:
+          type: string
+          format: uri
+    PaymentPostRequest:
+      type: object
+      properties:
+        amount:
+          type: integer
+          example: 150
+        currency:
+          type: string
+          example: "CAD"
+        paymentMethod:
+          type: string
+          example: "credit card"
+    Document:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        format:
+          type: string
+        status:
+          type: string
+        dueDate:
+          type: string
+          format: date
+        url:
+          type: string
+          format: uri
+    DocumentPutRequest:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "submitted"
+        documentURL:
+          type: string
+          format: uri
+    AvailabilityPostRequest:
+      type: object
+      properties:
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+    Availability:
+      type: object
+      properties:
+        id:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+    AppointmentPutRequest:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
