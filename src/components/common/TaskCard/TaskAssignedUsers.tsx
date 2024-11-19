@@ -7,7 +7,7 @@ type Props = {
 
 export function TaskAssignedUsers({ assignedUsers }: Props) {
   return (
-    <ul className="flex gap-1 items-center">
+    <ul className="flex gap-1 items-center w-[100px] justify-end">
       {assignedUsers.map((user) => (
         <li key={user._id}>
           <Avatar>
