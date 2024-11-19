@@ -71,7 +71,7 @@ function ApplicationSwitcher({ applications }: Props) {
             )}
           >
             {globalApplications.find((application) => application.id === value)
-              ?.label || "Loading..."}
+              ?.label || <Caption>Loading...</Caption>}
             {open ? (
               <IoMdArrowDropup className="ml-2 h-4 w-4 shrink-0 opacity-50 transition-transform" />
             ) : (
@@ -97,7 +97,7 @@ function ApplicationSwitcher({ applications }: Props) {
                       }
                     }}
                   >
-                    All Applications
+                    <Caption>All Applications</Caption>
                     <Check
                       className={cn(
                         "ml-auto",
@@ -119,7 +119,7 @@ function ApplicationSwitcher({ applications }: Props) {
                       }
                     }}
                   >
-                    {application.label}
+                    <Caption>{application.label}</Caption>
                     <Check
                       className={cn(
                         "ml-auto",
