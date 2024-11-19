@@ -1,6 +1,5 @@
-import ApplicationSwitcher, {
-  ApplicationType,
-} from "@/components/common/ApplicationSwitcher";
+import ApplicationSwitcher from "@/components/common/ApplicationSwitcher";
+import { ApplicationType } from "@/types/ApplicationType";
 
 const applications: ApplicationType[] = [
   {

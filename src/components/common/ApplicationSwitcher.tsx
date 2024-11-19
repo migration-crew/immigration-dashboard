@@ -15,6 +15,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { ApplicationType } from "@/types/ApplicationType";
 import { Check } from "lucide-react";
 import * as React from "react";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
@@ -22,12 +23,6 @@ import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 export type Props = {
   className?: string;
   applications: ApplicationType[];
-};
-
-export type ApplicationType = {
-  id: string;
-  label: string;
-  date: string;
 };
 
 function ApplicationSwitcher({ applications }: Props) {
