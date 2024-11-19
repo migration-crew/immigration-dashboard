@@ -16,7 +16,7 @@ export function PageContainer({ children, className }: Props) {
   return (
     <div
       className={cn(
-        "flex flex-col gap-[18px] p-6 bg-primary-gray h-screen",
+        "flex flex-col gap-[18px] grow p-6 bg-primary-gray",
         className
       )}
     >
