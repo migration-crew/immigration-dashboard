@@ -38,7 +38,7 @@ const YukiPage = () => {
       <Microtext>Microtext</Microtext>
       <MicrotextSemi>MicrotextSemi</MicrotextSemi>
 
-      <div className="">
+      <div className="border-task-red border-2 p-3">
         <Button>default</Button>
         <Button disabled>default disabled</Button>
 
