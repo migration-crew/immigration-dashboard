@@ -4,6 +4,11 @@ import ApplicationSwitcher, {
 
 const applications: ApplicationType[] = [
   {
+    value: "All Applications",
+    label: "All Applications",
+    date: "3323-06-15",
+  },
+  {
     value: "Maria_CICCC_ESL",
     label: "Maria_CICCC_ESL",
     date: "2023-06-15",

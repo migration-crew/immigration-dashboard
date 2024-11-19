@@ -77,8 +77,10 @@ function ApplicationSwitcher({ applications }: Props) {
                   key={application.value}
                   value={application.value}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue);
-                    setOpen(false);
+                    if (currentValue !== value) {
+                      setValue(currentValue);
+                      setOpen(false);
+                    }
                   }}
                 >
                   {application.label}
