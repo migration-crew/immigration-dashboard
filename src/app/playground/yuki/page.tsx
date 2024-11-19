@@ -1,3 +1,4 @@
+import { UploadDocumentModal } from "@/app/documents/[applicationID]/_components/UploadDocumentModal";
 import { Caption } from "@/components/common/text/Caption";
 import { CaptionSemi } from "@/components/common/text/CaptionSemi";
 import { Heading } from "@/components/common/text/Heading";
@@ -53,6 +54,10 @@ const YukiPage = () => {
           green disabled
         </Button>
       </div>
+      <UploadDocumentModal status="NotSubmitted" />
+      <UploadDocumentModal status="PendingApproval" />
+      <UploadDocumentModal status="Approved" />
+      <UploadDocumentModal status="Rejected" />
     </div>
   );
 };
