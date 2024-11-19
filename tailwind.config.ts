@@ -20,6 +20,7 @@ const config: Config = {
         "secondary-light-gray": "var(--light-gray)",
         "secondary-green": "var(--green)",
         "secondary-blue": "var(--blue)",
+        "task-red": "var(--task-red)",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
