@@ -25,7 +25,7 @@ export type Props = {
 };
 
 export type ApplicationType = {
-  value: string;
+  id: string;
   label: string;
   date: string;
 };
@@ -54,9 +54,8 @@ function ApplicationSwitcher({ applications }: Props) {
           )}
         >
           {value
-            ? sortedApplications.find(
-                (application) => application.value === value
-              )?.label
+            ? sortedApplications.find((application) => application.id === value)
+                ?.label
             : "Choose your application..."}
           {open ? (
             <IoMdArrowDropup className="ml-2 h-4 w-4 shrink-0 opacity-50 transition-transform" />
@@ -73,8 +72,8 @@ function ApplicationSwitcher({ applications }: Props) {
             <CommandGroup>
               {sortedApplications.map((application) => (
                 <CommandItem
-                  key={application.value}
-                  value={application.value}
+                  key={application.id}
+                  value={application.id}
                   onSelect={(currentValue) => {
                     if (currentValue !== value) {
                       setValue(currentValue);
@@ -86,7 +85,7 @@ function ApplicationSwitcher({ applications }: Props) {
                   <Check
                     className={cn(
                       "ml-auto",
-                      value === application.value ? "opacity-100" : "opacity-0"
+                      value === application.id ? "opacity-100" : "opacity-0"
                     )}
                   />
                 </CommandItem>
