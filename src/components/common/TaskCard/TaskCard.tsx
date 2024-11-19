@@ -46,7 +46,7 @@ export function TaskCard({
       key={taskId}
       onClick={onClick}
       className={cn(
-        `${"flex flex-col gap-3 p-6 w-[280px] rounded-none cursor-pointer hover:border-2 hover:border-red-500 hover:border-opacity-40 duration-100"}`,
+        `${"flex flex-col gap-3 p-6 w-[280px] rounded-none cursor-pointer hover:border-2 hover:border-task-red duration-100"}`,
         className
       )}
     >
