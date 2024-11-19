@@ -31,9 +31,6 @@ export type ApplicationType = {
 };
 
 function ApplicationSwitcher({ applications }: Props) {
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
-
   const sortedApplications = React.useMemo(
     () =>
       [...(applications || [])].sort(
@@ -41,6 +38,8 @@ function ApplicationSwitcher({ applications }: Props) {
       ),
     [applications]
   );
+  const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState(`${sortedApplications[0].label}`);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
