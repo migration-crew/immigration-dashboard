@@ -16,16 +16,10 @@ import { Button } from "@/components/ui/upImmigrationButton";
 import { Card } from "@/components/ui/card";
 
 const formSchema = z.object({
-  form: z.string().min(2, {
-    message: "at least 2 characters.",
-  }),
-  document: z.string().min(2, {
-    message: "at least 2 characters.",
-  }),
-  date: z.string().min(2, {
-    message: "at least 2 characters.",
-  }),
-});
+  form: z.string(),
+  document: z.string(),
+  date: z.string()
+}).required();
 
 export function NewDocForm2() {
   const form = useForm<z.infer<typeof formSchema>>({
