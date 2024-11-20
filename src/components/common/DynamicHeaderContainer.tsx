@@ -11,7 +11,7 @@ export default function DynamicHeaderContainer({
 }: Props) {
   return (
     <>
-      <Card className="w-[280px] h-[49px] rounded-t-2xl">
+      <Card className="w-[280px] rounded-2xl">
         <CardHeader className="bg-secondary-medium-gray text-primary-white rounded-t-2xl">
           {headerChildren}
         </CardHeader>
