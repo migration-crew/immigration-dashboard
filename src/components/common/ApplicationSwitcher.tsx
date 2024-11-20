@@ -70,23 +70,29 @@ function ApplicationSwitcher({ applications, className }: Props) {
             role="combobox"
             aria-expanded={open}
             className={cn(
-              "w-[337px] h-[37px] pt-[11px] pr-[141px] pb-[10px] pl-[25px] justify-between shadow-md hover:shadow-lg transition-shadow duration-200",
-              "hover:bg-accent hover:text-accent-foreground",
+              "w-[337px] h-[37px] pt-[11px] pr-[141px] pb-[10px] pl-[25px] flex flex-row justify-between shadow-md hover:shadow-lg transition-shadow duration-200",
               className
             )}
           >
-            {globalApplications.find((application) => application.id === value)
-              ?.label || <Caption>Loading...</Caption>}
-            <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Vector-xDHm6Wme9hrg7GtHzQjgve2DBtYdkq.svg"
-              alt="dropdown arrow"
-              height={9}
-              width={14}
-              className={cn(
-                "ml-44 shrink-0 opacity-50 transition-transform",
-                open && "rotate-180"
-              )}
-            />
+            <div className="w-full h-full justify-between flex float-start">
+              <div className="w-[90%] flex justify-start">
+                {globalApplications.find(
+                  (application) => application.id === value
+                )?.label || <Caption>Loading...</Caption>}
+              </div>
+              <div className="w-[10%] flex align-middle justify-center">
+                <Image
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Vector-xDHm6Wme9hrg7GtHzQjgve2DBtYdkq.svg"
+                  alt="dropdown arrow"
+                  height={9}
+                  width={14}
+                  className={cn(
+                    "shrink-0 opacity-50 transition-transform",
+                    open && "rotate-180"
+                  )}
+                />
+              </div>
+            </div>
           </Button>
         </PopoverTrigger>
         <PopoverContent className={cn("w-[337px] p-0", className)}>
@@ -113,8 +119,7 @@ function ApplicationSwitcher({ applications, className }: Props) {
                         "ml-auto",
                         value === allApplications.id
                           ? "opacity-100"
-                          : "opacity-0",
-                        className
+                          : "opacity-0"
                       )}
                     />
                   </CommandItem>
