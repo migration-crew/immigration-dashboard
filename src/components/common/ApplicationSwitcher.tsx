@@ -70,28 +70,26 @@ function ApplicationSwitcher({ applications, className }: Props) {
             role="combobox"
             aria-expanded={open}
             className={cn(
-              "w-[337px] h-[37px] pt-[11px] pr-[141px] pb-[10px] pl-[25px] flex flex-row justify-between shadow-md hover:shadow-lg transition-shadow duration-200",
+              "w-[337px] h-[37px] pt-[11px] pr-[16px] pb-[10px] pl-[25px] flex flex-row justify-between shadow-md hover:shadow-lg transition-shadow duration-200",
               className
             )}
           >
-            <div className="w-full h-full justify-between flex float-start">
-              <div className="w-[90%] flex justify-start">
-                {globalApplications.find(
-                  (application) => application.id === value
-                )?.label || <Caption>Loading...</Caption>}
-              </div>
-              <div className="w-[10%] flex align-middle justify-center">
-                <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Vector-xDHm6Wme9hrg7GtHzQjgve2DBtYdkq.svg"
-                  alt="dropdown arrow"
-                  height={9}
-                  width={14}
-                  className={cn(
-                    "shrink-0 opacity-50 transition-transform",
-                    open && "rotate-180"
-                  )}
-                />
-              </div>
+            <div className="flex justify-start">
+              {globalApplications.find(
+                (application) => application.id === value
+              )?.label || <Caption>Loading...</Caption>}
+            </div>
+            <div className="flex align-middle justify-center">
+              <Image
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Vector-xDHm6Wme9hrg7GtHzQjgve2DBtYdkq.svg"
+                alt="dropdown arrow"
+                height={9}
+                width={14}
+                className={cn(
+                  "shrink-0 opacity-50 transition-transform",
+                  open && "rotate-180"
+                )}
+              />
             </div>
           </Button>
         </PopoverTrigger>
