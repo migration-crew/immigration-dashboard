@@ -21,15 +21,15 @@ export default function DavidPage() {
     attachmentsCount: 1,
     assignedUsers: [
       {
-        _id: "1",
-        name: "Bart",
-        avatar:
+        id: "1",
+        firstName: "Bart",
+        imageUrl:
           "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/67/67e62baab9a7fcd856e7187a6d8929317bb58c7c.jpg",
       },
       {
-        _id: "2",
-        name: "Putin",
-        avatar:
+        id: "2",
+        firstName: "Putin",
+        imageUrl:
           "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/b3/b399e6f3d68abd4963bab22c1efe0983f5189644.jpg",
       },
     ],

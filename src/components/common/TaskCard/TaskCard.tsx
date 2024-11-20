@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { user } from "@/types/user";
+import { BasicUser } from "@/types/user";
 import { Card } from "../../ui/card";
 import { TaskAssignedUsers } from "./TaskAssignedUsers";
 import { TaskAttachments } from "./TaskAttachments";
@@ -13,7 +13,7 @@ type Props = {
   status: string;
   commentsCount: number;
   attachmentsCount: number;
-  assignedUsers: user[];
+  assignedUsers: BasicUser[];
   className?: string;
   onClick: () => void;
 };

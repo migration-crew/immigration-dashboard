@@ -1,5 +1,14 @@
-export type user = {
-  _id: string;
-  name?: string;
-  avatar: string;
+export type User = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  nationality: string;
+  language: string;
+  address: string;
+  birthDate: string;
+  gender: string;
+  email: string;
+  imageUrl: string;
 };
+
+export type BasicUser = Pick<User, "id" | "firstName" | "imageUrl">;
