@@ -17,8 +17,8 @@ import {
 import { cn } from "@/lib/utils";
 import { ApplicationType } from "@/types/ApplicationType";
 import { Check } from "lucide-react";
+import Image from "next/image";
 import * as React from "react";
-import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { Caption } from "./text/Caption";
 
 export type Props = {
@@ -32,7 +32,7 @@ type globalApplicationsType = {
   date?: string;
 };
 
-function ApplicationSwitcher({ applications }: Props) {
+function ApplicationSwitcher({ applications, className }: Props) {
   const sortedApplications = React.useMemo(
     () =>
       [...(applications || [])].sort(
@@ -54,11 +54,15 @@ function ApplicationSwitcher({ applications }: Props) {
     globalApplications.push(allApplications);
   }
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState(`${sortedApplications[0].id}`);
+  const [value, setValue] = React.useState(
+    isAdmin
+      ? globalApplications[globalApplications.length - 1].id
+      : sortedApplications[0].id
+  );
 
   return (
     <>
-      <Caption>Choose an application</Caption>
+      <Caption className="text-gray-400">Choose an application</Caption>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
@@ -66,20 +70,26 @@ function ApplicationSwitcher({ applications }: Props) {
             role="combobox"
             aria-expanded={open}
             className={cn(
-              "w-[220px] justify-between shadow-md hover:shadow-lg transition-shadow duration-200",
-              "hover:bg-accent hover:text-accent-foreground"
+              "w-[337px] h-[37px] pt-[11px] pr-[141px] pb-[10px] pl-[25px] justify-between shadow-md hover:shadow-lg transition-shadow duration-200",
+              "hover:bg-accent hover:text-accent-foreground",
+              className
             )}
           >
             {globalApplications.find((application) => application.id === value)
               ?.label || <Caption>Loading...</Caption>}
-            {open ? (
-              <IoMdArrowDropup className="ml-2 h-4 w-4 shrink-0 opacity-50 transition-transform" />
-            ) : (
-              <IoMdArrowDropdown className="ml-2 h-4 w-4 shrink-0 opacity-50 transition-transform" />
-            )}
+            <Image
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Vector-xDHm6Wme9hrg7GtHzQjgve2DBtYdkq.svg"
+              alt="dropdown arrow"
+              height={9}
+              width={14}
+              className={cn(
+                "ml-44 shrink-0 opacity-50 transition-transform",
+                open && "rotate-180"
+              )}
+            />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[200px] p-0">
+        <PopoverContent className={cn("w-[337px] p-0", className)}>
           <Command>
             <CommandInput placeholder="Search application..." className="h-9" />
             <CommandList>
@@ -103,7 +113,8 @@ function ApplicationSwitcher({ applications }: Props) {
                         "ml-auto",
                         value === allApplications.id
                           ? "opacity-100"
-                          : "opacity-0"
+                          : "opacity-0",
+                        className
                       )}
                     />
                   </CommandItem>
@@ -119,7 +130,7 @@ function ApplicationSwitcher({ applications }: Props) {
                       }
                     }}
                   >
-                    <Caption>{application.label}</Caption>
+                    <Caption className="">{application.label}</Caption>
                     <Check
                       className={cn(
                         "ml-auto",
