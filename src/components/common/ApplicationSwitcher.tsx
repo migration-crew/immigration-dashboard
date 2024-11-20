@@ -23,6 +23,7 @@ import { Caption } from "./text/Caption";
 
 export type Props = {
   className?: string;
+  containerClassName?: string;
   applications: ApplicationType[];
 };
 
@@ -32,7 +33,11 @@ type globalApplicationsType = {
   date?: string;
 };
 
-function ApplicationSwitcher({ applications, className }: Props) {
+function ApplicationSwitcher({
+  applications,
+  containerClassName,
+  className,
+}: Props) {
   const sortedApplications = React.useMemo(
     () =>
       [...(applications || [])].sort(
@@ -61,7 +66,7 @@ function ApplicationSwitcher({ applications, className }: Props) {
   );
 
   return (
-    <>
+    <div className={containerClassName}>
       <Caption className="text-gray-400">Choose an application</Caption>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
@@ -147,7 +152,7 @@ function ApplicationSwitcher({ applications, className }: Props) {
           </Command>
         </PopoverContent>
       </Popover>
-    </>
+    </div>
   );
 }
 
