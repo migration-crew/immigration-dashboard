@@ -5,6 +5,7 @@ import { DynamicRoundedContainer } from "@/components/common/DynamicRoundedConta
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskCard } from "@/components/common/TaskCard/TaskCard";
 import { ParagraphRegular } from "@/components/common/text/ParagraphRegular";
+import { ApplicationTaskType } from "@/types/ApplicationTaskType";
 
 export default function DavidPage() {
   const links = [
@@ -13,25 +14,37 @@ export default function DavidPage() {
     { name: "David", href: "/playground/david" },
   ];
 
-  const dummyData = {
+  const dummyData: ApplicationTaskType = {
     id: "1",
-    title: "Fill IMM form",
+    name: "Fill IMM form",
+    description: "Fill the IMM form for the new employee",
     status: "In Progress",
-    commentsCount: 2,
-    attachmentsCount: 1,
-    assignedUsers: [
+    dueDate: "2025-12-12",
+    comments: [
       {
-        _id: "1",
-        name: "Bart",
-        avatar:
-          "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/67/67e62baab9a7fcd856e7187a6d8929317bb58c7c.jpg",
+        user: {
+          id: "1",
+          firstName: "Bart",
+          imageUrl:
+            "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/67/67e62baab9a7fcd856e7187a6d8929317bb58c7c.jpg",
+        },
+        content: "I will do it",
+        createdAt: "2025-12-12",
       },
       {
-        _id: "2",
-        name: "Putin",
-        avatar:
-          "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/b3/b399e6f3d68abd4963bab22c1efe0983f5189644.jpg",
+        user: {
+          id: "2",
+          firstName: "Putin",
+          imageUrl:
+            "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/b3/b399e6f3d68abd4963bab22c1efe0983f5189644.jpg",
+        },
+        content: "I will do it",
+        createdAt: "2025-12-12",
       },
+    ],
+    documentURLs: [
+      "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/67/67e62baab9a7fcd856e7187a6d8929317bb58c7c.jpg",
+      "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/b3/b399e6f3d68abd4963bab22c1efe0983f5189644.jpg",
     ],
   };
 
@@ -50,12 +63,7 @@ export default function DavidPage() {
         <ParagraphRegular>hello h3</ParagraphRegular>
       </DynamicRoundedContainer>
       <TaskCard
-        taskId={dummyData.id}
-        title={dummyData.title}
-        status={dummyData.status}
-        commentsCount={dummyData.commentsCount}
-        attachmentsCount={dummyData.attachmentsCount}
-        assignedUsers={dummyData.assignedUsers}
+        applicationTask={dummyData}
         onClick={() => console.log("TaskCard clicked")}
       />
     </PageContainer>
