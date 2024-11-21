@@ -5,7 +5,7 @@ import { DynamicRoundedContainer } from "@/components/common/DynamicRoundedConta
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskCard } from "@/components/common/TaskCard/TaskCard";
 import { ParagraphRegular } from "@/components/common/text/ParagraphRegular";
-import { ApplicationTaskType } from "@/types/ApplicationTaskType";
+import { ApplicationTaskType } from "@/types/Application/ApplicationTaskType";
 
 export default function DavidPage() {
   const links = [

@@ -1,14 +1,16 @@
 import { MessageSquareMore } from "lucide-react";
+import { Microtext } from "../text/Microtext";
 
 type Props = {
   commentsCount: number;
+  className?: string;
 };
 
 export function TaskComments({ commentsCount }: Props) {
   return (
-    <p className="flex gap-2 items-center text-secondary-medium-gray text-microtext">
+    <div className="flex gap-2 items-center">
       <MessageSquareMore width={"16px"} color="gray" />
-      {commentsCount}
-    </p>
+      <Microtext>{commentsCount}</Microtext>
+    </div>
   );
 }

@@ -20,5 +20,5 @@ export const TitleLight = ({
   className?: string | undefined;
   children: React.ReactNode;
 }) => {
-  return <h2 className={cn("text-title-light", className)}>{children}</h2>;
+  return <h2 className={cn("!text-title-light", className)}>{children}</h2>;
 };

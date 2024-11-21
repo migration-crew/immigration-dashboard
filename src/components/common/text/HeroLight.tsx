@@ -20,5 +20,5 @@ export const HeroLight = ({
   className?: string | undefined;
   children: React.ReactNode;
 }) => {
-  return <h1 className={cn("text-hero-light", className)}>{children}</h1>;
+  return <h1 className={cn("!text-hero-light", className)}>{children}</h1>;
 };
