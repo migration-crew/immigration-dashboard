@@ -11,6 +11,7 @@ const config: Config = {
     extend: {
       colors: {
         "primary-red": "rgba(var(--primary-red),var(--tw-bg-opacity, 1))",
+        "primary-dark-red": "rgba(var(--primary-dark-red),var(--tw-bg-opacity, 1))",
         "primary-black": "rgba(var(--primary-black),var(--tw-bg-opacity, 1))",
         "primary-gray": "rgba(var(--primary-gray),var(--tw-bg-opacity, 1))",
         "primary-white": "rgba(var(--primary-white),var(--tw-bg-opacity, 1))",

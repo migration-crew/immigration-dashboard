@@ -42,6 +42,7 @@ body {
 
     /* Style Color */
     --primary-red: 173, 35, 32;
+    --primary-dark-red: 119, 13, 10;
     --primary-black: 0, 0, 0;
     --primary-gray: 243, 243, 243;
     --primary-white: 255, 255, 255;

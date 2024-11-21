@@ -55,6 +55,7 @@ const YukiPage = () => {
       </div>
 
       <div className="h-10 bg-primary-red bg-opacity-50">primary-red</div>
+      <div className="h-10 bg-primary-dark-red bg-opacity-50">primary-dark-red</div>
       <div className="h-10 bg-primary-black bg-opacity-50">primary-black</div>
 
       <div className="bg-amber-100">
