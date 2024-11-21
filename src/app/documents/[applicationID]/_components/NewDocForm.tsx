@@ -4,39 +4,26 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { Button } from "@/components/ui/upImmigrationButton";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/upImmigrationButton";
 import { Card } from "@/components/ui/card";
 
 const formSchema = z.object({
-  form: z.string().min(2, {
-    message: "at least 2 characters.",
-  }),
-  document: z.string().min(2, {
-    message: "at least 2 characters.",
-  }),
-  date: z.string().min(2, {
-    message: "at least 2 characters.",
-  }),
-});
+  form: z.string({ required_error: "*required"}).min(1, {message: "*required"}),
+  document: z.string({ required_error: "*required"}).min(1, {message: "*required"}),
+  date: z.string({ required_error: "*required"}).min(1, {message: "*required"})
+}).required();
 
 export function NewDocForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      form: "",
-      document: "",
-      date: "",
-    },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -46,22 +33,17 @@ export function NewDocForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-center">
-      <Card className="flex w-[800px] justify-between mr-5  px-8 py-4 rounded-sm">
+        <Card className="flex w-[800px] justify-between mr-5  px-8 py-4 rounded-sm">
         <FormField
           control={form.control}
           name="form"
           render={({ field }) => (
-            <FormItem className="w-[85px]">
-              <FormLabel>Form</FormLabel>
-              <FormControl>
-                <Input placeholder="FORM" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is form
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-            
+              <FormItem className="w-[85px]">
+                <FormControl>
+                  <Input placeholder="FORM" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
           )}
         />
         <FormField
@@ -69,13 +51,9 @@ export function NewDocForm() {
           name="document"
           render={({ field }) => (
               <FormItem className="w-[453px]">
-                <FormLabel>Document</FormLabel>
                 <FormControl>
                   <Input placeholder="DOCUMENT" {...field} />
                 </FormControl>
-                <FormDescription>
-                This is document discription
-              </FormDescription>
                 <FormMessage />
               </FormItem>
           )}
@@ -85,13 +63,9 @@ export function NewDocForm() {
           name="date"
           render={({ field }) => (
               <FormItem className="w-[91px]">
-                <FormLabel>Date</FormLabel>
                 <FormControl>
                   <Input placeholder="DATE" {...field} />
                 </FormControl>
-                <FormDescription>
-                This is due date
-              </FormDescription>
                 <FormMessage />
               </FormItem>
           )}

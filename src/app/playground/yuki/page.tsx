@@ -1,5 +1,4 @@
 import { NewDocForm } from "@/app/documents/[applicationID]/_components/NewDocForm";
-import { NewDocForm2 } from "@/app/documents/[applicationID]/_components/NewDocForm2";
 import { Caption } from "@/components/common/text/Caption";
 import { CaptionSemi } from "@/components/common/text/CaptionSemi";
 import { Heading } from "@/components/common/text/Heading";
@@ -57,9 +56,6 @@ const YukiPage = () => {
       </div>
       <div className="m-5">
         <NewDocForm />
-      </div>
-      <div className="m-5">
-        <NewDocForm2 />
       </div>
     </div>
   );
