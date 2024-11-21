@@ -20,5 +20,5 @@ export const SubheadingLead = ({
   className?: string | undefined;
   children: React.ReactNode;
 }) => {
-  return <h5 className={cn("text-subheading-lead", className)}>{children}</h5>;
+  return <h5 className={cn("!text-subheading-lead", className)}>{children}</h5>;
 };

@@ -20,5 +20,5 @@ export const CaptionSemi = ({
   className?: string | undefined;
   children: React.ReactNode;
 }) => {
-  return <p className={cn("text-caption-semi", className)}>{children}</p>;
+  return <p className={cn("!text-caption-semi", className)}>{children}</p>;
 };
