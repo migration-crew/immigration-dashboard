@@ -1,4 +1,4 @@
-export type EventPostRequest = {
+export type EventPostRequestType = {
   title: string;
   startDate: string;
   description: string;
