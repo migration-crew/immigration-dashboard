@@ -1,4 +1,4 @@
-import { BasicUserType } from "./User/UserType";
+import { BasicUserType } from "../User/UserType";
 
 export type ApplicationCommentType = {
   user: BasicUserType;
