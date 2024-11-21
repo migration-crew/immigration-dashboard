@@ -73,6 +73,8 @@ const YukiPage = () => {
       <div className="h-10 bg-secondary-light-gray bg-opacity-50">secondary-light-gray</div>
       <div className="h-10 bg-secondary-green bg-opacity-50">secondary-green</div>
       <div className="h-10 bg-secondary-blue bg-opacity-50">secondary-blue</div>
+    <Microtext>nomal</Microtext>
+    <Microtext className="text-secondary-medium-gray">with text-color</Microtext>
     </div>
   );
 };
