@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { ApplicationTaskType } from "@/types/ApplicationTaskType";
+import { ApplicationTaskType } from "@/types/Application/ApplicationTaskType";
 import { Card } from "../../ui/card";
 import { TaskAssignedUsers } from "./TaskAssignedUsers";
 import { TaskAttachments } from "./TaskAttachments";

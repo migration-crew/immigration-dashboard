@@ -20,5 +20,5 @@ export const Paragraph = ({
   className?: string | undefined;
   children: React.ReactNode;
 }) => {
-  return <p className={cn("text-paragraph", className)}>{children}</p>;
+  return <p className={cn("!text-paragraph", className)}>{children}</p>;
 };
