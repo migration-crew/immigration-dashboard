@@ -20,5 +20,5 @@ export const Microtext = ({
   className?: string | undefined;
   children: React.ReactNode;
 }) => {
-  return <p className={cn("text-microtext", className)}>{children}</p>;
+  return <p className={cn("!text-microtext", className)}>{children}</p>;
 };

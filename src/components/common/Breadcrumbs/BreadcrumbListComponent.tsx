@@ -5,12 +5,12 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Link } from "@/types/breadcrumb-link";
+import { BreadCrumbType } from "@/types/BreadCrumbType";
 import React from "react";
 import { HeadingSemi } from "../text/HeadingSemi";
 
 type Props = {
-  links: Link[];
+  links: BreadCrumbType[];
 };
 
 export function BreadcrumbListComponent({ links }: Props) {
