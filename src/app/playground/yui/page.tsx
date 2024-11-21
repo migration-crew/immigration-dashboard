@@ -7,6 +7,7 @@ const page = () => {
       <DynamicHeaderContainer
         headerChildren={<CaptionSemi>Visa Application</CaptionSemi>}
         contentChildren={"Hello"}
+        className="w-[520px]"
       />
     </div>
   );
