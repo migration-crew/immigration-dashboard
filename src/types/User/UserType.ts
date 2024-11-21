@@ -1,4 +1,4 @@
-export type User = {
+export type UserType = {
   id: string;
   firstName: string;
   lastName: string;
@@ -11,4 +11,4 @@ export type User = {
   imageUrl: string;
 };
 
-export type BasicUser = Pick<User, "id" | "firstName" | "imageUrl">;
+export type BasicUserType = Pick<UserType, "id" | "firstName" | "imageUrl">;

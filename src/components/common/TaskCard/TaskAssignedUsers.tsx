@@ -1,20 +1,21 @@
-import { User } from "@/types/user";
+import { ApplicationCommentType } from "@/types/Application/ApplicationCommentType";
 import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 
-type BasicUser = Pick<User, "id" | "firstName" | "imageUrl">;
-
 type Props = {
-  assignedUsers: BasicUser[];
+  comments: ApplicationCommentType[];
 };
 
-export function TaskAssignedUsers({ assignedUsers }: Props) {
+export function TaskAssignedUsers({ comments }: Props) {
   return (
     <ul className="flex gap-1 items-center w-[100px] justify-end">
-      {assignedUsers.map((user) => (
-        <li key={user.id}>
+      {comments.map((comment) => (
+        <li key={comment.user.id}>
           <Avatar>
-            <AvatarImage src={user.imageUrl} alt={user.firstName} />
-            <AvatarFallback>{user.firstName}</AvatarFallback>
+            <AvatarImage
+              src={comment.user.imageUrl}
+              alt={comment.user.firstName}
+            />
+            <AvatarFallback>{comment.user.firstName}</AvatarFallback>
           </Avatar>
         </li>
       ))}

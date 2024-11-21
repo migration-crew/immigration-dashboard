@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { BasicUser } from "@/types/user";
+import { ApplicationTaskType } from "@/types/Application/ApplicationTaskType";
 import { Card } from "../../ui/card";
 import { TaskAssignedUsers } from "./TaskAssignedUsers";
 import { TaskAttachments } from "./TaskAttachments";
@@ -8,54 +8,37 @@ import { TaskStatus } from "./TaskStatus";
 import { TaskTitle } from "./TaskTitle";
 
 type Props = {
-  taskId: string;
-  title: string;
-  status: string;
-  commentsCount: number;
-  attachmentsCount: number;
-  assignedUsers: BasicUser[];
+  applicationTask: ApplicationTaskType;
   className?: string;
   onClick: () => void;
 };
 
 /**
  * TaskCard
- * @param taskId: it will be used as the id of the task
- * @param title: pass the title of the task
- * @param status: pass the status of the task (later we'll have to use statusTag component)
- * @param commentsCount: it shows the number of comments on the task
- * @param attachmentsCount: it shows the number of attachments on the task
- * @param assignedUsers: it shows the users assigned to the task
- * @param className: (optional) pass all classes that you want to apply to the task card
- * @param onClick: when clicking on the task card, it should open the TaskDetail component on the right side
+ * @param applicationTask: ApplicationTaskType: it contains the task details
+ * @param className: pass the classes to the TaskCard component
+ * @param onClick: function to be called when the card is clicked
  * @returns
  */
 
-export function TaskCard({
-  taskId: taskId,
-  title,
-  status,
-  commentsCount,
-  attachmentsCount,
-  assignedUsers,
-  className,
-  onClick,
-}: Props) {
+export function TaskCard({ applicationTask, className, onClick }: Props) {
   return (
     <Card
-      key={taskId}
+      key={applicationTask.id}
       onClick={onClick}
       className={cn(
         `${"flex flex-col gap-3 p-6 w-[280px] rounded-none cursor-pointer hover:border-2 hover:border-task-red duration-100"}`,
         className
       )}
     >
-      <TaskTitle title={title} />
-      <TaskStatus status={status} />
+      <TaskTitle title={applicationTask.name} />
+      <TaskStatus status={applicationTask.status} />
       <div className="flex justify-between">
-        <TaskComments commentsCount={commentsCount} />
-        <TaskAttachments attachmentsCount={attachmentsCount} />
-        <TaskAssignedUsers assignedUsers={assignedUsers} />
+        <TaskComments commentsCount={applicationTask.comments.length} />
+        <TaskAttachments
+          attachmentsCount={applicationTask.documentURLs.length}
+        />
+        <TaskAssignedUsers comments={applicationTask.comments} />
       </div>
     </Card>
   );
