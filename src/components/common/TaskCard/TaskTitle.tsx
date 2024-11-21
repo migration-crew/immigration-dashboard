@@ -5,7 +5,5 @@ type Props = {
 };
 
 export function TaskTitle({ title }: Props) {
-  return (
-    <MicrotextSemi className="font-semibold text-xs">{title}</MicrotextSemi>
-  );
+  return <MicrotextSemi className="">{title}</MicrotextSemi>;
 }
