@@ -126,7 +126,7 @@ const config: Config = {
         ],
         "microtext-semi": [
           "var(--font-size-microtext)",
-          { fontWeight: "var(--font-weight-semi)" },
+          { fontWeight: "var(--font-weight-semi-bold)" },
         ],
         microtext: [
           "var(--font-size-microtext)",
