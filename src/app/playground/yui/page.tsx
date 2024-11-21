@@ -1,6 +1,6 @@
 import DynamicHeaderContainer from "@/components/common/DynamicHeaderContainer";
 import HoraizontalProgressBar from "@/components/common/HoraizontalProgressBar";
-import StatusTag from "@/components/common/StatusTag";
+import { StatusTag } from "@/components/common/StatusTag";
 import { CaptionSemi } from "@/components/common/text/CaptionSemi";
 
 const page = () => {
@@ -14,7 +14,7 @@ const page = () => {
               <HoraizontalProgressBar progress={50} />
             </>
             <>
-              <StatusTag progress={0} />
+              <StatusTag progress={30} />
             </>
           </>
         }
