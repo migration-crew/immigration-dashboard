@@ -7,9 +7,9 @@ type Props = {
 
 export function TaskAttachments({ attachmentsCount }: Props) {
   return (
-    <Microtext className="flex gap-2 items-center text-secondary-medium-gray text-microtext">
+    <div className="flex gap-2 items-center">
       <Paperclip width={"16px"} color="gray" />
-      {attachmentsCount}
-    </Microtext>
+      <Microtext>{attachmentsCount}</Microtext>
+    </div>
   );
 }

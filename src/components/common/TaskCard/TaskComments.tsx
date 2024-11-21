@@ -8,9 +8,9 @@ type Props = {
 
 export function TaskComments({ commentsCount }: Props) {
   return (
-    <Microtext className="flex gap-2 items-center text-secondary-medium-gray text-microtext">
+    <div className="flex gap-2 items-center">
       <MessageSquareMore width={"16px"} color="gray" />
-      {commentsCount}
-    </Microtext>
+      <Microtext>{commentsCount}</Microtext>
+    </div>
   );
 }
