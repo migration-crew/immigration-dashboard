@@ -53,6 +53,25 @@ const YukiPage = () => {
           green disabled
         </Button>
       </div>
+
+      <div className="h-10 bg-primary-red bg-opacity-50">primary-red</div>
+      <div className="h-10 bg-primary-black bg-opacity-50">primary-black</div>
+
+      <div className="bg-amber-100">
+        <div className="h-10 w-1/2 bg-primary-gray bg-opacity-50">primary-gray</div>
+        <div className="h-10 w-1/2 bg-primary-white bg-opacity-50">primary-white</div>
+      </div>
+
+      <div className="h-10 bg-secondary-dark-gray bg-opacity-50">
+        secondary-dark-gray
+      </div>
+      <div className="h-10 bg-secondary-medium-gray bg-opacity-50">
+        secondary-medium-gray
+      </div>
+      <div className="h-10 bg-secondary-gray bg-opacity-50">secondary-gray</div>
+      <div className="h-10 bg-secondary-light-gray bg-opacity-50">secondary-light-gray</div>
+      <div className="h-10 bg-secondary-green bg-opacity-50">secondary-green</div>
+      <div className="h-10 bg-secondary-blue bg-opacity-50">secondary-blue</div>
     </div>
   );
 };

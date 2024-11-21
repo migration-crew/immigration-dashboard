@@ -41,16 +41,16 @@ body {
     --radius: 0.5rem;
 
     /* Style Color */
-    --primary-red: #ad2320;
-    --primary-black: #000000;
-    --primary-gray: #f3f3f3;
-    --primary-white: #fff;
-    --dark-gray: #373737;
-    --medium-gray: #5e5e5e;
-    --gray: #cbcbcb;
-    --light-gray: #f5f6fa;
-    --green: #0c9986;
-    --blue: #4880ff;
+    --primary-red: 173, 35, 32;
+    --primary-black: 0, 0, 0;
+    --primary-gray: 243, 243, 243;
+    --primary-white: 255, 255, 255;
+    --dark-gray: 55, 55, 55;
+    --medium-gray: 94, 94, 94;
+    --gray: 203, 203, 203;
+    --light-gray: 245, 246, 250;
+    --green: 12, 153, 134;
+    --blue: 72, 128, 255;
     --task-red: rgba(255, 0, 0, 0.2);
 
     /* Font Size */
