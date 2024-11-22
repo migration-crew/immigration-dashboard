@@ -4,7 +4,6 @@ import ApplicationProgress from "@/components/common/ApplicationProgress/Applica
 import { BreadcrumbComponent } from "@/components/common/Breadcrumbs/BreadcrumbComponent";
 import { DynamicRoundedContainer } from "@/components/common/DynamicRoundedContainer";
 import { PageContainer } from "@/components/common/PageContainer";
-import AppSidebar from "@/components/common/Sidebar/AppSidebar";
 import { TaskCard } from "@/components/common/TaskCard/TaskCard";
 import { ParagraphRegular } from "@/components/common/text/ParagraphRegular";
 import TopNavbar from "@/components/common/TopNavbar/TopNavbar";
@@ -71,7 +70,6 @@ export default function DavidPage() {
       />
       <TopNavbar />
       <ApplicationProgress />
-      <AppSidebar />
     </PageContainer>
   );
 }

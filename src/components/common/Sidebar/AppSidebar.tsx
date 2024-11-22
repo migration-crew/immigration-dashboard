@@ -4,9 +4,19 @@ import {
   SidebarMenu,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { CircleDollarSign, Clock3, SquarePen } from "lucide-react";
+import {
+  CalendarCheck,
+  CircleDollarSign,
+  Clock3,
+  FileText,
+  MessageSquare,
+  SquarePen,
+  UserPen,
+} from "lucide-react";
+import Link from "next/link";
+import { Caption } from "../text/Caption";
 
-const items = [
+const sidebarItems = [
   {
     label: "Dashboard",
     href: "/dashboard",
@@ -19,8 +29,28 @@ const items = [
   },
   {
     label: "Payment",
-    href: "/payment",
+    href: "/payments",
     icon: CircleDollarSign,
+  },
+  {
+    label: "Documents",
+    href: "/documents",
+    icon: FileText,
+  },
+  {
+    label: "Calendar",
+    href: "/calendar",
+    icon: CalendarCheck,
+  },
+  {
+    label: "Inbox",
+    href: "/inbox",
+    icon: MessageSquare,
+  },
+  {
+    label: "Profile",
+    href: "/profile",
+    icon: UserPen,
   },
 ];
 
@@ -29,12 +59,18 @@ export default function AppSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarMenu>
-          {items.map((item) => (
-            <SidebarMenuItem key={item.label}>
-              <a href={item.href}>
-                <item.icon />
-                <span>{item.label}</span>
-              </a>
+          {sidebarItems.map((item) => (
+            <SidebarMenuItem
+              key={item.label}
+              className="w-[240px] h-[50px] flex flex-col items-center"
+            >
+              <Link
+                href={item.href}
+                className="flex items-center gap-2 h-full w-full justify-start hover:bg-primary-gray rounded"
+              >
+                <item.icon className="w-[24px] h-[24px]" />
+                <Caption>{item.label}</Caption>
+              </Link>
             </SidebarMenuItem>
           ))}
         </SidebarMenu>
