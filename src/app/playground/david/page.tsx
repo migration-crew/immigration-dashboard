@@ -1,5 +1,6 @@
 "use client";
 
+import ApplicationProgress from "@/components/common/ApplicationProgress/ApplicationProgress";
 import { BreadcrumbComponent } from "@/components/common/Breadcrumbs/BreadcrumbComponent";
 import { DynamicRoundedContainer } from "@/components/common/DynamicRoundedContainer";
 import { PageContainer } from "@/components/common/PageContainer";
@@ -68,6 +69,7 @@ export default function DavidPage() {
         onClick={() => console.log("TaskCard clicked")}
       />
       <TopNavbar />
+      <ApplicationProgress />
     </PageContainer>
   );
 }
