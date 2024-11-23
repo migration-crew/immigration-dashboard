@@ -17,7 +17,7 @@ const config: Config = {
         "primary-white": "rgba(var(--primary-white), 1)",
         "secondary-dark-gray": "rgba(var(--dark-gray), 1)",
         "secondary-medium-gray":
-          "rgba(var(--medium-gray),var(--tw-bg-opacity, 1))",
+          "rgba(var(--medium-gray), 1)",
         "secondary-gray": "rgba(var(--gray), 1)",
         "secondary-light-gray":
           "rgba(var(--light-gray), 1)",
