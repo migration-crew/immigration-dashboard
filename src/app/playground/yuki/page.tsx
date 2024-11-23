@@ -1,3 +1,4 @@
+import { NewDocForm } from "@/app/documents/[applicationID]/_components/NewDocForm";
 import { UploadDocumentModal } from "@/app/documents/[applicationID]/_components/UploadDocumentModal";
 import { Caption } from "@/components/common/text/Caption";
 import { CaptionSemi } from "@/components/common/text/CaptionSemi";
