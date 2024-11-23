@@ -1,9 +1,15 @@
+"use client";
+
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
   SidebarMenu,
+  SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import clsx from "clsx";
 import {
   CalendarCheck,
   CircleDollarSign,
@@ -14,6 +20,7 @@ import {
   UserPen,
 } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Caption } from "../text/Caption";
 
 const sidebarItems = [
@@ -55,26 +62,38 @@ const sidebarItems = [
 ];
 
 export default function AppSidebar() {
+  const pathname = usePathname();
   return (
-    <Sidebar>
+    <Sidebar collapsible="icon">
+      <SidebarHeader className="flex mx-auto">
+        <p>logo goes here</p>
+      </SidebarHeader>
       <SidebarContent>
         <SidebarMenu>
           {sidebarItems.map((item) => (
-            <SidebarMenuItem
-              key={item.label}
-              className="w-[240px] h-[50px] flex flex-col items-center"
-            >
-              <Link
-                href={item.href}
-                className="flex items-center gap-2 h-full w-full justify-start hover:bg-primary-gray rounded"
-              >
-                <item.icon className="w-[24px] h-[24px]" />
-                <Caption>{item.label}</Caption>
-              </Link>
+            <SidebarMenuItem key={item.label}>
+              <SidebarMenuButton asChild className="w-[240px] h-[50px]">
+                <Link
+                  href={item.href}
+                  className={` ${clsx(
+                    "flex gap-2 h-full w-[80%] hover:bg-primary-gray rounded mx-auto pl-10",
+                    {
+                      "bg-primary-red text-primary-white":
+                        pathname === item.href,
+                    }
+                  )}`}
+                >
+                  <item.icon className="w-[24px] h-[24px]" />
+                  <Caption>{item.label}</Caption>
+                </Link>
+              </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
         </SidebarMenu>
       </SidebarContent>
+      <SidebarFooter className="flex mx-auto">
+        <p>footer goes here</p>
+      </SidebarFooter>
     </Sidebar>
   );
 }
