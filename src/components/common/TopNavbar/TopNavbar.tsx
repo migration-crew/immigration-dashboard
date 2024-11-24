@@ -67,8 +67,8 @@ export default function TopNavbar() {
   >(null);
 
   return (
-    <div className="flex justify-between items-center self-stretch bg-primary-white px-6">
-      <div className="relative flex w-[400px] gap-10 items-center">
+    <div className="flex justify-between items-center self-stretch bg-primary-white px-6 h-[70px]">
+      <div className="relative flex w-[400px] items-center">
         <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
         <Input
           type="search"
@@ -76,7 +76,7 @@ export default function TopNavbar() {
           className="pl-8  rounded-[19px] bg-secondary-light-gray"
         />
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 h-full">
         <NavbarIcon
           items={messages}
           icon={FaMessage}
