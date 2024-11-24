@@ -20,5 +20,5 @@ export const Hero = ({
   className?: string | undefined;
   children: React.ReactNode;
 }) => {
-  return <h1 className={cn("text-hero", className)}>{children}</h1>;
+  return <h1 className={cn("!text-hero", className)}>{children}</h1>;
 };

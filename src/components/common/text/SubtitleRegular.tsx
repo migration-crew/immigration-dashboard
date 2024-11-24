@@ -20,5 +20,5 @@ export const SubtitleRegular = ({
   className?: string | undefined;
   children: React.ReactNode;
 }) => {
-  return <h3 className={cn("text-subtitle-regular", className)}>{children}</h3>;
+  return <h3 className={cn("!text-subtitle-regular", className)}>{children}</h3>;
 };
