@@ -28,23 +28,27 @@ export default function NavbarIcon({
   const unreadCount = items.length;
 
   return (
-    <div className="relative">
+    <div className="relative flex items-center justify-center h-full w-[67px]">
       {/* Icon with badge */}
       <button
         onClick={onToggle}
-        className="relative focus:outline-none hover:opacity-75"
+        className={`relative focus:outline-none h-full w-full flex items-center justify-center ${
+          isOpen ? "bg-primary-red text-white" : "hover:opacity-75"
+        }`}
       >
-        <Icon className="h-6 w-6" />
-        {unreadCount > 0 && (
-          <div className="absolute -top-1 -right-1 bg-primary-red text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">
-            {unreadCount}
-          </div>
-        )}
+        <div className="relative">
+          <Icon className="h-6 w-6" />
+          {unreadCount > 0 && (
+            <div className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-primary-red text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">
+              {unreadCount}
+            </div>
+          )}
+        </div>
       </button>
 
       {/* Dropdown */}
       {isOpen && (
-        <div className="absolute top-8 right-0 bg-primary-red text-primary-white  w-64">
+        <div className="absolute top-full right-0 bg-primary-red text-primary-white w-64">
           {items.length > 0 ? (
             <div>
               {items.map((item) => (
