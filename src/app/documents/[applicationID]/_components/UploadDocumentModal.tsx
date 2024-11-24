@@ -2,7 +2,10 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
+  DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/upImmigrationButton";
@@ -16,12 +19,19 @@ type Props = {
 export const UploadDocumentModal = ({ status }: Props) => {
   return (
     <Dialog>
+      {/* Button to open upload document modal */}
       <DialogTrigger asChild>
         <SubmitDocumentButton status={status} />
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      {/* upload document modal */}
+      <DialogContent className="max-w-[700px] h-[500px] flex flex-col">
+      <DialogHeader>
+        <DialogTitle>Documents</DialogTitle>
+        <DialogDescription>You can choose several file types. (.pdf .png .jpg .jpeg)</DialogDescription>
+        <DialogDescription>Maximum file size is 50 MB</DialogDescription>
+      </DialogHeader>
         <DocumentDropzone />
-        <DialogFooter className="sm:justify-end">
+        <DialogFooter className="justify-end items-end">
           <DialogClose asChild>
             <Button type="button">Submit</Button>
           </DialogClose>
