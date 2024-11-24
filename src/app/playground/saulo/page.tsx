@@ -1,5 +1,9 @@
+"use client";
+
 import ApplicationSwitcher from "@/components/common/ApplicationSwitcher";
+import FilterSection from "@/components/common/FilterSection/FilterSection";
 import { ApplicationType } from "@/types/ApplicationType";
+import { useState } from "react";
 
 const applications: ApplicationType[] = [
   {
@@ -29,9 +33,6 @@ const applications: ApplicationType[] = [
   },
 ];
 
-import FilterSection from "@/components/common/FilterSection/FilterSection";
-import { useState } from "react";
-
 export default function Page() {
   const [sortOptions, setSortOptions] = useState([
     { label: "Date: First to Last", value: "date_asc" },
@@ -56,8 +57,8 @@ export default function Page() {
   ]);
 
   const handleSortChange = (value: string) => {
-    console.log("Sort changed:", value);
-    // Implement your sorting logic here
+    console.log("Sort changed:", value, setSortOptions([]));
+    setSortOptions([]); // Implement your sorting logic here
   };
 
   const handleVisaTypeChange = (values: string[]) => {
@@ -87,7 +88,7 @@ export default function Page() {
 
   return (
     <div className="p-4">
-      <div>
+      <div className="mb-4">
         <ApplicationSwitcher applications={applications} />
       </div>
       <FilterSection

@@ -19,53 +19,31 @@ export type FilterOption = {
   value: string;
 };
 
-export type FilterBarProps = {
-  sortOptions?: FilterOption[];
-  visaTypes?: FilterOption[];
-  statusOptions?: FilterOption[];
-  onSortChange?: (value: string) => void;
-  onVisaTypeChange?: (values: string[]) => void;
-  onStatusChange?: (values: string[]) => void;
-  onAddVisaType?: (newType: string) => void;
-  onAddStatus?: (newStatus: string) => void;
-  onReset?: () => void;
+export type FilterSectionProps = {
+  sortOptions: FilterOption[];
+  visaTypes: FilterOption[];
+  statusOptions: FilterOption[];
+  onSortChange: (value: string) => void;
+  onVisaTypeChange: (values: string[]) => void;
+  onStatusChange: (values: string[]) => void;
+  onAddVisaType: (newType: string) => void;
+  onAddStatus: (newStatus: string) => void;
+  onReset: () => void;
   className?: string;
 };
 
-const sortOptionsArr: FilterOption[] = [
-  { label: "Date: First to Last", value: "date_asc" },
-  { label: "Date: Last to First", value: "date_desc" },
-  { label: "Progress: Low to High", value: "progress_asc" },
-  { label: "Progress: High to Low", value: "progress_desc" },
-  { label: "A-Z", value: "alpha_asc" },
-];
-
-const visaTypesArr: FilterOption[] = [
-  { label: "Student Visa", value: "student" },
-  { label: "Work Permit", value: "work" },
-  { label: "LMIA", value: "lmia" },
-  { label: "Check", value: "check" },
-];
-
-const statusOptionsArr: FilterOption[] = [
-  { label: "Processing", value: "processing" },
-  { label: "On hold", value: "on_hold" },
-  { label: "Completed", value: "completed" },
-  { label: "Rejected", value: "rejected" },
-];
-
-function FilterSection({
-  sortOptions = sortOptionsArr,
-  visaTypes = visaTypesArr,
-  statusOptions = statusOptionsArr,
-  onSortChange = () => {},
-  onVisaTypeChange = () => {},
-  onStatusChange = () => {},
-  onAddVisaType = () => {},
-  onAddStatus = () => {},
-  onReset = () => {},
+export default function FilterSection({
+  sortOptions,
+  visaTypes,
+  statusOptions,
+  onSortChange,
+  onVisaTypeChange,
+  onStatusChange,
+  onAddVisaType,
+  onAddStatus,
+  onReset,
   className = "",
-}: FilterBarProps) {
+}: FilterSectionProps) {
   const [selectedSort, setSelectedSort] = React.useState<string>("");
   const [selectedVisaTypes, setSelectedVisaTypes] = React.useState<string[]>(
     []
@@ -113,7 +91,7 @@ function FilterSection({
         <DropdownMenuContent align="start" className="w-[200px]">
           <DropdownMenuRadioGroup
             value={selectedSort}
-            onValueChange={(value) => {
+            onValueChange={(value: string) => {
               setSelectedSort(value);
               onSortChange(value);
             }}
@@ -143,7 +121,7 @@ function FilterSection({
               >
                 <Checkbox
                   checked={selectedVisaTypes.includes(option.value)}
-                  onCheckedChange={(checked) => {
+                  onCheckedChange={(checked: unknown) => {
                     const newSelected = checked
                       ? [...selectedVisaTypes, option.value]
                       : selectedVisaTypes.filter((v) => v !== option.value);
@@ -227,7 +205,7 @@ function FilterSection({
               >
                 <Checkbox
                   checked={selectedStatus.includes(option.value)}
-                  onCheckedChange={(checked) => {
+                  onCheckedChange={(checked: unknown) => {
                     const newSelected = checked
                       ? [...selectedStatus, option.value]
                       : selectedStatus.filter((v) => v !== option.value);
@@ -311,5 +289,3 @@ function FilterSection({
     </div>
   );
 }
-
-export default FilterSection;
