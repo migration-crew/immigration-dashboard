@@ -1,6 +1,5 @@
 "use client";
 
-import { Caption } from "@/components/common/text/Caption";
 import { CaptionSemi } from "@/components/common/text/CaptionSemi";
 import { ParagraphRegular } from "@/components/common/text/ParagraphRegular";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -94,16 +93,17 @@ export const DocumentDropzone: NextPage = () => {
         "image/png": [],
         "application/pdf": [],
         "application/msword": [],
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document": [],
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+          [],
         "application/vnd.ms-excel": [],
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [],
         "application/vnd.ms-powerpoint": [],
-        "application/vnd.openxmlformats-officedocument.presentationml.presentation": [],
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+          [],
       },
       maxSize: 50 * 1024 * 1024, // 50MB
     });
 
-  // ドラッグ中のスタイルを設定
   const setDropZoneStyle = () => {
     if (isDragAccept) {
       return "bg-primary-gray/10";
@@ -133,8 +133,10 @@ export const DocumentDropzone: NextPage = () => {
             ? "This file Type is not allowed"
             : "Please upload documents"}
         </CaptionSemi>
-        <div className="flex justify-center"><Plus size={35} /></div>
-        
+        <div className="flex justify-center">
+          <Plus size={35} />
+        </div>
+
         <Button variant="secondary" disabled={isDragReject}>
           Choose files
         </Button>
@@ -167,13 +169,13 @@ export const DocumentDropzone: NextPage = () => {
                       </>
                     ) : (
                       <>
-                      <div className="flex justify-between items-center">
-                        <Loader />
-                        <ParagraphRegular className="break-words w-[240px]">
-                          apploading {item.file.name}...
-                        </ParagraphRegular>
-                      </div>
-                      <Separator className="my-2" />
+                        <div className="flex justify-between items-center">
+                          <Loader />
+                          <ParagraphRegular className="break-words w-[240px]">
+                            apploading {item.file.name}...
+                          </ParagraphRegular>
+                        </div>
+                        <Separator className="my-2" />
                       </>
                     )}
                   </li>
