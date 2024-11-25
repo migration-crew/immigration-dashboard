@@ -27,7 +27,7 @@ export const UploadDocumentModal = ({ status }: Props) => {
       <DialogContent className="max-w-[700px] h-[500px] flex flex-col">
       <DialogHeader>
         <DialogTitle>Documents</DialogTitle>
-        <DialogDescription>You can choose several file types. (.pdf .png .jpg .jpeg)</DialogDescription>
+        <DialogDescription>You can choose several file types. (.pdf .png .jpg .jpeg .doc .docx .xls .xlsx .ppt .pptx)</DialogDescription>
         <DialogDescription>Maximum file size is 50 MB</DialogDescription>
       </DialogHeader>
         <DocumentDropzone />

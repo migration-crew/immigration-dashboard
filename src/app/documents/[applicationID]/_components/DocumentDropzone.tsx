@@ -6,7 +6,7 @@ import { ParagraphRegular } from "@/components/common/text/ParagraphRegular";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/upImmigrationButton";
-import { File, Loader, Trash } from "lucide-react";
+import { File, Loader, Plus, Trash } from "lucide-react";
 import type { NextPage } from "next";
 import { useCallback, useState } from "react";
 import type { FileRejection } from "react-dropzone";
@@ -93,12 +93,12 @@ export const DocumentDropzone: NextPage = () => {
         "image/jpeg": [],
         "image/png": [],
         "application/pdf": [],
-        // "application/msword": [],
-        // "application/vnd.openxmlformats-officedocument.wordprocessingml.document": [],
-        // "application/vnd.ms-excel": [],
-        // "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [],
-        // "application/vnd.ms-powerpoint": [],
-        // "application/vnd.openxmlformats-officedocument.presentationml.presentation": [],
+        "application/msword": [],
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document": [],
+        "application/vnd.ms-excel": [],
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [],
+        "application/vnd.ms-powerpoint": [],
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation": [],
       },
       maxSize: 50 * 1024 * 1024, // 50MB
     });
@@ -123,21 +123,18 @@ export const DocumentDropzone: NextPage = () => {
     <div className="w-full flex-1 flex">
       <div
         {...getRootProps()}
-        className={`w-1/2 h-full bg-primary-gray border-secondary-dark-gray border-2 grid place-content-between px-5 py-7 text-center justify-center ${setDropZoneStyle()}`}
+        className={`w-1/2 h-full bg-primary-gray border-secondary-medium-gray/90 border-2 grid place-content-between px-5 py-7 text-center justify-center ${setDropZoneStyle()}`}
       >
         <input {...getInputProps()} />
         <CaptionSemi className="text-primary-black">
           {isDragAccept
             ? "Documents will appload"
             : isDragReject
-            ? "Error"
+            ? "This file Type is not allowed"
             : "Please upload documents"}
         </CaptionSemi>
-        <Caption>
-          {isDragReject
-            ? "This file Type is not allowed"
-            : "Drag 'n' drop some files here, or click to select files"}
-        </Caption>
+        <div className="flex justify-center"><Plus size={35} /></div>
+        
         <Button variant="secondary" disabled={isDragReject}>
           Choose files
         </Button>
@@ -149,7 +146,7 @@ export const DocumentDropzone: NextPage = () => {
             {currentShowFiles && (
               <ul className="p-4">
                 {currentShowFiles.map((item, index) => (
-                  <li key={index} className="">
+                  <li key={index}>
                     {item.isUploaded ? (
                       <>
                         <div className="flex justify-between items-center">
@@ -169,12 +166,15 @@ export const DocumentDropzone: NextPage = () => {
                         <Separator className="my-2" />
                       </>
                     ) : (
+                      <>
                       <div className="flex justify-between items-center">
                         <Loader />
                         <ParagraphRegular className="break-words w-[240px]">
                           apploading {item.file.name}...
                         </ParagraphRegular>
                       </div>
+                      <Separator className="my-2" />
+                      </>
                     )}
                   </li>
                 ))}
