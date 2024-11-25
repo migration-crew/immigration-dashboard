@@ -1,3 +1,4 @@
+import ApplicationStatus from "@/app/applications/_components/ApplicationStatus";
 import {
   Table,
   TableBody,
@@ -5,14 +6,15 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Badge } from "../ui/upImmigrationBadge";
+} from "@/components/ui/upImmigrationTable";
+import HorizontalProgressBar from "./HorizontalProgressBar";
+import { CaptionSemi } from "./text/CaptionSemi";
 
 type Application = {
   number: string;
   name: string;
   type: string;
-  progress: string;
+  progress: number;
   status: string;
 };
 
@@ -22,11 +24,11 @@ type Props = {
 
 export function Applicationtable({ applicationData }: Props) {
   return (
-    <Table className="w-[1152px] rounded-lg overflow-hidden">
+    <Table className="w-[1152px] ">
       <TableHeader className="bg-secondary-medium-gray text-primary-white ">
         <TableRow className="">
           <TableHead className="text-primary-white w-[64px] h-[21px] px-[30px]">
-            NUMBER
+            <CaptionSemi>NUMBER</CaptionSemi>
           </TableHead>
           <TableHead className="text-primary-white w-[283px]">NAME</TableHead>
           <TableHead className="text-primary-white w-[100px]">TYPE</TableHead>
@@ -44,9 +46,11 @@ export function Applicationtable({ applicationData }: Props) {
               {application.name}
             </TableCell>
             <TableCell>{application.type}</TableCell>
-            <TableCell>{application.progress}</TableCell>
+            <TableCell>
+              <HorizontalProgressBar progress={application.progress} />
+            </TableCell>
             <TableCell className="">
-              <Badge>{application.status}</Badge>
+              <ApplicationStatus status={application.status} />
             </TableCell>
           </TableRow>
         ))}
