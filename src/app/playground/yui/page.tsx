@@ -1,3 +1,4 @@
+import ChatSideBar from "@/app/inbox/_components/ChatSideBar";
 import { Applicationtable } from "@/components/common/ApplicationTable";
 import DynamicHeaderContainer from "@/components/common/DynamicHeaderContainer";
 import HorizontalProgressBar from "@/components/common/HorizontalProgressBar";
@@ -38,6 +39,10 @@ const page = () => {
           ]}
         />
       </div>
+      <ChatSideBar
+        channels={["#All Client", "#Student Channel"]}
+        messages={["Student_Project", "General_Project"]}
+      />
     </div>
   );
 };
