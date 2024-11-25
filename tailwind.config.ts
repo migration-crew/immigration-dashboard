@@ -10,16 +10,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "primary-red": "var(--primary-red)",
-        "primary-black": "var(--primary-black)",
-        "primary-gray": "var(--primary-gray)",
-        "primary-white": "var(--primary-white)",
-        "secondary-dark-gray": "var(--dark-gray)",
-        "secondary-medium-gray": "var(--medium-gray)",
-        "secondary-gray": "var(--gray)",
-        "secondary-light-gray": "var(--light-gray)",
-        "secondary-green": "var(--green)",
-        "secondary-blue": "var(--blue)",
+        "primary-red": "rgba(var(--primary-red), 1)",
+        "primary-dark-red": "rgba(var(--primary-dark-red), 1)",
+        "primary-black": "rgba(var(--primary-black), 1)",
+        "primary-gray": "rgba(var(--primary-gray), 1)",
+        "primary-white": "rgba(var(--primary-white), 1)",
+        "secondary-dark-gray": "rgba(var(--dark-gray), 1)",
+        "secondary-medium-gray":
+          "rgba(var(--medium-gray),var(--tw-bg-opacity, 1))",
+        "secondary-gray": "rgba(var(--gray), 1)",
+        "secondary-light-gray":
+          "rgba(var(--light-gray), 1)",
+        "secondary-green": "rgba(var(--green), 1)",
+        "secondary-blue": "rgba(var(--blue), 1)",
         "task-red": "var(--task-red)",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -125,7 +128,7 @@ const config: Config = {
         ],
         "microtext-semi": [
           "var(--font-size-microtext)",
-          { fontWeight: "var(--font-weight-semi)" },
+          { fontWeight: "var(--font-weight-semi-bold)" },
         ],
         microtext: [
           "var(--font-size-microtext)",
