@@ -53,7 +53,7 @@ export function Applicationtable({ applicationData }: Props) {
             </TableCell>
             <TableCell>{application.type}</TableCell>
             <TableCell>
-              <RoundedProgressBar progressBar={application.progress} />
+              <RoundedProgressBar progress={application.progress} />
             </TableCell>
             <TableCell className="">
               <ApplicationStatus status={application.status} />
