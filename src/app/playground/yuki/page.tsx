@@ -17,6 +17,7 @@ import { Subtitle } from "@/components/common/text/Subtitle";
 import { SubtitleRegular } from "@/components/common/text/SubtitleRegular";
 import { Title } from "@/components/common/text/Title";
 import { TitleLight } from "@/components/common/text/TitleLight";
+import { Badge } from "@/components/ui/upImmigrationBadge";
 import { Button } from "@/components/ui/upImmigrationButton";
 
 const YukiPage = () => {

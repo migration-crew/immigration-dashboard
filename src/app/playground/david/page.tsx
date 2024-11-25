@@ -1,10 +1,12 @@
 "use client";
 
+import ApplicationProgress from "@/components/common/ApplicationProgress/ApplicationProgress";
 import { BreadcrumbComponent } from "@/components/common/Breadcrumbs/BreadcrumbComponent";
 import { DynamicRoundedContainer } from "@/components/common/DynamicRoundedContainer";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskCard } from "@/components/common/TaskCard/TaskCard";
 import { ParagraphRegular } from "@/components/common/text/ParagraphRegular";
+import TopNavbar from "@/components/common/TopNavbar/TopNavbar";
 import { ApplicationTaskType } from "@/types/Application/ApplicationTaskType";
 
 export default function DavidPage() {
@@ -66,6 +68,8 @@ export default function DavidPage() {
         applicationTask={dummyData}
         onClick={() => console.log("TaskCard clicked")}
       />
+      <TopNavbar />
+      <ApplicationProgress />
     </PageContainer>
   );
 }
