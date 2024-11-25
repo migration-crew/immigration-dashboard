@@ -20,5 +20,5 @@ export const Subtitle = ({
   className?: string | undefined;
   children: React.ReactNode;
 }) => {
-  return <h3 className={cn("text-subtitle", className)}>{children}</h3>;
+  return <h3 className={cn("!text-subtitle", className)}>{children}</h3>;
 };
