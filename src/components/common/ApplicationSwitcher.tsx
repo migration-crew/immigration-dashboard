@@ -21,16 +21,16 @@ import Image from "next/image";
 import * as React from "react";
 import { Caption } from "./text/Caption";
 
+export type globalApplicationsType = {
+  id: string;
+  name: string;
+  date?: Date;
+};
+
 export type Props = {
   className?: string;
   containerClassName?: string;
   applications: ApplicationType[];
-};
-
-type globalApplicationsType = {
-  id: string;
-  label: string;
-  date?: string;
 };
 
 function ApplicationSwitcher({
@@ -41,20 +41,26 @@ function ApplicationSwitcher({
   const sortedApplications = React.useMemo(
     () =>
       [...(applications || [])].sort(
-        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        (a, b) => b.date.getTime() - a.date.getTime()
       ),
     [applications]
   );
 
-  const allApplications = {
+  const allApplications: globalApplicationsType = {
     id: "All Applications",
-    label: "All Applications",
+    name: "All Applications",
   };
 
   const isAdmin = true;
   // fake admin user is active
 
-  const globalApplications: globalApplicationsType[] = [...applications];
+  const globalApplications: globalApplicationsType[] = applications.map(
+    (app) => ({
+      id: app.id,
+      name: app.name,
+      date: app.date,
+    })
+  );
   if (isAdmin) {
     globalApplications.push(allApplications);
   }
@@ -82,7 +88,7 @@ function ApplicationSwitcher({
             <div className="flex justify-start">
               {globalApplications.find(
                 (application) => application.id === value
-              )?.label || <Caption>Loading...</Caption>}
+              )?.name || <Caption>Loading...</Caption>}
             </div>
             <div className="flex align-middle justify-center">
               <Image
@@ -138,7 +144,7 @@ function ApplicationSwitcher({
                       }
                     }}
                   >
-                    <Caption className="">{application.label}</Caption>
+                    <Caption className="">{application.name}</Caption>
                     <Check
                       className={cn(
                         "ml-auto",

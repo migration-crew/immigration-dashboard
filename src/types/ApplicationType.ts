@@ -1,8 +1,8 @@
 export type ApplicationType = {
   id: string;
-  label: string;
-  date: string;
+  name: string;
+  date: Date;
   type: string;
-  progress: string;
+  progress: number;
   status: string;
 };

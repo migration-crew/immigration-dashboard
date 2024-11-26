@@ -8,43 +8,43 @@ import { useMemo, useState } from "react";
 const applications: ApplicationType[] = [
   {
     id: "Maria_CICCC_ESL",
-    label: "Maria_CICCC_ESL",
-    date: "2023-06-15",
-    type: "Student",
-    progress: "100%",
-    status: "Completed",
+    name: "Maria_CICCC_ESL",
+    date: new Date("2023-06-15"),
+    type: "student",
+    progress: 100,
+    status: "completed",
   },
   {
     id: "Maria_Work_Permit",
-    label: "Maria_Work_Permit",
-    date: "2023-05-10",
-    type: "Work_Permit",
-    progress: "75%",
-    status: "On_Hold",
+    name: "Maria_Work_Permit",
+    date: new Date("2023-05-10"),
+    type: "workPermit",
+    progress: 75,
+    status: "onHold",
   },
   {
     id: "Carrey_Visitor",
-    label: "Carrey_Visitor",
-    date: "2023-04-22",
-    type: "Visitor",
-    progress: "25%",
-    status: "Processing",
+    name: "Carrey_Visitor",
+    date: new Date("2023-04-22"),
+    type: "visitor",
+    progress: 25,
+    status: "processing",
   },
   {
     id: "Maria_CICCC_UX/UI",
-    label: "Maria_CICCC_UX/UI",
-    date: "2023-06-01",
-    type: "Student",
-    progress: "100%",
-    status: "Rejected",
+    name: "Maria_CICCC_UX/UI",
+    date: new Date("2023-06-01"),
+    type: "student",
+    progress: 100,
+    status: "rejected",
   },
   {
     id: "Maria_CICCC_UX/UI_2",
-    label: "Maria_CICCC_UX/UI_2",
-    date: "2023-05-28",
-    type: "Student",
-    progress: "50%",
-    status: "Processing",
+    name: "Maria_CICCC_UX/UI_2",
+    date: new Date("2023-05-28"),
+    type: "student",
+    progress: 50,
+    status: "processing",
   },
 ];
 
@@ -58,18 +58,18 @@ export default function Page() {
   ]);
 
   const [visaTypes] = useState([
-    { label: "Student Visa", value: "Student" },
-    { label: "Work Permit", value: "Work_Permit" },
+    { label: "Student Visa", value: "student" },
+    { label: "Work Permit", value: "workPermit" },
     { label: "LMIA", value: "lmia" },
     { label: "Check", value: "check" },
-    { label: "Visitor", value: "Visitor" },
+    { label: "Visitor", value: "visitor" },
   ]);
 
   const [statusOptions] = useState([
-    { label: "Processing", value: "Processing" },
-    { label: "On hold", value: "On_Hold" },
-    { label: "Completed", value: "Completed" },
-    { label: "Rejected", value: "Rejected" },
+    { label: "Processing", value: "processing" },
+    { label: "On hold", value: "onHold" },
+    { label: "Completed", value: "completed" },
+    { label: "Rejected", value: "rejected" },
   ]);
 
   const [selectedSort, setSelectedSort] = useState("");
@@ -110,20 +110,20 @@ export default function Page() {
     return filtered.sort((a, b) => {
       switch (selectedSort) {
         case "date_asc":
-          return new Date(a.date).getTime() - new Date(b.date).getTime();
+          return a.date.getTime() - b.date.getTime();
         case "date_desc":
-          return new Date(b.date).getTime() - new Date(a.date).getTime();
+          return b.date.getTime() - a.date.getTime();
         case "progress_asc":
-          return parseInt(a.progress) - parseInt(b.progress);
+          return a.progress - b.progress;
         case "progress_desc":
-          return parseInt(b.progress) - parseInt(a.progress);
+          return b.progress - a.progress;
         case "alpha_asc":
-          return a.label.localeCompare(b.label);
+          return a.name.localeCompare(b.name);
         default:
           return 0;
       }
     });
-  }, [applications, selectedSort, selectedVisaTypes, selectedStatus]);
+  }, [selectedSort, selectedVisaTypes, selectedStatus]);
 
   return (
     <div className="p-4">
@@ -145,8 +145,8 @@ export default function Page() {
         <ul>
           {filteredAndSortedApplications.map((app) => (
             <li key={app.id}>
-              {app.label} - Type: {app.type}, Status: {app.status}, Progress:{" "}
-              {app.progress}
+              {app.name} - Type: {app.type}, Status: {app.status}, Progress:{" "}
+              {app.progress}%
             </li>
           ))}
         </ul>
