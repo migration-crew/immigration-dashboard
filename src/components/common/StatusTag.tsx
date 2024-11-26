@@ -58,7 +58,7 @@ export default function StatusTag({ status }: Props) {
 
   return (
     <>
-      <Badge variant={variant}>{statusLetter}</Badge>
+      <Badge className="h-fit text-center justify-center" variant={variant}>{statusLetter}</Badge>
     </>
   );
 }
