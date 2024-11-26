@@ -44,7 +44,7 @@ const page = () => {
         channels={["#All Client", "#Student Channel"]}
         messages={["Student_Project", "General_Project"]}
       />
-      <ChatHeader />
+      <ChatHeader title={"All Student"} />
     </div>
   );
 };
