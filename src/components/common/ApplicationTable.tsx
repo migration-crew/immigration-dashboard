@@ -1,4 +1,4 @@
-import ApplicationStatus from "@/app/applications/_components/ApplicationStatus";
+import StatusTag from "@/components/common/StatusTag";
 import {
   Table,
   TableBody,
@@ -56,7 +56,7 @@ export function Applicationtable({ applicationData }: Props) {
               <RoundedProgressBar progress={application.progress} />
             </TableCell>
             <TableCell className="">
-              <ApplicationStatus status={application.status} />
+              <StatusTag status={application.status} />
             </TableCell>
           </TableRow>
         ))}

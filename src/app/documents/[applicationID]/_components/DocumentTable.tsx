@@ -1,5 +1,4 @@
-import ApplicationStatus from "@/app/applications/_components/ApplicationStatus";
-import RoundedProgressBar from "@/components/common/RoundedProgressBar";
+import StatusTag from "@/components/common/StatusTag";
 import { CaptionSemi } from "@/components/common/text/CaptionSemi";
 import {
   Table,
@@ -13,10 +12,10 @@ import { DocumentType } from "@/types/Document/DocumentType";
 import { UploadDocumentModal } from "./UploadDocumentModal";
 
 type Props = {
-  documents: DocumentType[]
-}
+  documents: DocumentType[];
+};
 
-export const DocumentTable = ({documents}: Props) => {
+export const DocumentTable = ({ documents }: Props) => {
   return (
     <Table className="w-[1152px] ">
       <TableHeader className="bg-secondary-medium-gray text-primary-white text-caption-semi">
@@ -42,15 +41,13 @@ export const DocumentTable = ({documents}: Props) => {
         {documents.map((document, index) => (
           <TableRow key={index}>
             <TableCell className="px-[30px]">{document.format}</TableCell>
-            <TableCell className="text-caption-semi">
-              {document.name}
-            </TableCell>
+            <TableCell className="text-caption-semi">{document.name}</TableCell>
             <TableCell>{document.dueDate.toDateString()}</TableCell>
             <TableCell>
               <UploadDocumentModal status={document.status} />
             </TableCell>
             <TableCell className="">
-              <ApplicationStatus status={document.status} />
+              <StatusTag status={document.status} />
             </TableCell>
           </TableRow>
         ))}

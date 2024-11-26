@@ -18,7 +18,7 @@ type variantType =
   | null
   | undefined;
 
-export default function ApplicationStatus({ status }: Props) {
+export default function StatusTag({ status }: Props) {
   const [statusLetter, setStatusLetter] = useState("");
   const [variant, setVariant] = useState<variantType>(null);
   useEffect(() => {
@@ -38,6 +38,18 @@ export default function ApplicationStatus({ status }: Props) {
       case "onHold":
         setVariant("gray");
         setStatusLetter("On Hold");
+        break;
+      case "approved":
+        setVariant("green");
+        setStatusLetter("Approved");
+        break;
+      case "pendingApproval":
+        setVariant("blue");
+        setStatusLetter("Pending Approval");
+        break;
+      case "notSubmitted":
+        setVariant("gray");
+        setStatusLetter("Not Submitted");
         break;
       default:
         throw new Error("this status is not excepted");
