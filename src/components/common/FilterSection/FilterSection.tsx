@@ -9,9 +9,8 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ChevronDown, Plus, RotateCcw } from "lucide-react";
+import { ChevronDown, RotateCcw } from "lucide-react";
 import * as React from "react";
 
 export type FilterOption = {
@@ -26,8 +25,6 @@ export type FilterSectionProps = {
   onSortChange: (value: string) => void;
   onVisaTypeChange: (values: string[]) => void;
   onStatusChange: (values: string[]) => void;
-  onAddVisaType: (newType: string) => void;
-  onAddStatus: (newStatus: string) => void;
   onReset: () => void;
   className?: string;
 };
@@ -39,8 +36,6 @@ export default function FilterSection({
   onSortChange,
   onVisaTypeChange,
   onStatusChange,
-  onAddVisaType,
-  onAddStatus,
   onReset,
   className = "",
 }: FilterSectionProps) {
@@ -49,33 +44,6 @@ export default function FilterSection({
     []
   );
   const [selectedStatus, setSelectedStatus] = React.useState<string[]>([]);
-  const [showAllVisaTypes, setShowAllVisaTypes] = React.useState(false);
-  const [showAllStatus, setShowAllStatus] = React.useState(false);
-  const [showAddVisaType, setShowAddVisaType] = React.useState(false);
-  const [showAddStatus, setShowAddStatus] = React.useState(false);
-  const [newVisaType, setNewVisaType] = React.useState("");
-  const [newStatus, setNewStatus] = React.useState("");
-
-  const visibleVisaTypes = showAllVisaTypes ? visaTypes : visaTypes.slice(0, 4);
-  const visibleStatus = showAllStatus
-    ? statusOptions
-    : statusOptions.slice(0, 4);
-
-  const handleAddVisaType = () => {
-    if (newVisaType.trim()) {
-      onAddVisaType(newVisaType.trim());
-      setNewVisaType("");
-      setShowAddVisaType(false);
-    }
-  };
-
-  const handleAddStatus = () => {
-    if (newStatus.trim()) {
-      onAddStatus(newStatus.trim());
-      setNewStatus("");
-      setShowAddStatus(false);
-    }
-  };
 
   return (
     <div className={`flex flex-wrap items-center gap-4 ${className}`}>
@@ -114,14 +82,14 @@ export default function FilterSection({
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" className="w-[200px]">
           <ScrollArea className="h-[300px] w-full p-2">
-            {visibleVisaTypes.map((option) => (
+            {visaTypes.map((option) => (
               <label
                 key={option.value}
                 className="flex cursor-pointer items-center space-x-2 rounded p-2 hover:bg-accent"
               >
                 <Checkbox
                   checked={selectedVisaTypes.includes(option.value)}
-                  onCheckedChange={(checked: unknown) => {
+                  onCheckedChange={(checked) => {
                     const newSelected = checked
                       ? [...selectedVisaTypes, option.value]
                       : selectedVisaTypes.filter((v) => v !== option.value);
@@ -132,47 +100,6 @@ export default function FilterSection({
                 <span>{option.label}</span>
               </label>
             ))}
-            {visaTypes.length > 4 && (
-              <Button
-                variant="link"
-                className="mt-2 w-full justify-start px-2 text-primary"
-                onClick={() => setShowAllVisaTypes(!showAllVisaTypes)}
-              >
-                <Plus className="mr-2 h-4 w-4" />
-                {showAllVisaTypes ? "Show less" : "More filter"}
-              </Button>
-            )}
-            {!showAddVisaType && (
-              <Button
-                variant="link"
-                className="mt-2 w-full justify-start px-2 text-primary"
-                onClick={() => setShowAddVisaType(true)}
-              >
-                <Plus className="mr-2 h-4 w-4" />
-                More filter
-              </Button>
-            )}
-            {showAddVisaType && (
-              <div className="mt-4 space-y-2">
-                <Input
-                  placeholder="New visa type"
-                  value={newVisaType}
-                  onChange={(e) => setNewVisaType(e.target.value)}
-                />
-                <div className="flex justify-end space-x-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setShowAddVisaType(false)}
-                  >
-                    Cancel
-                  </Button>
-                  <Button size="sm" onClick={handleAddVisaType}>
-                    Add
-                  </Button>
-                </div>
-              </div>
-            )}
             {selectedVisaTypes.length > 0 && (
               <Button
                 variant="link"
@@ -198,14 +125,14 @@ export default function FilterSection({
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" className="w-[200px]">
           <ScrollArea className="h-[300px] w-full p-2">
-            {visibleStatus.map((option) => (
+            {statusOptions.map((option) => (
               <label
                 key={option.value}
                 className="flex cursor-pointer items-center space-x-2 rounded p-2 hover:bg-accent"
               >
                 <Checkbox
                   checked={selectedStatus.includes(option.value)}
-                  onCheckedChange={(checked: unknown) => {
+                  onCheckedChange={(checked) => {
                     const newSelected = checked
                       ? [...selectedStatus, option.value]
                       : selectedStatus.filter((v) => v !== option.value);
@@ -216,47 +143,6 @@ export default function FilterSection({
                 <span>{option.label}</span>
               </label>
             ))}
-            {statusOptions.length > 4 && (
-              <Button
-                variant="link"
-                className="mt-2 w-full justify-start px-2 text-primary"
-                onClick={() => setShowAllStatus(!showAllStatus)}
-              >
-                <Plus className="mr-2 h-4 w-4" />
-                {showAllStatus ? "Show less" : "More filter"}
-              </Button>
-            )}
-            {!showAddStatus && (
-              <Button
-                variant="link"
-                className="mt-2 w-full justify-start px-2 text-primary"
-                onClick={() => setShowAddStatus(true)}
-              >
-                <Plus className="mr-2 h-4 w-4" />
-                More filter
-              </Button>
-            )}
-            {showAddStatus && (
-              <div className="mt-4 space-y-2">
-                <Input
-                  placeholder="New status"
-                  value={newStatus}
-                  onChange={(e) => setNewStatus(e.target.value)}
-                />
-                <div className="flex justify-end space-x-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setShowAddStatus(false)}
-                  >
-                    Cancel
-                  </Button>
-                  <Button size="sm" onClick={handleAddStatus}>
-                    Add
-                  </Button>
-                </div>
-              </div>
-            )}
             {selectedStatus.length > 0 && (
               <Button
                 variant="link"
