@@ -25,15 +25,23 @@ type Props = {
 export function Applicationtable({ applicationData }: Props) {
   return (
     <Table className="w-[1152px] ">
-      <TableHeader className="bg-secondary-medium-gray text-primary-white ">
+      <TableHeader className="bg-secondary-medium-gray text-primary-white text-caption-semi">
         <TableRow className="">
           <TableHead className="text-primary-white w-[18%] h-[21px] px-[30px]">
             <CaptionSemi>NUMBER</CaptionSemi>
           </TableHead>
-          <TableHead className="text-primary-white w-[32%]">NAME</TableHead>
-          <TableHead className="text-primary-white w-[16%]">TYPE</TableHead>
-          <TableHead className="text-primary-white w-[18%]">PROGRESS</TableHead>
-          <TableHead className="text-primary-white w-[16%]">STATUS</TableHead>
+          <TableHead className="text-primary-white w-[32%]">
+            <CaptionSemi>NAME</CaptionSemi>
+          </TableHead>
+          <TableHead className="text-primary-white w-[16%]">
+            <CaptionSemi>TYPE</CaptionSemi>
+          </TableHead>
+          <TableHead className="text-primary-white w-[18%]">
+            <CaptionSemi>PROGRESS</CaptionSemi>
+          </TableHead>
+          <TableHead className="text-primary-white w-[16%]">
+            <CaptionSemi>STATUS</CaptionSemi>
+          </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>

@@ -1,3 +1,5 @@
+import { Caption } from "./text/Caption";
+
 type Props = {
   progress: number;
 };
@@ -11,7 +13,9 @@ export default function HorizontalProgressBar({ progress }: Props) {
           style={{ width: `${progress}%` }}
         >
           {progress > 0 && (
-            <p className="text-center text-primary-white ">{progress}%</p>
+            <Caption className="text-center text-primary-white ">
+              {progress}%
+            </Caption>
           )}
         </div>
       </div>

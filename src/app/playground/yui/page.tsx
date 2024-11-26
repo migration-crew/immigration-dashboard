@@ -33,7 +33,7 @@ const page = () => {
               number: "002",
               name: "Application Two",
               type: "Type B",
-              progress: 75,
+              progress: 0,
               status: "completed",
             },
           ]}

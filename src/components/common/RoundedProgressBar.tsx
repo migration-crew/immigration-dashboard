@@ -1,3 +1,5 @@
+import { Caption } from "./text/Caption";
+
 type Props = {
   progress: number;
 };
@@ -11,11 +13,7 @@ export default function RoundedProgressBar({ progress }: Props) {
           style={{ width: `${progress}%` }}
         ></div>
       </div>
-      {progress > 0 && (
-        <p className="text-center text-primary-black text-caption ">
-          {progress}%
-        </p>
-      )}
+      <Caption className="text-center text-primary-black ">{progress}%</Caption>
     </div>
   );
 }
