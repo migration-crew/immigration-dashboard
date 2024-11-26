@@ -1,3 +1,4 @@
+import { NewDocForm } from "@/app/documents/[applicationID]/_components/NewDocForm";
 import { UploadDocumentModal } from "@/app/documents/[applicationID]/_components/UploadDocumentModal";
 import { Caption } from "@/components/common/text/Caption";
 import { CaptionSemi } from "@/components/common/text/CaptionSemi";
@@ -21,7 +22,7 @@ import { Button } from "@/components/ui/upImmigrationButton";
 
 const YukiPage = () => {
   return (
-    <div className="bg-primary-gray">
+    <div className="bg-primary-gray w-full">
       <Hero>Hero</Hero>
       <HeroLight>HeroLight</HeroLight>
       <Title>Title</Title>
@@ -54,6 +55,9 @@ const YukiPage = () => {
         <Button variant="green" disabled>
           green disabled
         </Button>
+      </div>
+      <div className="m-5">
+        <NewDocForm />
       </div>
       <UploadDocumentModal status="NotSubmitted" />
       <UploadDocumentModal status="PendingApproval" />
