@@ -9,3 +9,8 @@ export type EventType = {
   format: string;
   appointmentType: AppointmentTypeType;
 };
+
+export type QuickCalendarType = Pick<
+  EventType,
+  "id" | "startDate" | "duration"
+>;
