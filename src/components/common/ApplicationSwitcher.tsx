@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -14,6 +13,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Button } from "@/components/ui/upImmigrationButton";
 import { cn } from "@/lib/utils";
 import { ApplicationType } from "@/types/ApplicationType";
 import { Check } from "lucide-react";

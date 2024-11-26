@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
@@ -10,8 +9,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/upImmigrationButton";
+import { cn } from "@/lib/utils";
 import { ChevronDown, RotateCcw } from "lucide-react";
 import * as React from "react";
+import { Caption } from "../text/Caption";
 
 export type FilterOption = {
   label: string;
@@ -44,19 +46,34 @@ export default function FilterSection({
     []
   );
   const [selectedStatus, setSelectedStatus] = React.useState<string[]>([]);
+  const [sortOpen, setSortOpen] = React.useState(false);
+  const [visaTypeOpen, setVisaTypeOpen] = React.useState(false);
+  const [statusOpen, setStatusOpen] = React.useState(false);
 
   return (
-    <div className={`flex flex-wrap items-center gap-4 ${className}`}>
-      <div className="text-sm font-medium">Filter by</div>
+    <div
+      className={`flex flex-wrap items-center border w-[739px] h-[53px] ${className}`}
+    >
+      <div className="text-center w-[79px] h-[21]">
+        <Caption>Filter by</Caption>
+      </div>
 
-      <DropdownMenu>
+      <DropdownMenu open={sortOpen} onOpenChange={setSortOpen}>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="w-[140px] justify-between">
-            Sort by
-            <ChevronDown className="h-4 w-4 opacity-50" />
+          <Button
+            variant="ghost"
+            className="w-[187px] h-full justify-between rounded-none border-x"
+          >
+            <Caption>Sort by</Caption>
+            <ChevronDown
+              className={cn(
+                "transition-transform duration-200",
+                sortOpen && "rotate-180"
+              )}
+            />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="start" className="w-[200px]">
+        <DropdownMenuContent align="start" className="w-[187px]">
           <DropdownMenuRadioGroup
             value={selectedSort}
             onValueChange={(value: string) => {
@@ -66,22 +83,30 @@ export default function FilterSection({
           >
             {sortOptions.map((option) => (
               <DropdownMenuRadioItem key={option.value} value={option.value}>
-                {option.label}
+                <Caption>{option.label}</Caption>
               </DropdownMenuRadioItem>
             ))}
           </DropdownMenuRadioGroup>
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <DropdownMenu>
+      <DropdownMenu open={visaTypeOpen} onOpenChange={setVisaTypeOpen}>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="w-[140px] justify-between">
-            Visa Type
-            <ChevronDown className="h-4 w-4 opacity-50" />
+          <Button
+            variant="ghost"
+            className="w-[155px] h-full justify-between rounded-none"
+          >
+            <Caption>Visa Type</Caption>
+            <ChevronDown
+              className={cn(
+                "transition-transform duration-200",
+                visaTypeOpen && "rotate-180"
+              )}
+            />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="start" className="w-[200px]">
-          <ScrollArea className="h-[300px] w-full p-2">
+        <DropdownMenuContent align="start" className="w-[155px]">
+          <ScrollArea className="h-[210px] w-full p-2">
             {visaTypes.map((option) => (
               <label
                 key={option.value}
@@ -97,7 +122,7 @@ export default function FilterSection({
                     onVisaTypeChange(newSelected);
                   }}
                 />
-                <span>{option.label}</span>
+                <Caption>{option.label}</Caption>
               </label>
             ))}
             {selectedVisaTypes.length > 0 && (
@@ -109,22 +134,30 @@ export default function FilterSection({
                   onVisaTypeChange([]);
                 }}
               >
-                Remove
+                <Caption>Remove</Caption>
               </Button>
             )}
           </ScrollArea>
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <DropdownMenu>
+      <DropdownMenu open={statusOpen} onOpenChange={setStatusOpen}>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="w-[140px] justify-between">
-            Status
-            <ChevronDown className="h-4 w-4 opacity-50" />
+          <Button
+            variant="ghost"
+            className="w-[155px] h-full justify-between rounded-none shadow-none border-x"
+          >
+            <Caption>Status</Caption>
+            <ChevronDown
+              className={cn(
+                "transition-transform duration-200",
+                statusOpen && "rotate-180"
+              )}
+            />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="start" className="w-[200px]">
-          <ScrollArea className="h-[300px] w-full p-2">
+        <DropdownMenuContent align="start" className="w-[155px]">
+          <ScrollArea className="h-[210px] w-full p-2">
             {statusOptions.map((option) => (
               <label
                 key={option.value}
@@ -140,7 +173,7 @@ export default function FilterSection({
                     onStatusChange(newSelected);
                   }}
                 />
-                <span>{option.label}</span>
+                <Caption>{option.label}</Caption>
               </label>
             ))}
             {selectedStatus.length > 0 && (
@@ -152,7 +185,7 @@ export default function FilterSection({
                   onStatusChange([]);
                 }}
               >
-                Remove
+                <Caption>Remove</Caption>
               </Button>
             )}
           </ScrollArea>
@@ -161,7 +194,7 @@ export default function FilterSection({
 
       <Button
         variant="ghost"
-        className="text-primary hover:text-primary/80"
+        className="text-primary w-[161px] h-full rounded-none hover:text-primary/80"
         onClick={() => {
           setSelectedSort("");
           setSelectedVisaTypes([]);
@@ -169,8 +202,8 @@ export default function FilterSection({
           onReset();
         }}
       >
-        <RotateCcw className="mr-2 h-4 w-4" />
-        Reset Filter
+        <RotateCcw className="mr-2 h-4 w-4 text-primary-red" />
+        <Caption className="text-primary-red">Reset Filter</Caption>
       </Button>
     </div>
   );
