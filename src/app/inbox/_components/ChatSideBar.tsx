@@ -1,8 +1,11 @@
+"use client";
+
 import { CaptionSemi } from "@/components/common/text/CaptionSemi";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/upImmigrationButton";
 import { Search } from "lucide-react";
+import { useState } from "react";
 
 type Props = {
   channels: string[];
@@ -10,6 +13,15 @@ type Props = {
 };
 
 export default function ChatSideBar({ channels, messages }: Props) {
+  const [searchText, setSearchText] = useState(""); // State to hold the input value
+
+  // Filter channels and messages based on the search text
+  const filteredChannels = channels.filter((channel) =>
+    channel.toLowerCase().includes(searchText.toLowerCase())
+  );
+  const filteredMessages = messages.filter((message) =>
+    message.toLowerCase().includes(searchText.toLowerCase())
+  );
   return (
     <div className="w-[290px] h-full">
       <Card className="flex flex-col gap-6 py-10 px-5">
@@ -17,7 +29,9 @@ export default function ChatSideBar({ channels, messages }: Props) {
           <Input
             type="text"
             placeholder="Search Users"
-            className="pl-10 pr-4 py-2 w-full rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            className="pl-10 pr-4 py-2 w-full rounded-lg border border-gray-300 focus:outline-none focus:ring-2"
           />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
           <button type="submit" className="sr-only">
@@ -26,9 +40,13 @@ export default function ChatSideBar({ channels, messages }: Props) {
         </form>
         <div className="flex flex-col gap-6">
           <CaptionSemi>Channel</CaptionSemi>
-          <div className="flex flex-col gap-2 w-[250px] bg-inherit hover:bg-primary-gray active:bg-secondary-green">
-            {channels.map((channel, index) => (
-              <Button key={index} variant="green">
+          <div className="flex flex-col gap-2 w-[250px]">
+            {filteredChannels.map((channel, index) => (
+              <Button
+                key={index}
+                variant="green"
+                className="text-black shadow-none text-caption bg-inherit hover:bg-primary-gray hover:text-primary-black active:bg-secondary-dark-gray active:text-primary-white focus:bg-secondary-green focus:text-primary-white"
+              >
                 {channel}
               </Button>
             ))}
@@ -37,8 +55,12 @@ export default function ChatSideBar({ channels, messages }: Props) {
         <div className="flex flex-col gap-6">
           <CaptionSemi>Direct Message</CaptionSemi>
           <div className="flex flex-col gap-2">
-            {messages.map((message, index) => (
-              <Button key={index} variant="green">
+            {filteredMessages.map((message, index) => (
+              <Button
+                key={index}
+                variant="green"
+                className="text-black shadow-none text-caption bg-inherit hover:bg-primary-gray hover:text-primary-black active:bg-secondary-dark-gray active:text-primary-white focus:bg-secondary-green focus:text-primary-white"
+              >
                 {message}
               </Button>
             ))}
