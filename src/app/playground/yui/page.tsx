@@ -1,3 +1,4 @@
+import ChatHeader from "@/app/inbox/_components/ChatHeader";
 import ChatSideBar from "@/app/inbox/_components/ChatSideBar";
 import { Applicationtable } from "@/components/common/ApplicationTable";
 import DynamicHeaderContainer from "@/components/common/DynamicHeaderContainer";
@@ -43,6 +44,7 @@ const page = () => {
         channels={["#All Client", "#Student Channel"]}
         messages={["Student_Project", "General_Project"]}
       />
+      <ChatHeader />
     </div>
   );
 };
