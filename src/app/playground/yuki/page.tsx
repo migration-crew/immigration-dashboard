@@ -1,3 +1,4 @@
+import { DocumentTable } from "@/app/documents/[applicationID]/_components/DocumentTable";
 import { NewDocForm } from "@/app/documents/[applicationID]/_components/NewDocForm";
 import { UploadDocumentModal } from "@/app/documents/[applicationID]/_components/UploadDocumentModal";
 import { Caption } from "@/components/common/text/Caption";
@@ -17,8 +18,8 @@ import { Subtitle } from "@/components/common/text/Subtitle";
 import { SubtitleRegular } from "@/components/common/text/SubtitleRegular";
 import { Title } from "@/components/common/text/Title";
 import { TitleLight } from "@/components/common/text/TitleLight";
-import { Badge } from "@/components/ui/upImmigrationBadge";
 import { Button } from "@/components/ui/upImmigrationButton";
+import { documents } from "./data/DocumentTable";
 
 const YukiPage = () => {
   return (
@@ -96,12 +97,15 @@ const YukiPage = () => {
       <div className="h-10 bg-secondary-green/50 text-secondary-green">
         secondary-green
       </div>
-      <div className="h-10 bg-secondary-blue/50 text-secondary-blue">secondary-blue</div>
+      <div className="h-10 bg-secondary-blue/50 text-secondary-blue">
+        secondary-blue
+      </div>
       <Microtext>nomal</Microtext>
       <Microtext className="text-secondary-medium-gray">
         with text-color
       </Microtext>
       <div className="bg-primary-white text-primary-gray">text</div>
+      <DocumentTable documents={documents} />
     </div>
   );
 };
