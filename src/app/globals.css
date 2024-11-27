@@ -41,16 +41,17 @@ body {
     --radius: 0.5rem;
 
     /* Style Color */
-    --primary-red: #ad2320;
-    --primary-black: #000000;
-    --primary-gray: #f3f3f3;
-    --primary-white: #fff;
-    --dark-gray: #373737;
-    --medium-gray: #5e5e5e;
-    --gray: #cbcbcb;
-    --light-gray: #f5f6fa;
-    --green: #0c9986;
-    --blue: #4880ff;
+    --primary-red: 173, 35, 32;
+    --primary-dark-red: 119, 13, 10;
+    --primary-black: 0, 0, 0;
+    --primary-gray: 243, 243, 243;
+    --primary-white: 255, 255, 255;
+    --dark-gray: 55, 55, 55;
+    --medium-gray: 94, 94, 94;
+    --gray: 203, 203, 203;
+    --light-gray: 245, 246, 250;
+    --green: 12, 153, 134;
+    --blue: 72, 128, 255;
     --task-red: rgba(255, 0, 0, 0.2);
 
     /* Font Size */
@@ -68,6 +69,16 @@ body {
     --font-weight-semi-bold: 600;
     --font-weight-regular: 400;
     --font-weight-light: 300;
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -94,6 +105,16 @@ body {
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+
+    /* Sidebar */
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 

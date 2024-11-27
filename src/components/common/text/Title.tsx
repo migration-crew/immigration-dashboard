@@ -20,5 +20,5 @@ export const Title = ({
   className?: string | undefined;
   children: React.ReactNode;
 }) => {
-  return <h2 className={cn("text-title", className)}>{children}</h2>;
+  return <h2 className={cn("!text-title", className)}>{children}</h2>;
 };

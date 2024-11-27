@@ -1,10 +1,10 @@
-import { Link } from "@/types/breadcrumb-link";
+import { BreadCrumbType } from "@/types/BreadCrumbType";
 import { Breadcrumb } from "../../ui/breadcrumb";
 import { BreadcrumbListComponent } from "./BreadcrumbListComponent";
 
 type Props = {
   className?: string | undefined;
-  links: Link[];
+  links: BreadCrumbType[];
 };
 
 /**

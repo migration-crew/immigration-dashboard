@@ -20,5 +20,5 @@ export const ParagraphRegular = ({
   className?: string | undefined;
   children: React.ReactNode;
 }) => {
-  return <p className={cn("text-paragraph-regular", className)}>{children}</p>;
+  return <p className={cn("!text-paragraph-regular", className)}>{children}</p>;
 };
