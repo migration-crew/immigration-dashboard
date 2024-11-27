@@ -7,3 +7,5 @@ export type PaymentType = {
   createdAt: string;
   invoiceURL: string;
 };
+
+export type TablePaymentType = Pick<PaymentType, "id" | "status">;
