@@ -13,9 +13,8 @@ type Props = {
 };
 
 export default function ChatSideBar({ channels, messages }: Props) {
-  const [searchText, setSearchText] = useState(""); // State to hold the input value
+  const [searchText, setSearchText] = useState("");
 
-  // Filter channels and messages based on the search text
   const filteredChannels = channels.filter((channel) =>
     channel.toLowerCase().includes(searchText.toLowerCase())
   );
