@@ -20,10 +20,10 @@ export const DocumentTable = ({ documents }: Props) => {
     <Table className="w-[1152px] ">
       <TableHeader className="bg-secondary-medium-gray text-primary-white text-caption-semi">
         <TableRow className="">
-          <TableHead className="text-primary-white w-[18%] h-[21px] px-[30px]">
+          <TableHead className="text-primary-white w-[11%] h-[21px] px-[30px]">
             <CaptionSemi>FORM</CaptionSemi>
           </TableHead>
-          <TableHead className="text-primary-white w-[32%]">
+          <TableHead className="text-primary-white w-[44%]">
             <CaptionSemi>DOCUMENT</CaptionSemi>
           </TableHead>
           <TableHead className="text-primary-white w-[16%]">
@@ -32,7 +32,7 @@ export const DocumentTable = ({ documents }: Props) => {
           <TableHead className="text-primary-white w-[18%]">
             <CaptionSemi>ADD DOCUMENT</CaptionSemi>
           </TableHead>
-          <TableHead className="text-primary-white w-[16%]">
+          <TableHead className="text-primary-white w-[11%]">
             <CaptionSemi>STATUS</CaptionSemi>
           </TableHead>
         </TableRow>
