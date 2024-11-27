@@ -1,4 +1,7 @@
+import { NewDocForm } from "@/app/documents/[applicationID]/_components/NewDocForm";
 import { UploadDocumentModal } from "@/app/documents/[applicationID]/_components/UploadDocumentModal";
+import { PaymentTable } from "@/app/payments/_components/PaymentTable";
+import { paymentTableData } from "@/app/payments/data/paymentTable";
 import { Caption } from "@/components/common/text/Caption";
 import { CaptionSemi } from "@/components/common/text/CaptionSemi";
 import { Heading } from "@/components/common/text/Heading";
@@ -16,12 +19,11 @@ import { Subtitle } from "@/components/common/text/Subtitle";
 import { SubtitleRegular } from "@/components/common/text/SubtitleRegular";
 import { Title } from "@/components/common/text/Title";
 import { TitleLight } from "@/components/common/text/TitleLight";
-import { Badge } from "@/components/ui/upImmigrationBadge";
 import { Button } from "@/components/ui/upImmigrationButton";
 
 const YukiPage = () => {
   return (
-    <div className="bg-primary-gray">
+    <div className="bg-primary-gray w-full">
       <Hero>Hero</Hero>
       <HeroLight>HeroLight</HeroLight>
       <Title>Title</Title>
@@ -54,6 +56,9 @@ const YukiPage = () => {
         <Button variant="green" disabled>
           green disabled
         </Button>
+      </div>
+      <div className="m-5">
+        <NewDocForm />
       </div>
       <UploadDocumentModal status="NotSubmitted" />
       <UploadDocumentModal status="PendingApproval" />
@@ -92,12 +97,16 @@ const YukiPage = () => {
       <div className="h-10 bg-secondary-green/50 text-secondary-green">
         secondary-green
       </div>
-      <div className="h-10 bg-secondary-blue/50 text-secondary-blue">secondary-blue</div>
+      <div className="h-10 bg-secondary-blue/50 text-secondary-blue">
+        secondary-blue
+      </div>
       <Microtext>nomal</Microtext>
       <Microtext className="text-secondary-medium-gray">
         with text-color
       </Microtext>
       <div className="bg-primary-white text-primary-gray">text</div>
+
+      <PaymentTable payments={paymentTableData} />
     </div>
   );
 };

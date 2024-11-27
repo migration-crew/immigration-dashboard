@@ -113,7 +113,7 @@ const stages: ApplicationStageType[] = [
         id: "8",
         name: "Arrange accommodation",
         description: "Arrange accommodation",
-        status: "Completed",
+        status: "Not Started",
         dueDate: "2024-11-25",
         comments: [],
         documentURLs: [],
@@ -154,15 +154,29 @@ export default function ApplicationProgress() {
       title="Progress"
       className="flex flex-col w-[794px] h-[313px] gap-8"
     >
-      <ul className="flex justify-evenly">
-        {stages.map((stage) => {
+      <ul className="flex justify-evenly items-center relative">
+        <div
+          className="absolute top-[60px] left-0 right-0 h-[2px] bg-secondary-medium-gray z-0"
+          style={{
+            margin: "0 auto",
+            width: "70%",
+          }}
+        />
+        {stages.map((stage, index) => {
           const progress = calculateProgress(stage.tasks);
           return (
             <li
               key={stage.applicationId}
-              className="flex flex-col items-center gap-8"
+              className="relative flex flex-col items-center gap-8"
             >
-              <div style={{ width: 120, height: 120 }}>
+              <div
+                style={{
+                  width: 120,
+                  height: 120,
+                  zIndex: 1,
+                  background: "#FFF",
+                }}
+              >
                 <CircularProgressbar
                   value={progress}
                   text={`${progress}%`}
@@ -179,6 +193,9 @@ export default function ApplicationProgress() {
                 />
               </div>
               <CaptionSemi>{stage.name}</CaptionSemi>
+              {index < stages.length - 1 && (
+                <div className="absolute top-[60px] left-[100px] h-[2px] bg-secondary-medium-gray w-[120px] -z-1" />
+              )}
             </li>
           );
         })}
