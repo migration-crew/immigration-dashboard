@@ -51,7 +51,7 @@ export default function FilterSection({
 
   return (
     <div
-      className={`flex flex-wrap items-center border w-[739px] h-[53px] ${className}`}
+      className={`flex flex-wrap items-center border w-[739px] h-[53px] rounded ${className}`}
     >
       <div className="text-center w-[79px] h-[21]">
         <Caption>Filter by</Caption>

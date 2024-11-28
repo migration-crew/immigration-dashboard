@@ -7,7 +7,8 @@ import { useMemo, useState } from "react";
 
 export type testApplicationType = {
   application: ApplicationType[];
-  date: Date;
+  createdAt: Date;
+  updateAt: Date;
   progress: number;
   status: string;
 };
@@ -21,7 +22,8 @@ const applications: testApplicationType[] = [
         type: "student",
       },
     ],
-    date: new Date("2023-06-15"),
+    createdAt: new Date("2023-05-01"),
+    updateAt: new Date("2023-06-15"),
     progress: 100,
     status: "completed",
   },
@@ -33,7 +35,8 @@ const applications: testApplicationType[] = [
         type: "workPermit",
       },
     ],
-    date: new Date("2023-05-10"),
+    createdAt: new Date("2023-04-01"),
+    updateAt: new Date("2023-05-10"),
     progress: 75,
     status: "onHold",
   },
@@ -45,7 +48,8 @@ const applications: testApplicationType[] = [
         type: "visitor",
       },
     ],
-    date: new Date("2023-04-22"),
+    createdAt: new Date("2023-04-01"),
+    updateAt: new Date("2023-04-22"),
     progress: 25,
     status: "processing",
   },
@@ -57,7 +61,8 @@ const applications: testApplicationType[] = [
         type: "student",
       },
     ],
-    date: new Date("2023-06-01"),
+    createdAt: new Date("2023-05-01"),
+    updateAt: new Date("2023-06-01"),
     progress: 100,
     status: "rejected",
   },
@@ -69,7 +74,8 @@ const applications: testApplicationType[] = [
         type: "student",
       },
     ],
-    date: new Date("2023-05-28"),
+    createdAt: new Date("2023-04-01"),
+    updateAt: new Date("2023-05-28"),
     progress: 50,
     status: "processing",
   },
@@ -138,9 +144,9 @@ export default function Page() {
     return filtered.sort((a, b) => {
       switch (selectedSort) {
         case "date_asc":
-          return a.date.getTime() - b.date.getTime();
+          return a.updateAt.getTime() - b.updateAt.getTime();
         case "date_desc":
-          return b.date.getTime() - a.date.getTime();
+          return b.updateAt.getTime() - a.updateAt.getTime();
         case "progress_asc":
           return a.progress - b.progress;
         case "progress_desc":

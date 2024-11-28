@@ -24,7 +24,7 @@ import { Caption } from "./text/Caption";
 export type globalApplicationsType = {
   id: string;
   name: string;
-  date?: Date;
+  updateAt?: Date;
 };
 
 export type Props = {
@@ -41,7 +41,7 @@ function ApplicationSwitcher({
   const sortedApplications = React.useMemo(
     () =>
       [...(applications || [])].sort(
-        (a, b) => b.date.getTime() - a.date.getTime()
+        (a, b) => b.updateAt.getTime() - a.updateAt.getTime()
       ),
     [applications]
   );
@@ -58,7 +58,7 @@ function ApplicationSwitcher({
     (app) => ({
       id: app.application[0].id,
       name: app.application[0].name,
-      date: app.date,
+      date: app.updateAt,
     })
   );
   if (isAdmin) {
