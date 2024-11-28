@@ -125,19 +125,19 @@ export default function FilterSection({
                 <Caption>{option.label}</Caption>
               </label>
             ))}
-            {selectedVisaTypes.length > 0 && (
-              <Button
-                variant="link"
-                className="mt-2 w-full justify-start px-2 text-destructive"
-                onClick={() => {
-                  setSelectedVisaTypes([]);
-                  onVisaTypeChange([]);
-                }}
-              >
-                <Caption>Remove</Caption>
-              </Button>
-            )}
           </ScrollArea>
+          {selectedVisaTypes.length > 0 && (
+            <Button
+              variant="link"
+              className="w-full justify-center px-2 text-destructive"
+              onClick={() => {
+                setSelectedVisaTypes([]);
+                onVisaTypeChange([]);
+              }}
+            >
+              <Caption>Remove</Caption>
+            </Button>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
 
@@ -145,7 +145,7 @@ export default function FilterSection({
         <DropdownMenuTrigger asChild>
           <Button
             variant="ghost"
-            className="w-[155px] h-full justify-between rounded-none shadow-none border-x"
+            className="w-[155px] h-full justify-between rounded-none shadow-none border-none"
           >
             <Caption>Status</Caption>
             <ChevronDown
@@ -176,19 +176,19 @@ export default function FilterSection({
                 <Caption>{option.label}</Caption>
               </label>
             ))}
-            {selectedStatus.length > 0 && (
-              <Button
-                variant="link"
-                className="mt-2 w-full justify-start px-2 text-destructive"
-                onClick={() => {
-                  setSelectedStatus([]);
-                  onStatusChange([]);
-                }}
-              >
-                <Caption>Remove</Caption>
-              </Button>
-            )}
           </ScrollArea>
+          {selectedStatus.length > 0 && (
+            <Button
+              variant="link"
+              className="w-full px-2 text-destructive justify-center"
+              onClick={() => {
+                setSelectedStatus([]);
+                onStatusChange([]);
+              }}
+            >
+              <Caption>Remove</Caption>
+            </Button>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
 
