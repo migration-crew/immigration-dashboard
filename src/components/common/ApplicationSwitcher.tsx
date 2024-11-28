@@ -1,5 +1,6 @@
 "use client";
 
+import { testApplicationType } from "@/app/playground/saulo/page";
 import {
   Command,
   CommandEmpty,
@@ -15,7 +16,6 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/upImmigrationButton";
 import { cn } from "@/lib/utils";
-import { ApplicationType } from "@/types/ApplicationType";
 import { Check } from "lucide-react";
 import Image from "next/image";
 import * as React from "react";
@@ -30,7 +30,7 @@ export type globalApplicationsType = {
 export type Props = {
   className?: string;
   containerClassName?: string;
-  applications: ApplicationType[];
+  applications: testApplicationType[];
 };
 
 function ApplicationSwitcher({
@@ -56,8 +56,8 @@ function ApplicationSwitcher({
 
   const globalApplications: globalApplicationsType[] = applications.map(
     (app) => ({
-      id: app.id,
-      name: app.name,
+      id: app.application[0].id,
+      name: app.application[0].name,
       date: app.date,
     })
   );
@@ -68,7 +68,7 @@ function ApplicationSwitcher({
   const [value, setValue] = React.useState(
     isAdmin
       ? globalApplications[globalApplications.length - 1].id
-      : sortedApplications[0].id
+      : sortedApplications[0].application[0].id
   );
 
   return (
@@ -135,8 +135,8 @@ function ApplicationSwitcher({
                 )}
                 {sortedApplications.map((application) => (
                   <CommandItem
-                    key={application.id}
-                    value={application.id}
+                    key={application.application[0].id}
+                    value={application.application[0].id}
                     onSelect={(currentValue) => {
                       if (currentValue !== value) {
                         setValue(currentValue);
@@ -144,11 +144,15 @@ function ApplicationSwitcher({
                       }
                     }}
                   >
-                    <Caption className="">{application.name}</Caption>
+                    <Caption className="">
+                      {application.application[0].name}
+                    </Caption>
                     <Check
                       className={cn(
                         "ml-auto",
-                        value === application.id ? "opacity-100" : "opacity-0"
+                        value === application.application[0].id
+                          ? "opacity-100"
+                          : "opacity-0"
                       )}
                     />
                   </CommandItem>

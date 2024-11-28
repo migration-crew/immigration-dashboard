@@ -145,7 +145,7 @@ export default function FilterSection({
         <DropdownMenuTrigger asChild>
           <Button
             variant="ghost"
-            className="w-[155px] h-full justify-between rounded-none shadow-none border-none"
+            className="w-[155px] h-full justify-between rounded-none shadow-none border-x"
           >
             <Caption>Status</Caption>
             <ChevronDown

@@ -2,47 +2,74 @@
 
 import ApplicationSwitcher from "@/components/common/ApplicationSwitcher";
 import FilterSection from "@/components/common/FilterSection/FilterSection";
-import { ApplicationType } from "@/types/ApplicationType";
+import { ApplicationType } from "@/types/Application/ApplicationType";
 import { useMemo, useState } from "react";
 
-const applications: ApplicationType[] = [
+export type testApplicationType = {
+  application: ApplicationType[];
+  date: Date;
+  progress: number;
+  status: string;
+};
+
+const applications: testApplicationType[] = [
   {
-    id: "Maria_CICCC_ESL",
-    name: "Maria_CICCC_ESL",
+    application: [
+      {
+        id: "Maria_CICCC_ESL",
+        name: "Maria_CICCC_ESL",
+        type: "student",
+      },
+    ],
     date: new Date("2023-06-15"),
-    type: "student",
     progress: 100,
     status: "completed",
   },
   {
-    id: "Maria_Work_Permit",
-    name: "Maria_Work_Permit",
+    application: [
+      {
+        id: "Maria_Work_Permit",
+        name: "Maria_Work_Permit",
+        type: "workPermit",
+      },
+    ],
     date: new Date("2023-05-10"),
-    type: "workPermit",
     progress: 75,
     status: "onHold",
   },
   {
-    id: "Carrey_Visitor",
-    name: "Carrey_Visitor",
+    application: [
+      {
+        id: "Carrey_Visitor",
+        name: "Carrey_Visitor",
+        type: "visitor",
+      },
+    ],
     date: new Date("2023-04-22"),
-    type: "visitor",
     progress: 25,
     status: "processing",
   },
   {
-    id: "Maria_CICCC_UX/UI",
-    name: "Maria_CICCC_UX/UI",
+    application: [
+      {
+        id: "Maria_CICCC_UX/UI",
+        name: "Maria_CICCC_UX/UI",
+        type: "student",
+      },
+    ],
     date: new Date("2023-06-01"),
-    type: "student",
     progress: 100,
     status: "rejected",
   },
   {
-    id: "Maria_CICCC_UX/UI_2",
-    name: "Maria_CICCC_UX/UI_2",
+    application: [
+      {
+        id: "Maria_CICCC_UX/UI_2",
+        name: "Maria_CICCC_UX/UI_2",
+        type: "student",
+      },
+    ],
     date: new Date("2023-05-28"),
-    type: "student",
     progress: 50,
     status: "processing",
   },
@@ -101,7 +128,8 @@ export default function Page() {
   const filteredAndSortedApplications = useMemo(() => {
     const filtered = applications.filter((app) => {
       const typeMatch =
-        selectedVisaTypes.length === 0 || selectedVisaTypes.includes(app.type);
+        selectedVisaTypes.length === 0 ||
+        selectedVisaTypes.includes(app.application[0].type);
       const statusMatch =
         selectedStatus.length === 0 || selectedStatus.includes(app.status);
       return typeMatch && statusMatch;
@@ -118,7 +146,7 @@ export default function Page() {
         case "progress_desc":
           return b.progress - a.progress;
         case "alpha_asc":
-          return a.name.localeCompare(b.name);
+          return a.application[0].name.localeCompare(b.application[0].name);
         default:
           return 0;
       }
@@ -144,9 +172,9 @@ export default function Page() {
         <h2 className="text-xl font-bold mb-2">Filtered Applications:</h2>
         <ul>
           {filteredAndSortedApplications.map((app) => (
-            <li key={app.id}>
-              {app.name} - Type: {app.type}, Status: {app.status}, Progress:{" "}
-              {app.progress}%
+            <li key={app.application[0].id}>
+              {app.application[0].name} - Type: {app.application[0].type},
+              Status: {app.status}, Progress: {app.progress}%
             </li>
           ))}
         </ul>
