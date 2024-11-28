@@ -1,6 +1,10 @@
 "use client";
 
 import ApplicationSwitcher from "@/components/common/ApplicationSwitcher";
+import {
+  AppointmentCard,
+  AppointmentCardProps,
+} from "@/components/common/AppoitmentCard";
 import FilterSection from "@/components/common/FilterSection/FilterSection";
 import { ApplicationType } from "@/types/Application/ApplicationType";
 import { useMemo, useState } from "react";
@@ -11,6 +15,28 @@ export type testApplicationType = {
   updateAt: Date;
   progress: number;
   status: string;
+};
+
+const testAppointment: AppointmentCardProps = {
+  name: "First Consultation",
+  date: new Date("2024-01-28T16:00:00"),
+  eventFormat: {
+    type: "online" as const,
+    meetingId: "256 487 7889",
+  },
+  description: "Initial consultation to discuss requirements",
+  attendees: [
+    {
+      id: "1",
+      name: "John Doe",
+      image: "/placeholder.svg",
+    },
+    {
+      id: "2",
+      name: "Jane Smith",
+      image: "/placeholder.svg",
+    },
+  ],
 };
 
 const applications: testApplicationType[] = [
@@ -185,6 +211,7 @@ export default function Page() {
           ))}
         </ul>
       </div>
+      <AppointmentCard {...testAppointment} />
     </div>
   );
 }
