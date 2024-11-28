@@ -73,22 +73,36 @@ export default function FilterSection({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" className="w-[187px]">
-          {sortOptions.map((option) => (
-            <DropdownMenuRadioItem
-              key={option.value}
-              value={option.value}
-              className="flex items-center justify-between py-2 px-4 cursor-pointer hover:bg-gray-100"
+          <ScrollArea className="h-[200px] w-full">
+            {sortOptions.map((option) => (
+              <DropdownMenuRadioItem
+                key={option.value}
+                value={option.value}
+                className="flex items-center justify-between py-2 px-4 cursor-pointer hover:bg-gray-100"
+                onClick={() => {
+                  setSelectedSort(option.value);
+                  onSortChange(option.value);
+                }}
+              >
+                <Caption>{option.label}</Caption>
+                {selectedSort === option.value && (
+                  <Check className="h-4 w-4 text-bold" />
+                )}
+              </DropdownMenuRadioItem>
+            ))}
+          </ScrollArea>
+          {selectedSort.length > 0 && (
+            <Button
+              variant="link"
+              className="w-full justify-center px-2 text-destructive"
               onClick={() => {
-                setSelectedSort(option.value);
-                onSortChange(option.value);
+                setSelectedSort("");
+                onSortChange("");
               }}
             >
-              <Caption>{option.label}</Caption>
-              {selectedSort === option.value && (
-                <Check className="h-4 w-4 text-bold" />
-              )}
-            </DropdownMenuRadioItem>
-          ))}
+              <Caption>Remove</Caption>
+            </Button>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
 
@@ -108,7 +122,7 @@ export default function FilterSection({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" className="w-[155px]">
-          <ScrollArea className="h-[210px] w-full p-2">
+          <ScrollArea className="h-[200px] w-full p-2">
             {visaTypes.map((option) => (
               <label
                 key={option.value}
@@ -159,7 +173,7 @@ export default function FilterSection({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" className="w-[155px]">
-          <ScrollArea className="h-[210px] w-full p-2">
+          <ScrollArea className="h-[200px] w-full p-2">
             {statusOptions.map((option) => (
               <label
                 key={option.value}
