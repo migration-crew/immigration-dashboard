@@ -8,9 +8,19 @@ import { CiImageOn } from "react-icons/ci";
 import { FaMicrophone } from "react-icons/fa6";
 import { FiSend } from "react-icons/fi";
 import { GrAttachment } from "react-icons/gr";
+import ChatContainer from "./ChatContainer";
 
 export default function MessageComposer() {
   const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState<string[]>([]);
+
+  const handleSendMessage = () => {
+    if (message.trim()) {
+      setMessages((prevMessages) => [...prevMessages, message]);
+      setMessage("");
+    }
+  };
+
   return (
     <>
       <div className="w-[846px] h-[65px] border-t ">
@@ -42,11 +52,27 @@ export default function MessageComposer() {
           >
             <CiImageOn />
           </button>
-          <Button className="w-[86px] h-[33ps] text-caption  bg-secondary-green text-primary-white hover:bg-secondary-green-300 active:bg-green-200  flex justify-center items-center">
+          <Button
+            onClick={handleSendMessage}
+            className="w-[86px] h-[33ps] text-caption  bg-secondary-green text-primary-white hover:bg-secondary-green-300 active:bg-green-200  flex justify-center items-center"
+          >
             Send
             <FiSend />
           </Button>
         </Card>
+      </div>
+      <div className="mt-4">
+        {messages.map((msg, index) => (
+          <ChatContainer
+            key={index}
+            message={{
+              id: "",
+              user: { id: "userId", imageUrl: "", firstName: "" },
+              content: msg,
+              createdAt: new Date().toString(),
+            }}
+          />
+        ))}
       </div>
     </>
   );
