@@ -4,14 +4,13 @@ import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/upImmigrationButton";
 import { cn } from "@/lib/utils";
-import { ChevronDown, RotateCcw } from "lucide-react";
+import { Check, ChevronDown, RotateCcw } from "lucide-react";
 import * as React from "react";
 import { Caption } from "../text/Caption";
 
@@ -74,19 +73,22 @@ export default function FilterSection({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" className="w-[187px]">
-          <DropdownMenuRadioGroup
-            value={selectedSort}
-            onValueChange={(value: string) => {
-              setSelectedSort(value);
-              onSortChange(value);
-            }}
-          >
-            {sortOptions.map((option) => (
-              <DropdownMenuRadioItem key={option.value} value={option.value}>
-                <Caption>{option.label}</Caption>
-              </DropdownMenuRadioItem>
-            ))}
-          </DropdownMenuRadioGroup>
+          {sortOptions.map((option) => (
+            <DropdownMenuRadioItem
+              key={option.value}
+              value={option.value}
+              className="flex items-center justify-between py-2 px-4 cursor-pointer hover:bg-gray-100"
+              onClick={() => {
+                setSelectedSort(option.value);
+                onSortChange(option.value);
+              }}
+            >
+              <Caption>{option.label}</Caption>
+              {selectedSort === option.value && (
+                <Check className="h-4 w-4 text-bold" />
+              )}
+            </DropdownMenuRadioItem>
+          ))}
         </DropdownMenuContent>
       </DropdownMenu>
 
