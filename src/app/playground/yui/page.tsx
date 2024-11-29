@@ -2,6 +2,7 @@ import ChatContainer from "@/app/inbox/_components/ChatContainer";
 import ChatHeader from "@/app/inbox/_components/ChatHeader";
 import ChatSideBar from "@/app/inbox/_components/ChatSideBar";
 import MessageComposer from "@/app/inbox/_components/MessageComposer";
+import NewChatModal from "@/app/inbox/_components/NewChatModal";
 import { Applicationtable } from "@/components/common/ApplicationTable";
 import DynamicHeaderContainer from "@/components/common/DynamicHeaderContainer";
 import HorizontalProgressBar from "@/components/common/HorizontalProgressBar";
@@ -10,7 +11,7 @@ import { Badge } from "@/components/ui/upImmigrationBadge";
 
 const page = () => {
   return (
-    <div>
+    <div className="bg-primary-gray w-full">
       <DynamicHeaderContainer
         headerChildren={<CaptionSemi>Visa Application</CaptionSemi>}
         className="w-[520px]"
@@ -56,6 +57,7 @@ const page = () => {
             user: {
               id: "userId",
               imageUrl: "https://github.com/shadcn.png",
+              firstName: "Frankcy",
             },
           }}
         />
@@ -67,6 +69,7 @@ const page = () => {
             user: {
               id: "adminId",
               imageUrl: "https://github.com/shadcn.png",
+              firstName: "Broock",
             },
           }}
         />
@@ -79,6 +82,7 @@ const page = () => {
             user: {
               id: "userId",
               imageUrl: "https://github.com/shadcn.png",
+              firstName: "Frankcy",
             },
           }}
         />
@@ -91,11 +95,23 @@ const page = () => {
             user: {
               id: "adminId",
               imageUrl: "https://github.com/shadcn.png",
+              firstName: "Broock",
             },
           }}
         />
       </div>
       <MessageComposer />
+      <NewChatModal
+        users={[
+          {
+            id: "2",
+            firstName: "Chopper",
+            lastName: "Tony",
+            email: "svbebe@gmail.com",
+            imageUrl: "https://github.com/shadcn.png",
+          },
+        ]}
+      />
     </div>
   );
 };

@@ -17,7 +17,7 @@ type Props = {
 export default function ChatContainer({ message }: Props) {
   //   const { currentUser } = useAuth();
   //   const [name, setName] = useState<string>("");
-  const [cardRight, setCardRight] = useState("rounded-bl-none"); //右スタイリング
+  const [cardRight, setCardRight] = useState("rounded-bl-none");
   const [isRight, setIsRight] = useState(true);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function ChatContainer({ message }: Props) {
     if (!isRight) {
       setCardRight(
         "mt-0 mb-40px mr-0 ml-auto bg-secondary-green text-primary-white rounded-br-none"
-      ); //左のスタイリング
+      );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [message]);

@@ -12,4 +12,7 @@ export type UserType = {
 };
 
 export type BasicUserType = Pick<UserType, "id" | "firstName" | "imageUrl">;
-export type chatUserType = Pick<UserType, "id" | "firstName" | "imageUrl">;
+export type ChatUserType = Pick<
+  UserType,
+  "id" | "firstName" | "lastName" | "email" | "imageUrl"
+>;
