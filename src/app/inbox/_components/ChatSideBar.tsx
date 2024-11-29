@@ -45,7 +45,7 @@ export default function ChatSideBar({ channels, messages }: Props) {
               <Button
                 key={index}
                 variant="green"
-                className="text-black shadow-none text-caption bg-inherit hover:bg-primary-gray hover:text-primary-black active:bg-secondary-dark-gray active:text-primary-white focus:bg-secondary-green focus:text-primary-white"
+                className=" text-black shadow-none text-caption bg-inherit hover:bg-primary-gray hover:text-primary-black active:bg-secondary-dark-gray active:text-primary-white focus:bg-secondary-green focus:text-primary-white justify-start"
               >
                 {channel}
               </Button>
@@ -59,7 +59,7 @@ export default function ChatSideBar({ channels, messages }: Props) {
               <Button
                 key={index}
                 variant="green"
-                className="text-black shadow-none text-caption bg-inherit hover:bg-primary-gray hover:text-primary-black active:bg-secondary-dark-gray active:text-primary-white focus:bg-secondary-green focus:text-primary-white"
+                className="text-black shadow-none text-caption bg-inherit hover:bg-primary-gray hover:text-primary-black active:bg-secondary-dark-gray active:text-primary-white focus:bg-secondary-green focus:text-primary-white justify-start"
               >
                 {message}
               </Button>
