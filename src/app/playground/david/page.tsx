@@ -8,6 +8,7 @@ import { TaskCard } from "@/components/common/TaskCard/TaskCard";
 import { ParagraphRegular } from "@/components/common/text/ParagraphRegular";
 import TopNavbar from "@/components/common/TopNavbar/TopNavbar";
 import { ApplicationTaskType } from "@/types/Application/ApplicationTaskType";
+import AddTaskButton from "./AddTaskButton";
 import QuickCalendar from "./QuickCalendar";
 
 export default function DavidPage() {
@@ -72,6 +73,7 @@ export default function DavidPage() {
       <TopNavbar />
       <ApplicationProgress />
       <QuickCalendar />
+      <AddTaskButton />
     </PageContainer>
   );
 }
