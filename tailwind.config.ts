@@ -17,7 +17,7 @@ const config: Config = {
         "primary-white": "rgba(var(--primary-white), 1)",
         "secondary-dark-gray": "rgba(var(--dark-gray), 1)",
         "secondary-medium-gray":
-          "rgba(var(--medium-gray),var(--tw-bg-opacity, 1))",
+          "rgba(var(--medium-gray), 1)",
         "secondary-gray": "rgba(var(--gray), 1)",
         "secondary-light-gray":
           "rgba(var(--light-gray), 1)",
@@ -63,6 +63,16 @@ const config: Config = {
           "3": "hsl(var(--chart-3))",
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
+        },
+        sidebar: {
+          DEFAULT: "hsl(var(--sidebar-background))",
+          foreground: "hsl(var(--sidebar-foreground))",
+          primary: "hsl(var(--sidebar-primary))",
+          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
+          accent: "hsl(var(--sidebar-accent))",
+          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
+          border: "hsl(var(--sidebar-border))",
+          ring: "hsl(var(--sidebar-ring))",
         },
       },
       fontSize: {
