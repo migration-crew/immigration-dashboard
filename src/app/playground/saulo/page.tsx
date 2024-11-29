@@ -1,3 +1,4 @@
+import { AppointmentDatePicker } from "@/app/appointment/_components/AppoinementDatePicker";
 import ApplicationSwitcher from "@/components/common/ApplicationSwitcher";
 import { ApplicationType } from "@/types/ApplicationType";
 
@@ -33,6 +34,7 @@ export default function page() {
   return (
     <div>
       <ApplicationSwitcher applications={applications} />
+      <AppointmentDatePicker />
     </div>
   );
 }
