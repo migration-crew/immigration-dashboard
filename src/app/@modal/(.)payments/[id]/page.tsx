@@ -1,10 +1,7 @@
-import PaymentModal from '@/components/common/PaymentModal'
-import React from 'react'
+import PaymentModal from "@/components/common/PaymentModal";
 
 const page = () => {
-  return (
-    <PaymentModal />
-  )
-}
+  return <PaymentModal />;
+};
 
-export default page
+export default page;

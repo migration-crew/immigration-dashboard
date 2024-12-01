@@ -7,19 +7,19 @@ const page = () => {
     <div>
       <p>payment</p>
       <Button asChild>
-        <Link href="/payments/1">1</Link>
+        <Link href="/payments/PvpKKAtezj">1</Link>
       </Button>
       <Button asChild>
-        <Link href="/payments/2">2</Link>
+        <Link href="/payments/UIRclGQIfO">2</Link>
       </Button>
       <Button asChild>
-        <Link href="/payments/3">3</Link>
+        <Link href="/payments/sHyvFRqCeu">3</Link>
       </Button>
       <Button asChild>
-        <Link href="/payments/4">4</Link>
+        <Link href="/payments/vlgKNjRZHz">4</Link>
       </Button>
       <Button asChild>
-        <Link href="/payments/5">5</Link>
+        <Link href="/payments/yFwPtUXOFT">5</Link>
       </Button>
     </div>
   )
