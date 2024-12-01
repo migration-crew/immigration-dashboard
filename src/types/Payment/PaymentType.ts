@@ -9,3 +9,7 @@ export type PaymentType = {
 };
 
 export type TablePaymentType = Pick<PaymentType, "id" | "status">;
+export type PaymentModalType = Pick<
+  PaymentType,
+  "id" | "amount" | "currency" | "status"
+>;
