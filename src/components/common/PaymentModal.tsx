@@ -2,7 +2,7 @@
 
 import { paymentModalData } from "@/app/payments/data/PaymentModal";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/upImmigrationRadio-group";
 import { Button } from "@/components/ui/upImmigrationButton";
 import { FileText, X } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
