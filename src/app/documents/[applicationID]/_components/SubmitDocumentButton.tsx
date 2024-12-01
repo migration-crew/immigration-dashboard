@@ -8,7 +8,7 @@ type Props = {
 export const SubmitDocumentButton = ({ status }: Props) => {
   const isReplace = status !== "notSubmitted";
   const replaceClass = isReplace ? "bg-secondary-gray text-primary-black" : "";
-  const isDisble = status !== "rejected";
+  const isDisble = isReplace && status !== "rejected";
 
   return (
     <Button

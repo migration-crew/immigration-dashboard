@@ -1,6 +1,8 @@
 import { DocumentTable } from "@/app/documents/[applicationID]/_components/DocumentTable";
 import { NewDocForm } from "@/app/documents/[applicationID]/_components/NewDocForm";
 import { UploadDocumentModal } from "@/app/documents/[applicationID]/_components/UploadDocumentModal";
+import { PaymentTable } from "@/app/payments/_components/PaymentTable";
+import { paymentTableData } from "@/app/payments/data/paymentTable";
 import { Caption } from "@/components/common/text/Caption";
 import { CaptionSemi } from "@/components/common/text/CaptionSemi";
 import { Heading } from "@/components/common/text/Heading";
@@ -60,10 +62,10 @@ const YukiPage = () => {
       <div className="m-5">
         <NewDocForm />
       </div>
-      <UploadDocumentModal status="NotSubmitted" />
-      <UploadDocumentModal status="PendingApproval" />
-      <UploadDocumentModal status="Approved" />
-      <UploadDocumentModal status="Rejected" />
+      <UploadDocumentModal status="notSubmitted" />
+      <UploadDocumentModal status="pendingApproval" />
+      <UploadDocumentModal status="approved" />
+      <UploadDocumentModal status="rejected" />
 
       <div className="h-10 bg-primary-red/50 text-primary-red">primary-red</div>
       <div className="h-10 bg-primary-dark-red/50 text-primary-dark-red">
@@ -105,7 +107,9 @@ const YukiPage = () => {
         with text-color
       </Microtext>
       <div className="bg-primary-white text-primary-gray">text</div>
+
       <DocumentTable documents={documents} />
+      <PaymentTable payments={paymentTableData} />
     </div>
   );
 };
