@@ -51,11 +51,7 @@ const PaymentModal = () => {
           <ParagraphRegular>Pay With:</ParagraphRegular>
           <RadioGroup defaultValue="card" className="flex justify-between">
             <div className="flex items-center space-x-2">
-              <RadioGroupItem
-                className="border-primary-red"
-                value="card"
-                id="card"
-              />
+              <RadioGroupItem value="card" id="card" />
               <Label htmlFor="card">Card</Label>
             </div>
             <div className="flex items-center space-x-2">
