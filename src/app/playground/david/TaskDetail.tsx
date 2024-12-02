@@ -1,7 +1,7 @@
 import { Microtext } from "@/components/common/text/Microtext";
 import { MicrotextSemi } from "@/components/common/text/MicrotextSemi";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { SheetContent } from "@/components/ui/sheet";
+import { SheetContent } from "@/components/ui/upImmigrationSheet";
 import { ApplicationTaskType } from "@/types/Application/ApplicationTaskType";
 
 type Props = {
