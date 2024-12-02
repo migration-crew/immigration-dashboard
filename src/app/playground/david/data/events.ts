@@ -2,18 +2,15 @@ import { QuickCalendarType } from "@/types/Calendar/EventType";
 
 export const events: QuickCalendarType[] = [
   {
-    id: "1",
-    startDate: "2022-01-01T00:00:00.000Z",
-    duration: 60,
+    events: "payment",
+    date: new Date("2024-12-10"),
   },
   {
-    id: "2",
-    startDate: "2022-01-02T00:00:00.000Z",
-    duration: 60,
+    events: "document",
+    date: new Date("2024-12-22"),
   },
   {
-    id: "3",
-    startDate: "2022-01-03T00:00:00.000Z",
-    duration: 60,
+    events: "appointment",
+    date: new Date("2024-12-25"),
   },
 ];
