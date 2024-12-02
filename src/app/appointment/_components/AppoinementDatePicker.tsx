@@ -4,15 +4,15 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-interface TimeSlot {
+type TimeSlot = {
   time: string;
   available: boolean;
-}
+};
 
-interface DaySchedule {
+type DaySchedule = {
   date: Date;
   timeSlots: TimeSlot[];
-}
+};
 
 export function AppointmentDatePicker() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -83,11 +83,13 @@ export function AppointmentDatePicker() {
               key={day.date.toISOString()}
               className="flex flex-col items-center"
             >
-              <div className="text-xs font-medium text-primary-red mb-1 text-center whitespace-pre-line">
-                {getDayLabel(day.date, currentWeekStart + index)}
-              </div>
-              <div className="text-sm font-medium mb-4">
-                {formatDate(day.date)}
+              <div className="mb-3 grid">
+                <div className="h-9 text-xs font-medium text-primary-red mb-1 text-center whitespace-pre-line px-0 pt-Auto pb-0">
+                  {getDayLabel(day.date, currentWeekStart + index)}
+                </div>
+                <div className="text-sm font-medium mb-2 bottom-0">
+                  {formatDate(day.date)}
+                </div>
               </div>
               <div className="space-y-2 w-full">
                 {day.timeSlots.map((slot) => (
