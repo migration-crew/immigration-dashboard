@@ -131,7 +131,7 @@ export default function FilterSection({
               >
                 <Checkbox
                   checked={selectedVisaTypes.includes(option.value)}
-                  onCheckedChange={(checked) => {
+                  onCheckedChange={(checked: unknown) => {
                     const newSelected = checked
                       ? [...selectedVisaTypes, option.value]
                       : selectedVisaTypes.filter((v) => v !== option.value);
@@ -182,7 +182,7 @@ export default function FilterSection({
               >
                 <Checkbox
                   checked={selectedStatus.includes(option.value)}
-                  onCheckedChange={(checked) => {
+                  onCheckedChange={(checked: unknown) => {
                     const newSelected = checked
                       ? [...selectedStatus, option.value]
                       : selectedStatus.filter((v) => v !== option.value);

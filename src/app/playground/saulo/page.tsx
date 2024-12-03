@@ -7,8 +7,6 @@ import { useMemo, useState } from "react";
 
 export type testApplicationType = {
   application: ApplicationType[];
-  createdAt: Date;
-  updateAt: Date;
   progress: number;
   status: string;
 };
@@ -19,11 +17,16 @@ const applications: testApplicationType[] = [
       {
         id: "Maria_CICCC_ESL",
         name: "Maria_CICCC_ESL",
-        type: "student",
+        type: {
+          id: "student",
+          name: "student",
+          createdAt: new Date("2023-05-01"),
+          updatedAt: new Date("2023-06-15"),
+        },
+        createdAt: new Date("2023-05-01"),
+        updatedAt: new Date("2023-06-15"),
       },
     ],
-    createdAt: new Date("2023-05-01"),
-    updateAt: new Date("2023-06-15"),
     progress: 100,
     status: "completed",
   },
@@ -32,11 +35,16 @@ const applications: testApplicationType[] = [
       {
         id: "Maria_Work_Permit",
         name: "Maria_Work_Permit",
-        type: "workPermit",
+        type: {
+          id: "workPermit",
+          name: "workPermit",
+          createdAt: new Date("2023-04-01"),
+          updatedAt: new Date("2023-05-10"),
+        },
+        createdAt: new Date("2023-04-01"),
+        updatedAt: new Date("2023-05-10"),
       },
     ],
-    createdAt: new Date("2023-04-01"),
-    updateAt: new Date("2023-05-10"),
     progress: 75,
     status: "onHold",
   },
@@ -45,11 +53,16 @@ const applications: testApplicationType[] = [
       {
         id: "Carrey_Visitor",
         name: "Carrey_Visitor",
-        type: "visitor",
+        type: {
+          id: "visitor",
+          name: "visitor",
+          createdAt: new Date("2023-04-01"),
+          updatedAt: new Date("2023-04-22"),
+        },
+        createdAt: new Date("2023-04-01"),
+        updatedAt: new Date("2023-04-22"),
       },
     ],
-    createdAt: new Date("2023-04-01"),
-    updateAt: new Date("2023-04-22"),
     progress: 25,
     status: "processing",
   },
@@ -58,11 +71,16 @@ const applications: testApplicationType[] = [
       {
         id: "Maria_CICCC_UX/UI",
         name: "Maria_CICCC_UX/UI",
-        type: "student",
+        type: {
+          id: "student",
+          name: "student",
+          createdAt: new Date("2023-05-01"),
+          updatedAt: new Date("2023-06-01"),
+        },
+        createdAt: new Date("2023-05-01"),
+        updatedAt: new Date("2023-06-01"),
       },
     ],
-    createdAt: new Date("2023-05-01"),
-    updateAt: new Date("2023-06-01"),
     progress: 100,
     status: "rejected",
   },
@@ -71,11 +89,16 @@ const applications: testApplicationType[] = [
       {
         id: "Maria_CICCC_UX/UI_2",
         name: "Maria_CICCC_UX/UI_2",
-        type: "student",
+        type: {
+          id: "student",
+          name: "student",
+          createdAt: new Date("2023-04-01"),
+          updatedAt: new Date("2023-05-28"),
+        },
+        createdAt: new Date("2023-04-01"),
+        updatedAt: new Date("2023-05-28"),
       },
     ],
-    createdAt: new Date("2023-04-01"),
-    updateAt: new Date("2023-05-28"),
     progress: 50,
     status: "processing",
   },
@@ -135,7 +158,7 @@ export default function Page() {
     const filtered = applications.filter((app) => {
       const typeMatch =
         selectedVisaTypes.length === 0 ||
-        selectedVisaTypes.includes(app.application[0].type);
+        selectedVisaTypes.includes(app.application[0].type.name);
       const statusMatch =
         selectedStatus.length === 0 || selectedStatus.includes(app.status);
       return typeMatch && statusMatch;
@@ -144,9 +167,15 @@ export default function Page() {
     return filtered.sort((a, b) => {
       switch (selectedSort) {
         case "date_asc":
-          return a.updateAt.getTime() - b.updateAt.getTime();
+          return (
+            a.application[0].updatedAt.getTime() -
+            b.application[0].updatedAt.getTime()
+          );
         case "date_desc":
-          return b.updateAt.getTime() - a.updateAt.getTime();
+          return (
+            b.application[0].updatedAt.getTime() -
+            a.application[0].updatedAt.getTime()
+          );
         case "progress_asc":
           return a.progress - b.progress;
         case "progress_desc":
@@ -179,7 +208,7 @@ export default function Page() {
         <ul>
           {filteredAndSortedApplications.map((app) => (
             <li key={app.application[0].id}>
-              {app.application[0].name} - Type: {app.application[0].type},
+              {app.application[0].name} - Type: {app.application[0].type.name},
               Status: {app.status}, Progress: {app.progress}%
             </li>
           ))}
