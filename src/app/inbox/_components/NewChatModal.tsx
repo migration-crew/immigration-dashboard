@@ -1,6 +1,7 @@
 "use client";
 
 import { CaptionSemi } from "@/components/common/text/CaptionSemi";
+import { MicrotextSemi } from "@/components/common/text/MicrotextSemi";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -14,7 +15,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/upImmigrationButton";
 import { ChatUserType } from "@/types/User/UserType";
-import { Search } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Search, X } from "lucide-react";
 import { useState } from "react";
 
 type Props = {
@@ -23,6 +25,7 @@ type Props = {
 
 export default function NewChatModal({ users }: Props) {
   const [searchText, setSearchText] = useState("");
+  const [selectedUsers, setSelectedUsers] = useState<ChatUserType[]>([]);
 
   const filteredUsers = users.filter((user) => {
     const name = searchText.split(" ");
@@ -38,6 +41,15 @@ export default function NewChatModal({ users }: Props) {
       );
     }
   });
+
+  const toggleUser = (user: ChatUserType) => {
+    setSelectedUsers((prev) =>
+      prev.some((u) => u.email === user.email)
+        ? prev.filter((u) => u.email !== user.email)
+        : [...prev, user]
+    );
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -47,6 +59,43 @@ export default function NewChatModal({ users }: Props) {
         <DialogHeader>
           <DialogTitle className="text-caption-semi">New Chat</DialogTitle>
         </DialogHeader>
+        <AnimatePresence>
+          {selectedUsers.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="flex flex-wrap gap-2"
+            >
+              {selectedUsers.map((user) => (
+                <motion.div
+                  key={user.email}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  className="flex items-center bg-primary-light-blue text-primary-dark-blue rounded-full px-3 py-1"
+                >
+                  <Avatar className="h-6 w-6 mr-2">
+                    <AvatarImage src={user.imageUrl} alt={user.firstName} />
+                    <AvatarFallback className="text-caption-semi">
+                      {user.firstName[0]}
+                    </AvatarFallback>
+                  </Avatar>
+                  <span className="text-sm mr-2 text-caption-semi">
+                    {user.firstName}
+                  </span>
+                  <button
+                    onClick={() => toggleUser(user)}
+                    className="text-primary-dark-blue hover:text-primary-red focus:outline-none"
+                    aria-label={`Remove ${user.firstName}`}
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
         <div className="grid gap-4 py-4">
           <div className="grid gap-4">
             <div>
@@ -72,23 +121,31 @@ export default function NewChatModal({ users }: Props) {
               </form>
             </div>
           </div>
-          <div className="my-6">
+
+          <div className="my-6 grid gap-7">
             {filteredUsers.map((user, index) => (
               <div
                 key={index}
-                className="flex items-center space-x-10 h-9 border-secondary-light-gray"
+                className="flex items-center space-x-10 h-9 border-secondary-light-gray justify-between"
               >
-                <Avatar>
-                  <AvatarImage src={user.imageUrl} alt={user.firstName} />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-                <div className="flex pr-9">
-                  <CaptionSemi>
-                    {user.firstName} {user.lastName}
-                  </CaptionSemi>
-                  <CaptionSemi className="">{user.email}</CaptionSemi>
+                <div className="flex items-center">
+                  <Avatar>
+                    <AvatarImage src={user.imageUrl} alt={user.firstName} />
+                    <AvatarFallback>{user.firstName[0]}</AvatarFallback>
+                  </Avatar>
+
+                  <div className="grid pl-3">
+                    <CaptionSemi>
+                      {user.firstName} {user.lastName}
+                    </CaptionSemi>
+                    <MicrotextSemi className="">{user.email}</MicrotextSemi>
+                  </div>
                 </div>
-                <Checkbox className="w-12" />
+                <Checkbox
+                  checked={selectedUsers.some((u) => u.email === user.email)}
+                  onCheckedChange={() => toggleUser(user)}
+                  className=""
+                />
               </div>
             ))}
           </div>
@@ -97,6 +154,7 @@ export default function NewChatModal({ users }: Props) {
           <Button
             type="submit"
             className="w-full text-caption text-primary-white"
+            disabled={selectedUsers.length === 0}
           >
             Start New Conversation
           </Button>

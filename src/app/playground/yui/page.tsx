@@ -114,6 +114,27 @@ const page = () => {
             email: "svbebe@gmail.com",
             imageUrl: "https://github.com/shadcn.png",
           },
+          {
+            id: "3",
+            firstName: "Robin",
+            lastName: "Nico",
+            email: "ewgweggwe@gmail.com",
+            imageUrl: "https://github.com/shadcn.png",
+          },
+          {
+            id: "4",
+            firstName: "Sanji",
+            lastName: "Yamada",
+            email: "ewgwebwebkmoi@gmail.com",
+            imageUrl: "https://github.com/shadcn.png",
+          },
+          {
+            id: "5",
+            firstName: "Usopp",
+            lastName: "Rodoliguess",
+            email: "oihoknojnojno@gmail.com",
+            imageUrl: "https://github.com/shadcn.png",
+          },
         ]}
       />
     </div>
