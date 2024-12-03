@@ -1,6 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import {
+  RadioGroup,
+  RadioGroupItem,
+} from "@/components/ui/upImmigrationRadio-group";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -47,12 +52,15 @@ export function AppointmentDatePicker() {
   };
 
   const getDayLabel = (date: Date, index: number) => {
-    const weekday = new Intl.DateTimeFormat("en-US", {
+    if (index === 0) return `TODAY`;
+    if (index === 1) return `TOMORROW`;
+    return "";
+  };
+
+  const getWeekDay = (date: Date) => {
+    return new Intl.DateTimeFormat("en-US", {
       weekday: "long",
     }).format(date);
-    if (index === 0) return `TODAY\n${weekday}`;
-    if (index === 1) return `TOMORROW\n${weekday}`;
-    return weekday;
   };
 
   const handleNextWeek = () => {
@@ -75,67 +83,86 @@ export function AppointmentDatePicker() {
   const visibleDays = schedule.slice(currentWeekStart, currentWeekStart + 7);
 
   return (
-    <div className="w-full max-w-4xl bg-slate-50 p-6 rounded-lg">
+    <div className="w-full max-w-4xl p-6 rounded-lg">
       <div ref={scrollContainerRef} className="overflow-x-hidden">
-        <div className="grid grid-cols-7 gap-4">
+        <div className="grid grid-cols-7 gap-4 bg-slate-50 py-2 mb-8 rounded">
           {visibleDays.map((day, index) => (
             <div
               key={day.date.toISOString()}
               className="flex flex-col items-center"
             >
-              <div className="mb-3 grid">
-                <div className="h-9 text-xs font-medium text-primary-red mb-1 text-center whitespace-pre-line px-0 pt-Auto pb-0">
+              <div className="grid">
+                <div className="h-5 text-xs font-medium text-primary-red text-center whitespace-pre-line px-0 pt-Auto pb-0">
                   {getDayLabel(day.date, currentWeekStart + index)}
+                </div>
+                <div className=" text-center text-sm font-medium">
+                  {getWeekDay(day.date)}
                 </div>
                 <div className="text-sm font-medium mb-2 bottom-0">
                   {formatDate(day.date)}
                 </div>
               </div>
-              <div className="space-y-2 w-full">
-                {day.timeSlots.map((slot) => (
-                  <label
-                    key={`${day.date.toISOString()}-${slot.time}`}
-                    className="flex items-center space-x-2 cursor-pointer"
-                  >
-                    <input
-                      type="radio"
-                      name="appointmentTime"
-                      value={`${day.date.toISOString()}-${slot.time}`}
-                      checked={
-                        selectedDate?.toDateString() ===
-                          day.date.toDateString() && selectedTime === slot.time
-                      }
-                      onChange={() => {
-                        setSelectedDate(day.date);
-                        setSelectedTime(slot.time);
-                      }}
-                      className="form-radio h-4 w-4 text-primary-red border-gray-300 focus:ring-primary-red"
-                    />
-                    <span className="text-sm">{slot.time}</span>
-                  </label>
-                ))}
-              </div>
             </div>
           ))}
         </div>
+        <div className="w-full grid grid-cols-7 gap-4">
+          {visibleDays.map((day, index) => (
+            <RadioGroup
+              key={index}
+              onValueChange={(value) => {
+                const [dateString, time] = value.split("-");
+                setSelectedDate(new Date(dateString));
+                setSelectedTime(time);
+              }}
+              value={
+                selectedDate?.toISOString() && selectedTime
+                  ? `${selectedDate.toISOString()}-${selectedTime}`
+                  : undefined
+              }
+            >
+              {day.timeSlots.map((slot) => (
+                <div
+                  key={`${day.date.toISOString()}-${slot.time}`}
+                  className="flex items-center space-x-2"
+                >
+                  <RadioGroupItem
+                    value={`${day.date.toISOString()}-${slot.time}`}
+                    id={`${day.date.toISOString()}-${slot.time}`}
+                  />
+                  <Label
+                    htmlFor={`${day.date.toISOString()}-${slot.time}`}
+                    className="text-sm cursor-pointer"
+                  >
+                    {slot.time}
+                  </Label>
+                </div>
+              ))}
+            </RadioGroup>
+          ))}
+        </div>
       </div>
-      <div className="flex justify-between mt-6">
-        <Button
-          variant="ghost"
-          className="text-primary-red hover:text-primary-red/80"
-          onClick={handlePreviousWeek}
-          disabled={currentWeekStart === 0}
-        >
-          <ChevronLeft className="mr-1 h-4 w-4" />
-          Previous Week
-        </Button>
+      <div
+        className={`flex ${
+          currentWeekStart > 0 ? "justify-between" : "justify-end"
+        } mt-6`}
+      >
+        {currentWeekStart > 0 && (
+          <Button
+            variant="ghost"
+            className="text-primary-red hover:text-primary-red/80"
+            onClick={handlePreviousWeek}
+          >
+            <ChevronLeft className="mr-1 h-4 w-4" />
+            Previous Times
+          </Button>
+        )}
         <Button
           variant="ghost"
           className="text-primary-red hover:text-primary-red/80"
           onClick={handleNextWeek}
           disabled={currentWeekStart >= schedule.length - 7}
         >
-          Next Week
+          View More Times
           <ChevronRight className="ml-1 h-4 w-4" />
         </Button>
       </div>
