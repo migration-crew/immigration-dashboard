@@ -40,11 +40,14 @@ const page = () => {
           ]}
         />
       </div>
+
       <ChatSideBar
         channels={["#All Client", "#Student Channel"]}
         messages={["Student_Project", "General_Project"]}
       />
-      <ChatHeader title={"All Student"} />
+      <div className="rounded-lg bg-primary-white">
+        <ChatHeader title={"All Student"} />
+      </div>
     </div>
   );
 };
