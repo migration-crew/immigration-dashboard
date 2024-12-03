@@ -43,64 +43,68 @@ const page = () => {
           ]}
         />
       </div>
-      <div>
-        <ChatSideBar
-          channels={["#All Client", "#Student Channel"]}
-          messages={["Student_Project", "General_Project"]}
-        />
-        <ChatHeader title={"All Student"} />
-        <ChatContainer
-          message={{
-            id: "0",
-            content: "Hello",
-            createdAt: "5:20",
-            user: {
-              id: "userId",
-              imageUrl: "https://github.com/shadcn.png",
-              firstName: "Frankcy",
-            },
-          }}
-        />
-        <ChatContainer
-          message={{
-            id: "1",
-            content: "Good bye",
-            createdAt: "9:20",
-            user: {
-              id: "adminId",
-              imageUrl: "https://github.com/shadcn.png",
-              firstName: "Broock",
-            },
-          }}
-        />
-        <ChatContainer
-          message={{
-            id: "0",
-            content:
-              "oihosjdnvosdenvoisdenvoksndovnsodvnpsdknvopsiednvpoksndvolisndeboknselbjzn;dijrbodsjnbf;vojnsd;ofivn;oeksvn;osenv;ojnds;ojvn;dfojnb;ojdnf;bjovn;sdojnb;ovjsdn;vk;sodeinv;oinegw;rong;oiwegoinwe;okgnwoi;esgvibewsiugblvisedblviubeilgubewibgvijbdsjbgvlierbivueiuvnlisudnlivndlsinvlisndlivnlisdnvidsnbvilndsibn",
-            createdAt: "10:20",
-            user: {
-              id: "userId",
-              imageUrl: "https://github.com/shadcn.png",
-              firstName: "Frankcy",
-            },
-          }}
-        />
-        <ChatContainer
-          message={{
-            id: "1",
-            content:
-              "ijokkkkkkkkkkkkkkookkokookasfkofokfodsjndsjidsjdjddjnsdjndndnsdnsvvdsnjnjsijdvjnsdvndvjndjnvndvjsndvdvanvnajdovdavdamvadamvahuuovdaodavdvahudvavadmuhdavmhdvavmavdaouhvmdhamvadouvdaovhadmovdhouvdauhovdahuvadhuvdhuavdahuvadouvdaohudvahuvodauhovuadhvadouhhoudvahdovavadhoovhdahvduaodvahuadovhovduahvdauhdvaoavdohvdaohumvhdaomvhdoavodhuahoavdudhovuvadhouvdahouadvhuovadhouavdohuadvhouavdhouvadhouvadhouvdahouavdhouvadhouvdaohvdahmovadohuvadohuvadohuvadhovadhouvadohuvadhuovadhouadvhohudvahouvdaohvadavdhoadvhouadvhuoadvohuavddva",
-            createdAt: "11:20",
-            user: {
-              id: "adminId",
-              imageUrl: "https://github.com/shadcn.png",
-              firstName: "Broock",
-            },
-          }}
-        />
+      <div className="flex">
+        <div className="">
+          <ChatSideBar
+            channels={["#All Client", "#Student Channel"]}
+            messages={["Student_Project", "General_Project"]}
+          />
+        </div>
+        <div className="float-left">
+          <ChatHeader title={"All Student"} />
+          <ChatContainer
+            message={{
+              id: "0",
+              content: "Hello",
+              createdAt: "5:20",
+              user: {
+                id: "userId",
+                imageUrl: "https://github.com/shadcn.png",
+                firstName: "Frankcy",
+              },
+            }}
+          />
+          <ChatContainer
+            message={{
+              id: "1",
+              content: "Good bye",
+              createdAt: "9:20",
+              user: {
+                id: "adminId",
+                imageUrl: "https://github.com/shadcn.png",
+                firstName: "Broock",
+              },
+            }}
+          />
+          <ChatContainer
+            message={{
+              id: "0",
+              content:
+                "oihosjdnvosdenvoisdenvoksndovnsodvnpsdknvopsiednvpoksndvolisndeboknselbjzn;dijrbodsjnbf;vojnsd;ofivn;oeksvn;osenv;ojnds;ojvn;dfojnb;ojdnf;bjovn;sdojnb;ovjsdn;vk;sodeinv;oinegw;rong;oiwegoinwe;okgnwoi;esgvibewsiugblvisedblviubeilgubewibgvijbdsjbgvlierbivueiuvnlisudnlivndlsinvlisndlivnlisdnvidsnbvilndsibn",
+              createdAt: "10:20",
+              user: {
+                id: "userId",
+                imageUrl: "https://github.com/shadcn.png",
+                firstName: "Frankcy",
+              },
+            }}
+          />
+          <ChatContainer
+            message={{
+              id: "1",
+              content:
+                "ijokkkkkkkkkkkkkkookkokookasfkofokfodsjndsjidsjdjddjnsdjndndnsdnsvvdsnjnjsijdvjnsdvndvjndjnvndvjsndvdvanvnajdovdavdamvadamvahuuovdaodavdvahudvavadmuhdavmhdvavmavdaouhvmdhamvadouvdaovhadmovdhouvdauhovdahuvadhuvdhuavdahuvadouvdaohudvahuvodauhovuadhvadouhhoudvahdovavadhoovhdahvduaodvahuadovhovduahvdauhdvaoavdohvdaohumvhdaomvhdoavodhuahoavdudhovuvadhouvdahouadvhuovadhouavdohuadvhouavdhouvadhouvadhouvdahouavdhouvadhouvdaohvdahmovadohuvadohuvadohuvadhovadhouvadohuvadhuovadhouadvhohudvahouvdaohvadavdhoadvhouadvhuoadvohuavddva",
+              createdAt: "11:20",
+              user: {
+                id: "adminId",
+                imageUrl: "https://github.com/shadcn.png",
+                firstName: "Broock",
+              },
+            }}
+          />
+          <MessageComposer />
+        </div>
       </div>
-      <MessageComposer />
       <NewChatModal
         users={[
           {

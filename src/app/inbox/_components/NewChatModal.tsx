@@ -2,6 +2,7 @@
 
 import { CaptionSemi } from "@/components/common/text/CaptionSemi";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Dialog,
   DialogContent,
@@ -40,11 +41,11 @@ export default function NewChatModal({ users }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Edit Profile</Button>
+        <Button variant="outline">New Chat</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle className="text-caption-semi">New Message</DialogTitle>
+          <DialogTitle className="text-caption-semi">New Chat</DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid gap-4">
@@ -75,18 +76,19 @@ export default function NewChatModal({ users }: Props) {
             {filteredUsers.map((user, index) => (
               <div
                 key={index}
-                className="flex items-center space-x-4 w-9 h-9 border-secondary-light-gray"
+                className="flex items-center space-x-10 h-9 border-secondary-light-gray"
               >
                 <Avatar>
                   <AvatarImage src={user.imageUrl} alt={user.firstName} />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
-                <div>
+                <div className="flex pr-9">
                   <CaptionSemi>
                     {user.firstName} {user.lastName}
                   </CaptionSemi>
                   <CaptionSemi className="">{user.email}</CaptionSemi>
                 </div>
+                <Checkbox className="w-12" />
               </div>
             ))}
           </div>
