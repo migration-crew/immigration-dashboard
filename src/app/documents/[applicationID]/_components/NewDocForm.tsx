@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Caption } from "@/components/common/text/Caption";
-import { Calendar } from "@/components/ui/calendar";
 import { Card } from "@/components/ui/card";
 import {
   Form,
@@ -21,6 +20,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/upImmigrationButton";
+import { Calendar } from "@/components/ui/upImmigrationCalendar";
 import { cn } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
 
