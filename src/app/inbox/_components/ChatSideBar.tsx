@@ -4,24 +4,36 @@ import { CaptionSemi } from "@/components/common/text/CaptionSemi";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/upImmigrationButton";
+import { ChannelType } from "@/types/Inbox/ChannelType";
 import { Search } from "lucide-react";
 import { useState } from "react";
 
 type Props = {
-  channels: string[];
-  messages: string[];
+  chats: ChannelType[];
 };
 
-export default function ChatSideBar({ channels, messages }: Props) {
-  const [searchText, setSearchText] = useState(""); // State to hold the input value
+export default function ChatSideBar({ chats }: Props) {
+  const [searchText, setSearchText] = useState("");
+  // const [channels, setChannels] = useState([]);
+  // const [messages, setMessages] = useState([]);
+  const channels: ChannelType[] = [];
+  const messages: ChannelType[] = [];
 
-  // Filter channels and messages based on the search text
+  chats.forEach((chat) => {
+    if (chat.members.length > 2) {
+      channels.push(chat);
+    } else {
+      messages.push(chat);
+    }
+  });
   const filteredChannels = channels.filter((channel) =>
-    channel.toLowerCase().includes(searchText.toLowerCase())
+    channel.name.toLowerCase().includes(searchText.toLowerCase())
   );
+
   const filteredMessages = messages.filter((message) =>
-    message.toLowerCase().includes(searchText.toLowerCase())
+    message.name.toLowerCase().includes(searchText.toLowerCase())
   );
+
   return (
     <div className="w-[290px] h-full">
       <Card className="flex flex-col gap-6 py-10 px-5">
@@ -44,10 +56,9 @@ export default function ChatSideBar({ channels, messages }: Props) {
             {filteredChannels.map((channel, index) => (
               <Button
                 key={index}
-                variant="green"
                 className=" text-black shadow-none text-caption bg-inherit hover:bg-primary-gray hover:text-primary-black active:bg-secondary-dark-gray active:text-primary-white focus:bg-secondary-green focus:text-primary-white justify-start"
               >
-                {channel}
+                {channel.name}
               </Button>
             ))}
           </div>
@@ -58,10 +69,9 @@ export default function ChatSideBar({ channels, messages }: Props) {
             {filteredMessages.map((message, index) => (
               <Button
                 key={index}
-                variant="green"
                 className="text-black shadow-none text-caption bg-inherit hover:bg-primary-gray hover:text-primary-black active:bg-secondary-dark-gray active:text-primary-white focus:bg-secondary-green focus:text-primary-white justify-start"
               >
-                {message}
+                {message.name}
               </Button>
             ))}
           </div>
