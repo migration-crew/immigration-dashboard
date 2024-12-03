@@ -9,6 +9,8 @@ import { ParagraphRegular } from "@/components/common/text/ParagraphRegular";
 import TopNavbar from "@/components/common/TopNavbar/TopNavbar";
 import { ApplicationTaskType } from "@/types/Application/ApplicationTaskType";
 import AddTaskButton from "./AddTaskButton";
+import { events } from "./data/events";
+import QuickCalendar from "./QuickCalendar";
 
 export default function DavidPage() {
   const links = [
@@ -73,6 +75,7 @@ export default function DavidPage() {
       />
       <TopNavbar />
       <ApplicationProgress />
+      <QuickCalendar events={events} />
       <AddTaskButton />
     </PageContainer>
   );
