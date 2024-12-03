@@ -1,19 +1,24 @@
 "use client";
 
 import { paymentModalData } from "@/app/payments/data/PaymentModal";
+import { HeadingSemi } from "@/components/common/text/HeadingSemi";
+import { Paragraph } from "@/components/common/text/Paragraph";
+import { ParagraphRegular } from "@/components/common/text/ParagraphRegular";
+import { SubheadingLeadLight } from "@/components/common/text/SubheadingLeadLight";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/upImmigrationRadio-group";
+import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/upImmigrationBadge";
 import { Button } from "@/components/ui/upImmigrationButton";
 import { FileText, X } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { ElementRef, useEffect, useRef } from "react";
-import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
-import { Separator } from "../ui/separator";
-import { Badge } from "../ui/upImmigrationBadge";
-import { HeadingSemi } from "./text/HeadingSemi";
-import { Paragraph } from "./text/Paragraph";
-import { ParagraphRegular } from "./text/ParagraphRegular";
-import { SubheadingLeadLight } from "./text/SubheadingLeadLight";
 
 const PaymentModal = () => {
   const id = useParams().id;
@@ -46,8 +51,8 @@ const PaymentModal = () => {
       </div>
       <div className="w-[362px]">
         <HeadingSemi className="mb-2">Payment Method</HeadingSemi>
-        <Separator />
-        <div>
+        <Separator className="mb-9" />
+        {/* <div>
           <ParagraphRegular>Pay With:</ParagraphRegular>
           <RadioGroup defaultValue="card" className="flex justify-between">
             <div className="flex items-center space-x-2">
@@ -67,6 +72,26 @@ const PaymentModal = () => {
               <Label htmlFor="wise">Wise</Label>
             </div>
           </RadioGroup>
+        </div> */}
+        <div className="grid gap-6">
+          <div className="grid gap-4">
+            <Label htmlFor="cardNumber">Card Number</Label>
+            <Input id="cardNumber" placeholder="1234 5678 9101 1121" className="h-12"/>
+          </div>
+          <div className="grid gap-4">
+            <Label htmlFor="name">Name on Card</Label>
+            <Input id="name" placeholder="Name" className="h-12"/>
+          </div>
+          <div className="flex gap-5">
+            <div className="grid gap-4">
+              <Label htmlFor="expire">Expiration Date</Label>
+              <Input id="expire" placeholder="MM/YY" className="h-12"/>
+            </div>
+            <div className="grid gap-4">
+              <Label htmlFor="cvv">CVV</Label>
+              <Input id="cvv" placeholder="123" className="h-12"/>
+            </div>
+          </div>
         </div>
       </div>
       <div className="w-[480px]">
