@@ -75,20 +75,20 @@ const PaymentModal = () => {
         </div> */}
         <div className="grid gap-6">
           <div className="grid gap-4">
-            <Label htmlFor="cardNumber">Card Number</Label>
+            <Label htmlFor="cardNumber"><ParagraphRegular>Card Number</ParagraphRegular></Label>
             <Input id="cardNumber" placeholder="1234 5678 9101 1121" className="h-12"/>
           </div>
           <div className="grid gap-4">
-            <Label htmlFor="name">Name on Card</Label>
+            <Label htmlFor="name"><ParagraphRegular>Name on Card</ParagraphRegular></Label>
             <Input id="name" placeholder="Name" className="h-12"/>
           </div>
           <div className="flex gap-5">
             <div className="grid gap-4">
-              <Label htmlFor="expire">Expiration Date</Label>
+              <Label htmlFor="expire"><ParagraphRegular>Expiration Date</ParagraphRegular></Label>
               <Input id="expire" placeholder="MM/YY" className="h-12"/>
             </div>
             <div className="grid gap-4">
-              <Label htmlFor="cvv">CVV</Label>
+              <Label htmlFor="cvv"><ParagraphRegular>CVV</ParagraphRegular></Label>
               <Input id="cvv" placeholder="123" className="h-12"/>
             </div>
           </div>
@@ -126,7 +126,7 @@ const PaymentModal = () => {
         </Card>
         <Button className="w-full py-4 h-fit">
           <Paragraph>
-            Pay {payment.currency} {payment.amount}
+            Pay {payment.currency} {payment.amount.toFixed(2)}
           </Paragraph>
         </Button>
       </div>
