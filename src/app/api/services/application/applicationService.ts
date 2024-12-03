@@ -6,9 +6,15 @@ const COLLECTION = "Applications"
 export const getApplications = async (userId: string) => {
     const client = await clientPromise;
     const db = client.db(DATABASE);
-    const applications = await db
+    const rawApplications = await db
             .collection(COLLECTION)
             .find({ userId })
             .toArray();
-    return applications;
+    return rawApplications.map(app => ({
+        id: app._id,
+        name: app.name,
+        type: app.applicationTypeId,
+        createAt: app.createdAt,
+        updatedAt: app.updatedAt
+    }));
 };
