@@ -22,6 +22,7 @@ import { Title } from "@/components/common/text/Title";
 import { TitleLight } from "@/components/common/text/TitleLight";
 import { Button } from "@/components/ui/upImmigrationButton";
 import { documents } from "./data/DocumentTable";
+import RefundPolicy from "@/app/payments/_components/RefundPolicy";
 
 const YukiPage = () => {
   return (
@@ -110,6 +111,8 @@ const YukiPage = () => {
 
       <DocumentTable documents={documents} />
       <PaymentTable payments={paymentTableData} />
+
+      <RefundPolicy />
     </div>
   );
 };
