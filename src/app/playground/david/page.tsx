@@ -28,6 +28,7 @@ export default function DavidPage() {
         user: {
           id: "1",
           firstName: "Bart",
+          lastName: "Simpson",
           imageUrl:
             "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/67/67e62baab9a7fcd856e7187a6d8929317bb58c7c.jpg",
         },
@@ -37,7 +38,8 @@ export default function DavidPage() {
       {
         user: {
           id: "2",
-          firstName: "Putin",
+          firstName: "Vladimir",
+          lastName: "Putin",
           imageUrl:
             "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/b3/b399e6f3d68abd4963bab22c1efe0983f5189644.jpg",
         },
