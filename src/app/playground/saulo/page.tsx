@@ -1,8 +1,11 @@
 "use client";
 
 import ApplicationSwitcher from "@/components/common/ApplicationSwitcher";
+import { AppointmentCard } from "@/components/common/AppoitmentCard";
 import FilterSection from "@/components/common/FilterSection/FilterSection";
 import { ApplicationType } from "@/types/Application/ApplicationType";
+import { AppointmentType } from "@/types/Appointment/AppointmentType";
+import { BasicUserType } from "@/types/User/UserType";
 import { useMemo, useState } from "react";
 
 export type testApplicationType = {
@@ -10,6 +13,43 @@ export type testApplicationType = {
   progress: number;
   status: string;
 };
+
+const testAppointment: AppointmentType = {
+  id: "1",
+  appointmentType: {
+    id: "1",
+    name: "First Consultation",
+    duration: 60,
+    currency: "USD",
+    price: 100,
+  },
+  date: new Date("2024-01-28T16:00:00"),
+  user: {
+    id: "1",
+    firstName: "John",
+    lastName: "Doe",
+    nationality: "US",
+    language: "English",
+    address: "123 Main St, Anytown, USA",
+    birthDate: "1990-01-01",
+    gender: "Male",
+    email: "john.doe@example.com",
+    imageUrl: "/placeholder.svg",
+  },
+};
+
+const testAttendees: BasicUserType[] = [
+  {
+    id: "1",
+    firstName: "John",
+    imageUrl: "/placeholder.svg",
+  },
+  {
+    id: "2",
+    firstName: "Jane",
+    imageUrl: "/placeholder.svg",
+  },
+];
 
 const applications: testApplicationType[] = [
   {
@@ -214,6 +254,10 @@ export default function Page() {
           ))}
         </ul>
       </div>
+      <AppointmentCard
+        appointment={testAppointment}
+        attendees={testAttendees}
+      />
     </div>
   );
 }
