@@ -1,12 +1,10 @@
 "use client";
 
-import { Caption } from "@/components/common/text/Caption";
 import { Microtext } from "@/components/common/text/Microtext";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
+import { Caption } from "@/compxonents/common/text/Caption";
 import { MessageType } from "@/types/Inbox/MessageType";
-
-import { useEffect, useState } from "react";
 
 const currentUserId = "userId";
 
@@ -15,22 +13,10 @@ type Props = {
 };
 
 export default function ChatContainer({ message }: Props) {
-  //   const { currentUser } = useAuth();
-  //   const [name, setName] = useState<string>("");
-  const [cardRight, setCardRight] = useState("rounded-bl-none"); //右スタイリング
-  const [isRight, setIsRight] = useState(true);
-
-  useEffect(() => {
-    if (message.user.id !== currentUserId) {
-      setIsRight(false);
-    }
-    if (!isRight) {
-      setCardRight(
-        "mt-0 mb-40px mr-0 ml-auto bg-secondary-green text-primary-white rounded-br-none"
-      ); //左のスタイリング
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [message]);
+  const isRight = message.user.id === currentUserId;
+  const cardRight = isRight
+    ? "bg-secondary-white rounded-bl-none"
+    : "mt-0 mb-40px mr-0 ml-auto bg-secondary-green text-primary-white rounded-br-none";
 
   //   useEffect(() => {
   //     const getUserNameById = async () => {
