@@ -1,3 +1,4 @@
+import ChatContainer from "@/app/inbox/_components/ChatContainer";
 import ChatHeader from "@/app/inbox/_components/ChatHeader";
 import ChatSideBar from "@/app/inbox/_components/ChatSideBar";
 import { Applicationtable } from "@/components/common/ApplicationTable";
@@ -40,8 +41,8 @@ const page = () => {
           ]}
         />
       </div>
-
-      <ChatSideBar
+      <div>
+        <ChatSideBar
         chats={[
           {
             id: "0",
@@ -160,8 +161,53 @@ const page = () => {
           },
         ]}
       />
-      <div className="rounded-lg bg-primary-white">
         <ChatHeader title={"All Student"} />
+        <ChatContainer
+          message={{
+            id: "0",
+            content: "Hello",
+            createdAt: "5:20",
+            user: {
+              id: "userId",
+              imageUrl: "https://github.com/shadcn.png",
+            },
+          }}
+        />
+        <ChatContainer
+          message={{
+            id: "1",
+            content: "Good bye",
+            createdAt: "9:20",
+            user: {
+              id: "adminId",
+              imageUrl: "https://github.com/shadcn.png",
+            },
+          }}
+        />
+        <ChatContainer
+          message={{
+            id: "0",
+            content:
+              "oihosjdnvosdenvoisdenvoksndovnsodvnpsdknvopsiednvpoksndvolisndeboknselbjzn;dijrbodsjnbf;vojnsd;ofivn;oeksvn;osenv;ojnds;ojvn;dfojnb;ojdnf;bjovn;sdojnb;ovjsdn;vk;sodeinv;oinegw;rong;oiwegoinwe;okgnwoi;esgvibewsiugblvisedblviubeilgubewibgvijbdsjbgvlierbivueiuvnlisudnlivndlsinvlisndlivnlisdnvidsnbvilndsibn",
+            createdAt: "10:20",
+            user: {
+              id: "userId",
+              imageUrl: "https://github.com/shadcn.png",
+            },
+          }}
+        />
+        <ChatContainer
+          message={{
+            id: "1",
+            content:
+              "ijokkkkkkkkkkkkkkookkokookasfkofokfodsjndsjidsjdjddjnsdjndndnsdnsvvdsnjnjsijdvjnsdvndvjndjnvndvjsndvdvanvnajdovdavdamvadamvahuuovdaodavdvahudvavadmuhdavmhdvavmavdaouhvmdhamvadouvdaovhadmovdhouvdauhovdahuvadhuvdhuavdahuvadouvdaohudvahuvodauhovuadhvadouhhoudvahdovavadhoovhdahvduaodvahuadovhovduahvdauhdvaoavdohvdaohumvhdaomvhdoavodhuahoavdudhovuvadhouvdahouadvhuovadhouavdohuadvhouavdhouvadhouvadhouvdahouavdhouvadhouvdaohvdahmovadohuvadohuvadohuvadhovadhouvadohuvadhuovadhouadvhohudvahouvdaohvadavdhoadvhouadvhuoadvohuavddva",
+            createdAt: "11:20",
+            user: {
+              id: "adminId",
+              imageUrl: "https://github.com/shadcn.png",
+            },
+          }}
+        />
       </div>
     </div>
   );
