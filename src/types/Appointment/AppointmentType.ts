@@ -4,6 +4,6 @@ import { AppointmentTypeType } from "./AppointmentTypeType";
 export type AppointmentType = {
   id: string;
   appointmentType: AppointmentTypeType;
-  date: string;
+  date: Date;
   user: UserType;
 };
