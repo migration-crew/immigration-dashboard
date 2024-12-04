@@ -41,7 +41,9 @@ function ApplicationSwitcher({
   const sortedApplications = React.useMemo(
     () =>
       [...(applications || [])].sort(
-        (a, b) => b.updateAt.getTime() - a.updateAt.getTime()
+        (a, b) =>
+          b.application[0].updatedAt.getTime() -
+          a.application[0].updatedAt.getTime()
       ),
     [applications]
   );
@@ -58,7 +60,7 @@ function ApplicationSwitcher({
     (app) => ({
       id: app.application[0].id,
       name: app.application[0].name,
-      date: app.updateAt,
+      date: app.application[0].updatedAt,
     })
   );
   if (isAdmin) {
