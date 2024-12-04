@@ -40,6 +40,7 @@ const page = () => {
           ]}
         />
       </div>
+
       <ChatSideBar
         chats={[
           {
@@ -159,7 +160,9 @@ const page = () => {
           },
         ]}
       />
-      <ChatHeader />
+      <div className="rounded-lg bg-primary-white">
+        <ChatHeader title={"All Student"} />
+      </div>
     </div>
   );
 };
