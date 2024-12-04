@@ -3,6 +3,6 @@ export type DocumentType = {
   name: string;
   format: string;
   status: string;
-  dueDate: string;
+  dueDate: Date;
   url: string;
 };
