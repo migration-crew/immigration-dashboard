@@ -53,7 +53,12 @@ export default function NewChatModal({ users }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">New Chat</Button>
+        <Button
+          // variant="outline"
+          className="bg-primary-red text-primary-white hover:opacity-80 active:opacity-50"
+        >
+          + New Chat
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
