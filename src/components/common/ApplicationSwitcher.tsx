@@ -24,7 +24,7 @@ import { Caption } from "./text/Caption";
 export type globalApplicationsType = {
   id: string;
   name: string;
-  updateAt?: Date;
+  updatedAt?: Date;
 };
 
 export type Props = {

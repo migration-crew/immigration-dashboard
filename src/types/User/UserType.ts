@@ -11,4 +11,5 @@ export type UserType = {
   imageUrl: string;
 };
 
-export type BasicUserType = Pick<UserType, "id" | "firstName" | "imageUrl">;
+export type BasicUserType = Pick<UserType, "id" | "firstName" | "imageUrl"> &
+  Partial<Pick<UserType, "lastName">>;

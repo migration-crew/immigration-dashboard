@@ -4,7 +4,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -75,20 +74,22 @@ export default function FilterSection({
         <DropdownMenuContent align="start" className="w-[187px]">
           <ScrollArea className="h-[200px] w-full">
             {sortOptions.map((option) => (
-              <DropdownMenuRadioItem
+              <div
                 key={option.value}
-                value={option.value}
-                className="flex items-center justify-between py-2 px-4 cursor-pointer hover:bg-gray-100"
+                className="flex items-center py-2 px-4 gap-2 cursor-pointer hover:bg-gray-100"
                 onClick={() => {
                   setSelectedSort(option.value);
                   onSortChange(option.value);
                 }}
               >
-                <Caption>{option.label}</Caption>
                 {selectedSort === option.value && (
                   <Check className="h-4 w-4 text-bold" />
                 )}
-              </DropdownMenuRadioItem>
+                {selectedSort !== option.value && (
+                  <div className="h-4 w-4"></div>
+                )}
+                <Caption>{option.label}</Caption>
+              </div>
             ))}
           </ScrollArea>
           {selectedSort.length > 0 && (
@@ -130,7 +131,7 @@ export default function FilterSection({
               >
                 <Checkbox
                   checked={selectedVisaTypes.includes(option.value)}
-                  onCheckedChange={(checked) => {
+                  onCheckedChange={(checked: unknown) => {
                     const newSelected = checked
                       ? [...selectedVisaTypes, option.value]
                       : selectedVisaTypes.filter((v) => v !== option.value);
@@ -181,7 +182,7 @@ export default function FilterSection({
               >
                 <Checkbox
                   checked={selectedStatus.includes(option.value)}
-                  onCheckedChange={(checked) => {
+                  onCheckedChange={(checked: unknown) => {
                     const newSelected = checked
                       ? [...selectedStatus, option.value]
                       : selectedStatus.filter((v) => v !== option.value);
