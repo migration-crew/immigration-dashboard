@@ -37,7 +37,7 @@ export default function MessageComposer() {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Write Message"
-              className="border-none shadow-none w-[607px] h-[24px]"
+              className="border-none shadow-none w-[607px] h-[24px] focus-visible:ring-0"
             />
           </div>
           <button
