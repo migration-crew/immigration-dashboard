@@ -1,5 +1,10 @@
+"use client";
+
+import { AppointmentTypeContainer } from "@/app/appointment/_components/AppoinmentTypeContainer";
 import ApplicationSwitcher from "@/components/common/ApplicationSwitcher";
 import { ApplicationType } from "@/types/ApplicationType";
+import { AppointmentTypeType } from "@/types/Appointment/AppointmentTypeType";
+import { useState } from "react";
 
 const applications: ApplicationType[] = [
   {
@@ -29,10 +34,17 @@ const applications: ApplicationType[] = [
   },
 ];
 
-export default function page() {
+export default function Page() {
+  const [selectedAppointmentType, setSelectedAppointmentType] =
+    useState<AppointmentTypeType | null>(null);
+
   return (
     <div>
       <ApplicationSwitcher applications={applications} />
+      <div className="p-4">
+        <AppointmentTypeContainer onTypeSelect={setSelectedAppointmentType} />
+        {selectedAppointmentType && "<AppointmentDatePicker />"}
+      </div>
     </div>
   );
 }
