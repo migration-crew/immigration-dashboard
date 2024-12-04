@@ -1,6 +1,7 @@
 import ChatContainer from "@/app/inbox/_components/ChatContainer";
 import ChatHeader from "@/app/inbox/_components/ChatHeader";
-import ChatSideBar from "@/app/inbox/_components/ChatSideBar";
+// import ChatSideBar from "@/app/inbox/_components/ChatSideBar";
+import MessageComposer from "@/app/inbox/_components/MessageComposer";
 import { Applicationtable } from "@/components/common/ApplicationTable";
 import DynamicHeaderContainer from "@/components/common/DynamicHeaderContainer";
 import HorizontalProgressBar from "@/components/common/HorizontalProgressBar";
@@ -209,6 +210,7 @@ const page = () => {
           }}
         />
       </div>
+      <MessageComposer />
     </div>
   );
 };
