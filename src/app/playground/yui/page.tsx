@@ -1,3 +1,5 @@
+import ChatHeader from "@/app/inbox/_components/ChatHeader";
+import ChatSideBar from "@/app/inbox/_components/ChatSideBar";
 import { Applicationtable } from "@/components/common/ApplicationTable";
 import DynamicHeaderContainer from "@/components/common/DynamicHeaderContainer";
 import HorizontalProgressBar from "@/components/common/HorizontalProgressBar";
@@ -38,6 +40,126 @@ const page = () => {
           ]}
         />
       </div>
+      <ChatSideBar
+        chats={[
+          {
+            id: "0",
+            name: "Saulo",
+            members: [
+              {
+                id: "0",
+                firstName: "Yuki",
+                imageUrl: "https://github.com/shadcn.png",
+              },
+              {
+                id: "1",
+                firstName: "Zoro",
+                imageUrl: "https://github.com/shadcn.png",
+              },
+            ],
+          },
+          {
+            id: "0",
+            name: "Saulo2",
+            members: [
+              {
+                id: "0",
+                firstName: "Yuki",
+                imageUrl: "https://github.com/shadcn.png",
+              },
+              {
+                id: "1",
+                firstName: "Zoro",
+                imageUrl: "https://github.com/shadcn.png",
+              },
+              {
+                id: "1",
+                firstName: "Zoro",
+                imageUrl: "https://github.com/shadcn.png",
+              },
+            ],
+          },
+          {
+            id: "0",
+            name: "Saulo3",
+            members: [
+              {
+                id: "0",
+                firstName: "Yuki",
+                imageUrl: "https://github.com/shadcn.png",
+              },
+              {
+                id: "1",
+                firstName: "Zoro",
+                imageUrl: "https://github.com/shadcn.png",
+              },
+              {
+                id: "0",
+                firstName: "Yuki",
+                imageUrl: "https://github.com/shadcn.png",
+              },
+              {
+                id: "1",
+                firstName: "Zoro",
+                imageUrl: "https://github.com/shadcn.png",
+              },
+            ],
+          },
+          {
+            id: "0",
+            name: "Saulo4",
+            members: [
+              {
+                id: "0",
+                firstName: "Yuki",
+                imageUrl: "https://github.com/shadcn.png",
+              },
+              {
+                id: "1",
+                firstName: "Zoro",
+                imageUrl: "https://github.com/shadcn.png",
+              },
+              {
+                id: "0",
+                firstName: "Yuki",
+                imageUrl: "https://github.com/shadcn.png",
+              },
+              {
+                id: "1",
+                firstName: "Zoro",
+                imageUrl: "https://github.com/shadcn.png",
+              },
+              {
+                id: "0",
+                firstName: "Yuki",
+                imageUrl: "https://github.com/shadcn.png",
+              },
+              {
+                id: "1",
+                firstName: "Zoro",
+                imageUrl: "https://github.com/shadcn.png",
+              },
+            ],
+          },
+          {
+            id: "0",
+            name: "Saulo5",
+            members: [
+              {
+                id: "0",
+                firstName: "Yuki",
+                imageUrl: "https://github.com/shadcn.png",
+              },
+              {
+                id: "1",
+                firstName: "Zoro",
+                imageUrl: "https://github.com/shadcn.png",
+              },
+            ],
+          },
+        ]}
+      />
+      <ChatHeader />
     </div>
   );
 };
