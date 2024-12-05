@@ -1,9 +1,9 @@
+import { ApplicationType } from "@/types/Application/ApplicationType";
 import { PaymentType } from "@/types/Payment/PaymentType";
 import PaymentCarousel from "./PaymentCarousel";
-import { ApplicationType } from "@/types/Application/ApplicationType";
 
 export type testPaymentType = PaymentType & {
-  application: ApplicationType,
+  application: ApplicationType;
   feeType: string;
   dueDate: Date;
 };
@@ -27,8 +27,8 @@ function AwaitingPayment({ payments, singleCard, className }: Props) {
     <div
       className={
         singleCard
-          ? "w-[340px] h-[313px] p-6 grid justify-between"
-          : `w-[708px] h-[320px] p-6 grid justify-between ${className}`
+          ? "w-[340px] h-[313px] p-6 grid"
+          : `w-[708px] h-[320px] p-6 grid ${className}`
       }
     >
       <h2 className="text-xl font-bold w-[292px] h-[24px]">Awaiting Payment</h2>
@@ -38,7 +38,10 @@ function AwaitingPayment({ payments, singleCard, className }: Props) {
           {payments.length} pending payment{payments.length !== 1 ? "s" : ""}.
         </span>
       </p>
-      <PaymentCarousel payments={payments} singleCard={singleCard} />
+      <PaymentCarousel
+        payments={payments.concat(payments, payments)}
+        singleCard={singleCard}
+      />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/upImmigrationButton";
+import { cn } from "@/lib/utils";
 import { Card } from "../../ui/card";
 import {
   Carousel,
@@ -28,18 +29,17 @@ function PaymentCarousel({ payments, singleCard }: Props) {
       {/* (width of Carousel) = (pl of CarouselItem) + (width of CarouselItem) */}
       <Carousel
         opts={carouselOptions}
-        className={singleCard ? "w-[228px] h-[181px]" : "w-[610px] h-[181px]"}
+        className={singleCard ? "w-[228px] h-[181px]" : "w-[700px] h-[181px]"}
       >
         {/* (-ml of CarouselContent) = (pl of CarouselItem)/2 */}
-        <CarouselContent
-          className="-ml-1"
-        >
+        <CarouselContent className="-ml-1">
           {payments.map((payment) => (
             <CarouselItem
               key={payment.id}
-              className={`pl-2 w-[220px] ${
-                !singleCard && "basis-[228px]"
-              }`}
+              className={cn(
+                `pl-2`,
+                !singleCard ? "basis-1/3" : "basis-[228px]"
+              )}
             >
               {/* <div> */}
               <Card className="border h-full w-[220px] overflow-hidden">
