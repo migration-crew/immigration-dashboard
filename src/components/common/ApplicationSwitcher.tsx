@@ -1,6 +1,5 @@
 "use client";
 
-import { testApplicationType } from "@/app/playground/saulo/page";
 import {
   Command,
   CommandEmpty,
@@ -16,6 +15,7 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/upImmigrationButton";
 import { cn } from "@/lib/utils";
+import { ApplicationType } from "@/types/Application/ApplicationType";
 import { Check } from "lucide-react";
 import Image from "next/image";
 import * as React from "react";
@@ -30,7 +30,7 @@ export type globalApplicationsType = {
 export type Props = {
   className?: string;
   containerClassName?: string;
-  applications: testApplicationType[];
+  applications: ApplicationType[];
 };
 
 function ApplicationSwitcher({
@@ -41,9 +41,7 @@ function ApplicationSwitcher({
   const sortedApplications = React.useMemo(
     () =>
       [...(applications || [])].sort(
-        (a, b) =>
-          b.application[0].updatedAt.getTime() -
-          a.application[0].updatedAt.getTime()
+        (a, b) => b.updatedAt.getTime() - a.updatedAt.getTime()
       ),
     [applications]
   );
@@ -58,9 +56,9 @@ function ApplicationSwitcher({
 
   const globalApplications: globalApplicationsType[] = applications.map(
     (app) => ({
-      id: app.application[0].id,
-      name: app.application[0].name,
-      date: app.application[0].updatedAt,
+      id: app.id,
+      name: app.name,
+      date: app.updatedAt,
     })
   );
   if (isAdmin) {
@@ -70,7 +68,7 @@ function ApplicationSwitcher({
   const [value, setValue] = React.useState(
     isAdmin
       ? globalApplications[globalApplications.length - 1].id
-      : sortedApplications[0].application[0].id
+      : sortedApplications[0].id
   );
 
   return (
@@ -137,8 +135,8 @@ function ApplicationSwitcher({
                 )}
                 {sortedApplications.map((application) => (
                   <CommandItem
-                    key={application.application[0].id}
-                    value={application.application[0].id}
+                    key={application.id}
+                    value={application.id}
                     onSelect={(currentValue) => {
                       if (currentValue !== value) {
                         setValue(currentValue);
@@ -146,15 +144,11 @@ function ApplicationSwitcher({
                       }
                     }}
                   >
-                    <Caption className="">
-                      {application.application[0].name}
-                    </Caption>
+                    <Caption className="">{application.name}</Caption>
                     <Check
                       className={cn(
                         "ml-auto",
-                        value === application.application[0].id
-                          ? "opacity-100"
-                          : "opacity-0"
+                        value === application.id ? "opacity-100" : "opacity-0"
                       )}
                     />
                   </CommandItem>

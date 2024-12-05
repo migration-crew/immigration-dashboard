@@ -6,7 +6,7 @@ import FilterSection from "@/components/common/FilterSection/FilterSection";
 import { ApplicationType } from "@/types/Application/ApplicationType";
 import { AppointmentType } from "@/types/Appointment/AppointmentType";
 import { BasicUserType } from "@/types/User/UserType";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export type testApplicationType = {
   application: ApplicationType[];
@@ -14,137 +14,14 @@ export type testApplicationType = {
   status: string;
 };
 
-const testAppointment: AppointmentType = {
-  id: "1",
-  appointmentType: {
-    id: "1",
-    name: "First Consultation",
-    duration: 60,
-    currency: "USD",
-    price: 100,
-  },
-  date: new Date("2024-01-28T16:00:00"),
-  user: {
-    id: "1",
-    firstName: "John",
-    lastName: "Doe",
-    nationality: "US",
-    language: "English",
-    address: "123 Main St, Anytown, USA",
-    birthDate: "1990-01-01",
-    gender: "Male",
-    email: "john.doe@example.com",
-    imageUrl: "/placeholder.svg",
-  },
-};
-
-const testAttendees: BasicUserType[] = [
-  {
-    id: "1",
-    firstName: "John",
-    imageUrl: "/placeholder.svg",
-  },
-  {
-    id: "2",
-    firstName: "Jane",
-    imageUrl: "/placeholder.svg",
-  },
-];
-
-const applications: testApplicationType[] = [
-  {
-    application: [
-      {
-        id: "Maria_CICCC_ESL",
-        name: "Maria_CICCC_ESL",
-        type: {
-          id: "student",
-          name: "student",
-          createdAt: new Date("2023-05-01"),
-          updatedAt: new Date("2023-06-15"),
-        },
-        createdAt: new Date("2023-05-01"),
-        updatedAt: new Date("2023-06-15"),
-      },
-    ],
-    progress: 100,
-    status: "completed",
-  },
-  {
-    application: [
-      {
-        id: "Maria_Work_Permit",
-        name: "Maria_Work_Permit",
-        type: {
-          id: "workPermit",
-          name: "workPermit",
-          createdAt: new Date("2023-04-01"),
-          updatedAt: new Date("2023-05-10"),
-        },
-        createdAt: new Date("2023-04-01"),
-        updatedAt: new Date("2023-05-10"),
-      },
-    ],
-    progress: 75,
-    status: "onHold",
-  },
-  {
-    application: [
-      {
-        id: "Carrey_Visitor",
-        name: "Carrey_Visitor",
-        type: {
-          id: "visitor",
-          name: "visitor",
-          createdAt: new Date("2023-04-01"),
-          updatedAt: new Date("2023-04-22"),
-        },
-        createdAt: new Date("2023-04-01"),
-        updatedAt: new Date("2023-04-22"),
-      },
-    ],
-    progress: 25,
-    status: "processing",
-  },
-  {
-    application: [
-      {
-        id: "Maria_CICCC_UX/UI",
-        name: "Maria_CICCC_UX/UI",
-        type: {
-          id: "student",
-          name: "student",
-          createdAt: new Date("2023-05-01"),
-          updatedAt: new Date("2023-06-01"),
-        },
-        createdAt: new Date("2023-05-01"),
-        updatedAt: new Date("2023-06-01"),
-      },
-    ],
-    progress: 100,
-    status: "rejected",
-  },
-  {
-    application: [
-      {
-        id: "Maria_CICCC_UX/UI_2",
-        name: "Maria_CICCC_UX/UI_2",
-        type: {
-          id: "student",
-          name: "student",
-          createdAt: new Date("2023-04-01"),
-          updatedAt: new Date("2023-05-28"),
-        },
-        createdAt: new Date("2023-04-01"),
-        updatedAt: new Date("2023-05-28"),
-      },
-    ],
-    progress: 50,
-    status: "processing",
-  },
-];
-
 export default function Page() {
+  const [applications, setApplications] = useState<ApplicationType[]>([]);
+  const [testApplications, setTestApplications] = useState<
+    testApplicationType[]
+  >([]);
+  const [appointment, setAppointment] = useState<AppointmentType | null>(null);
+  const [attendees, setAttendees] = useState<BasicUserType[]>([]);
+
   const [sortOptions] = useState([
     { label: "Date: First to Last", value: "date_asc" },
     { label: "Date: Last to First", value: "date_desc" },
@@ -172,6 +49,37 @@ export default function Page() {
   const [selectedVisaTypes, setSelectedVisaTypes] = useState<string[]>([]);
   const [selectedStatus, setSelectedStatus] = useState<string[]>([]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const applicationsResponse = await fetch("../api/applications");
+        const applicationsData: ApplicationType[] =
+          await applicationsResponse.json();
+        console.log(applicationsData);
+
+        setApplications(applicationsData);
+
+        const testApplicationsResponse = await fetch("/api/test-applications");
+        const testApplicationsData: testApplicationType[] =
+          await testApplicationsResponse.json();
+        setTestApplications(testApplicationsData);
+
+        const appointmentResponse = await fetch("/api/appointment");
+        const appointmentData: AppointmentType =
+          await appointmentResponse.json();
+        setAppointment(appointmentData);
+
+        const attendeesResponse = await fetch("/api/attendees");
+        const attendeesData: BasicUserType[] = await attendeesResponse.json();
+        setAttendees(attendeesData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const handleSortChange = (value: string) => {
     console.log("Sort changed:", value);
     setSelectedSort(value);
@@ -198,13 +106,35 @@ export default function Page() {
     const filtered = applications.filter((app) => {
       const typeMatch =
         selectedVisaTypes.length === 0 ||
+        selectedVisaTypes.includes(app.type.name);
+      return typeMatch;
+    });
+
+    return filtered.sort((a, b) => {
+      switch (selectedSort) {
+        case "date_asc":
+          return a.updatedAt.getTime() - b.updatedAt.getTime();
+        case "date_desc":
+          return b.updatedAt.getTime() - a.updatedAt.getTime();
+        case "alpha_asc":
+          return a.name.localeCompare(b.name);
+        default:
+          return 0;
+      }
+    });
+  }, [applications, selectedSort, selectedVisaTypes]);
+
+  const testFilteredAndSortedApplications = useMemo(() => {
+    const testFiltered = testApplications.filter((app) => {
+      const typeMatch =
+        selectedVisaTypes.length === 0 ||
         selectedVisaTypes.includes(app.application[0].type.name);
       const statusMatch =
         selectedStatus.length === 0 || selectedStatus.includes(app.status);
       return typeMatch && statusMatch;
     });
 
-    return filtered.sort((a, b) => {
+    return testFiltered.sort((a, b) => {
       switch (selectedSort) {
         case "date_asc":
           return (
@@ -226,7 +156,7 @@ export default function Page() {
           return 0;
       }
     });
-  }, [selectedSort, selectedVisaTypes, selectedStatus]);
+  }, [testApplications, selectedSort, selectedVisaTypes, selectedStatus]);
 
   return (
     <div className="p-4">
@@ -246,7 +176,7 @@ export default function Page() {
       <div className="mt-4">
         <h2 className="text-xl font-bold mb-2">Filtered Applications:</h2>
         <ul>
-          {filteredAndSortedApplications.map((app) => (
+          {testFilteredAndSortedApplications.map((app) => (
             <li key={app.application[0].id}>
               {app.application[0].name} - Type: {app.application[0].type.name},
               Status: {app.status}, Progress: {app.progress}%
@@ -254,10 +184,9 @@ export default function Page() {
           ))}
         </ul>
       </div>
-      <AppointmentCard
-        appointment={testAppointment}
-        attendees={testAttendees}
-      />
+      {appointment && (
+        <AppointmentCard appointment={appointment} attendees={attendees} />
+      )}
     </div>
   );
 }
