@@ -24,24 +24,23 @@ function PaymentCarousel({ payments, singleCard }: Props) {
     : { align: "center" as const, loop: false };
 
   return (
-    <div className="flex justify-center w-full">
+    <div className={cn("flex w-full", singleCard && " justify-center")}>
       {/* Carousel -> area of card visible */}
       {/* (width of Carousel) = (pl of CarouselItem) + (width of CarouselItem) */}
       <Carousel
         opts={carouselOptions}
-        className={singleCard ? "w-[228px] h-[181px]" : "w-[700px] h-[181px]"}
+        className={singleCard ? "w-[228px] h-[181px]" : "w-[580px] h-[181px] ml-9"}
       >
         {/* (-ml of CarouselContent) = (pl of CarouselItem)/2 */}
-        <CarouselContent className="-ml-1">
+        <CarouselContent className={cn("-ml-1", !singleCard && "w-[700px]")}>
           {payments.map((payment) => (
             <CarouselItem
               key={payment.id}
               className={cn(
                 `pl-2`,
-                !singleCard ? "basis-1/3" : "basis-[228px]"
+                !singleCard && "basis-1/3"
               )}
             >
-              {/* <div> */}
               <Card className="border h-full w-[220px] overflow-hidden">
                 <div className="h-[140px] pt-4 pb-1 pl-4 pr-4">
                   <div className="bg-[#5E5E5E] text-white text-center rounded-2xl h-fit w-fit pr-2 pl-2 pt-1 pb-1">
@@ -63,16 +62,14 @@ function PaymentCarousel({ payments, singleCard }: Props) {
                   <CaptionSemi>Make Payment</CaptionSemi>
                 </Button>
               </Card>
-              {/* </div> */}
             </CarouselItem>
           ))}
+          {!singleCard && (
+            <CarouselItem  className="basis-1/6" />
+          )}
         </CarouselContent>
         <CarouselPrevious className="-left-9" />
-        {singleCard ? (
-          <CarouselNext className="-right-9" />
-        ) : (
-          <CarouselNext className="-right-10" />
-        )}
+        <CarouselNext className={cn(singleCard? "-right-9":"-right-10")} />
       </Carousel>
     </div>
   );
