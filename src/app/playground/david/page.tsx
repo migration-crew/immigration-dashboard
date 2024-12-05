@@ -9,6 +9,9 @@ import { ParagraphRegular } from "@/components/common/text/ParagraphRegular";
 import TopNavbar from "@/components/common/TopNavbar/TopNavbar";
 import { ApplicationTaskType } from "@/types/Application/ApplicationTaskType";
 import { StageProgressType } from "@/types/Application/ApplicationType";
+import AddTaskButton from "./AddTaskButton";
+import { events } from "./data/events";
+import QuickCalendar from "./QuickCalendar";
 
 export default function DavidPage() {
   const links = [
@@ -51,6 +54,7 @@ export default function DavidPage() {
         user: {
           id: "1",
           firstName: "Bart",
+          lastName: "Simpson",
           imageUrl:
             "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/67/67e62baab9a7fcd856e7187a6d8929317bb58c7c.jpg",
         },
@@ -60,7 +64,8 @@ export default function DavidPage() {
       {
         user: {
           id: "2",
-          firstName: "Putin",
+          firstName: "Vladimir",
+          lastName: "Putin",
           imageUrl:
             "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/b3/b399e6f3d68abd4963bab22c1efe0983f5189644.jpg",
         },
@@ -94,6 +99,8 @@ export default function DavidPage() {
       />
       <TopNavbar />
       <ApplicationProgress progresses={progresses} />
+      <QuickCalendar events={events} />
+      <AddTaskButton />
     </PageContainer>
   );
 }
