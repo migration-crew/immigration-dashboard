@@ -1,3 +1,5 @@
+"use client";
+
 import { ApplicationTaskType } from "@/types/Application/ApplicationTaskType";
 import { ApplicationStageType } from "@/types/ApplicationStageType";
 import { CircularProgressbar } from "react-circular-progressbar";
