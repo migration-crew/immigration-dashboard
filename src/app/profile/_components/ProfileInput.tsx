@@ -54,8 +54,37 @@ export default function ProfileInput() {
           </label>
           <Input id="address" type="text" />
         </div>
+
+        <div className="flex">
+          <div className="w-[360px] h-[45px]">
+            <label
+              htmlFor="dateOfBirth"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Date of Birth
+            </label>
+            <Input id="dateOfBirth" type="text" />
+          </div>
+          <div className="w-[360px] h-[45px]">
+            <label
+              htmlFor="gender"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Gender
+            </label>
+            <Input id="gender" type="text" />
+          </div>
+        </div>
+        <div>
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-700"
+          >
+            E-mail
+          </label>
+          <Input id="email" type="text" />
+        </div>
       </Card>
-      <div></div>
     </>
   );
 }
