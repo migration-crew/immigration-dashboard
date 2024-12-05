@@ -68,8 +68,8 @@ function PaymentCarousel({ payments, singleCard }: Props) {
             <CarouselItem  className="basis-1/6" />
           )}
         </CarouselContent>
-        <CarouselPrevious className="-left-9" />
-        <CarouselNext className={cn(singleCard? "-right-9":"-right-10")} />
+        <CarouselPrevious className="-left-9 bg-secondary-dark-gray text-primary-white [&_svg]:size-7 hover:bg-secondary-dark-gray hover:text-primary-white hover:opacity-80" />
+        <CarouselNext className={cn("bg-secondary-dark-gray text-primary-white [&_svg]:size-7 hover:bg-secondary-dark-gray hover:text-primary-white hover:opacity-80", singleCard? "-right-9":"-right-10")} />
       </Carousel>
     </div>
   );
