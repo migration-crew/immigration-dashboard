@@ -14,18 +14,18 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/upImmigrationButton";
-import { ChatUserType } from "@/types/User/UserType";
+import { chatUserType } from "@/types/User/UserType";
 import { AnimatePresence, motion } from "framer-motion";
 import { Search, X } from "lucide-react";
 import { useState } from "react";
 
 type Props = {
-  users: ChatUserType[];
+  users: chatUserType[];
 };
 
 export default function NewChatModal({ users }: Props) {
   const [searchText, setSearchText] = useState("");
-  const [selectedUsers, setSelectedUsers] = useState<ChatUserType[]>([]);
+  const [selectedUsers, setSelectedUsers] = useState<chatUserType[]>([]);
 
   const filteredUsers = users.filter((user) => {
     const name = searchText.split(" ");
@@ -42,7 +42,7 @@ export default function NewChatModal({ users }: Props) {
     }
   });
 
-  const toggleUser = (user: ChatUserType) => {
+  const toggleUser = (user: chatUserType) => {
     setSelectedUsers((prev) =>
       prev.some((u) => u.email === user.email)
         ? prev.filter((u) => u.email !== user.email)

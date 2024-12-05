@@ -2,6 +2,7 @@ import ChatContainer from "@/app/inbox/_components/ChatContainer";
 import ChatHeader from "@/app/inbox/_components/ChatHeader";
 import ChatSideBar from "@/app/inbox/_components/ChatSideBar";
 import MessageComposer from "@/app/inbox/_components/MessageComposer";
+import NewChatModal from "@/app/inbox/_components/NewChatModal";
 import { Applicationtable } from "@/components/common/ApplicationTable";
 import DynamicHeaderContainer from "@/components/common/DynamicHeaderContainer";
 import HorizontalProgressBar from "@/components/common/HorizontalProgressBar";
@@ -42,7 +43,7 @@ const page = () => {
           ]}
         />
       </div>
-      <div>
+      <div className="flex">
         <ChatSideBar
           chats={[
             {
@@ -162,59 +163,93 @@ const page = () => {
             },
           ]}
         />
-        <ChatHeader title={"All Student"} />
-        <ChatContainer
-          message={{
-            id: "0",
-            content: "Hello",
-            createdAt: "5:20",
-            user: {
-              id: "userId",
-              imageUrl: "https://github.com/shadcn.png",
-              firstName: "Broock",
-            },
-          }}
-        />
-        <ChatContainer
-          message={{
-            id: "1",
-            content: "Good bye",
-            createdAt: "9:20",
-            user: {
-              id: "adminId",
-              imageUrl: "https://github.com/shadcn.png",
-              firstName: "Fruncky",
-            },
-          }}
-        />
-        <ChatContainer
-          message={{
-            id: "0",
-            content:
-              "oihosjdnvosdenvoisdenvoksndovnsodvnpsdknvopsiednvpoksndvolisndeboknselbjzn;dijrbodsjnbf;vojnsd;ofivn;oeksvn;osenv;ojnds;ojvn;dfojnb;ojdnf;bjovn;sdojnb;ovjsdn;vk;sodeinv;oinegw;rong;oiwegoinwe;okgnwoi;esgvibewsiugblvisedblviubeilgubewibgvijbdsjbgvlierbivueiuvnlisudnlivndlsinvlisndlivnlisdnvidsnbvilndsibn",
-            createdAt: "10:20",
-            user: {
-              id: "userId",
-              imageUrl: "https://github.com/shadcn.png",
-              firstName: "Broock",
-            },
-          }}
-        />
-        <ChatContainer
-          message={{
-            id: "1",
-            content:
-              "ijokkkkkkkkkkkkkkookkokookasfkofokfodsjndsjidsjdjddjnsdjndndnsdnsvvdsnjnjsijdvjnsdvndvjndjnvndvjsndvdvanvnajdovdavdamvadamvahuuovdaodavdvahudvavadmuhdavmhdvavmavdaouhvmdhamvadouvdaovhadmovdhouvdauhovdahuvadhuvdhuavdahuvadouvdaohudvahuvodauhovuadhvadouhhoudvahdovavadhoovhdahvduaodvahuadovhovduahvdauhdvaoavdohvdaohumvhdaomvhdoavodhuahoavdudhovuvadhouvdahouadvhuovadhouavdohuadvhouavdhouvadhouvadhouvdahouavdhouvadhouvdaohvdahmovadohuvadohuvadohuvadhovadhouvadohuvadhuovadhouadvhohudvahouvdaohvadavdhoadvhouadvhuoadvohuavddva",
-            createdAt: "11:20",
-            user: {
-              id: "adminId",
-              imageUrl: "https://github.com/shadcn.png",
-              firstName: "Fruncky",
-            },
-          }}
-        />
+        <div>
+          <ChatHeader title={"All Student"} />
+          <ChatContainer
+            message={{
+              id: "0",
+              content: "Hello",
+              createdAt: "5:20",
+              user: {
+                id: "userId",
+                imageUrl: "https://github.com/shadcn.png",
+                firstName: "Broock",
+              },
+            }}
+          />
+          <ChatContainer
+            message={{
+              id: "1",
+              content: "Good bye",
+              createdAt: "9:20",
+              user: {
+                id: "adminId",
+                imageUrl: "https://github.com/shadcn.png",
+                firstName: "Fruncky",
+              },
+            }}
+          />
+          <ChatContainer
+            message={{
+              id: "0",
+              content:
+                "oihosjdnvosdenvoisdenvoksndovnsodvnpsdknvopsiednvpoksndvolisndeboknselbjzn;dijrbodsjnbf;vojnsd;ofivn;oeksvn;osenv;ojnds;ojvn;dfojnb;ojdnf;bjovn;sdojnb;ovjsdn;vk;sodeinv;oinegw;rong;oiwegoinwe;okgnwoi;esgvibewsiugblvisedblviubeilgubewibgvijbdsjbgvlierbivueiuvnlisudnlivndlsinvlisndlivnlisdnvidsnbvilndsibn",
+              createdAt: "10:20",
+              user: {
+                id: "userId",
+                imageUrl: "https://github.com/shadcn.png",
+                firstName: "Broock",
+              },
+            }}
+          />
+          <ChatContainer
+            message={{
+              id: "1",
+              content:
+                "ijokkkkkkkkkkkkkkookkokookasfkofokfodsjndsjidsjdjddjnsdjndndnsdnsvvdsnjnjsijdvjnsdvndvjndjnvndvjsndvdvanvnajdovdavdamvadamvahuuovdaodavdvahudvavadmuhdavmhdvavmavdaouhvmdhamvadouvdaovhadmovdhouvdauhovdahuvadhuvdhuavdahuvadouvdaohudvahuvodauhovuadhvadouhhoudvahdovavadhoovhdahvduaodvahuadovhovduahvdauhdvaoavdohvdaohumvhdaomvhdoavodhuahoavdudhovuvadhouvdahouadvhuovadhouavdohuadvhouavdhouvadhouvadhouvdahouavdhouvadhouvdaohvdahmovadohuvadohuvadohuvadhovadhouvadohuvadhuovadhouadvhohudvahouvdaohvadavdhoadvhouadvhuoadvohuavddva",
+              createdAt: "11:20",
+              user: {
+                id: "adminId",
+                imageUrl: "https://github.com/shadcn.png",
+                firstName: "Fruncky",
+              },
+            }}
+          />
+          <MessageComposer />
+        </div>
       </div>
-      <MessageComposer />
+      <NewChatModal
+        users={[
+          {
+            id: "0",
+            firstName: "Zoro",
+            imageUrl: "https://github.com/shadcn.png",
+            lastName: "Roronoa",
+            email: "kmpkmpl@gmail.com",
+          },
+          {
+            id: "1",
+            firstName: "Nami",
+            imageUrl: "https://github.com/shadcn.png",
+            lastName: "Kobayashi",
+            email: "vfaesvev@gmail.com",
+          },
+          {
+            id: "2",
+            firstName: "Usoppu",
+            imageUrl: "https://github.com/shadcn.png",
+            lastName: "Suzuki",
+            email: "ipjonoisio@gmail.com",
+          },
+          {
+            id: "3",
+            firstName: "Robin",
+            imageUrl: "https://github.com/shadcn.png",
+            lastName: "Nico",
+            email: "alcknojnocss@gmail.com",
+          },
+        ]}
+      />
     </div>
   );
 };
