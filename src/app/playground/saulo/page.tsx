@@ -1,6 +1,6 @@
-import { AppointmentDatePicker } from "@/app/appointment/_components/AppoinementDatePicker";
-("use client");
+"use client";
 
+import { AppointmentDatePicker } from "@/app/appointment/_components/AppoinementDatePicker";
 import ApplicationSwitcher from "@/components/common/ApplicationSwitcher";
 import { AppointmentCard } from "@/components/common/AppoitmentCard";
 import FilterSection from "@/components/common/FilterSection/FilterSection";
