@@ -1,20 +1,15 @@
+import { PaymentType } from "@/types/Payment/PaymentType";
 import PaymentCarousel from "./PaymentCarousel";
+import { ApplicationType } from "@/types/Application/ApplicationType";
 
-export type Payment = {
-  id: string;
-  amount: number;
-  currency: string;
-  status: string;
-  paymentMethod: string;
-  createdAt: string;
-  invoiceURL: string;
-  name: string;
+export type testPaymentType = PaymentType & {
+  application: ApplicationType,
   feeType: string;
-  dueDate: string;
+  dueDate: Date;
 };
 
 type Props = {
-  payments: Payment[];
+  payments: testPaymentType[];
   singleCard: boolean;
   className?: string;
 };

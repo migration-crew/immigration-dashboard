@@ -1,14 +1,16 @@
 "use client";
+import { testApplication } from "@/app/payments/data/paymentTable";
 import ApplicationSwitcher from "@/components/common/ApplicationSwitcher";
 import { AppointmentCard } from "@/components/common/AppoitmentCard";
 import AwaitingPayment, {
-  Payment,
+  testPaymentType,
 } from "@/components/common/AwaitingPayment/AwaitingPayment";
 import FilterSection from "@/components/common/FilterSection/FilterSection";
 import { ApplicationType } from "@/types/Application/ApplicationType";
 import { AppointmentType } from "@/types/Appointment/AppointmentType";
 import { BasicUserType } from "@/types/User/UserType";
 import { useMemo, useState } from "react";
+import { payments } from "./data/payment";
 
 export type testApplicationType = {
   application: ApplicationType[];
@@ -50,45 +52,6 @@ const testAttendees: BasicUserType[] = [
     id: "2",
     firstName: "Jane",
     imageUrl: "/placeholder.svg",
-  },
-];
-
-const payments: Payment[] = [
-  {
-    id: "1",
-    amount: 150.0,
-    currency: "CAD",
-    status: "",
-    paymentMethod: "",
-    createdAt: "",
-    invoiceURL: "",
-    name: "Maria_CICCC_UX/UI_2",
-    feeType: "School Enrollment Fee",
-    dueDate: "2025/11/10",
-  },
-  {
-    id: "2",
-    amount: 250.0,
-    currency: "CAD",
-    status: "",
-    paymentMethod: "",
-    createdAt: "",
-    invoiceURL: "",
-    name: "Maria_CICCC_UX/UI_2",
-    feeType: "Visa Fee",
-    dueDate: "2025/11/10",
-  },
-  {
-    id: "3",
-    amount: 8500.0,
-    currency: "CAD",
-    status: "",
-    paymentMethod: "",
-    createdAt: "",
-    invoiceURL: "",
-    name: "Carrey_Visitor",
-    feeType: "School Tuition Fee",
-    dueDate: "2025/11/10",
   },
 ];
 
@@ -271,7 +234,6 @@ export default function Page() {
 
   return (
     <div className="p-4">
-      <ApplicationSwitcher applications={applications} />
       <AwaitingPayment payments={payments} singleCard={true} />
       <div className="mb-4">
         <ApplicationSwitcher applications={filteredAndSortedApplications} />

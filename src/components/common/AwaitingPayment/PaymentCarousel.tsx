@@ -5,14 +5,14 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "../../ui/carousel";
+} from "../../ui/upImmigrationCarousel";
 import { CaptionSemi } from "../text/CaptionSemi";
 import { HeadingLight } from "../text/HeadingLight";
 import { Microtext } from "../text/Microtext";
-import { Payment } from "./AwaitingPayment";
+import { testPaymentType } from "./AwaitingPayment";
 
 type Props = {
-  payments: Payment[];
+  payments: testPaymentType[];
   singleCard: boolean;
 };
 
@@ -42,7 +42,7 @@ function PaymentCarousel({ payments, singleCard }: Props) {
                 <Card className="border h-full w-[220px] overflow-hidden">
                   <div className="h-[140px] pt-6 pb-6 pl-4 pr-4">
                     <div className="bg-[#5E5E5E] text-white text-center rounded-2xl h-fit w-fit pr-2 pl-2 pt-1 pb-1">
-                      <Microtext>{payment.name}</Microtext>
+                      <Microtext>{payment.application.name}</Microtext>
                     </div>
                     <div className="pl-1 pt-2 pb-2">
                       <Microtext>{payment.feeType}</Microtext>
@@ -51,7 +51,7 @@ function PaymentCarousel({ payments, singleCard }: Props) {
                       <HeadingLight>
                         {payment.currency} {payment.amount.toFixed(2)}
                       </HeadingLight>
-                      <Microtext>Due Date: {payment.dueDate}</Microtext>
+                      <Microtext>Due Date: {payment.dueDate.toDateString()}</Microtext>
                     </div>
                   </div>
                   <div className="h-[41px] w-[220px] ">

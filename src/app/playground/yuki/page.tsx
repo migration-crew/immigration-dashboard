@@ -23,6 +23,8 @@ import { TitleLight } from "@/components/common/text/TitleLight";
 import { Button } from "@/components/ui/upImmigrationButton";
 import { documents } from "./data/DocumentTable";
 import RefundPolicy from "@/app/payments/_components/RefundPolicy";
+import AwaitingPayment from "@/components/common/AwaitingPayment/AwaitingPayment";
+import { payments } from "@/app/playground/saulo/data/payment";
 
 const YukiPage = () => {
   return (
@@ -115,6 +117,8 @@ const YukiPage = () => {
       <RefundPolicy />
 
       <div className="shadow-navBar w-10 h-10">shadow</div>
+
+      <AwaitingPayment payments={payments} singleCard={true} />
     </div>
   );
 };
