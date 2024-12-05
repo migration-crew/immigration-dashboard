@@ -119,6 +119,7 @@ const YukiPage = () => {
       <div className="shadow-navBar w-10 h-10">shadow</div>
 
       <AwaitingPayment payments={payments} singleCard={true} />
+      <AwaitingPayment payments={payments} singleCard={false} />
     </div>
   );
 };
