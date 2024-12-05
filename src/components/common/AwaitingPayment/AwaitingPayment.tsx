@@ -14,7 +14,6 @@ export type testPaymentType = PaymentType & {
 type Props = {
   payments: testPaymentType[];
   singleCard: boolean;
-  className?: string;
 };
 
 function AwaitingPayment({ payments, singleCard }: Props) {
