@@ -14,8 +14,7 @@ type Props = {
 
 export default function ChatSideBar({ chats }: Props) {
   const [searchText, setSearchText] = useState("");
-  // const [channels, setChannels] = useState([]);
-  // const [messages, setMessages] = useState([]);
+
   const channels: ChannelType[] = [];
   const messages: ChannelType[] = [];
 
@@ -57,7 +56,6 @@ export default function ChatSideBar({ chats }: Props) {
               <Button
                 key={index}
                 className=" text-black shadow-none text-caption bg-inherit hover:bg-primary-gray hover:text-primary-black active:bg-secondary-dark-gray active:text-primary-white focus:bg-secondary-green focus:text-primary-white justify-start"
-              >
                 {channel.name}
               </Button>
             ))}
