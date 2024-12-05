@@ -10,17 +10,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "primary-red": "rgba(var(--primary-red),var(--tw-bg-opacity, 1))",
-        "primary-dark-red": "rgba(var(--primary-dark-red),var(--tw-bg-opacity, 1))",
-        "primary-black": "rgba(var(--primary-black),var(--tw-bg-opacity, 1))",
-        "primary-gray": "rgba(var(--primary-gray),var(--tw-bg-opacity, 1))",
-        "primary-white": "rgba(var(--primary-white),var(--tw-bg-opacity, 1))",
-        "secondary-dark-gray": "rgba(var(--dark-gray),var(--tw-bg-opacity, 1))",
-        "secondary-medium-gray": "rgba(var(--medium-gray),var(--tw-bg-opacity, 1))",
-        "secondary-gray": "rgba(var(--gray),var(--tw-bg-opacity, 1))",
-        "secondary-light-gray": "rgba(var(--light-gray),var(--tw-bg-opacity, 1))",
-        "secondary-green": "rgba(var(--green),var(--tw-bg-opacity, 1))",
-        "secondary-blue": "rgba(var(--blue),var(--tw-bg-opacity, 1))",
+        "primary-red": "rgba(var(--primary-red), 1)",
+        "primary-dark-red": "rgba(var(--primary-dark-red), 1)",
+        "primary-black": "rgba(var(--primary-black), 1)",
+        "primary-gray": "rgba(var(--primary-gray), 1)",
+        "primary-white": "rgba(var(--primary-white), 1)",
+        "secondary-dark-gray": "rgba(var(--dark-gray), 1)",
+        "secondary-medium-gray":
+          "rgba(var(--medium-gray), 1)",
+        "secondary-gray": "rgba(var(--gray), 1)",
+        "secondary-light-gray":
+          "rgba(var(--light-gray), 1)",
+        "secondary-green": "rgba(var(--green), 1)",
+        "secondary-blue": "rgba(var(--blue), 1)",
         "task-red": "var(--task-red)",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -61,6 +63,16 @@ const config: Config = {
           "3": "hsl(var(--chart-3))",
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
+        },
+        sidebar: {
+          DEFAULT: "hsl(var(--sidebar-background))",
+          foreground: "hsl(var(--sidebar-foreground))",
+          primary: "hsl(var(--sidebar-primary))",
+          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
+          accent: "hsl(var(--sidebar-accent))",
+          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
+          border: "hsl(var(--sidebar-border))",
+          ring: "hsl(var(--sidebar-ring))",
         },
       },
       fontSize: {
@@ -126,7 +138,7 @@ const config: Config = {
         ],
         "microtext-semi": [
           "var(--font-size-microtext)",
-          { fontWeight: "var(--font-weight-semi)" },
+          { fontWeight: "var(--font-weight-semi-bold)" },
         ],
         microtext: [
           "var(--font-size-microtext)",
@@ -138,6 +150,9 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      boxShadow: {
+        "navBar": "var(--navBarShadow)"
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],

@@ -1,4 +1,4 @@
-import { ApplicationCommentType } from "@/types/ApplicationCommentType";
+import { ApplicationCommentType } from "@/types/Application/ApplicationCommentType";
 import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 
 type Props = {

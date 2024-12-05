@@ -20,5 +20,5 @@ export const Heading = ({
   className?: string | undefined;
   children: React.ReactNode;
 }) => {
-  return <h4 className={cn("text-heading", className)}>{children}</h4>;
+  return <h4 className={cn("!text-heading", className)}>{children}</h4>;
 };
