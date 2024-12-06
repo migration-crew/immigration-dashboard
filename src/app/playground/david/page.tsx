@@ -93,10 +93,7 @@ export default function DavidPage() {
         <ParagraphRegular>hello h2</ParagraphRegular>
         <ParagraphRegular>hello h3</ParagraphRegular>
       </DynamicRoundedContainer>
-      <TaskCard
-        applicationTask={dummyData}
-        onClick={() => console.log("TaskCard clicked")}
-      />
+      <TaskCard applicationTask={dummyData} />
       <TopNavbar />
       <ApplicationProgress progresses={progresses} />
       <QuickCalendar events={events} />
