@@ -14,7 +14,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import dayjs from "dayjs";
-import { Check, ChevronsUpDown } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import {
@@ -37,7 +37,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/upImmigrationButton";
-import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -102,17 +101,6 @@ export default function ProfileInput({
     resolver: zodResolver(FormSchema),
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: "選択された言語",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
-  }
-
   useEffect(() => {
     setCountries(
       filterCountries(countryRegionData, priorityOptions, whitelist, blacklist)
@@ -156,7 +144,10 @@ export default function ProfileInput({
               }}
             >
               <SelectTrigger className={className}>
-                <SelectValue placeholder={placeholder} className="opacity-50" />
+                <SelectValue
+                  placeholder={placeholder}
+                  className="opacity-50 text-caption"
+                />
               </SelectTrigger>
               <SelectContent>
                 {countries.map(({ countryName, countryShortCode }) => (
@@ -175,10 +166,7 @@ export default function ProfileInput({
               Language
             </label>
             <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-6"
-              >
+              <form className="space-y-6">
                 <FormField
                   control={form.control}
                   name="language"
@@ -200,18 +188,15 @@ export default function ProfileInput({
                                 ? languages.find(
                                     (language) => language.value === field.value
                                   )?.label
-                                : "Select Language"}
-                              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 " />
+                                : "Please select language"}
+                              <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                             </Button>
                           </FormControl>
                         </PopoverTrigger>
                         <PopoverContent className="w-[360px] p-0">
                           <Command>
-                            <CommandInput
-                              placeholder="Search Laungage"
-                              className="opacity-50 "
-                            />
-                            <CommandEmpty>言語が見つかりません。</CommandEmpty>
+                            <CommandInput placeholder="Search language..." />
+                            <CommandEmpty>Language not found</CommandEmpty>
                             <CommandGroup>
                               {languages.map((language) => (
                                 <CommandItem
@@ -255,7 +240,7 @@ export default function ProfileInput({
           <Input id="address" type="text" />
         </div>
         <div className="flex gap-[60px]">
-          <div className="w-[360px] ">
+          <div className="w-[360px] h-auto">
             <label
               htmlFor="dateOfBirth"
               className="block text-sm font-medium text-gray-700 pb-1 text-caption"
@@ -272,8 +257,9 @@ export default function ProfileInput({
                 />
               </DemoContainer>
             </LocalizationProvider>
+            x
           </div>
-          <div className="w-[360px] h-auto  ">
+          <div className="w-[360px] h-auto">
             <label
               htmlFor="gender"
               className="block text-sm font-medium text-gray-700 pb-3 text-caption"
@@ -284,7 +270,7 @@ export default function ProfileInput({
               <SelectTrigger className="">
                 <SelectValue
                   placeholder="Select Gender"
-                  className="disabled:opacity-50 "
+                  className="opacity-50 text-caption"
                 />
               </SelectTrigger>
               <SelectContent>
