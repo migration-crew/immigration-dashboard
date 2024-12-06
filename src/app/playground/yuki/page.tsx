@@ -113,6 +113,8 @@ const YukiPage = () => {
       <PaymentTable payments={paymentTableData} />
 
       <RefundPolicy />
+
+      <div className="shadow-navBar w-10 h-10">shadow</div>
     </div>
   );
 };
