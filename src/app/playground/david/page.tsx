@@ -8,6 +8,7 @@ import { TaskCard } from "@/components/common/TaskCard/TaskCard";
 import { ParagraphRegular } from "@/components/common/text/ParagraphRegular";
 import TopNavbar from "@/components/common/TopNavbar/TopNavbar";
 import { ApplicationTaskType } from "@/types/Application/ApplicationTaskType";
+import { StageProgressType } from "@/types/Application/ApplicationType";
 import AddTaskButton from "./AddTaskButton";
 import { events } from "./data/events";
 import QuickCalendar from "./QuickCalendar";
@@ -17,6 +18,29 @@ export default function DavidPage() {
     { name: "Home", href: "/" },
     { name: "Playground", href: "/playground" },
     { name: "David", href: "/playground/david" },
+  ];
+
+  const progresses: StageProgressType[] = [
+    {
+      id: "1",
+      name: "Getting Started",
+      percentage: 100,
+    },
+    {
+      id: "2",
+      name: "School Admission",
+      percentage: 100,
+    },
+    {
+      id: "3",
+      name: "Visa Application",
+      percentage: 50,
+    },
+    {
+      id: "4",
+      name: "Pre-Departure",
+      percentage: 0,
+    },
   ];
 
   const dummyData: ApplicationTaskType = {
@@ -74,7 +98,7 @@ export default function DavidPage() {
         onClick={() => console.log("TaskCard clicked")}
       />
       <TopNavbar />
-      <ApplicationProgress />
+      <ApplicationProgress progresses={progresses} />
       <QuickCalendar events={events} />
       <AddTaskButton />
     </PageContainer>
