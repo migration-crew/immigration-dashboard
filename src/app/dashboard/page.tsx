@@ -1,11 +1,20 @@
 import ApplicationProgress from "@/components/common/ApplicationProgress/ApplicationProgress";
 import ApplicationSwitcher from "@/components/common/ApplicationSwitcher";
 import { BreadcrumbComponent } from "@/components/common/Breadcrumbs/BreadcrumbComponent";
+import DynamicHeaderContainer from "@/components/common/DynamicHeaderContainer";
 import { DynamicRoundedContainer } from "@/components/common/DynamicRoundedContainer";
+import HorizontalProgressBar from "@/components/common/HorizontalProgressBar";
 import { PageContainer } from "@/components/common/PageContainer";
+import { TaskCard } from "@/components/common/TaskCard/TaskCard";
+import { CaptionSemi } from "@/components/common/text/CaptionSemi";
+import { Paragraph } from "@/components/common/text/Paragraph";
+import { Button } from "@/components/ui/upImmigrationButton";
 import { applications } from "@/data/applications";
+import { currentTasks } from "@/data/currentTasks";
 import { progresses } from "@/data/progresses";
 import { StageProgressType } from "@/types/Application/ApplicationType";
+import QuickCalendar from "../playground/david/QuickCalendar";
+import { events } from "../playground/david/data/events";
 
 const INITIAL_LINKS = [
   { name: "Dashboard", href: "/dashboard" },
@@ -24,6 +33,7 @@ async function getProgresses(): Promise<StageProgressType[]> {
 
 export default async function DashboardPage() {
   const progresses = await getProgresses();
+
   return (
     <PageContainer>
       <div className="flex justify-between items-center">
@@ -38,6 +48,42 @@ export default async function DashboardPage() {
         >
           Here goes AwaitingPayment component
         </DynamicRoundedContainer>
+      </div>
+      <div className="flex pt-2 gap-4">
+        <div className="flex flex-col gap-2 w-[390px]">
+          <Paragraph>Current Tasks</Paragraph>
+          <DynamicHeaderContainer
+            headerChildren={<CaptionSemi>Visa Application</CaptionSemi>}
+            contentChildren={
+              <>
+                <HorizontalProgressBar progress={50} />
+                {currentTasks.map((task, index) => {
+                  const lastTask = index === currentTasks.length - 1;
+                  return (
+                    <TaskCard
+                      key={task.id}
+                      applicationTask={task}
+                      className={`w-full p-4 gap-1 ${
+                        lastTask ? "rounded-b-2xl" : ""
+                      }`}
+                    />
+                  );
+                })}
+              </>
+            }
+            className="w-full"
+          ></DynamicHeaderContainer>
+          <Button className="bg-secondary-green">See Your Tasks</Button>
+        </div>
+        <div className="flex flex-col gap-2 w-[340px]">
+          <Paragraph>Your schedule</Paragraph>
+          <DynamicHeaderContainer
+            headerChildren={<CaptionSemi>Mon Dec 16</CaptionSemi>}
+            contentChildren={<QuickCalendar events={events} />}
+            className="w-full"
+          ></DynamicHeaderContainer>
+          <Button className="bg-secondary-green">See Your Calendar</Button>
+        </div>
       </div>
     </PageContainer>
   );
