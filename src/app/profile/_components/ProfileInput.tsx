@@ -257,7 +257,6 @@ export default function ProfileInput({
                 />
               </DemoContainer>
             </LocalizationProvider>
-            x
           </div>
           <div className="w-[360px] h-auto">
             <label
