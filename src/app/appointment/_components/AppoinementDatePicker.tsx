@@ -105,40 +105,43 @@ export function AppointmentDatePicker() {
             </div>
           ))}
         </div>
-        <div className="w-full grid grid-cols-7 gap-4">
-          {visibleDays.map((day, index) => (
-            <RadioGroup
-              key={index}
-              onValueChange={(value) => {
-                const [dateString, time] = value.split("-");
-                setSelectedDate(new Date(dateString));
-                setSelectedTime(time);
-              }}
-              value={
-                selectedDate?.toISOString() && selectedTime
-                  ? `${selectedDate.toISOString()}-${selectedTime}`
-                  : undefined
-              }
-            >
-              {day.timeSlots.map((slot) => (
-                <div
-                  key={`${day.date.toISOString()}-${slot.time}`}
-                  className="flex items-center space-x-2"
-                >
-                  <RadioGroupItem
-                    value={`${day.date.toISOString()}-${slot.time}`}
-                    id={`${day.date.toISOString()}-${slot.time}`}
-                  />
-                  <Label
-                    htmlFor={`${day.date.toISOString()}-${slot.time}`}
-                    className="text-sm cursor-pointer"
+        <div>
+          <RadioGroup
+            onValueChange={(value) => {
+              const [dateString, time] = value.split("=");
+              setSelectedDate(new Date(dateString));
+              setSelectedTime(time);
+              
+            }}
+            value={
+              (selectedDate && selectedTime)
+                ? `${selectedDate.getUTCFullYear()}-${selectedDate.getUTCMonth()+1}-${selectedDate.getUTCDate()}=${selectedTime}`
+                : undefined
+            }
+            className="w-full grid grid-cols-7 gap-4"
+          >
+            {visibleDays.map((day, index) => (
+              <div key={index}>
+                {day.timeSlots.map((slot) => (
+                  <div
+                    key={`${day.date.toISOString()}-${slot.time}`}
+                    className="flex items-center space-x-2"
                   >
-                    {slot.time}
-                  </Label>
-                </div>
-              ))}
-            </RadioGroup>
-          ))}
+                    <RadioGroupItem
+                      value={`${day.date.getUTCFullYear()}-${day.date.getUTCMonth()+1}-${day.date.getUTCDate()}=${slot.time}`}
+                      id={`${day.date.toISOString()}-${slot.time}`}
+                    />
+                    <Label
+                      htmlFor={`${day.date.toISOString()}-${slot.time}`}
+                      className="text-sm cursor-pointer"
+                    >
+                      {`${slot.time}`}
+                    </Label>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </RadioGroup>
         </div>
       </div>
       <div

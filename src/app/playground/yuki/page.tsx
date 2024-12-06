@@ -23,6 +23,7 @@ import { TitleLight } from "@/components/common/text/TitleLight";
 import { Button } from "@/components/ui/upImmigrationButton";
 import { documents } from "./data/DocumentTable";
 import RefundPolicy from "@/app/payments/_components/RefundPolicy";
+import { AppointmentDatePicker } from "@/app/appointment/_components/AppoinementDatePicker";
 
 const YukiPage = () => {
   return (
@@ -115,6 +116,8 @@ const YukiPage = () => {
       <RefundPolicy />
 
       <div className="shadow-navBar w-10 h-10">shadow</div>
+
+      <AppointmentDatePicker />
     </div>
   );
 };
