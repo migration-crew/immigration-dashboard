@@ -7,3 +7,9 @@ export type ApplicationType = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type StageProgressType = {
+  id: string; // applicationStageId
+  name: string;
+  percentage: number;
+};
