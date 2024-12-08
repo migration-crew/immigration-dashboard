@@ -537,7 +537,7 @@ components:
         name:
           type: string
         type:
-          type: string
+          $ref: '#/components/schemas/ApplicationType'
     ApplicationType:
       properties:
         id:
