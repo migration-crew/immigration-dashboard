@@ -18,3 +18,18 @@ export const getApplications = async (userId: string) => {
         updatedAt: app.updatedAt
     }));
 };
+
+export const getApplicationTypes = async () => {
+    const client = await clientPromise;
+    const db = client.db(DATABASE);
+    const rawApplicationTypes = await db
+            .collection("ApplicationTypes")
+            .find()
+            .toArray();
+    return rawApplicationTypes.map(type => ({
+        id: type._id,
+        name: type.name,
+        createdAt: type.createdAt,
+        updatedAt: type.updatedAt
+    }));
+}
