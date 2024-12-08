@@ -2,7 +2,10 @@ import { DocumentTable } from "@/app/documents/[applicationID]/_components/Docum
 import { NewDocForm } from "@/app/documents/[applicationID]/_components/NewDocForm";
 import { UploadDocumentModal } from "@/app/documents/[applicationID]/_components/UploadDocumentModal";
 import { PaymentTable } from "@/app/payments/_components/PaymentTable";
+import RefundPolicy from "@/app/payments/_components/RefundPolicy";
 import { paymentTableData } from "@/app/payments/data/paymentTable";
+import { payments } from "@/app/playground/saulo/data/payment";
+import AwaitingPayment from "@/components/common/AwaitingPayment/AwaitingPayment";
 import { Caption } from "@/components/common/text/Caption";
 import { CaptionSemi } from "@/components/common/text/CaptionSemi";
 import { Heading } from "@/components/common/text/Heading";
@@ -110,6 +113,13 @@ const YukiPage = () => {
 
       <DocumentTable documents={documents} />
       <PaymentTable payments={paymentTableData} />
+
+      <RefundPolicy />
+
+      <div className="shadow-navBar w-10 h-10">shadow</div>
+
+      <AwaitingPayment payments={payments} singleCard={true} />
+      <AwaitingPayment payments={payments} singleCard={false} />
     </div>
   );
 };

@@ -10,59 +10,84 @@ export type testPaymentType = TablePaymentType & {
 export const testApplication: ApplicationType = {
   id: "nRHegHAxQG",
   name: "Maria_CICCC_UX/UI_2",
-  type: "student",
+  type: {
+    id: "PvpKKAtezj",
+    name: "student",
+    createdAt: new Date("2024-12-17T02:45:17-08:00"),
+    updatedAt: new Date("2024-12-17T02:45:17-08:00"),
+    
+  },
+  createdAt: new Date("2024-12-17T02:45:17-08:00"),
+  updatedAt: new Date("2024-12-17T02:45:17-08:00"),
 };
 
-const testPayment1: TablePaymentType = {
+export const testPayment1: TablePaymentType = {
   id: "PvpKKAtezj",
   status: "paid",
 };
-const testPayment2: TablePaymentType = {
+export const testPayment2: TablePaymentType = {
   id: "UIRclGQIfO",
   status: "refunded",
 };
-const testPayment3: TablePaymentType = {
+export const testPayment3: TablePaymentType = {
   id: "sHyvFRqCeu",
   status: "unPaid",
 };
-const testPayment4: TablePaymentType = {
+export const testPayment4: TablePaymentType = {
   id: "vlgKNjRZHz",
   status: "rejected",
 };
-const testPayment5: TablePaymentType = {
+export const testPayment5: TablePaymentType = {
   id: "yFwPtUXOFT",
   status: "paid",
+};
+
+export const addPayment1 = {
+  dueDate: new Date("2024-12-17T02:45:17-08:00"),
+  type: "schoolEnrolment",
+};
+
+export const addPayment2 = {
+  dueDate: new Date("2024-02-08T13:34:32-08:00"),
+  type: "visa",
+};
+export const addPayment3 = {
+  dueDate: new Date("2024-10-31T14:10:21-07:00"),
+  type: "schoolTuition",
+};
+export const addPayment4 = {
+  dueDate: new Date("2024-06-06T02:18:33-07:00"),
+  type: "visa",
+};
+export const addPayment5 = {
+  dueDate: new Date("2024-08-31T14:23:41-07:00"),
+  type: "visa",
 };
 
 export const paymentTableData: testPaymentType[] = [
   {
     ...testPayment1,
+    ...addPayment1,
     application: testApplication,
-    dueDate: new Date("2024-12-17T02:45:17-08:00"),
-    type: "schoolEnrolment",
   },
   {
     ...testPayment2,
+    ...addPayment2,
     application: testApplication,
-    dueDate: new Date("2024-02-08T13:34:32-08:00"),
-    type: "visa",
   },
   {
     ...testPayment3,
+    ...addPayment3,
     application: testApplication,
-    dueDate: new Date("2024-10-31T14:10:21-07:00"),
-    type: "schoolTuition",
   },
   {
     ...testPayment4,
+    ...addPayment4,
     application: testApplication,
-    dueDate: new Date("2024-06-06T02:18:33-07:00"),
-    type: "visa",
   },
   {
     ...testPayment5,
+    ...addPayment5,
     application: testApplication,
-    dueDate: new Date("2024-08-31T14:23:41-07:00"),
-    type: "visa",
   },
 ];
