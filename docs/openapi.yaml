@@ -175,6 +175,20 @@ paths:
                 items:
                   type: object
                   $ref: "#/components/schemas/Application"
+  /applications/types:
+    get:
+      summary: Get all application types
+      tags: [ 'Application' ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  $ref: "#/components/schemas/ApplicationType"
   /applications/tasks:
     get:
       summary: Get an application
@@ -523,6 +537,12 @@ components:
         name:
           type: string
         type:
+          type: string
+    ApplicationType:
+      properties:
+        id:
+          type: string
+        name:
           type: string
     ApplicationTask:
       properties:
