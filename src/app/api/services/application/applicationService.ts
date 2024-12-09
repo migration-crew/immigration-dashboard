@@ -101,3 +101,16 @@ export const getApplicationTasks = async (applicationId: string) => {
     );
     return tasks.filter(task => task !== null);
 }
+
+export const updateApplicationStatus = async (taskId: string, status: string) => {
+    const client = await clientPromise;
+    const db = client.db(DATABASE);
+    const APPLICATION_TASK_DETAILS_COLLECTION = "ApplicationTaskDetails"
+    
+    await db
+        .collection(APPLICATION_TASK_DETAILS_COLLECTION)
+        .updateOne(
+            { _id: new ObjectId(taskId) },
+            { $set: { status: status } }
+        )
+}
