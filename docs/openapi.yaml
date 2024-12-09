@@ -175,6 +175,20 @@ paths:
                 items:
                   type: object
                   $ref: "#/components/schemas/Application"
+  /applications/types:
+    get:
+      summary: Get all application types
+      tags: [ 'Application' ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  $ref: "#/components/schemas/ApplicationType"
   /applications/tasks:
     get:
       summary: Get an application
@@ -199,12 +213,8 @@ paths:
       summary: Update an application task
       tags: [ 'Application' ]
       parameters:
-        - name: applicationId
-          in: query
-          required: true
-          schema:
-            type: string
         - name: taskId
+          description: ID of task detail table
           in: query
           required: true
           schema:
@@ -523,6 +533,12 @@ components:
         name:
           type: string
         type:
+          $ref: '#/components/schemas/ApplicationType'
+    ApplicationType:
+      properties:
+        id:
+          type: string
+        name:
           type: string
     ApplicationTask:
       properties:
