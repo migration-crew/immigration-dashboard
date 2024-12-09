@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getApplications } from "../services/application/applicationService"
+import { getApplicationTypes } from "../../services/application/applicationService";
 
 export async function GET(req: NextRequest) {
     // Extract userId from the query parameters
@@ -14,16 +14,16 @@ export async function GET(req: NextRequest) {
     }
 
     try {
-        // Call the service function to get the applications
-        const applications = await getApplications(userId);
+        // Call the service function to get the application types
+        const applicationTypes = await getApplicationTypes();
 
-        // Return the found applications as the response
+        // Return the found application types as the response
         return NextResponse.json(
-            applications,
+            applicationTypes,
             { status: 200 }
         );
     } catch (error) {
-        console.error('Error fetching applications:', error);
+        console.error('Error fetching application types:', error);
         return NextResponse.json(
             { message: 'Internal Server Error' },
             { status: 500 }

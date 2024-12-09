@@ -1,12 +1,16 @@
 "use client";
-
+import { testApplication } from "@/app/payments/data/paymentTable";
 import ApplicationSwitcher from "@/components/common/ApplicationSwitcher";
 import { AppointmentCard } from "@/components/common/AppoitmentCard";
+import AwaitingPayment, {
+  testPaymentType,
+} from "@/components/common/AwaitingPayment/AwaitingPayment";
 import FilterSection from "@/components/common/FilterSection/FilterSection";
 import { ApplicationType } from "@/types/Application/ApplicationType";
 import { AppointmentType } from "@/types/Appointment/AppointmentType";
 import { BasicUserType } from "@/types/User/UserType";
 import { useMemo, useState } from "react";
+import { payments } from "./data/payment";
 
 export type testApplicationType = {
   application: ApplicationType[];
@@ -230,6 +234,7 @@ export default function Page() {
 
   return (
     <div className="p-4">
+      <AwaitingPayment payments={payments} singleCard={true} />
       <div className="mb-4">
         <ApplicationSwitcher applications={filteredAndSortedApplications} />
       </div>
