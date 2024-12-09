@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getApplications } from "../services/application/applicationService"
+import { getAllCountries } from "../services/others/countryServices";
 
 export async function GET(req: NextRequest) {
     // Extract userId from the query parameters
     const userId = "user1";
-    
+
     // Validate the userId
     if (!userId || typeof userId !== 'string') {
         return NextResponse.json(
@@ -15,11 +15,11 @@ export async function GET(req: NextRequest) {
 
     try {
         // Call the service function to get the applications
-        const applications = await getApplications(userId);
+        const countries = await getAllCountries();
 
         // Return the found applications as the response
         return NextResponse.json(
-            applications,
+            countries,
             { status: 200 }
         );
     } catch (error) {
