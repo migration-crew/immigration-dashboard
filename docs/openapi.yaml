@@ -18,6 +18,8 @@ tags:
     description: Inbox section.
   - name: Profile
     description: Profile section.<br>(There is no API to create a user because it is created in Clerk dashboard.)
+  - name: Others
+    description: Other APIs which are not categorized.
 
 security:
   - BearerAuth: []
@@ -409,6 +411,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+  
+  /countries:
+    get:
+      summary: Get all countries
+      tags: [ 'Others' ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /languages:
+    get:
+      summary: Get all languages
+      tags: [ 'Others' ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
 
 components:
   schemas:
