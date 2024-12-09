@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb';
 import clientPromise from '../../lib/mongodb';
 
 const DATABASE = process.env.MONGODB_DB_NAME;
@@ -19,4 +20,30 @@ export const getAppointmentTypes = async () => {
         createdAt: type.createdAt,
         updatedAt: type.updatedAt
     }));
+}
+
+export type NewAppointment = {
+    appointmentTypeId: string;
+    userId: string;
+    date: string;
+}
+
+export const createAppointment = async (appointment: NewAppointment) => {
+    const client = await clientPromise;
+    const db = client.db(DATABASE);
+    const APPOINTMENTS_COLLECTION = "Appointments"
+
+    console.log("🚀");
+    console.log(appointment);
+    
+    const newAppointment = await db
+        .collection(APPOINTMENTS_COLLECTION)
+        .insertOne({
+            appointmentTypeId: new ObjectId(appointment.appointmentTypeId),
+            userId: appointment.userId,
+            date: appointment.date,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        });
+    return newAppointment;
 }
