@@ -213,12 +213,8 @@ paths:
       summary: Update an application task
       tags: [ 'Application' ]
       parameters:
-        - name: applicationId
-          in: query
-          required: true
-          schema:
-            type: string
         - name: taskId
+          description: ID of task detail table
           in: query
           required: true
           schema:
