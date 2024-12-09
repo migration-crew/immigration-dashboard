@@ -47,3 +47,22 @@ export const createAppointment = async (appointment: NewAppointment) => {
         });
     return newAppointment;
 }
+
+export const updateAppointment = async (appointmentId: string, date: string) => {
+    const client = await clientPromise;
+    const db = client.db(DATABASE);
+    const APPOINTMENTS_COLLECTION = "Appointments"
+
+    const updatedAppointment = await db
+        .collection(APPOINTMENTS_COLLECTION)
+        .updateOne(
+            { _id: new ObjectId(appointmentId) },
+            {
+                $set: {
+                    date,
+                    updatedAt: new Date()
+                }
+            }
+        );
+    return updatedAppointment;
+}
