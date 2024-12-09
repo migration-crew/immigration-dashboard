@@ -32,11 +32,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
-<<<<<<< HEAD
-    "country-region-data": "^3.1.0",
-=======
     "embla-carousel-react": "^8.5.1",
->>>>>>> origin
     "d3-ease": "^3.0.1",
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.13",
