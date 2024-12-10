@@ -553,6 +553,9 @@ components:
         dueDate:
           type: string
           format: date
+        stage:
+          type: string
+          example: "Getting Started"
         comments:
           type: array
           items:
