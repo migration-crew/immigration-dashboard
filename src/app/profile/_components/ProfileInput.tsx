@@ -8,103 +8,51 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { filterCountries } from "@/lib/helpers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import axios from "axios";
 import dayjs from "dayjs";
-import { Check, ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from "@/components/ui/command";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Button } from "@/components/ui/upImmigrationButton";
-import { cn } from "@/lib/utils";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-
-const languages = [
-  { value: "en", label: "English" },
-  { value: "es", label: "Español" },
-  { value: "fr", label: "Français" },
-  { value: "de", label: "Deutsch" },
-  { value: "it", label: "Italiano" },
-  { value: "pt", label: "Português" },
-  { value: "ru", label: "Русский" },
-  { value: "zh", label: "中文" },
-  { value: "ja", label: "日本語" },
-  { value: "ko", label: "한국어" },
-  { value: "ar", label: "العربية" },
-  { value: "hi", label: "हिन्दी" },
-] as const;
-
-const FormSchema = z.object({
-  language: z.string({
-    required_error: "Select Laungage",
-  }),
-});
-
-export interface Region {
-  name: string;
-  shortCode: string;
-}
-
-export interface CountryRegion {
-  countryName: string;
-  countryShortCode: string;
-  regions: Region[];
-}
-
-interface CountrySelectProps {
-  countryRegionData?: [];
-  priorityOptions?: string[];
-  whitelist?: string[];
-  blacklist?: string[];
+type CountrySelectProps = {
   onChange?: (value: string) => void;
-  className?: string;
-  placeholder?: string;
-}
+};
+
+type LanguageSelectProps = {
+  onChange?: (value: string) => void;
+};
 
 export default function ProfileInput({
-  countryRegionData = [],
-  priorityOptions = [],
-  whitelist = [],
-  blacklist = [],
   onChange = () => {},
-  className,
-  placeholder = "Country",
-}: CountrySelectProps) {
+}: CountrySelectProps & LanguageSelectProps) {
+  const [countries, setCountries] = useState<string[]>([]);
+  const [languages, setLanguages] = useState<string[]>([]);
   const [value, setValue] = useState<dayjs.Dayjs | null>(dayjs());
-  const [countries, setCountries] = useState<CountryRegion[]>([]);
-  const [open, setOpen] = useState(false);
-
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-  });
 
   useEffect(() => {
-    setCountries(
-      filterCountries(countryRegionData, priorityOptions, whitelist, blacklist)
-    );
+    const fetchCountries = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/countries");
+        setCountries(response.data);
+      } catch (error) {
+        console.error("Error fetching countries:", error);
+      }
+    };
+    fetchCountries();
+  }, []);
+
+  useEffect(() => {
+    const fetchLanguages = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/languages");
+        setLanguages(response.data);
+      } catch (error) {
+        console.error("Error fetching languages:", error);
+      }
+    };
+    fetchLanguages();
   }, []);
 
   return (
@@ -118,7 +66,7 @@ export default function ProfileInput({
             >
               First Name
             </label>
-            <Input id="first" type="text" />
+            <Input id="first" type="text" placeholder="John" />
           </div>
           <div className="w-[360px] h-auto">
             <label
@@ -127,7 +75,7 @@ export default function ProfileInput({
             >
               Last Name
             </label>
-            <Input id="last" type="text" />
+            <Input id="last" type="text" placeholder="Smith" />
           </div>
         </div>
         <div className="flex gap-[60px]">
@@ -138,20 +86,16 @@ export default function ProfileInput({
             >
               Nationality
             </label>
-            <Select
-              onValueChange={(value: string) => {
-                onChange(value);
-              }}
-            >
-              <SelectTrigger className={className}>
+            <Select onValueChange={(value: string) => onChange(value)}>
+              <SelectTrigger className="placeholder-gray-500 text-caption">
                 <SelectValue
-                  placeholder={placeholder}
-                  className="opacity-50 text-caption"
+                  placeholder="Country"
+                  className="placeholder-gray-500 text-caption"
                 />
               </SelectTrigger>
               <SelectContent>
-                {countries.map(({ countryName, countryShortCode }) => (
-                  <SelectItem key={countryShortCode} value={countryShortCode}>
+                {countries.map((countryName) => (
+                  <SelectItem key={countryName} value={countryName}>
                     {countryName}
                   </SelectItem>
                 ))}
@@ -165,69 +109,21 @@ export default function ProfileInput({
             >
               Language
             </label>
-            <Form {...form}>
-              <form className="space-y-6">
-                <FormField
-                  control={form.control}
-                  name="language"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-col">
-                      <Popover open={open} onOpenChange={setOpen}>
-                        <PopoverTrigger asChild>
-                          <FormControl>
-                            <Button
-                              variant="outline"
-                              role="combobox"
-                              aria-expanded={open}
-                              className={cn(
-                                "w-[360px] justify-between",
-                                !field.value && "text-muted-foreground"
-                              )}
-                            >
-                              {field.value
-                                ? languages.find(
-                                    (language) => language.value === field.value
-                                  )?.label
-                                : "Please select language"}
-                              <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                            </Button>
-                          </FormControl>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-[360px] p-0">
-                          <Command>
-                            <CommandInput placeholder="Search language..." />
-                            <CommandEmpty>Language not found</CommandEmpty>
-                            <CommandGroup>
-                              {languages.map((language) => (
-                                <CommandItem
-                                  value={language.label}
-                                  key={language.value}
-                                  onSelect={() => {
-                                    form.setValue("language", language.value);
-                                    setOpen(false);
-                                  }}
-                                >
-                                  <Check
-                                    className={cn(
-                                      "mr-2 h-4 w-4",
-                                      language.value === field.value
-                                        ? "opacity-100"
-                                        : "opacity-0"
-                                    )}
-                                  />
-                                  {language.label}
-                                </CommandItem>
-                              ))}
-                            </CommandGroup>
-                          </Command>
-                        </PopoverContent>
-                      </Popover>
-                      <FormMessage />
-                    </FormItem>
-                  )}
+            <Select onValueChange={(value: string) => onChange(value)}>
+              <SelectTrigger>
+                <SelectValue
+                  placeholder="Please select language"
+                  className="placeholder-opacity-55 text-caption"
                 />
-              </form>
-            </Form>
+              </SelectTrigger>
+              <SelectContent>
+                {languages.map((languageName) => (
+                  <SelectItem key={languageName} value={languageName}>
+                    {languageName}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
         </div>
         <div className="w-[780px]">
@@ -237,7 +133,11 @@ export default function ProfileInput({
           >
             Address
           </label>
-          <Input id="address" type="text" />
+          <Input
+            id="address"
+            type="text"
+            placeholder="1234 Maple Street Springfield, IL USA"
+          />
         </div>
         <div className="flex gap-[60px]">
           <div className="w-[360px] h-auto">
@@ -253,7 +153,7 @@ export default function ProfileInput({
                   // label="Select a date"
                   value={value}
                   onChange={(newValue) => setValue(newValue)}
-                  className="w-[360px] h-auto"
+                  className="w-[360px] h-9"
                 />
               </DemoContainer>
             </LocalizationProvider>
@@ -287,7 +187,12 @@ export default function ProfileInput({
           >
             E-mail
           </label>
-          <Input id="email" type="text" />
+          <Input
+            id="email"
+            type="text"
+            placeholder="john_smith123@gmail.com"
+            className="placeholder-sidebar-foreground"
+          />
         </div>
       </Card>
     </>
