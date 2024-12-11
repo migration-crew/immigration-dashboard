@@ -46,40 +46,46 @@ export default async function DashboardPage() {
         <ApplicationProgress progresses={progresses} />
         <AwaitingPayment payments={payments} singleCard={true} />
       </div>
-      <div className="flex pt-2 gap-4">
+      <div className="flex pt-2 gap-4 h-[490px]">
         <div className="flex flex-col gap-2 w-[390px]">
           <Paragraph>Current Tasks</Paragraph>
-          <DynamicHeaderContainer
-            headerChildren={<CaptionSemi>Visa Application</CaptionSemi>}
-            contentChildren={
-              <>
-                <HorizontalProgressBar progress={50} />
-                {currentTasks.map((task, index) => {
-                  const lastTask = index === currentTasks.length - 1;
-                  return (
-                    <TaskCard
-                      key={task.id}
-                      applicationTask={task}
-                      className={`w-full p-4 gap-1 ${
-                        lastTask ? "rounded-b-2xl" : ""
-                      }`}
-                    />
-                  );
-                })}
-              </>
-            }
-            className="w-full"
-          ></DynamicHeaderContainer>
-          <Button className="bg-secondary-green">See Your Tasks</Button>
+          <div className="flex flex-col w-full gap-2">
+            <DynamicHeaderContainer
+              headerChildren={<CaptionSemi>Visa Application</CaptionSemi>}
+              contentChildren={
+                <>
+                  <HorizontalProgressBar progress={50} />
+                  <div className="overflow-auto h-[275px] rounded-b-2xl hide-scrollbar">
+                    {currentTasks.map((task, index) => {
+                      const lastTask = index === currentTasks.length - 1;
+                      return (
+                        <TaskCard
+                          key={task.id}
+                          applicationTask={task}
+                          className={`w-full p-4 gap-1  ${
+                            lastTask ? "rounded-b-2xl" : ""
+                          }`}
+                        />
+                      );
+                    })}
+                  </div>
+                </>
+              }
+              className="w-full"
+            ></DynamicHeaderContainer>
+            <Button className="bg-secondary-green">See Your Tasks</Button>
+          </div>
         </div>
         <div className="flex flex-col gap-2 w-[340px]">
           <Paragraph>Your schedule</Paragraph>
-          <DynamicHeaderContainer
-            headerChildren={<CaptionSemi>Mon Dec 16</CaptionSemi>}
-            contentChildren={<QuickCalendar events={events} />}
-            className="w-full"
-          ></DynamicHeaderContainer>
-          <Button className="bg-secondary-green">See Your Calendar</Button>
+          <div className="flex flex-col w-full gap-2">
+            <DynamicHeaderContainer
+              headerChildren={<CaptionSemi>Mon Dec 16</CaptionSemi>}
+              contentChildren={<QuickCalendar events={events} />}
+              className="w-full "
+            ></DynamicHeaderContainer>
+            <Button className="bg-secondary-green">See Your Calendar</Button>
+          </div>
         </div>
       </div>
     </PageContainer>
