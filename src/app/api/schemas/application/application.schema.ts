@@ -12,5 +12,5 @@ const ApplicationSchema = new Schema(
 );
 
 const Application =
-  models.Application || model("Application", ApplicationSchema);
+  models.Application || model("Applications", ApplicationSchema);
 export default Application;

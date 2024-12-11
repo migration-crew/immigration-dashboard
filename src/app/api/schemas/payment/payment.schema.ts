@@ -12,7 +12,7 @@ const PaymentSchema = new Schema<PaymentType, PaymentModelType>(
     dueDate: { type: Schema.Types.Date, required: true },
     application: {
       type: Schema.Types.ObjectId,
-      ref: "Application",
+      ref: "Applications",
       required: true,
     },
     type: { type: String, required: true },
@@ -24,5 +24,5 @@ const PaymentSchema = new Schema<PaymentType, PaymentModelType>(
 
 const Payment =
   models.Payment ||
-  model<PaymentType, PaymentModelType>("Payment", PaymentSchema);
+  model<PaymentType, PaymentModelType>("Payments", PaymentSchema);
 export default Payment;

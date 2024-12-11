@@ -22,12 +22,12 @@ if (!cached) {
 
 const db = mongoose.connection;
 
-// 接続成功時
+// success
 db.once("open", () => {
   console.log("MongoDB connected successfully!");
 });
 
-// 接続エラー時
+// error
 db.on("error", (err) => {
   console.error("MongoDB connection error:", err);
 });
