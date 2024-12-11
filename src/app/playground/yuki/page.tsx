@@ -1,6 +1,6 @@
-import { DocumentTable } from "@/app/documents/[applicationID]/_components/DocumentTable";
-import { NewDocForm } from "@/app/documents/[applicationID]/_components/NewDocForm";
-import { UploadDocumentModal } from "@/app/documents/[applicationID]/_components/UploadDocumentModal";
+import { DocumentTable } from "@/app/documents/_components/DocumentTable";
+import { NewDocForm } from "@/app/documents/_components/NewDocForm";
+import { UploadDocumentModal } from "@/app/documents/_components/UploadDocumentModal";
 import { PaymentTable } from "@/app/payments/_components/PaymentTable";
 import RefundPolicy from "@/app/payments/_components/RefundPolicy";
 import { paymentTableData } from "@/app/payments/data/paymentTable";
