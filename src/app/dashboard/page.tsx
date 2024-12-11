@@ -18,7 +18,8 @@ import { events } from "../playground/david/data/events";
 
 const INITIAL_LINKS = [
   { name: "Dashboard", href: "/dashboard" },
-  { name: "Loading...", href: "#" },
+  //FIXME: Make the name dynamic depending on the application
+  { name: "Maria_CICCC_UX/UI_2", href: "#" },
 ];
 
 async function getProgresses(): Promise<StageProgressType[]> {
