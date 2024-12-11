@@ -2,10 +2,7 @@ import dbConnect from "../../lib/mongoose";
 import Payment from "../../schemas/payment/payment.schema";
 
 export const getAllPayments = async (applicationId: string) => {
-  await dbConnect();
-
-  console.log("★", typeof applicationId);
-  
+  await dbConnect();  
 
   const payments = await Payment.find()
 

@@ -1,4 +1,4 @@
-import { Model, Schema, model } from "mongoose";
+import { Model, Schema, model, models } from "mongoose";
 import { PaymentType } from "../../types/payment";
 
 type PaymentModelType = Model<PaymentType>;
@@ -10,7 +10,7 @@ const PaymentSchema = new Schema<PaymentType, PaymentModelType>(
     status: { type: String, required: true },
     paymentMethod: { type: String, required: false },
     dueDate: { type: Schema.Types.Date, required: true },
-    applicaiton: {
+    application: {
       type: Schema.Types.ObjectId,
       ref: "Application",
       required: true,
@@ -22,5 +22,7 @@ const PaymentSchema = new Schema<PaymentType, PaymentModelType>(
   }
 );
 
-const Payment = model<PaymentType, PaymentModelType>("Payment", PaymentSchema);
+const Payment =
+  models.Payment ||
+  model<PaymentType, PaymentModelType>("Payment", PaymentSchema);
 export default Payment;

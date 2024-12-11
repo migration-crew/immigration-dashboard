@@ -6,7 +6,7 @@ export type PaymentType = {
   status: string;
   paymentMethod: string;
   dueDate: Schema.Types.Date;
-  applicaiton: Schema.Types.ObjectId;
+  application: Schema.Types.ObjectId;
   type: string;
 };
 
