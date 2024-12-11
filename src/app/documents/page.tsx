@@ -6,6 +6,7 @@ import React from 'react'
 import { DocumentTable } from './_components/DocumentTable';
 import { documents } from '../playground/yuki/data/DocumentTable';
 import { NewDocForm } from './_components/NewDocForm';
+import { applications } from '../playground/saulo/data/application';
 
 const documentPage = () => {
   const isAdmin = true
@@ -14,10 +15,10 @@ const documentPage = () => {
     { name: "mariaciccc", href: "/documents" },
   ];
   return (
-    <PageContainer className='flex flex-col'>
-      <div>
+    <PageContainer className='flex flex-col pt-1'>
+      <div className='flex justify-between items-end'>
         <BreadcrumbComponent links={links} />
-        {/* <ApplicationSwitcher applications={} /> */}
+        <ApplicationSwitcher applications={applications} />
       </div>
       {/* <FilterSection  /> */}
       <div className='flex-1 flex flex-col justify-between gap-6'>
