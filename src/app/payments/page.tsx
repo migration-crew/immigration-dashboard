@@ -1,28 +1,24 @@
-import { Button } from '@/components/ui/upImmigrationButton'
-import Link from 'next/link'
-import React from 'react'
+import ApplicationSwitcher from "@/components/common/ApplicationSwitcher";
+import AwaitingPayment from "@/components/common/AwaitingPayment/AwaitingPayment";
+import { PageContainer } from "@/components/common/PageContainer";
+import { HeadingSemi } from "@/components/common/text/HeadingSemi";
+import { applications } from "../playground/saulo/data/application";
+import { payments } from "../playground/saulo/data/payment";
+import RefundPolicy from "./_components/RefundPolicy";
 
 const page = () => {
   return (
-    <div>
-      <p>payment</p>
-      <Button asChild>
-        <Link href="/payments/PvpKKAtezj">1</Link>
-      </Button>
-      <Button asChild>
-        <Link href="/payments/UIRclGQIfO">2</Link>
-      </Button>
-      <Button asChild>
-        <Link href="/payments/sHyvFRqCeu">3</Link>
-      </Button>
-      <Button asChild>
-        <Link href="/payments/vlgKNjRZHz">4</Link>
-      </Button>
-      <Button asChild>
-        <Link href="/payments/yFwPtUXOFT">5</Link>
-      </Button>
-    </div>
-  )
-}
+    <PageContainer>
+      <div className="flex justify-between">
+        <HeadingSemi>Payment</HeadingSemi>
+        <ApplicationSwitcher applications={applications} />
+      </div>
+      <div className="flex justify-between gap-4">
+      <AwaitingPayment payments={payments} singleCard={false} />
+      <RefundPolicy />
+      </div>
+    </PageContainer>
+  );
+};
 
-export default page
+export default page;
