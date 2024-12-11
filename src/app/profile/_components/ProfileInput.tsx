@@ -2,19 +2,29 @@
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { Button } from "@/components/ui/upImmigrationButton";
+import { Calendar } from "@/components/ui/upImmigrationCalendar";
+import { cn } from "@/lib/utils";
 import axios from "axios";
-import dayjs from "dayjs";
-import { useEffect, useState } from "react";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+
+interface DateOfBirthPickerProps {
+  onDateChange: (date: Date | undefined) => void;
+}
 
 type CountrySelectProps = {
   onChange?: (value: string) => void;
@@ -26,10 +36,42 @@ type LanguageSelectProps = {
 
 export default function ProfileInput({
   onChange = () => {},
-}: CountrySelectProps & LanguageSelectProps) {
+}: // onDateChange,
+CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
   const [countries, setCountries] = useState<string[]>([]);
   const [languages, setLanguages] = useState<string[]>([]);
-  const [value, setValue] = useState<dayjs.Dayjs | null>(dayjs());
+
+  const [date, setDate] = React.useState<Date>();
+  const [selectedYear, setSelectedYear] = React.useState<number | undefined>();
+
+  const { control } = useForm();
+
+  const currentYear = new Date().getFullYear();
+  const years = Array.from({ length: 100 }, (_, i) => currentYear - i);
+
+  const handleDateChange = (newDate: Date | undefined) => {
+    setDate(newDate);
+    // onDateChange(newDate);
+  };
+
+  const handleYearChange = (year: string) => {
+    const yearNumber = parseInt(year);
+    setSelectedYear(yearNumber);
+  };
+
+  useEffect(() => {
+    if (selectedYear !== undefined && date) {
+      const newDate = new Date(date);
+      newDate.setFullYear(selectedYear);
+      setDate(newDate);
+    }
+  }, [selectedYear]);
+
+  useEffect(() => {
+    if (!selectedYear && date) {
+      setSelectedYear(date.getFullYear());
+    }
+  }, [date]);
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -87,11 +129,8 @@ export default function ProfileInput({
               Nationality
             </label>
             <Select onValueChange={(value: string) => onChange(value)}>
-              <SelectTrigger className="SelectTrigger text-gray-500 text-caption">
-                <SelectValue
-                  placeholder="Country"
-                  className="text-gray-500 text-caption"
-                />
+              <SelectTrigger className="SelectTrigger">
+                <SelectValue placeholder="Country" className="text-gray-500" />
               </SelectTrigger>
               <SelectContent>
                 {countries.map((countryName) => (
@@ -147,19 +186,58 @@ export default function ProfileInput({
             >
               Date of Birth
             </label>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={["DatePicker"]}>
-                <DatePicker
-                  value={value}
-                  onChange={(newValue) => setValue(newValue)}
-                  className="w-[360px] h-[32px]"
-                  sx={{
-                    paddingTop: 0,
-                    paddingBottom: 0,
-                  }}
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant={"outline"}
+                  className={cn(
+                    "w-[280px] justify-start text-left font-normal",
+                    !date && "text-muted-foreground"
+                  )}
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {date ? format(date, "PPP") : <span>Pick a date</span>}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0">
+                <div className="flex justify-center space-x-2 p-2">
+                  <Controller
+                    name="year"
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        onValueChange={(value) => {
+                          field.onChange(value);
+                          handleYearChange(value);
+                        }}
+                      >
+                        <SelectTrigger className="w-[120px]">
+                          <SelectValue placeholder="Select Year" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {years.map((year) => (
+                            <SelectItem key={year} value={year.toString()}>
+                              {year}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+                </div>
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={handleDateChange}
+                  initialFocus
+                  month={
+                    selectedYear
+                      ? new Date(selectedYear, date?.getMonth() || 0)
+                      : undefined
+                  }
                 />
-              </DemoContainer>
-            </LocalizationProvider>
+              </PopoverContent>
+            </Popover>
           </div>
           <div className="w-[360px] h-auto">
             <label
