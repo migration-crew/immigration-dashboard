@@ -87,10 +87,10 @@ export default function ProfileInput({
               Nationality
             </label>
             <Select onValueChange={(value: string) => onChange(value)}>
-              <SelectTrigger className="placeholder-gray-500 text-caption">
+              <SelectTrigger className="text-gray-500 text-caption">
                 <SelectValue
                   placeholder="Country"
-                  className="placeholder-gray-500 text-caption"
+                  className="text-gray-500 text-caption"
                 />
               </SelectTrigger>
               <SelectContent>
@@ -139,21 +139,20 @@ export default function ProfileInput({
             placeholder="1234 Maple Street Springfield, IL USA"
           />
         </div>
-        <div className="flex gap-[60px]">
+        <div className="flex gap-[60px] h-[64px]">
           <div className="w-[360px] h-auto">
             <label
               htmlFor="dateOfBirth"
-              className="block text-sm font-medium text-gray-700 pb-1 text-caption"
+              className="block text-sm font-medium text-gray-700 text-caption"
             >
               Date of Birth
             </label>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DemoContainer components={["DatePicker"]}>
                 <DatePicker
-                  // label="Select a date"
                   value={value}
                   onChange={(newValue) => setValue(newValue)}
-                  className="w-[360px] h-9"
+                  className="w-[360px] h-[32px] p-0"
                 />
               </DemoContainer>
             </LocalizationProvider>
@@ -191,7 +190,7 @@ export default function ProfileInput({
             id="email"
             type="text"
             placeholder="john_smith123@gmail.com"
-            className="placeholder-sidebar-foreground"
+            className=""
           />
         </div>
       </Card>
