@@ -3,7 +3,7 @@ import "./globals.css";
 
 import AppSidebar from "@/components/common/Sidebar/AppSidebar";
 import TopNavbar from "@/components/common/TopNavbar/TopNavbar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { Poppins } from "next/font/google";
 
 export const poppins = Poppins({
@@ -31,7 +31,7 @@ export default function RootLayout({
           <AppSidebar />
           <main className="flex-1">
             <TopNavbar />
-            <SidebarTrigger />
+            {/* <SidebarTrigger /> */}
             {children}
           </main>
         </SidebarProvider>
