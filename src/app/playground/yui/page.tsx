@@ -34,6 +34,7 @@ const page = () => {
               type: "Type A",
               progress: 50,
               status: "onHold",
+              id: "0",
             },
             {
               number: "002",
@@ -41,6 +42,7 @@ const page = () => {
               type: "Type B",
               progress: 0,
               status: "completed",
+              id: "1",
             },
           ]}
         />
@@ -252,7 +254,11 @@ const page = () => {
           },
         ]}
       />
-      <ProfileInput />
+      <ProfileInput
+        onDateChange={function (): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
       <div>
         <Invoices
           invoiceData={[
