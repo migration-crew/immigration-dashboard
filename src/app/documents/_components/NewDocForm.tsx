@@ -53,7 +53,7 @@ export function NewDocForm() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex items-center"
       >
-        <Card className="flex w-[800px] justify-between mr-5  px-6 py-4 rounded-sm">
+        <Card className="flex w-[1000px] justify-between mr-5  px-6 py-4 rounded-sm">
           <FormField
             control={form.control}
             name="form"
@@ -70,7 +70,7 @@ export function NewDocForm() {
             control={form.control}
             name="document"
             render={({ field }) => (
-              <FormItem className="w-[500px]">
+              <FormItem className="w-[480px]">
                 <FormControl>
                   <Input placeholder="DOCUMENT" {...field} />
                 </FormControl>
@@ -82,7 +82,7 @@ export function NewDocForm() {
             control={form.control}
             name="date"
             render={({ field }) => (
-              <FormItem className="w-[140px]">
+              <FormItem className="w-[180px]">
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>
@@ -120,8 +120,8 @@ export function NewDocForm() {
               </FormItem>
             )}
           />
+        <Button type="submit" className="w-[148px] h-[33px] ml-5">Add New Line</Button>
         </Card>
-        <Button type="submit">Submit</Button>
       </form>
     </Form>
   );
