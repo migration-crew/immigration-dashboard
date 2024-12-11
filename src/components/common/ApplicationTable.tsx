@@ -1,3 +1,4 @@
+"use client";
 import StatusTag from "@/components/common/StatusTag";
 import {
   Table,

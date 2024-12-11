@@ -149,7 +149,7 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
               Language
             </label>
             <Select onValueChange={(value: string) => onChange(value)}>
-              <SelectTrigger>
+              <SelectTrigger className="SelectTrigger">
                 <SelectValue
                   placeholder="Please select language"
                   className="placeholder-opacity-55 text-caption"
@@ -182,7 +182,7 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
           <div className="w-[360px] h-auto">
             <label
               htmlFor="dateOfBirth"
-              className="block text-sm font-medium text-gray-700 text-caption"
+              className="block text-sm font-medium text-gray-700 text-caption pb-3"
             >
               Date of Birth
             </label>
@@ -191,7 +191,7 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "w-[280px] justify-start text-left font-normal",
+                    "w-[360px] justify-start text-left font-normal",
                     !date && "text-muted-foreground"
                   )}
                 >
@@ -247,7 +247,7 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
               Gender
             </label>
             <Select>
-              <SelectTrigger className="">
+              <SelectTrigger className="SelectTrigger">
                 <SelectValue
                   placeholder="Select Gender"
                   className="opacity-50 text-caption"
