@@ -5,7 +5,12 @@ export type PaymentType = {
   currency: string;
   status: string;
   paymentMethod: string;
-  dueDate: string;
+  dueDate: Schema.Types.Date;
   applicaiton: Schema.Types.ObjectId;
   type: string;
 };
+
+export type defaultType = {
+  _id: string;
+
+}

@@ -9,7 +9,7 @@ const PaymentSchema = new Schema<PaymentType, PaymentModelType>(
     currency: { type: String, required: true },
     status: { type: String, required: true },
     paymentMethod: { type: String, required: false },
-    dueDate: { type: String, required: true },
+    dueDate: { type: Schema.Types.Date, required: true },
     applicaiton: {
       type: Schema.Types.ObjectId,
       ref: "Application",
