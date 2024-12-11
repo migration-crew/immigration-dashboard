@@ -1,8 +1,8 @@
 import ApplicationProgress from "@/components/common/ApplicationProgress/ApplicationProgress";
 import ApplicationSwitcher from "@/components/common/ApplicationSwitcher";
+import AwaitingPayment from "@/components/common/AwaitingPayment/AwaitingPayment";
 import { BreadcrumbComponent } from "@/components/common/Breadcrumbs/BreadcrumbComponent";
 import DynamicHeaderContainer from "@/components/common/DynamicHeaderContainer";
-import { DynamicRoundedContainer } from "@/components/common/DynamicRoundedContainer";
 import HorizontalProgressBar from "@/components/common/HorizontalProgressBar";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskCard } from "@/components/common/TaskCard/TaskCard";
@@ -15,6 +15,7 @@ import { progresses } from "@/data/progresses";
 import { StageProgressType } from "@/types/Application/ApplicationType";
 import QuickCalendar from "../playground/david/QuickCalendar";
 import { events } from "../playground/david/data/events";
+import { payments } from "../playground/saulo/data/payment";
 
 const INITIAL_LINKS = [
   { name: "Dashboard", href: "/dashboard" },
@@ -43,12 +44,7 @@ export default async function DashboardPage() {
       </div>
       <div className="flex justify-between">
         <ApplicationProgress progresses={progresses} />
-        <DynamicRoundedContainer
-          title=""
-          className="w-[340px] bg-primary-white flex items-center p-6"
-        >
-          Here goes AwaitingPayment component
-        </DynamicRoundedContainer>
+        <AwaitingPayment payments={payments} singleCard={true} />
       </div>
       <div className="flex pt-2 gap-4">
         <div className="flex flex-col gap-2 w-[390px]">
