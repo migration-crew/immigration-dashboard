@@ -21,4 +21,11 @@ export type chatUserType = Pick<
 export type BasicUserType = Pick<UserType, "id" | "firstName" | "imageUrl"> &
   Partial<Pick<UserType, "lastName">>;
 export type chatUserType = Pick<UserType, "id" | "firstName" | "imageUrl">;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin
+=======
+>>>>>>> main
+>>>>>>> main
 >>>>>>> main

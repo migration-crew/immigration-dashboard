@@ -13,3 +13,7 @@ export type PaymentModalType = Pick<
   PaymentType,
   "id" | "amount" | "currency" | "status"
 >;
+export type InvoicePaymentType = Pick<
+  PaymentType,
+  "id" | "status" | "invoiceURL"
+>;
