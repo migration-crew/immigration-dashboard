@@ -87,7 +87,7 @@ export default function ProfileInput({
               Nationality
             </label>
             <Select onValueChange={(value: string) => onChange(value)}>
-              <SelectTrigger className="text-gray-500 text-caption">
+              <SelectTrigger className="SelectTrigger text-gray-500 text-caption">
                 <SelectValue
                   placeholder="Country"
                   className="text-gray-500 text-caption"
@@ -152,7 +152,11 @@ export default function ProfileInput({
                 <DatePicker
                   value={value}
                   onChange={(newValue) => setValue(newValue)}
-                  className="w-[360px] h-[32px] p-0"
+                  className="w-[360px] h-[32px]"
+                  sx={{
+                    paddingTop: 0,
+                    paddingBottom: 0,
+                  }}
                 />
               </DemoContainer>
             </LocalizationProvider>

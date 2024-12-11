@@ -201,16 +201,25 @@ paths:
           required: true
           schema:
             type: string
+        - name: applicationTypeId
+          in: query
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  $ref: "#/components/schemas/ApplicationTask"
+                type: object
+                properties:
+                  addtionalProperties:
+                    type: array
+                    items:
+                      type: object
+                      $ref: "#/components/schemas/ApplicationTask"
+
     put:
       summary: Update an application task
       tags: [ 'Application' ]
