@@ -3,6 +3,7 @@ import ChatHeader from "@/app/inbox/_components/ChatHeader";
 import ChatSideBar from "@/app/inbox/_components/ChatSideBar";
 import MessageComposer from "@/app/inbox/_components/MessageComposer";
 import NewChatModal from "@/app/inbox/_components/NewChatModal";
+import Invoices from "@/app/payments/_components/Invoices";
 import ProfileInput from "@/app/profile/_components/ProfileInput";
 import { Applicationtable } from "@/components/common/ApplicationTable";
 import DynamicHeaderContainer from "@/components/common/DynamicHeaderContainer";
@@ -252,6 +253,174 @@ const page = () => {
         ]}
       />
       <ProfileInput />
+      <div>
+        <Invoices
+          invoiceData={[
+            {
+              invoice: {
+                id: "nRHegHAxQG",
+                status: "Paid",
+                invoiceURL: "",
+              },
+              name: "Maria_CICCC_UX/UI_2",
+              type: "Admission",
+            },
+            {
+              invoice: {
+                id: "INV-00202",
+                status: "Refunded",
+                invoiceURL: "",
+              },
+              name: "Maria_CICCC_UX/UI",
+              type: "Tuition",
+            },
+            {
+              invoice: {
+                id: "INV-00104",
+                status: "Unpaid",
+                invoiceURL: "",
+              },
+              name: "Maria_CICCC_ESL",
+              type: "Tuition",
+            },
+            {
+              invoice: {
+                id: "nRHegHAxQG",
+                status: "Paid",
+                invoiceURL: "",
+              },
+              name: "Maria_CICCC_UX/UI_2",
+              type: "Admission",
+            },
+            {
+              invoice: {
+                id: "INV-00202",
+                status: "Refunded",
+                invoiceURL: "",
+              },
+              name: "Maria_CICCC_UX/UI",
+              type: "Tuition",
+            },
+            {
+              invoice: {
+                id: "INV-00104",
+                status: "Paid",
+                invoiceURL: "",
+              },
+              name: "Maria_CICCC_ESL",
+              type: "Tuition",
+            },
+            {
+              invoice: {
+                id: "nRHegHAxQG",
+                status: "Paid",
+                invoiceURL: "",
+              },
+              name: "Maria_CICCC_UX/UI_2",
+              type: "Admission",
+            },
+            {
+              invoice: {
+                id: "INV-00202",
+                status: "Refunded",
+                invoiceURL: "",
+              },
+              name: "Maria_CICCC_UX/UI",
+              type: "Tuition",
+            },
+            {
+              invoice: {
+                id: "INV-00104",
+                status: "Paid",
+                invoiceURL: "",
+              },
+              name: "Maria_CICCC_ESL",
+              type: "Tuition",
+            },
+            {
+              invoice: {
+                id: "nRHegHAxQG",
+                status: "Paid",
+                invoiceURL: "",
+              },
+              name: "Maria_CICCC_UX/UI_2",
+              type: "Admission",
+            },
+            {
+              invoice: {
+                id: "INV-00202",
+                status: "Refunded",
+                invoiceURL: "",
+              },
+              name: "Maria_CICCC_UX/UI",
+              type: "Tuition",
+            },
+            {
+              invoice: {
+                id: "INV-00104",
+                status: "Paid",
+                invoiceURL: "",
+              },
+              name: "Maria_CICCC_ESL",
+              type: "Tuition",
+            },
+            {
+              invoice: {
+                id: "nRHegHAxQG",
+                status: "Paid",
+                invoiceURL: "",
+              },
+              name: "Maria_CICCC_UX/UI_2",
+              type: "Admission",
+            },
+            {
+              invoice: {
+                id: "INV-00202",
+                status: "Refunded",
+                invoiceURL: "",
+              },
+              name: "Maria_CICCC_UX/UI",
+              type: "Tuition",
+            },
+            {
+              invoice: {
+                id: "INV-00104",
+                status: "Paid",
+                invoiceURL: "",
+              },
+              name: "Maria_CICCC_ESL",
+              type: "Tuition",
+            },
+            {
+              invoice: {
+                id: "nRHegHAxQG",
+                status: "Paid",
+                invoiceURL: "",
+              },
+              name: "Maria_CICCC_UX/UI_2",
+              type: "Admission",
+            },
+            {
+              invoice: {
+                id: "INV-00202",
+                status: "Refunded",
+                invoiceURL: "",
+              },
+              name: "Maria_CICCC_UX/UI",
+              type: "Tuition",
+            },
+            {
+              invoice: {
+                id: "INV-00104",
+                status: "Paid",
+                invoiceURL: "",
+              },
+              name: "Maria_CICCC_ESL",
+              type: "Tuition",
+            },
+          ]}
+        />
+      </div>
     </div>
   );
 };

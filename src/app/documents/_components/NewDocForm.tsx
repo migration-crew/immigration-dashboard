@@ -53,12 +53,12 @@ export function NewDocForm() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex items-center"
       >
-        <Card className="flex w-[800px] justify-between mr-5  px-8 py-4 rounded-sm">
+        <Card className="flex w-[800px] justify-between mr-5  px-6 py-4 rounded-sm">
           <FormField
             control={form.control}
             name="form"
             render={({ field }) => (
-              <FormItem className="w-[85px]">
+              <FormItem className="w-[90px]">
                 <FormControl>
                   <Input placeholder="FORM" {...field} />
                 </FormControl>
@@ -70,7 +70,7 @@ export function NewDocForm() {
             control={form.control}
             name="document"
             render={({ field }) => (
-              <FormItem className="w-[453px]">
+              <FormItem className="w-[500px]">
                 <FormControl>
                   <Input placeholder="DOCUMENT" {...field} />
                 </FormControl>
@@ -110,7 +110,7 @@ export function NewDocForm() {
                       selected={field.value}
                       onSelect={field.onChange}
                       disabled={(date) =>
-                        date > new Date() || date < new Date("1900-01-01")
+                        date < new Date() || date < new Date("1900-01-01")
                       }
                       initialFocus
                     />

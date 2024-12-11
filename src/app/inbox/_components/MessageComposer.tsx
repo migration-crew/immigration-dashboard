@@ -54,7 +54,7 @@ export default function MessageComposer() {
           </button>
           <Button
             onClick={handleSendMessage}
-            className="w-[86px] h-[33ps] text-caption text-primary-white flex justify-center items-center"
+            className="w-[86px] h-[33px] text-caption text-primary-white flex justify-center items-center"
             variant={"green"}
           >
             Send

@@ -29,7 +29,7 @@ export default function RootLayout({
         {modal}
         <SidebarProvider>
           <AppSidebar />
-          <main className="flex-1">
+          <main className="flex flex-col flex-1">
             <TopNavbar />
             {/* <SidebarTrigger /> */}
             {children}
