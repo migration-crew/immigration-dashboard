@@ -1,9 +1,9 @@
 "use client";
 
+import { Caption } from "@/components/common/text/Caption";
 import { Microtext } from "@/components/common/text/Microtext";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
-import { Caption } from "@/compxonents/common/text/Caption";
 import { MessageType } from "@/types/Inbox/MessageType";
 
 const currentUserId = "userId";
