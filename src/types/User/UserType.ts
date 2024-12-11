@@ -11,21 +11,6 @@ export type UserType = {
   imageUrl: string;
 };
 
-<<<<<<< HEAD
-export type BasicUserType = Pick<UserType, "id" | "firstName" | "imageUrl">;
-export type chatUserType = Pick<
-  UserType,
-  "id" | "firstName" | "imageUrl" | "lastName" | "email"
->;
-=======
 export type BasicUserType = Pick<UserType, "id" | "firstName" | "imageUrl"> &
   Partial<Pick<UserType, "lastName">>;
 export type chatUserType = Pick<UserType, "id" | "firstName" | "imageUrl">;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> origin
-=======
->>>>>>> main
->>>>>>> main
->>>>>>> main
