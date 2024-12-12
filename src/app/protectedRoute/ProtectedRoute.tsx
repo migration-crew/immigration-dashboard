@@ -19,6 +19,9 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   if (!isSignedIn) {
     console.log("Redirecting to sign in page");
     router.push("/sign-in");
+  } else {
+    console.log("User is signed in");
+    router.push("/dashboard");
   }
 
   return <>{children}</>;
