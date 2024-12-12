@@ -129,3 +129,46 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* .form-radio {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid #d1d5db;
+  border-radius: 50%;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.form-radio:checked {
+  border-color: var(--primary-red);
+  background-color: var(--primary-red);
+}
+
+.form-radio:checked::before {
+  content: "";
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin: 3px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.form-radio:focus {
+  box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.2);
+} */
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
