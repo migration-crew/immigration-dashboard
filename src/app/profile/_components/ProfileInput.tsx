@@ -99,7 +99,7 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
 
   return (
     <>
-      <Card className="grid gap-[18px] justify-center">
+      <Card className="grid gap-[18px] justify-center border-none shadow-none">
         <div className="flex gap-[60px]">
           <div className="w-[360px] h-auto">
             <label

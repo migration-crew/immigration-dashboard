@@ -1,4 +1,6 @@
-export const chatsData = [
+import { ChannelType } from "@/types/Inbox/ChannelType";
+
+export const chatsData: ChannelType[] = [
   {
     id: "0",
     name: "Saulo",
