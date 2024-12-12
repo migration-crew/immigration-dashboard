@@ -14,7 +14,7 @@ type Props = {
   payments: testPaymentType[];
 };
 
-export const  = ({ payments }: Props) => {
+export const PaymentTable = ({ payments }: Props) => {
   return (
     <Table className="w-[1152px] ">
       <TableHeader className="bg-secondary-medium-gray text-caption-semi">
