@@ -1,6 +1,7 @@
 "use client";
 
 import { AppointmentTypeContainer } from "@/app/appointment/_components/AppoinmentTypeContainer";
+import { AppointmentDatePicker } from "@/app/appointment/_components/AppoinementDatePicker";
 import ApplicationSwitcher from "@/components/common/ApplicationSwitcher";
 import { AppointmentCard } from "@/components/common/AppoitmentCard";
 import AwaitingPayment from "@/components/common/AwaitingPayment/AwaitingPayment";
@@ -178,6 +179,7 @@ export default function Page() {
         <AppointmentTypeContainer onTypeSelect={setSelectedAppointmentType} />
         {selectedAppointmentType && "<AppointmentDatePicker />"}
       </div>
+      <AppointmentDatePicker />
     </div>
   );
 }
