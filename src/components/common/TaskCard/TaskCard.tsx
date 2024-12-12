@@ -12,7 +12,6 @@ import { TaskTitle } from "./TaskTitle";
 type Props = {
   applicationTask: ApplicationTaskType;
   className?: string;
-  onClick: () => void;
 };
 
 /**
@@ -23,13 +22,12 @@ type Props = {
  * @returns
  */
 
-export function TaskCard({ applicationTask, className, onClick }: Props) {
+export function TaskCard({ applicationTask, className }: Props) {
   return (
     <Sheet>
       <SheetTrigger asChild>
         <Card
           key={applicationTask.id}
-          onClick={onClick}
           className={cn(
             `${"flex flex-col gap-3 p-6 w-[280px] rounded-none cursor-pointer hover:border-2 hover:border-task-red duration-100"}`,
             className

@@ -1,3 +1,5 @@
+"use client";
+
 import { Input } from "@/components/ui/input";
 import { MessageType } from "@/types/Inbox/MessageType";
 import { NotificationType } from "@/types/NotificationType";
@@ -67,7 +69,7 @@ export default function TopNavbar() {
   >(null);
 
   return (
-    <div className="flex justify-between items-center self-stretch bg-primary-white px-6 h-[70px]">
+    <div className="flex justify-between items-center self-stretch bg-primary-white px-6 h-[70px] shadow-md">
       <div className="relative flex w-[400px] items-center">
         <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
         <Input

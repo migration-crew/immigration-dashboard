@@ -1,3 +1,5 @@
+"use client";
+
 import { Calendar } from "@/components/ui/upImmigrationCalendar";
 import { QuickCalendarType } from "@/types/Calendar/EventType";
 import React from "react";

@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 import AppSidebar from "@/components/common/Sidebar/AppSidebar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import TopNavbar from "@/components/common/TopNavbar/TopNavbar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { Poppins } from "next/font/google";
 
 export const poppins = Poppins({
@@ -28,8 +29,9 @@ export default function RootLayout({
         {modal}
         <SidebarProvider>
           <AppSidebar />
-          <main className="flex-1">
-            <SidebarTrigger />
+          <main className="flex flex-col flex-1">
+            <TopNavbar />
+            {/* <SidebarTrigger /> */}
             {children}
           </main>
         </SidebarProvider>
