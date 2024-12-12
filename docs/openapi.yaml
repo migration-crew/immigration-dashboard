@@ -18,6 +18,8 @@ tags:
     description: Inbox section.
   - name: Profile
     description: Profile section.<br>(There is no API to create a user because it is created in Clerk dashboard.)
+  - name: Others
+    description: Other APIs which are not categorized.
 
 security:
   - BearerAuth: []
@@ -175,6 +177,20 @@ paths:
                 items:
                   type: object
                   $ref: "#/components/schemas/Application"
+  /applications/types:
+    get:
+      summary: Get all application types
+      tags: [ 'Application' ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  $ref: "#/components/schemas/ApplicationType"
   /applications/tasks:
     get:
       summary: Get an application
@@ -185,26 +201,31 @@ paths:
           required: true
           schema:
             type: string
+        - name: applicationTypeId
+          in: query
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  $ref: "#/components/schemas/ApplicationTask"
+                type: object
+                properties:
+                  addtionalProperties:
+                    type: array
+                    items:
+                      type: object
+                      $ref: "#/components/schemas/ApplicationTask"
+
     put:
       summary: Update an application task
       tags: [ 'Application' ]
       parameters:
-        - name: applicationId
-          in: query
-          required: true
-          schema:
-            type: string
         - name: taskId
+          description: ID of task detail table
           in: query
           required: true
           schema:
@@ -399,6 +420,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+  
+  /countries:
+    get:
+      summary: Get all countries
+      tags: [ 'Others' ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /languages:
+    get:
+      summary: Get all languages
+      tags: [ 'Others' ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
 
 components:
   schemas:
@@ -523,6 +570,12 @@ components:
         name:
           type: string
         type:
+          $ref: '#/components/schemas/ApplicationType'
+    ApplicationType:
+      properties:
+        id:
+          type: string
+        name:
           type: string
     ApplicationTask:
       properties:

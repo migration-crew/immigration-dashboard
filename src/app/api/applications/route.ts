@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
     // Validate the userId
     if (!userId || typeof userId !== 'string') {
         return NextResponse.json(
-            { success: false, message: 'Not Authorized' },
+            { message: 'Not Authorized' },
             { status: 400 }
         );
     }
@@ -19,13 +19,13 @@ export async function GET(req: NextRequest) {
 
         // Return the found applications as the response
         return NextResponse.json(
-            { success: true, data: applications },
+            applications,
             { status: 200 }
         );
     } catch (error) {
         console.error('Error fetching applications:', error);
         return NextResponse.json(
-            { success: false, message: 'Internal Server Error' },
+            { message: 'Internal Server Error' },
             { status: 500 }
         );
     }

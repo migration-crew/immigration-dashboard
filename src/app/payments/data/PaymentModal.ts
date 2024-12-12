@@ -19,7 +19,7 @@ export const paymentModalData: testPaymentModalType[] = [
     currency: "CAD",
   },
   {
-    ...paymentTableData[2],
+    ...Data[2],
     amount: 100,
     currency: "CAD",
   },

@@ -10,7 +10,15 @@ export type testPaymentType = TablePaymentType & {
 export const testApplication: ApplicationType = {
   id: "nRHegHAxQG",
   name: "Maria_CICCC_UX/UI_2",
-  type: "student",
+  type: {
+    id: "PvpKKAtezj",
+    name: "student",
+    createdAt: new Date("2024-12-17T02:45:17-08:00"),
+    updatedAt: new Date("2024-12-17T02:45:17-08:00"),
+    
+  },
+  createdAt: new Date("2024-12-17T02:45:17-08:00"),
+  updatedAt: new Date("2024-12-17T02:45:17-08:00"),
 };
 
 export const testPayment1: TablePaymentType = {

@@ -1,13 +1,15 @@
 "use client";
-
 import { AppointmentDatePicker } from "@/app/appointment/_components/AppoinementDatePicker";
 import ApplicationSwitcher from "@/components/common/ApplicationSwitcher";
 import { AppointmentCard } from "@/components/common/AppoitmentCard";
+import AwaitingPayment from "@/components/common/AwaitingPayment/AwaitingPayment";
 import FilterSection from "@/components/common/FilterSection/FilterSection";
 import { ApplicationType } from "@/types/Application/ApplicationType";
 import { AppointmentType } from "@/types/Appointment/AppointmentType";
 import { BasicUserType } from "@/types/User/UserType";
 import { useMemo, useState } from "react";
+import { applications } from "./data/application";
+import { payments } from "./data/payment";
 
 export type testApplicationType = {
   application: ApplicationType[];
@@ -49,99 +51,6 @@ const testAttendees: BasicUserType[] = [
     id: "2",
     firstName: "Jane",
     imageUrl: "/placeholder.svg",
-  },
-];
-
-const applications: testApplicationType[] = [
-  {
-    application: [
-      {
-        id: "Maria_CICCC_ESL",
-        name: "Maria_CICCC_ESL",
-        type: {
-          id: "student",
-          name: "student",
-          createdAt: new Date("2023-05-01"),
-          updatedAt: new Date("2023-06-15"),
-        },
-        createdAt: new Date("2023-05-01"),
-        updatedAt: new Date("2023-06-15"),
-      },
-    ],
-    progress: 100,
-    status: "completed",
-  },
-  {
-    application: [
-      {
-        id: "Maria_Work_Permit",
-        name: "Maria_Work_Permit",
-        type: {
-          id: "workPermit",
-          name: "workPermit",
-          createdAt: new Date("2023-04-01"),
-          updatedAt: new Date("2023-05-10"),
-        },
-        createdAt: new Date("2023-04-01"),
-        updatedAt: new Date("2023-05-10"),
-      },
-    ],
-    progress: 75,
-    status: "onHold",
-  },
-  {
-    application: [
-      {
-        id: "Carrey_Visitor",
-        name: "Carrey_Visitor",
-        type: {
-          id: "visitor",
-          name: "visitor",
-          createdAt: new Date("2023-04-01"),
-          updatedAt: new Date("2023-04-22"),
-        },
-        createdAt: new Date("2023-04-01"),
-        updatedAt: new Date("2023-04-22"),
-      },
-    ],
-    progress: 25,
-    status: "processing",
-  },
-  {
-    application: [
-      {
-        id: "Maria_CICCC_UX/UI",
-        name: "Maria_CICCC_UX/UI",
-        type: {
-          id: "student",
-          name: "student",
-          createdAt: new Date("2023-05-01"),
-          updatedAt: new Date("2023-06-01"),
-        },
-        createdAt: new Date("2023-05-01"),
-        updatedAt: new Date("2023-06-01"),
-      },
-    ],
-    progress: 100,
-    status: "rejected",
-  },
-  {
-    application: [
-      {
-        id: "Maria_CICCC_UX/UI_2",
-        name: "Maria_CICCC_UX/UI_2",
-        type: {
-          id: "student",
-          name: "student",
-          createdAt: new Date("2023-04-01"),
-          updatedAt: new Date("2023-05-28"),
-        },
-        createdAt: new Date("2023-04-01"),
-        updatedAt: new Date("2023-05-28"),
-      },
-    ],
-    progress: 50,
-    status: "processing",
   },
 ];
 
@@ -231,6 +140,7 @@ export default function Page() {
 
   return (
     <div className="p-4">
+      <AwaitingPayment payments={payments} singleCard={true} />
       <div className="mb-4">
         <ApplicationSwitcher applications={filteredAndSortedApplications} />
       </div>
