@@ -5,7 +5,7 @@ import { useSignIn } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
 import { BannerImage } from '../_components/BannerImage'
 import { SignIn } from '@clerk/nextjs'
-import { LogoImage } from '../_components/Logo'
+import { LogoImage } from '../../../components/common/Logo'
 
 export default function Page() {
   // FIXME: use the following code later to customize the sign-in page
@@ -53,7 +53,7 @@ export default function Page() {
         </div>
 
         <div className="w-1/2 h-full flex flex-col gap-16 items-center justify-center bg-white">
-          <LogoImage />
+          <LogoImage width={215} height={102}/>
           <SignIn />
         </div>
       </div>
