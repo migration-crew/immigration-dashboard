@@ -108,7 +108,12 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
             >
               First Name
             </label>
-            <Input id="first" type="text" placeholder="John" />
+            <Input
+              id="first"
+              type="text"
+              placeholder="John"
+              className="h-[45px]"
+            />
           </div>
           <div className="w-[360px] h-auto">
             <label
@@ -117,7 +122,12 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
             >
               Last Name
             </label>
-            <Input id="last" type="text" placeholder="Smith" />
+            <Input
+              id="last"
+              type="text"
+              placeholder="Smith"
+              className="h-[45px]"
+            />
           </div>
         </div>
         <div className="flex gap-[60px]">
@@ -129,7 +139,7 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
               Nationality
             </label>
             <Select onValueChange={(value: string) => onChange(value)}>
-              <SelectTrigger className="SelectTrigger">
+              <SelectTrigger className="SelectTrigger h-[45px]">
                 <SelectValue placeholder="Country" className="text-gray-500" />
               </SelectTrigger>
               <SelectContent>
@@ -149,7 +159,7 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
               Language
             </label>
             <Select onValueChange={(value: string) => onChange(value)}>
-              <SelectTrigger className="SelectTrigger">
+              <SelectTrigger className="SelectTrigger h-[45px]">
                 <SelectValue
                   placeholder="Please select language"
                   className="placeholder-opacity-55 text-caption"
@@ -176,6 +186,7 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
             id="address"
             type="text"
             placeholder="1234 Maple Street Springfield, IL USA"
+            className="h-[45px]"
           />
         </div>
         <div className="flex gap-[60px] h-[64px]">
@@ -187,7 +198,7 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
               Date of Birth
             </label>
             <Popover>
-              <PopoverTrigger asChild>
+              <PopoverTrigger asChild className="h-[45px]">
                 <Button
                   variant={"outline"}
                   className={cn(
@@ -247,7 +258,7 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
               Gender
             </label>
             <Select>
-              <SelectTrigger className="SelectTrigger">
+              <SelectTrigger className="SelectTrigger  h-[45px]">
                 <SelectValue
                   placeholder="Select Gender"
                   className="opacity-50 text-caption"
@@ -272,7 +283,7 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
             id="email"
             type="text"
             placeholder="john_smith123@gmail.com"
-            className=""
+            className="h-[45px]"
           />
         </div>
       </Card>
