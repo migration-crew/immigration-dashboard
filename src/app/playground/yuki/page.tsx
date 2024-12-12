@@ -1,3 +1,4 @@
+import { AppointmentDatePicker } from "@/app/appointment/_components/AppoinementDatePicker";
 import { DocumentTable } from "@/app/documents/_components/DocumentTable";
 import { NewDocForm } from "@/app/documents/_components/NewDocForm";
 import { UploadDocumentModal } from "@/app/documents/_components/UploadDocumentModal";
@@ -118,6 +119,7 @@ const YukiPage = () => {
 
       <div className="shadow-navBar w-10 h-10">shadow</div>
 
+      <AppointmentDatePicker />
       <AwaitingPayment payments={payments} singleCard={true} />
       <AwaitingPayment payments={payments} singleCard={false} />
     </div>
