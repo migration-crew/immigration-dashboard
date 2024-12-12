@@ -93,7 +93,7 @@ export default function AppSidebar() {
         </SidebarMenu>
       </SidebarContent>
       <SidebarFooter className="flex mx-auto">
-        <p>footer goes here</p>
+        {/* <p>footer goes here</p> */}
       </SidebarFooter>
     </Sidebar>
   );
