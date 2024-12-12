@@ -26,6 +26,7 @@ import { Title } from "@/components/common/text/Title";
 import { TitleLight } from "@/components/common/text/TitleLight";
 import { Button } from "@/components/ui/upImmigrationButton";
 import { documents } from "./data/DocumentTable";
+import { AppointmentTypeContainer } from "@/app/appointment/_components/AppoinmentTypeContainer";
 
 const YukiPage = () => {
   return (
@@ -122,6 +123,8 @@ const YukiPage = () => {
       <AppointmentDatePicker />
       <AwaitingPayment payments={payments} singleCard={true} />
       <AwaitingPayment payments={payments} singleCard={false} />
+
+      <AppointmentTypeContainer />
     </div>
   );
 };
