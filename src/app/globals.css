@@ -130,11 +130,9 @@ body {
   }
 }
 
-<<<<<<< HEAD
 .SelectTrigger[data-placeholder] {
   @apply text-gray-500;
 }
-=======
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 .hide-scrollbar::-webkit-scrollbar {
@@ -146,4 +144,3 @@ body {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
->>>>>>> main
