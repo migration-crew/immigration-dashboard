@@ -130,7 +130,7 @@ body {
   }
 }
 
-.form-radio {
+/* .form-radio {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -159,4 +159,16 @@ body {
 
 .form-radio:focus {
   box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.2);
+} */
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
