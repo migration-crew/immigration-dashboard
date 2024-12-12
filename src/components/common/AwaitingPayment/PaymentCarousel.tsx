@@ -12,6 +12,7 @@ import { CaptionSemi } from "../text/CaptionSemi";
 import { HeadingLight } from "../text/HeadingLight";
 import { Microtext } from "../text/Microtext";
 import { testPaymentType } from "./AwaitingPayment";
+import Link from "next/link";
 
 type Props = {
   payments: testPaymentType[];
@@ -58,8 +59,10 @@ function PaymentCarousel({ payments, singleCard }: Props) {
                     </Microtext>
                   </div>
                 </div>
-                <Button className="rounded-none w-full h-[41px] py-[10px]">
+                <Button className="rounded-none w-full h-[41px] py-[10px]" asChild>
+                  <Link href={`/payments/${payment.id}`}>
                   <CaptionSemi>Make Payment</CaptionSemi>
+                  </Link>
                 </Button>
               </Card>
             </CarouselItem>

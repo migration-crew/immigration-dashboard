@@ -3,12 +3,14 @@ import ChatHeader from "@/app/inbox/_components/ChatHeader";
 import ChatSideBar from "@/app/inbox/_components/ChatSideBar";
 import MessageComposer from "@/app/inbox/_components/MessageComposer";
 import NewChatModal from "@/app/inbox/_components/NewChatModal";
+import Invoices from "@/app/payments/_components/Invoices";
 import ProfileInput from "@/app/profile/_components/ProfileInput";
 import { Applicationtable } from "@/components/common/ApplicationTable";
 import DynamicHeaderContainer from "@/components/common/DynamicHeaderContainer";
 import HorizontalProgressBar from "@/components/common/HorizontalProgressBar";
 import { CaptionSemi } from "@/components/common/text/CaptionSemi";
 import { Badge } from "@/components/ui/upImmigrationBadge";
+import { invoices } from "./data/invoice";
 
 const page = () => {
   return (
@@ -252,6 +254,11 @@ const page = () => {
         ]}
       />
       <ProfileInput />
+      <div>
+        <Invoices
+          invoiceData={invoices}
+        />
+      </div>
     </div>
   );
 };
