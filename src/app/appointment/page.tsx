@@ -1,11 +1,11 @@
 import { PageContainer } from '@/components/common/PageContainer'
 import React from 'react'
-import { AppointmentCard } from './_components/AppoitmentCard'
+import { AppointmentDatePicker } from './_components/AppoinementDatePicker'
 
 const page = () => {
   return (
     <PageContainer>
-      {/* <AppointmentCard appointment={} attendees={} /> */}
+      <AppointmentDatePicker />
     </PageContainer>
   )
 }
