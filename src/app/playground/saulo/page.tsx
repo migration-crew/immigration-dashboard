@@ -1,17 +1,15 @@
 "use client";
-import { testApplication } from "@/app/payments/data/paymentTable";
+import { AppointmentDatePicker } from "@/app/appointment/_components/AppoinementDatePicker";
 import ApplicationSwitcher from "@/components/common/ApplicationSwitcher";
 import { AppointmentCard } from "@/components/common/AppoitmentCard";
-import AwaitingPayment, {
-  testPaymentType,
-} from "@/components/common/AwaitingPayment/AwaitingPayment";
+import AwaitingPayment from "@/components/common/AwaitingPayment/AwaitingPayment";
 import FilterSection from "@/components/common/FilterSection/FilterSection";
 import { ApplicationType } from "@/types/Application/ApplicationType";
 import { AppointmentType } from "@/types/Appointment/AppointmentType";
 import { BasicUserType } from "@/types/User/UserType";
 import { useMemo, useState } from "react";
-import { payments } from "./data/payment";
 import { applications } from "./data/application";
+import { payments } from "./data/payment";
 
 export type testApplicationType = {
   application: ApplicationType[];
@@ -55,7 +53,6 @@ const testAttendees: BasicUserType[] = [
     imageUrl: "/placeholder.svg",
   },
 ];
-
 
 export default function Page() {
   const [sortOptions] = useState([
@@ -172,6 +169,7 @@ export default function Page() {
         appointment={testAppointment}
         attendees={testAttendees}
       />
+      <AppointmentDatePicker />
     </div>
   );
 }
