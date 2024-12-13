@@ -22,6 +22,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Caption } from "../text/Caption";
+import { LogoImage } from "@/components/common/Logo";
 
 const sidebarItems = [
   {
@@ -65,8 +66,8 @@ export default function AppSidebar() {
   const pathname = usePathname();
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader className="flex mx-auto">
-        <p>logo goes here</p>
+      <SidebarHeader className="flex mx-auto mb-8">
+        <LogoImage width={134} height={58}/>
       </SidebarHeader>
       <SidebarContent>
         <SidebarMenu>
@@ -92,7 +93,7 @@ export default function AppSidebar() {
         </SidebarMenu>
       </SidebarContent>
       <SidebarFooter className="flex mx-auto">
-        <p>footer goes here</p>
+        {/* <p>footer goes here</p> */}
       </SidebarFooter>
     </Sidebar>
   );
