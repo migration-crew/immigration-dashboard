@@ -35,7 +35,7 @@ export default function ChatSideBar({ chats }: Props) {
 
   return (
     <div className="w-[290px] h-full">
-      <Card className="flex flex-col gap-6 py-10 px-5">
+      <Card className="flex flex-col gap-6 py-10 px-5 h-[840px]">
         <form className="relative w-full max-w-md mx-auto">
           <Input
             type="text"
