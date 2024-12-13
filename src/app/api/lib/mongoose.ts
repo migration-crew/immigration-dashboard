@@ -6,14 +6,6 @@ if (!process.env.MONGODB_URI) {
 
 const uri: string = process.env.MONGODB_URI;
 
-// async function dbConnect() {
-//   if (uri) {
-//     mongoose.connect(uri).catch((reason) => {
-//       console.log("filed connecting database", reason);
-//     });
-//   }
-// }
-
 let cached = global.mongoose;
 
 if (!cached) {
