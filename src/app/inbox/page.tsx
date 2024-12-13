@@ -23,7 +23,7 @@ const page = () => {
         <div className="flex gap-2">
           <ChatSideBar chats={chatsData} />
           <div>
-            <ChatHeader title={"All Student"} />
+            <ChatHeader title={"All Students"} />
             <ScrollArea className="h-[723px]">
               <div className="">
                 {messages.map((message) => (

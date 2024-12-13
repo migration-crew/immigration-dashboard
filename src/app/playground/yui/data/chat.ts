@@ -3,7 +3,7 @@ import { ChannelType } from "@/types/Inbox/ChannelType";
 export const chatsData: ChannelType[] = [
   {
     id: "0",
-    name: "Saulo",
+    name: "Yuki",
     members: [
       {
         id: "0",
@@ -19,7 +19,7 @@ export const chatsData: ChannelType[] = [
   },
   {
     id: "0",
-    name: "Saulo2",
+    name: "All Students",
     members: [
       {
         id: "0",
@@ -40,44 +40,8 @@ export const chatsData: ChannelType[] = [
   },
   {
     id: "0",
-    name: "Saulo3",
+    name: "Immigration",
     members: [
-      {
-        id: "0",
-        firstName: "Yuki",
-        imageUrl: "https://github.com/shadcn.png",
-      },
-      {
-        id: "1",
-        firstName: "Zoro",
-        imageUrl: "https://github.com/shadcn.png",
-      },
-      {
-        id: "0",
-        firstName: "Yuki",
-        imageUrl: "https://github.com/shadcn.png",
-      },
-      {
-        id: "1",
-        firstName: "Zoro",
-        imageUrl: "https://github.com/shadcn.png",
-      },
-    ],
-  },
-  {
-    id: "0",
-    name: "Saulo4",
-    members: [
-      {
-        id: "0",
-        firstName: "Yuki",
-        imageUrl: "https://github.com/shadcn.png",
-      },
-      {
-        id: "1",
-        firstName: "Zoro",
-        imageUrl: "https://github.com/shadcn.png",
-      },
       {
         id: "0",
         firstName: "Yuki",
@@ -102,7 +66,43 @@ export const chatsData: ChannelType[] = [
   },
   {
     id: "0",
-    name: "Saulo5",
+    name: "Students",
+    members: [
+      {
+        id: "0",
+        firstName: "Yuki",
+        imageUrl: "https://github.com/shadcn.png",
+      },
+      {
+        id: "1",
+        firstName: "Zoro",
+        imageUrl: "https://github.com/shadcn.png",
+      },
+      {
+        id: "0",
+        firstName: "Yuki",
+        imageUrl: "https://github.com/shadcn.png",
+      },
+      {
+        id: "1",
+        firstName: "Zoro",
+        imageUrl: "https://github.com/shadcn.png",
+      },
+      {
+        id: "0",
+        firstName: "Yuki",
+        imageUrl: "https://github.com/shadcn.png",
+      },
+      {
+        id: "1",
+        firstName: "Zoro",
+        imageUrl: "https://github.com/shadcn.png",
+      },
+    ],
+  },
+  {
+    id: "0",
+    name: "Zoro",
     members: [
       {
         id: "0",
