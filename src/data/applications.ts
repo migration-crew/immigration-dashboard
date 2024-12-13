@@ -4,8 +4,8 @@ export const applications: testApplicationType[] = [
   {
     application: [
       {
-        id: "Maria_CICCC_ESL",
-        name: "Maria_CICCC_ESL",
+        id: "WeJnu",
+        name: "Maria_CICCC_UX/UI_2",
         type: {
           id: "student",
           name: "student",
@@ -22,7 +22,7 @@ export const applications: testApplicationType[] = [
   {
     application: [
       {
-        id: "Maria_Work_Permit",
+        id: "nuSWG",
         name: "Maria_Work_Permit",
         type: {
           id: "workPermit",
@@ -40,7 +40,7 @@ export const applications: testApplicationType[] = [
   {
     application: [
       {
-        id: "Carrey_Visitor",
+        id: "dnRUt",
         name: "Carrey_Visitor",
         type: {
           id: "visitor",
@@ -58,7 +58,7 @@ export const applications: testApplicationType[] = [
   {
     application: [
       {
-        id: "Maria_CICCC_UX/UI",
+        id: "UzUJC",
         name: "Maria_CICCC_UX/UI",
         type: {
           id: "student",
@@ -76,8 +76,8 @@ export const applications: testApplicationType[] = [
   {
     application: [
       {
-        id: "Maria_CICCC_UX/UI_2",
-        name: "Maria_CICCC_UX/UI_2",
+        id: "geOWU",
+        name: "Maria_CICCC_ESL",
         type: {
           id: "student",
           name: "student",

@@ -53,7 +53,7 @@ const PaymentModal = () => {
       <div className="w-[362px]">
         <HeadingSemi className="mb-2">Payment Method</HeadingSemi>
         <Separator className="mb-9" />
-        <div>
+        {/* <div>
           <ParagraphRegular>Pay With:</ParagraphRegular>
           <RadioGroup defaultValue="card" className="flex justify-between">
             <div className="flex items-center space-x-2">
@@ -73,7 +73,7 @@ const PaymentModal = () => {
               <Label htmlFor="wise">Wise</Label>
             </div>
           </RadioGroup>
-        </div>
+        </div> */}
         <div className="grid gap-6">
           <div className="grid gap-4">
             <Label htmlFor="cardNumber">

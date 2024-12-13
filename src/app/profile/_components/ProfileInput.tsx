@@ -99,7 +99,7 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
 
   return (
     <>
-      <Card className="grid gap-[18px] justify-center">
+      <Card className="grid gap-[18px] justify-center border-none shadow-none">
         <div className="flex gap-[60px]">
           <div className="w-[360px] h-auto">
             <label
@@ -108,7 +108,12 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
             >
               First Name
             </label>
-            <Input id="first" type="text" placeholder="John" />
+            <Input
+              id="first"
+              type="text"
+              placeholder="John"
+              className="h-[45px] bg-secondary-light-gray"
+            />
           </div>
           <div className="w-[360px] h-auto">
             <label
@@ -117,7 +122,12 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
             >
               Last Name
             </label>
-            <Input id="last" type="text" placeholder="Smith" />
+            <Input
+              id="last"
+              type="text"
+              placeholder="Smith"
+              className="h-[45px] bg-secondary-light-gray"
+            />
           </div>
         </div>
         <div className="flex gap-[60px]">
@@ -129,7 +139,7 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
               Nationality
             </label>
             <Select onValueChange={(value: string) => onChange(value)}>
-              <SelectTrigger className="SelectTrigger">
+              <SelectTrigger className="SelectTrigger h-[45px] bg-secondary-light-gray">
                 <SelectValue placeholder="Country" className="text-gray-500" />
               </SelectTrigger>
               <SelectContent>
@@ -141,7 +151,7 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
               </SelectContent>
             </Select>
           </div>
-          <div className="w-[360px] h-auto">
+          <div className="w-[360px] h-auto ">
             <label
               htmlFor="language"
               className="block text-sm font-medium text-gray-700 pb-2 text-caption"
@@ -149,7 +159,7 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
               Language
             </label>
             <Select onValueChange={(value: string) => onChange(value)}>
-              <SelectTrigger className="SelectTrigger">
+              <SelectTrigger className="SelectTrigger h-[45px] bg-secondary-light-gray">
                 <SelectValue
                   placeholder="Please select language"
                   className="placeholder-opacity-55 text-caption"
@@ -175,7 +185,8 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
           <Input
             id="address"
             type="text"
-            placeholder="1234 Maple Street Springfield, IL USA"
+            placeholder="1425 10th Avenue, Victoria BC, Canada"
+            className="h-[45px] bg-secondary-light-gray"
           />
         </div>
         <div className="flex gap-[60px] h-[64px]">
@@ -187,7 +198,10 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
               Date of Birth
             </label>
             <Popover>
-              <PopoverTrigger asChild>
+              <PopoverTrigger
+                asChild
+                className="h-[45px] bg-secondary-light-gray"
+              >
                 <Button
                   variant={"outline"}
                   className={cn(
@@ -247,7 +261,7 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
               Gender
             </label>
             <Select>
-              <SelectTrigger className="SelectTrigger">
+              <SelectTrigger className="SelectTrigger  h-[45px] bg-secondary-light-gray">
                 <SelectValue
                   placeholder="Select Gender"
                   className="opacity-50 text-caption"
@@ -272,7 +286,7 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
             id="email"
             type="text"
             placeholder="john_smith123@gmail.com"
-            className=""
+            className="h-[45px] bg-secondary-light-gray"
           />
         </div>
       </Card>

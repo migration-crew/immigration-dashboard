@@ -35,7 +35,7 @@ export default function ChatSideBar({ chats }: Props) {
 
   return (
     <div className="w-[290px] h-full">
-      <Card className="flex flex-col gap-6 py-10 px-5">
+      <Card className="flex flex-col gap-6 py-10 px-5 h-[840px]">
         <form className="relative w-full max-w-md mx-auto">
           <Input
             type="text"
@@ -56,6 +56,7 @@ export default function ChatSideBar({ chats }: Props) {
               <Button
                 key={index}
                 className=" text-black shadow-none text-caption bg-inherit hover:bg-primary-gray hover:text-primary-black active:bg-secondary-dark-gray active:text-primary-white focus:bg-secondary-green focus:text-primary-white justify-start"
+                autoFocus={index === 0 && true}
               >
                 {channel.name}
               </Button>

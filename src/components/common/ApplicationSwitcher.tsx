@@ -53,7 +53,7 @@ function ApplicationSwitcher({
     name: "All Applications",
   };
 
-  const isAdmin = true;
+  const isAdmin = false;
   // fake admin user is active
 
   const globalApplications: globalApplicationsType[] = applications.map(
