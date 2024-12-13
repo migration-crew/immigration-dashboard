@@ -3,8 +3,8 @@
 import { DynamicRoundedContainer } from "@/components/common/DynamicRoundedContainer";
 import { Caption } from "@/components/common/text/Caption";
 import { Paragraph } from "@/components/common/text/Paragraph";
-import { ParagraphRegular } from "@/components/common/text/ParagraphRegular";
 import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/upImmigrationButton";
 import {
   RadioGroup,
@@ -88,16 +88,17 @@ export function AppointmentDatePicker() {
 
   return (
     <DynamicRoundedContainer title="" className="w-full">
-      <div ref={scrollContainerRef} className="overflow-x-hidden">
-        <div className="grid grid-cols-7 gap-4 bg-primary-gray py-5 px-12 mb-5 rounded-lg justify-center">
+      <div ref={scrollContainerRef} className="overflow-x-hidden ">
+        <div className="flex justify-around bg-primary-gray py-5 px-20 mb-5 rounded-lg">
           {visibleDays.map((day, index) => (
-            <div
-              key={day.date.toISOString()}
-              className="flex flex-col items-center w-[100px] justify-center"
-            >
+            <div key={day.date.toISOString()} className="">
               <div className="grid">
-                <Caption className="h-5 text-primary-red text-center">{getDayLabel(day.date, currentWeekStart + index)}</Caption>
-                <Paragraph className="text-center">{getWeekDay(day.date)}</Paragraph>
+                <Caption className="h-5 text-primary-red text-center">
+                  {getDayLabel(day.date, currentWeekStart + index)}
+                </Caption>
+                <Paragraph className="text-center">
+                  {getWeekDay(day.date)}
+                </Paragraph>
                 <Caption className="">{formatDate(day.date)}</Caption>
               </div>
             </div>
@@ -109,32 +110,41 @@ export function AppointmentDatePicker() {
               const [dateString, time] = value.split("=");
               setSelectedDate(new Date(dateString));
               setSelectedTime(time);
-              
             }}
             value={
-              (selectedDate && selectedTime)
-                ? `${selectedDate.getUTCFullYear()}-${selectedDate.getUTCMonth()+1}-${selectedDate.getUTCDate()}=${selectedTime}`
+              selectedDate && selectedTime
+                ? `${selectedDate.getUTCFullYear()}-${
+                    selectedDate.getUTCMonth() + 1
+                  }-${selectedDate.getUTCDate()}=${selectedTime}`
                 : undefined
             }
-            className="w-full grid grid-cols-7 gap-4 px-12 justify-center"
+            className="w-full flex px-20 justify-center gap-0"
           >
             {visibleDays.map((day, index) => (
-              <div key={index}>
-                {day.timeSlots.map((slot) => (
+              <div key={index} className="w-[14.29%]">
+                {day.timeSlots.map((slot, index) => (
                   <div
                     key={`${day.date.toISOString()}-${slot.time}`}
-                    className="flex items-center w-[100px] justify-center"
+                    className="flex flex-col items-center"
                   >
-                    <RadioGroupItem
-                      value={`${day.date.getUTCFullYear()}-${day.date.getUTCMonth()+1}-${day.date.getUTCDate()}=${slot.time}`}
-                      id={`${day.date.toISOString()}-${slot.time}`}
-                    />
-                    <Label
-                      htmlFor={`${day.date.toISOString()}-${slot.time}`}
-                      className="text-sm cursor-pointer"
-                    >
-                      {`${slot.time}`}
-                    </Label>
+                    <div className="w-[100px] flex items-center py-3">
+                      <RadioGroupItem
+                      className="mr-2"
+                        value={`${day.date.getUTCFullYear()}-${
+                          day.date.getUTCMonth() + 1
+                        }-${day.date.getUTCDate()}=${slot.time}`}
+                        id={`${day.date.toISOString()}-${slot.time}`}
+                      />
+                      <Label
+                        htmlFor={`${day.date.toISOString()}-${slot.time}`}
+                        className="text-sm cursor-pointer"
+                      >
+                        {`${slot.time}`}
+                      </Label>
+                    </div>
+                    {index + 1 < day.timeSlots.length && (
+                      <Separator className="w-full" />
+                    )}
                   </div>
                 ))}
               </div>
