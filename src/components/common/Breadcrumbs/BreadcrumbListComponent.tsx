@@ -18,10 +18,11 @@ export function BreadcrumbListComponent({ links }: Props) {
     <BreadcrumbList>
       {links.map((link, index) => {
         const isLast = index === links.length - 1;
+        const isOnlyOne = links.length === 1;
         return (
           <React.Fragment key={link.href}>
             <BreadcrumbItem className="text-primary-black">
-              {isLast ? (
+              {isLast && !isOnlyOne ? (
                 <BreadcrumbPage className="text-primary-red">
                   <HeadingSemi>{link.name}</HeadingSemi>
                 </BreadcrumbPage>

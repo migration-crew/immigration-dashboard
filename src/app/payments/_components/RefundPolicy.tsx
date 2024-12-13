@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/upImmigrationButton";
 
 const RefundPolicy = () => {
   return (
-    <DynamicRoundedContainer title="Refund Policy" className="w-[458px] h-[253px] flex flex-col" childrenDivClassName="grid content-between flex-1 pt-1">
+    <DynamicRoundedContainer title="Refund Policy" className="w-[500px] h-[320px] flex flex-col" childrenDivClassName="grid content-between flex-1 pt-1">
       <Caption className="text-secondary-dark-gray opacity-70">
         Our refund policy covers cases where services are not delivered, the
         agency cancels the application, duplicate payments are made, or excess

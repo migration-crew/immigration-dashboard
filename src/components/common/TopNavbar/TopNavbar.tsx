@@ -8,6 +8,7 @@ import { useState } from "react";
 import { BsBellFill } from "react-icons/bs";
 import { FaMessage } from "react-icons/fa6";
 import NavbarIcon from "./NavbarIcon";
+import { UserButton } from "@clerk/nextjs";
 
 const messages: MessageType[] = [
   {
@@ -97,6 +98,9 @@ export default function TopNavbar() {
             )
           }
         />
+        <div className="flex w-[70px] h-[70px] items-center justify-center">
+          <UserButton />
+        </div>
       </div>
     </div>
   );

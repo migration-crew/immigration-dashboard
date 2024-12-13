@@ -38,12 +38,11 @@ function AwaitingPayment({ payments, singleCard }: Props) {
             </span>
           </MicrotextSemi>
           <PaymentCarousel
-            payments={payments.concat(payments, payments)}
+            payments={payments}
             singleCard={singleCard}
           />
         </>
       )}
-      <div></div>
     </DynamicRoundedContainer>
   );
 }

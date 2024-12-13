@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/upImmigrationButton";
 import { FileText, X } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { ElementRef, useEffect, useRef } from "react";
+import { RadioGroup, RadioGroupItem } from "../ui/upImmigrationRadio-group";
 
 const PaymentModal = () => {
   const id = useParams().id;
@@ -75,21 +76,33 @@ const PaymentModal = () => {
         </div> */}
         <div className="grid gap-6">
           <div className="grid gap-4">
-            <Label htmlFor="cardNumber"><ParagraphRegular>Card Number</ParagraphRegular></Label>
-            <Input id="cardNumber" placeholder="1234 5678 9101 1121" className="h-12"/>
+            <Label htmlFor="cardNumber">
+              <ParagraphRegular>Card Number</ParagraphRegular>
+            </Label>
+            <Input
+              id="cardNumber"
+              placeholder="1234 5678 9101 1121"
+              className="h-12"
+            />
           </div>
           <div className="grid gap-4">
-            <Label htmlFor="name"><ParagraphRegular>Name on Card</ParagraphRegular></Label>
-            <Input id="name" placeholder="Name" className="h-12"/>
+            <Label htmlFor="name">
+              <ParagraphRegular>Name on Card</ParagraphRegular>
+            </Label>
+            <Input id="name" placeholder="Name" className="h-12" />
           </div>
           <div className="flex gap-5">
             <div className="grid gap-4">
-              <Label htmlFor="expire"><ParagraphRegular>Expiration Date</ParagraphRegular></Label>
-              <Input id="expire" placeholder="MM/YY" className="h-12"/>
+              <Label htmlFor="expire">
+                <ParagraphRegular>Expiration Date</ParagraphRegular>
+              </Label>
+              <Input id="expire" placeholder="MM/YY" className="h-12" />
             </div>
             <div className="grid gap-4">
-              <Label htmlFor="cvv"><ParagraphRegular>CVV</ParagraphRegular></Label>
-              <Input id="cvv" placeholder="123" className="h-12"/>
+              <Label htmlFor="cvv">
+                <ParagraphRegular>CVV</ParagraphRegular>
+              </Label>
+              <Input id="cvv" placeholder="123" className="h-12" />
             </div>
           </div>
         </div>
