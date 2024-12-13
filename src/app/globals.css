@@ -15,7 +15,7 @@ body {
 @layer base {
   :root {
     /* box-shadow */
-    --navBarShadow: 3px 1px 10px 0px rgba(0, 0, 0, 0.10);
+    --navBarShadow: 3px 1px 10px 0px rgba(0, 0, 0, 0.1);
     /* color */
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
@@ -130,6 +130,9 @@ body {
   }
 }
 
+.SelectTrigger[data-placeholder] {
+  @apply text-gray-500;
+}
 /* .form-radio {
   appearance: none;
   -webkit-appearance: none;
