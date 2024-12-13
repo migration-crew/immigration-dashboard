@@ -3,7 +3,7 @@ import Payment from "../../schemas/payment/payment.schema";
 
 export const getAllPayments = async (applicationId: string) => {
   await dbConnect();
-  const payments = await Payment.find({"application": applicationId}).populate("application");
+  const payments = await Payment.find({"application": applicationId});
   return payments;
 };
 
