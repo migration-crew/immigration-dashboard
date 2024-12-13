@@ -1,9 +1,9 @@
 "use client";
 
+import { Caption } from "@/components/common/text/Caption";
 import { Microtext } from "@/components/common/text/Microtext";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
-import { Caption } from "@/compxonents/common/text/Caption";
 import { MessageType } from "@/types/Inbox/MessageType";
 
 const currentUserId = "userId";
@@ -30,7 +30,7 @@ export default function ChatContainer({ message }: Props) {
   //   }, []);
 
   return (
-    <div className={`w-[846px] flex px-4 py-10`}>
+    <div className={`w-[846px] flex px-4 py-10 bg-primary-white`}>
       <div className="mx-0 mt-auto mb-0">
         {message.user.id === currentUserId && (
           <Avatar className="w-9 h-9 border-secondary-light-gray mr-[15px]">

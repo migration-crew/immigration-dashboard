@@ -10,8 +10,10 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/upImmigrationButton";
 import { cn } from "@/lib/utils";
 import { Check, ChevronDown, RotateCcw } from "lucide-react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import * as React from "react";
 import { Caption } from "../text/Caption";
+import { useEffect } from "react";
 
 export type FilterOption = {
   label: string;
@@ -22,10 +24,6 @@ export type FilterSectionProps = {
   sortOptions: FilterOption[];
   visaTypes: FilterOption[];
   statusOptions: FilterOption[];
-  onSortChange: (value: string) => void;
-  onVisaTypeChange: (values: string[]) => void;
-  onStatusChange: (values: string[]) => void;
-  onReset: () => void;
   className?: string;
 };
 
@@ -33,24 +31,63 @@ export default function FilterSection({
   sortOptions,
   visaTypes,
   statusOptions,
-  onSortChange,
-  onVisaTypeChange,
-  onStatusChange,
-  onReset,
   className = "",
 }: FilterSectionProps) {
-  const [selectedSort, setSelectedSort] = React.useState<string>("");
-  const [selectedVisaTypes, setSelectedVisaTypes] = React.useState<string[]>(
-    []
+  const serchParams = useSearchParams();
+  const pathname = usePathname()
+  const {replace} = useRouter()
+
+  const [selectedSort, setSelectedSort] = React.useState<string>(
+    serchParams.get("sort") || ""
   );
-  const [selectedStatus, setSelectedStatus] = React.useState<string[]>([]);
+  const [selectedVisaTypes, setSelectedVisaTypes] = React.useState<string[]>(
+    serchParams.getAll("visa") || []
+  );
+  const [selectedStatus, setSelectedStatus] = React.useState<string[]>(
+    serchParams.getAll("status") || []
+  );
   const [sortOpen, setSortOpen] = React.useState(false);
   const [visaTypeOpen, setVisaTypeOpen] = React.useState(false);
   const [statusOpen, setStatusOpen] = React.useState(false);
 
+  useEffect(()=> {
+    setSelectedSort(serchParams.get("sort") || "")
+    setSelectedVisaTypes(serchParams.getAll("visa") || [])
+    setSelectedStatus(serchParams.getAll("status") || [])
+  }, [serchParams])
+
+  const onSortChange = (value: string | null) => {
+    setSelectedSort(value || "")
+    const params = new URLSearchParams(serchParams)
+    params.delete("sort")
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    value && params.append("sort", value)
+    replace(`${pathname}?${params.toString()}`)
+  }
+  const onVisaTypeChange = (values: string[]) => {
+    setSelectedVisaTypes(values)
+    const params = new URLSearchParams(serchParams)
+    params.delete("visa")
+    values.forEach((value) => params.append("visa", value))
+    replace(`${pathname}?${params.toString()}`)
+  }
+  const onStatusChange = (values: string[]) => {
+    setSelectedStatus(values)
+    const params = new URLSearchParams(serchParams)
+    params.delete("status")
+    values.forEach((value) => params.append("status", value))
+    replace(`${pathname}?${params.toString()}`)
+  }
+  const onReset = () => {
+    setSelectedSort("");
+    setSelectedVisaTypes([]);
+    setSelectedStatus([]);
+    replace(`${pathname}`)
+  }
+
   return (
     <div
-      className={`flex flex-wrap items-center border w-[739px] h-[53px] rounded ${className}`}
+      className={`flex flex-wrap items-center border w-[739px] h-[53px] rounded bg-primary-white ${className}`}
     >
       <div className="text-center w-[79px] h-[21]">
         <Caption>Filter by</Caption>
@@ -78,7 +115,6 @@ export default function FilterSection({
                 key={option.value}
                 className="flex items-center py-2 px-4 gap-2 cursor-pointer hover:bg-gray-100"
                 onClick={() => {
-                  setSelectedSort(option.value);
                   onSortChange(option.value);
                 }}
               >
@@ -97,8 +133,7 @@ export default function FilterSection({
               variant="link"
               className="w-full justify-center px-2 text-destructive"
               onClick={() => {
-                setSelectedSort("");
-                onSortChange("");
+                onSortChange(null);
               }}
             >
               <Caption>Remove</Caption>
@@ -135,7 +170,6 @@ export default function FilterSection({
                     const newSelected = checked
                       ? [...selectedVisaTypes, option.value]
                       : selectedVisaTypes.filter((v) => v !== option.value);
-                    setSelectedVisaTypes(newSelected);
                     onVisaTypeChange(newSelected);
                   }}
                 />
@@ -148,7 +182,6 @@ export default function FilterSection({
               variant="link"
               className="w-full justify-center px-2 text-destructive"
               onClick={() => {
-                setSelectedVisaTypes([]);
                 onVisaTypeChange([]);
               }}
             >
@@ -186,7 +219,6 @@ export default function FilterSection({
                     const newSelected = checked
                       ? [...selectedStatus, option.value]
                       : selectedStatus.filter((v) => v !== option.value);
-                    setSelectedStatus(newSelected);
                     onStatusChange(newSelected);
                   }}
                 />
@@ -199,7 +231,6 @@ export default function FilterSection({
               variant="link"
               className="w-full px-2 text-destructive justify-center"
               onClick={() => {
-                setSelectedStatus([]);
                 onStatusChange([]);
               }}
             >
@@ -213,9 +244,6 @@ export default function FilterSection({
         variant="ghost"
         className="text-primary w-[161px] h-full rounded-none hover:text-primary/80"
         onClick={() => {
-          setSelectedSort("");
-          setSelectedVisaTypes([]);
-          setSelectedStatus([]);
           onReset();
         }}
       >

@@ -1,8 +1,8 @@
-import { chatUserType } from "../User/UserType";
+import { BasicUserType } from "../User/UserType";
 
 export type MessageType = {
   id: string;
   content: string;
   createdAt: string;
-  user: chatUserType;
+  user: BasicUserType;
 };

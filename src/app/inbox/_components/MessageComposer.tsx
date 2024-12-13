@@ -1,8 +1,8 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/upImmigrationButton";
 import { useState } from "react";
 import { CiImageOn } from "react-icons/ci";
 import { FaMicrophone } from "react-icons/fa6";
@@ -54,7 +54,8 @@ export default function MessageComposer() {
           </button>
           <Button
             onClick={handleSendMessage}
-            className="w-[86px] h-[33ps] text-caption  bg-secondary-green text-primary-white hover:bg-secondary-green-300 active:bg-green-200  flex justify-center items-center"
+            className="w-[86px] h-[33px] text-caption text-primary-white flex justify-center items-center"
+            variant={"green"}
           >
             Send
             <FiSend />

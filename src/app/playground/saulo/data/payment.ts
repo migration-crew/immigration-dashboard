@@ -1,12 +1,11 @@
-import { testApplication } from "@/app/payments/data/paymentTable";
+import { testApplication, testPayment1, testPayment2, testPayment3, testPayment4, testPayment5 } from "@/app/payments/data/paymentTable";
 import { testPaymentType } from "@/components/common/AwaitingPayment/AwaitingPayment";
 
 export const payments: testPaymentType[] = [
   {
-    id: "1",
+    ...testPayment1,
     amount: 150.0,
     currency: "CAD",
-    status: "",
     paymentMethod: "",
     createdAt: "",
     invoiceURL: "",
@@ -15,10 +14,9 @@ export const payments: testPaymentType[] = [
     dueDate: new Date("2024-12-17T02:45:17-08:00"),
   },
   {
-    id: "2",
+    ...testPayment2,
     amount: 250.0,
     currency: "CAD",
-    status: "",
     paymentMethod: "",
     createdAt: "",
     invoiceURL: "",
@@ -27,10 +25,31 @@ export const payments: testPaymentType[] = [
     dueDate: new Date("2024-12-17T02:45:17-08:00"),
   },
   {
-    id: "3",
-    amount: 8500.0,
+    ...testPayment3,
+    amount: 500.0,
     currency: "CAD",
-    status: "",
+    paymentMethod: "",
+    createdAt: "",
+    invoiceURL: "",
+    application: testApplication,
+    feeType: "School Tuition Fee",
+    dueDate: new Date("2024-12-17T02:45:17-08:00"),
+  },
+  {
+    ...testPayment4,
+    amount: 700.0,
+    currency: "CAD",
+    paymentMethod: "",
+    createdAt: "",
+    invoiceURL: "",
+    application: testApplication,
+    feeType: "School Tuition Fee",
+    dueDate: new Date("2024-12-17T02:45:17-08:00"),
+  },
+  {
+    ...testPayment5,
+    amount: 800.0,
+    currency: "CAD",
     paymentMethod: "",
     createdAt: "",
     invoiceURL: "",
