@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/upImmigrationButton'
 
 const page = () => {
   const links = [
-    { name: "Calender", href: "/calender" },
+    { name: "Calendar", href: "/calendar" },
     { name: "Appointment", href: "/appointment" },
   ];
   return (
