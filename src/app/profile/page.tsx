@@ -35,7 +35,7 @@ const page = ({}: Props) => {
                 throw new Error("Function not implemented.");
               }}
             />
-            <Button className="w-[249px] h-14">Label</Button>
+            <Button className="w-[249px] h-14">Save</Button>
           </div>
         </Card>
       </div>
