@@ -256,7 +256,7 @@ const events = [
 
 export const DetailedCalendar = () => (
     <>
-        <DynamicRoundedContainer title="" className="w-[800px] h-[700px]" childrenDivClassName='w-full h-full'>
+        <DynamicRoundedContainer title="" className="w-[800px] h-[850px]" childrenDivClassName='w-full h-full'>
             <Calendar
                 events={events}
                 localizer={localizer}
