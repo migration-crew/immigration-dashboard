@@ -9,7 +9,7 @@ const documentPage = () => {
   const isAdmin = true;
   const links = [
     { name: "Documents", href: "/documents" },
-    { name: "Maria-CICCC", href: "/documents" },
+    { name: "Maria_CICCC_UX/UI_2", href: "/documents" },
   ];
 
   return (
