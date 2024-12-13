@@ -1,11 +1,14 @@
 "use client";
+
+import { AppointmentTypeContainer } from "@/app/appointment/_components/AppoinmentTypeContainer";
 import { AppointmentDatePicker } from "@/app/appointment/_components/AppoinementDatePicker";
 import ApplicationSwitcher from "@/components/common/ApplicationSwitcher";
-import { AppointmentCard } from "@/components/common/AppoitmentCard";
+import { AppointmentCard } from "@/components/common/AppointmentCard";
 import AwaitingPayment from "@/components/common/AwaitingPayment/AwaitingPayment";
 import FilterSection from "@/components/common/FilterSection/FilterSection";
 import { ApplicationType } from "@/types/Application/ApplicationType";
 import { AppointmentType } from "@/types/Appointment/AppointmentType";
+import { AppointmentTypeType } from "@/types/Appointment/AppointmentTypeType";
 import { BasicUserType } from "@/types/User/UserType";
 import { useMemo, useState } from "react";
 import { applications } from "./data/application";
@@ -55,6 +58,9 @@ const testAttendees: BasicUserType[] = [
 ];
 
 export default function Page() {
+  const [selectedAppointmentType, setSelectedAppointmentType] =
+    useState<AppointmentTypeType | null>(null);
+
   const [sortOptions] = useState([
     { label: "Date: First to Last", value: "date_asc" },
     { label: "Date: Last to First", value: "date_desc" },
@@ -169,6 +175,10 @@ export default function Page() {
         appointment={testAppointment}
         attendees={testAttendees}
       />
+      <div className="p-4">
+        <AppointmentTypeContainer onTypeSelect={setSelectedAppointmentType} />
+        {selectedAppointmentType && "<AppointmentDatePicker />"}
+      </div>
       <AppointmentDatePicker />
     </div>
   );

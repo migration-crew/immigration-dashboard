@@ -1,6 +1,10 @@
 "use client";
 
+import { DynamicRoundedContainer } from "@/components/common/DynamicRoundedContainer";
+import { Caption } from "@/components/common/text/Caption";
+import { Paragraph } from "@/components/common/text/Paragraph";
 import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/upImmigrationButton";
 import {
   RadioGroup,
@@ -83,24 +87,19 @@ export function AppointmentDatePicker() {
   const visibleDays = schedule.slice(currentWeekStart, currentWeekStart + 7);
 
   return (
-    <div className="w-full max-w-4xl p-6 rounded-lg">
-      <div ref={scrollContainerRef} className="overflow-x-hidden">
-        <div className="grid grid-cols-7 gap-4 bg-slate-50 py-2 mb-8 rounded">
+    <DynamicRoundedContainer title="" className="w-full">
+      <div ref={scrollContainerRef} className="overflow-x-hidden ">
+        <div className="flex justify-around bg-primary-gray py-5 px-20 mb-5 rounded-lg">
           {visibleDays.map((day, index) => (
-            <div
-              key={day.date.toISOString()}
-              className="flex flex-col items-center"
-            >
+            <div key={day.date.toISOString()} className="">
               <div className="grid">
-                <div className="h-5 text-xs font-medium text-primary-red text-center whitespace-pre-line px-0 pt-Auto pb-0">
+                <Caption className="h-5 text-primary-red text-center">
                   {getDayLabel(day.date, currentWeekStart + index)}
-                </div>
-                <div className=" text-center text-sm font-medium">
+                </Caption>
+                <Paragraph className="text-center">
                   {getWeekDay(day.date)}
-                </div>
-                <div className="text-sm font-medium mb-2 bottom-0">
-                  {formatDate(day.date)}
-                </div>
+                </Paragraph>
+                <Caption className="">{formatDate(day.date)}</Caption>
               </div>
             </div>
           ))}
@@ -111,32 +110,41 @@ export function AppointmentDatePicker() {
               const [dateString, time] = value.split("=");
               setSelectedDate(new Date(dateString));
               setSelectedTime(time);
-              
             }}
             value={
-              (selectedDate && selectedTime)
-                ? `${selectedDate.getUTCFullYear()}-${selectedDate.getUTCMonth()+1}-${selectedDate.getUTCDate()}=${selectedTime}`
+              selectedDate && selectedTime
+                ? `${selectedDate.getUTCFullYear()}-${
+                    selectedDate.getUTCMonth() + 1
+                  }-${selectedDate.getUTCDate()}=${selectedTime}`
                 : undefined
             }
-            className="w-full grid grid-cols-7 gap-4"
+            className="w-full flex px-20 justify-center gap-0"
           >
             {visibleDays.map((day, index) => (
-              <div key={index}>
-                {day.timeSlots.map((slot) => (
+              <div key={index} className="w-[14.29%]">
+                {day.timeSlots.map((slot, index) => (
                   <div
                     key={`${day.date.toISOString()}-${slot.time}`}
-                    className="flex items-center space-x-2"
+                    className="flex flex-col items-center"
                   >
-                    <RadioGroupItem
-                      value={`${day.date.getUTCFullYear()}-${day.date.getUTCMonth()+1}-${day.date.getUTCDate()}=${slot.time}`}
-                      id={`${day.date.toISOString()}-${slot.time}`}
-                    />
-                    <Label
-                      htmlFor={`${day.date.toISOString()}-${slot.time}`}
-                      className="text-sm cursor-pointer"
-                    >
-                      {`${slot.time}`}
-                    </Label>
+                    <div className="w-[100px] flex items-center py-3">
+                      <RadioGroupItem
+                      className="mr-2"
+                        value={`${day.date.getUTCFullYear()}-${
+                          day.date.getUTCMonth() + 1
+                        }-${day.date.getUTCDate()}=${slot.time}`}
+                        id={`${day.date.toISOString()}-${slot.time}`}
+                      />
+                      <Label
+                        htmlFor={`${day.date.toISOString()}-${slot.time}`}
+                        className="text-sm cursor-pointer"
+                      >
+                        {`${slot.time}`}
+                      </Label>
+                    </div>
+                    {index + 1 < day.timeSlots.length && (
+                      <Separator className="w-full" />
+                    )}
                   </div>
                 ))}
               </div>
@@ -169,6 +177,6 @@ export function AppointmentDatePicker() {
           <ChevronRight className="ml-1 h-4 w-4" />
         </Button>
       </div>
-    </div>
+    </DynamicRoundedContainer>
   );
 }

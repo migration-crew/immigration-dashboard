@@ -2,114 +2,104 @@
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { filterCountries } from "@/lib/helpers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import dayjs from "dayjs";
-import { Check, ChevronDown } from "lucide-react";
-import { useEffect, useState } from "react";
-
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from "@/components/ui/command";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { Button } from "@/components/ui/upImmigrationButton";
+import { Calendar } from "@/components/ui/upImmigrationCalendar";
 import { cn } from "@/lib/utils";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
+import axios from "axios";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 
-const languages = [
-  { value: "en", label: "English" },
-  { value: "es", label: "Español" },
-  { value: "fr", label: "Français" },
-  { value: "de", label: "Deutsch" },
-  { value: "it", label: "Italiano" },
-  { value: "pt", label: "Português" },
-  { value: "ru", label: "Русский" },
-  { value: "zh", label: "中文" },
-  { value: "ja", label: "日本語" },
-  { value: "ko", label: "한국어" },
-  { value: "ar", label: "العربية" },
-  { value: "hi", label: "हिन्दी" },
-] as const;
-
-const FormSchema = z.object({
-  language: z.string({
-    required_error: "Select Laungage",
-  }),
-});
-
-export interface Region {
-  name: string;
-  shortCode: string;
+interface DateOfBirthPickerProps {
+  onDateChange: (date: Date | undefined) => void;
 }
 
-export interface CountryRegion {
-  countryName: string;
-  countryShortCode: string;
-  regions: Region[];
-}
-
-interface CountrySelectProps {
-  countryRegionData?: [];
-  priorityOptions?: string[];
-  whitelist?: string[];
-  blacklist?: string[];
+type CountrySelectProps = {
   onChange?: (value: string) => void;
-  className?: string;
-  placeholder?: string;
-}
+};
+
+type LanguageSelectProps = {
+  onChange?: (value: string) => void;
+};
 
 export default function ProfileInput({
-  countryRegionData = [],
-  priorityOptions = [],
-  whitelist = [],
-  blacklist = [],
   onChange = () => {},
-  className,
-  placeholder = "Country",
-}: CountrySelectProps) {
-  const [value, setValue] = useState<dayjs.Dayjs | null>(dayjs());
-  const [countries, setCountries] = useState<CountryRegion[]>([]);
-  const [open, setOpen] = useState(false);
+}: // onDateChange,
+CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
+  const [countries, setCountries] = useState<string[]>([]);
+  const [languages, setLanguages] = useState<string[]>([]);
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-  });
+  const [date, setDate] = React.useState<Date>();
+  const [selectedYear, setSelectedYear] = React.useState<number | undefined>();
+
+  const { control } = useForm();
+
+  const currentYear = new Date().getFullYear();
+  const years = Array.from({ length: 100 }, (_, i) => currentYear - i);
+
+  const handleDateChange = (newDate: Date | undefined) => {
+    setDate(newDate);
+    // onDateChange(newDate);
+  };
+
+  const handleYearChange = (year: string) => {
+    const yearNumber = parseInt(year);
+    setSelectedYear(yearNumber);
+  };
 
   useEffect(() => {
-    setCountries(
-      filterCountries(countryRegionData, priorityOptions, whitelist, blacklist)
-    );
+    if (selectedYear !== undefined && date) {
+      const newDate = new Date(date);
+      newDate.setFullYear(selectedYear);
+      setDate(newDate);
+    }
+  }, [selectedYear]);
+
+  useEffect(() => {
+    if (!selectedYear && date) {
+      setSelectedYear(date.getFullYear());
+    }
+  }, [date]);
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/countries");
+        setCountries(response.data);
+      } catch (error) {
+        console.error("Error fetching countries:", error);
+      }
+    };
+    fetchCountries();
+  }, []);
+
+  useEffect(() => {
+    const fetchLanguages = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/languages");
+        setLanguages(response.data);
+      } catch (error) {
+        console.error("Error fetching languages:", error);
+      }
+    };
+    fetchLanguages();
   }, []);
 
   return (
     <>
-      <Card className="grid gap-[18px] justify-center">
+      <Card className="grid gap-[18px] justify-center border-none shadow-none">
         <div className="flex gap-[60px]">
           <div className="w-[360px] h-auto">
             <label
@@ -118,7 +108,12 @@ export default function ProfileInput({
             >
               First Name
             </label>
-            <Input id="first" type="text" />
+            <Input
+              id="first"
+              type="text"
+              placeholder="John"
+              className="h-[45px] bg-secondary-light-gray"
+            />
           </div>
           <div className="w-[360px] h-auto">
             <label
@@ -127,7 +122,12 @@ export default function ProfileInput({
             >
               Last Name
             </label>
-            <Input id="last" type="text" />
+            <Input
+              id="last"
+              type="text"
+              placeholder="Smith"
+              className="h-[45px] bg-secondary-light-gray"
+            />
           </div>
         </div>
         <div className="flex gap-[60px]">
@@ -138,96 +138,41 @@ export default function ProfileInput({
             >
               Nationality
             </label>
-            <Select
-              onValueChange={(value: string) => {
-                onChange(value);
-              }}
-            >
-              <SelectTrigger className={className}>
-                <SelectValue
-                  placeholder={placeholder}
-                  className="opacity-50 text-caption"
-                />
+            <Select onValueChange={(value: string) => onChange(value)}>
+              <SelectTrigger className="SelectTrigger h-[45px] bg-secondary-light-gray">
+                <SelectValue placeholder="Country" className="text-gray-500" />
               </SelectTrigger>
               <SelectContent>
-                {countries.map(({ countryName, countryShortCode }) => (
-                  <SelectItem key={countryShortCode} value={countryShortCode}>
+                {countries.map((countryName) => (
+                  <SelectItem key={countryName} value={countryName}>
                     {countryName}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </div>
-          <div className="w-[360px] h-auto">
+          <div className="w-[360px] h-auto ">
             <label
               htmlFor="language"
               className="block text-sm font-medium text-gray-700 pb-2 text-caption"
             >
               Language
             </label>
-            <Form {...form}>
-              <form className="space-y-6">
-                <FormField
-                  control={form.control}
-                  name="language"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-col">
-                      <Popover open={open} onOpenChange={setOpen}>
-                        <PopoverTrigger asChild>
-                          <FormControl>
-                            <Button
-                              variant="outline"
-                              role="combobox"
-                              aria-expanded={open}
-                              className={cn(
-                                "w-[360px] justify-between",
-                                !field.value && "text-muted-foreground"
-                              )}
-                            >
-                              {field.value
-                                ? languages.find(
-                                    (language) => language.value === field.value
-                                  )?.label
-                                : "Please select language"}
-                              <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                            </Button>
-                          </FormControl>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-[360px] p-0">
-                          <Command>
-                            <CommandInput placeholder="Search language..." />
-                            <CommandEmpty>Language not found</CommandEmpty>
-                            <CommandGroup>
-                              {languages.map((language) => (
-                                <CommandItem
-                                  value={language.label}
-                                  key={language.value}
-                                  onSelect={() => {
-                                    form.setValue("language", language.value);
-                                    setOpen(false);
-                                  }}
-                                >
-                                  <Check
-                                    className={cn(
-                                      "mr-2 h-4 w-4",
-                                      language.value === field.value
-                                        ? "opacity-100"
-                                        : "opacity-0"
-                                    )}
-                                  />
-                                  {language.label}
-                                </CommandItem>
-                              ))}
-                            </CommandGroup>
-                          </Command>
-                        </PopoverContent>
-                      </Popover>
-                      <FormMessage />
-                    </FormItem>
-                  )}
+            <Select onValueChange={(value: string) => onChange(value)}>
+              <SelectTrigger className="SelectTrigger h-[45px] bg-secondary-light-gray">
+                <SelectValue
+                  placeholder="Please select language"
+                  className="placeholder-opacity-55 text-caption"
                 />
-              </form>
-            </Form>
+              </SelectTrigger>
+              <SelectContent>
+                {languages.map((languageName) => (
+                  <SelectItem key={languageName} value={languageName}>
+                    {languageName}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
         </div>
         <div className="w-[780px]">
@@ -237,26 +182,76 @@ export default function ProfileInput({
           >
             Address
           </label>
-          <Input id="address" type="text" />
+          <Input
+            id="address"
+            type="text"
+            placeholder="1425 10th Avenue, Victoria BC, Canada"
+            className="h-[45px] bg-secondary-light-gray"
+          />
         </div>
-        <div className="flex gap-[60px]">
+        <div className="flex gap-[60px] h-[64px]">
           <div className="w-[360px] h-auto">
             <label
               htmlFor="dateOfBirth"
-              className="block text-sm font-medium text-gray-700 pb-1 text-caption"
+              className="block text-sm font-medium text-gray-700 text-caption pb-3"
             >
               Date of Birth
             </label>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={["DatePicker"]}>
-                <DatePicker
-                  // label="Select a date"
-                  value={value}
-                  onChange={(newValue) => setValue(newValue)}
-                  className="w-[360px] h-auto"
+            <Popover>
+              <PopoverTrigger
+                asChild
+                className="h-[45px] bg-secondary-light-gray"
+              >
+                <Button
+                  variant={"outline"}
+                  className={cn(
+                    "w-[360px] justify-start text-left font-normal",
+                    !date && "text-muted-foreground"
+                  )}
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {date ? format(date, "PPP") : <span>Pick a date</span>}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0">
+                <div className="flex justify-center space-x-2 p-2">
+                  <Controller
+                    name="year"
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        onValueChange={(value) => {
+                          field.onChange(value);
+                          handleYearChange(value);
+                        }}
+                      >
+                        <SelectTrigger className="w-[120px]">
+                          <SelectValue placeholder="Select Year" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {years.map((year) => (
+                            <SelectItem key={year} value={year.toString()}>
+                              {year}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+                </div>
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={handleDateChange}
+                  initialFocus
+                  month={
+                    selectedYear
+                      ? new Date(selectedYear, date?.getMonth() || 0)
+                      : undefined
+                  }
                 />
-              </DemoContainer>
-            </LocalizationProvider>
+              </PopoverContent>
+            </Popover>
           </div>
           <div className="w-[360px] h-auto">
             <label
@@ -266,7 +261,7 @@ export default function ProfileInput({
               Gender
             </label>
             <Select>
-              <SelectTrigger className="">
+              <SelectTrigger className="SelectTrigger  h-[45px] bg-secondary-light-gray">
                 <SelectValue
                   placeholder="Select Gender"
                   className="opacity-50 text-caption"
@@ -287,7 +282,12 @@ export default function ProfileInput({
           >
             E-mail
           </label>
-          <Input id="email" type="text" />
+          <Input
+            id="email"
+            type="text"
+            placeholder="john_smith123@gmail.com"
+            className="h-[45px] bg-secondary-light-gray"
+          />
         </div>
       </Card>
     </>
