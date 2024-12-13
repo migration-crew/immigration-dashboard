@@ -3,7 +3,7 @@
 import { AppointmentTypeContainer } from "@/app/appointment/_components/AppoinmentTypeContainer";
 import { AppointmentDatePicker } from "@/app/appointment/_components/AppoinementDatePicker";
 import ApplicationSwitcher from "@/components/common/ApplicationSwitcher";
-import { AppointmentCard } from "@/components/common/AppoitmentCard";
+import { AppointmentCard } from "@/components/common/AppointmentCard";
 import AwaitingPayment from "@/components/common/AwaitingPayment/AwaitingPayment";
 import FilterSection from "@/components/common/FilterSection/FilterSection";
 import { ApplicationType } from "@/types/Application/ApplicationType";

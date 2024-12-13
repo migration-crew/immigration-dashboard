@@ -84,7 +84,7 @@ export function AppointmentTypeContainer(
     <DynamicRoundedContainer
       title=""
       childrenDivClassName="w-full p-6 rounded-lg bg-slate-50 flex flex-col items-center"
-      className="w-[1116px] h-[323]"
+      className="w-full h-[323]"
     >
       <div className="w-[80%]">
         <SubheadingLead className="text-primary-red mb-6">
