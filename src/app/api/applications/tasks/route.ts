@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getApplicationTasks, updateApplicationStatus } from "../../services/application/applicationService";
+import { getAuth } from "@clerk/nextjs/server";
 
 export async function GET(req: NextRequest) {
     // Extract userId from the query parameters
-    const userId = "user1";
+    const { userId } = getAuth(req);
     
     // Validate the userId
     if (!userId || typeof userId !== 'string') {
