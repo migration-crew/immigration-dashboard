@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAppointmentTypes } from "../../services/appointment/appointmentService";
+import { getAuth } from "@clerk/nextjs/server";
 
 export async function GET(req: NextRequest) {
     // Extract userId from the query parameters
-    const userId = "user1";
+    const { userId } = getAuth(req);
     
     // Validate the userId
     if (!userId || typeof userId !== 'string') {

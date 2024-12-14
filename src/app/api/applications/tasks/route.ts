@@ -4,6 +4,7 @@ import dbConnect from "../../lib/mongoose";
 import { ApplicationTaskType } from "../../types/applicationTask";
 import ApplicationTask from "../../schemas/application/applicationTask.schema";
 import { ObjectId } from "mongodb";
+import { getAuth } from "@clerk/nextjs/server";
 
 export async function POST(): Promise<NextResponse> {
     try {
@@ -22,7 +23,7 @@ export async function POST(): Promise<NextResponse> {
 
 // export async function GET(req: NextRequest) {
 //     // Extract userId from the query parameters
-//     const userId = "user1";
+//     const { userId } = getAuth(req);
     
 //     // Validate the userId
 //     if (!userId || typeof userId !== 'string') {
