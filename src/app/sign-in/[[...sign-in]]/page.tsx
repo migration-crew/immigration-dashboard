@@ -18,6 +18,8 @@ import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/upImmigrationButton"
+import { Subtitle } from '@/components/common/text/Subtitle'
+import { ParagraphRegular } from '@/components/common/text/ParagraphRegular'
 
 export default function Page() {
   const { isLoaded, signIn, setActive } = useSignIn()
@@ -25,7 +27,7 @@ export default function Page() {
 
   const formSchema = z.object({
     email: z.string().min(2, {
-      message: "Username must be at least 2 characters.",
+      message: "Email must be at least 2 characters.",
     }),
     password: z.string().min(2, {
       message: "Password must be at least 2 characters.",
@@ -84,37 +86,46 @@ export default function Page() {
         <div className="w-1/2 h-full flex flex-col gap-16 items-center justify-center bg-white">
           <LogoImage width={215} height={102} />
 
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email address:</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Password:</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit">Sign In</Button>
-            </form>
-          </Form>
+          <div className='w-[500px] flex flex-col gap-9'>
+            <div>
+              <Subtitle>Login to Account</Subtitle>
+              <ParagraphRegular className='text-secondary-medium-gray'>Please enter your email and password to continue</ParagraphRegular>
+            </div>
+
+            <div>
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex flex-col items-center">
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem className='w-[500px]'>
+                        <FormLabel className='text-secondary-medium-gray'>Email address:</FormLabel>
+                        <FormControl>
+                          <Input required type="email" className='bg-secondary-light-gray' {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem className='w-[500px]'>
+                        <FormLabel className='text-secondary-medium-gray'>Password:</FormLabel>
+                        <FormControl>
+                          <Input required type="password" className='bg-secondary-light-gray' {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button type="submit" className='w-[191px] h-[50px]'>Log In</Button>
+                </form>
+              </Form>
+            </div>
+          </div>
         </div>
       </div>
     </>
