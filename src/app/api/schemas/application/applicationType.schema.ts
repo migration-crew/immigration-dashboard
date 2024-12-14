@@ -7,9 +7,9 @@ type ApplicationTypeModelType = Model<ApplicationTypeType>
 const ApplicationTypeSchema = new Schema<ApplicationTypeType, ApplicationTypeModelType>(
   {
     name: { type: String, required: true },
-    appplicationStages: [{ 
+    applicationStages: [{ 
       name: { type: String, required: true },
-      applicationTask: [{ type: Schema.Types.ObjectId, ref: "ApplicationTask", required: true }]
+      applicationTasks: { type: [Schema.Types.ObjectId], ref: "ApplicationTask", required: true }
     }]
   },
   {

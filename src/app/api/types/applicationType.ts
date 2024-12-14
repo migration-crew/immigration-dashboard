@@ -2,7 +2,7 @@ import { Schema } from "mongoose";
 
 export type ApplicationTypeType = {
   name: string;
-  appplicationStages: {
+  applicationStages: {
     name: string;
     applicationTask: Schema.Types.ObjectId[];
   }[];
