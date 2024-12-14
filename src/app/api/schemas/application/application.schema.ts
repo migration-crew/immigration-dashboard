@@ -1,10 +1,17 @@
-import { Schema, model, models } from "mongoose";
+import { Model, Schema, model, models } from "mongoose";
+import { ApplicationType } from "../../types/application";
 
-const ApplicationSchema = new Schema(
+type ApplicationModelType = Model<ApplicationType>
+
+const ApplicationSchema = new Schema<ApplicationType, ApplicationModelType>(
   {
-    userId: { type: String, required: true },
+    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
     name: { type: String, required: true },
-    applicationTypeId: { type: Schema.Types.ObjectId, required: true },
+    applicationType: {
+      type: Schema.Types.ObjectId,
+      ref: "ApplicationType",
+      required: true,
+    },
   },
   {
     timestamps: true,
@@ -12,5 +19,5 @@ const ApplicationSchema = new Schema(
 );
 
 const Application =
-  models.Application || model("Applications", ApplicationSchema);
+  models.Application || model<ApplicationType, ApplicationModelType>("Application", ApplicationSchema);
 export default Application;
