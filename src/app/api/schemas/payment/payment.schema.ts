@@ -18,7 +18,7 @@ const PaymentSchema = new Schema<PaymentType, PaymentModelType>(
     type: { type: String, required: true },
   },
   {
-    timestamps: true,
+    timestamps: true, versionKey: false
   }
 );
 

@@ -14,7 +14,7 @@ const ApplicationSchema = new Schema<ApplicationType, ApplicationModelType>(
     },
   },
   {
-    timestamps: true,
+    timestamps: true, versionKey: false
   }
 );
 
