@@ -34,24 +34,42 @@ type LanguageSelectProps = {
   onChange?: (value: string) => void;
 };
 
+type ProfileInputProps = {
+  users: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    address: string;
+    nationality: string;
+    language: string;
+    gender: string;
+    imageURL: string;
+    dateOfBirth?: string;
+  };
+};
+
 export default function ProfileInput({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onChange = () => {},
-}: // onDateChange,
-CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
+  users,
+}: CountrySelectProps &
+  LanguageSelectProps &
+  DateOfBirthPickerProps &
+  ProfileInputProps) {
   const [countries, setCountries] = useState<string[]>([]);
   const [languages, setLanguages] = useState<string[]>([]);
 
   const [date, setDate] = React.useState<Date>();
   const [selectedYear, setSelectedYear] = React.useState<number | undefined>();
 
-  const { control } = useForm();
+  const { control, setValue } = useForm();
 
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 100 }, (_, i) => currentYear - i);
 
   const handleDateChange = (newDate: Date | undefined) => {
     setDate(newDate);
-    // onDateChange(newDate);
   };
 
   const handleYearChange = (year: string) => {
@@ -113,6 +131,8 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
               type="text"
               placeholder="John"
               className="h-[45px] bg-secondary-light-gray"
+              value={users.firstName}
+              onChange={(e) => setValue("firstName", e.target.value)}
             />
           </div>
           <div className="w-[360px] h-auto">
@@ -127,6 +147,8 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
               type="text"
               placeholder="Smith"
               className="h-[45px] bg-secondary-light-gray"
+              value={users.lastName}
+              onChange={(e) => setValue("lastName", e.target.value)}
             />
           </div>
         </div>
@@ -138,7 +160,10 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
             >
               Nationality
             </label>
-            <Select onValueChange={(value: string) => onChange(value)}>
+            <Select
+              onValueChange={(value: string) => setValue("nationality", value)}
+              value={users.nationality}
+            >
               <SelectTrigger className="SelectTrigger h-[45px] bg-secondary-light-gray">
                 <SelectValue placeholder="Country" className="text-gray-500" />
               </SelectTrigger>
@@ -158,7 +183,10 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
             >
               Language
             </label>
-            <Select onValueChange={(value: string) => onChange(value)}>
+            <Select
+              onValueChange={(value: string) => setValue("language", value)}
+              value={users.language}
+            >
               <SelectTrigger className="SelectTrigger h-[45px] bg-secondary-light-gray">
                 <SelectValue
                   placeholder="Please select language"
@@ -187,6 +215,8 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
             type="text"
             placeholder="1425 10th Avenue, Victoria BC, Canada"
             className="h-[45px] bg-secondary-light-gray"
+            value={users.address}
+            onChange={(e) => setValue("address", e.target.value)}
           />
         </div>
         <div className="flex gap-[60px] h-[64px]">
@@ -223,8 +253,12 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
                         onValueChange={(value) => {
                           field.onChange(value);
                           handleYearChange(value);
+                          setValue("gender", value);
                         }}
+                        value={users.dateOfBirth}
                       >
+                        {/* onValueChange={(value: string) => } */}
+
                         <SelectTrigger className="w-[120px]">
                           <SelectValue placeholder="Select Year" />
                         </SelectTrigger>
@@ -260,7 +294,10 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
             >
               Gender
             </label>
-            <Select>
+            <Select
+              onValueChange={(value: string) => setValue("gender", value)}
+              value={users.gender}
+            >
               <SelectTrigger className="SelectTrigger  h-[45px] bg-secondary-light-gray">
                 <SelectValue
                   placeholder="Select Gender"
@@ -270,7 +307,8 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
               <SelectContent>
                 <SelectItem value="male">Male</SelectItem>
                 <SelectItem value="female">Female</SelectItem>
-                <SelectItem value="others">Others</SelectItem>
+                <SelectItem value="female">Non-birnary</SelectItem>
+                <SelectItem value="others">Prefer not to say</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -287,6 +325,8 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
             type="text"
             placeholder="john_smith123@gmail.com"
             className="h-[45px] bg-secondary-light-gray"
+            value={users.email}
+            onChange={(e) => setValue("email", e.target.value)}
           />
         </div>
       </Card>

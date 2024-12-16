@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
 import { BreadcrumbComponent } from "@/components/common/Breadcrumbs/BreadcrumbComponent";
@@ -6,14 +7,43 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/upImmigrationButton";
 import { UserType } from "@/types/User/UserType";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import ProfileInput from "./_components/ProfileInput";
 
 export type Props = {
   profile: UserType[];
 };
 
-const page = ({}: Props) => {
+type User = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  address: string;
+  nationality: string;
+  language: string;
+  gender: string;
+  imageURL: string;
+  dateOfBirth?: string;
+};
+
+export const page = ({}: Props) => {
   const links = [{ name: "Profile", href: "/profile" }];
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [users, setUsers] = useState<User | null>(null);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/user");
+        setUsers(response.data);
+      } catch (error) {
+        console.error("Error fetching Users:", error);
+      }
+    };
+    fetchUsers();
+  }, []);
 
   return (
     <PageContainer>
@@ -30,11 +60,12 @@ const page = ({}: Props) => {
                 Upload Photo
               </Button>
             </div>
-            <ProfileInput
+            {users && <ProfileInput users={users} />}
+            {/* <ProfileInput
               onDateChange={function (): void {
                 throw new Error("Function not implemented.");
               }}
-            />
+            /> */}
             <Button className="w-[249px] h-14">Save</Button>
           </div>
         </Card>
@@ -44,3 +75,7 @@ const page = ({}: Props) => {
 };
 
 export default page;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function setValue(_arg0: string, _arg1: string) {
+  throw new Error("Function not implemented.");
+}
