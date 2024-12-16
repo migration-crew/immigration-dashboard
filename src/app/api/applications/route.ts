@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-// import { getApplications } from "../services/application/applicationService"
+import { getApplications } from "../services/application/applicationService"
 import { ObjectId } from "mongodb";
 import dbConnect from "../lib/mongoose";
 import Application from "../schemas/application/application.schema";

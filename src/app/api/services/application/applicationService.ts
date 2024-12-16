@@ -1,36 +1,33 @@
+import { getUserId } from "../../lib/getUserId";
 import dbConnect from "../../lib/mongoose";
 import Application from "../../schemas/application/application.schema";
 
-// export const getApplications = async (userId: string) => {
-//     await dbConnect()
-//     const applications = await Application.find({"user": userId})
+export const getApplications = async (userId: string) => {
+    await dbConnect()
+    const userIdFromDB = await getUserId(userId)
+    console.log('🚀', userIdFromDB);
+    
+    const applications = await Application.find({"user": userIdFromDB}).populate("applicationType");
+    return applications;
 
+    // const applicationsWithDetails = await Promise.all(
+    //     rawApplications.map(async app => {
+    //         const APPLICATIONS_TYPE_COLLECTION = "ApplicationTypes"
+    //         const applicationType = await db
+    //             .collection(APPLICATIONS_TYPE_COLLECTION)
+    //             .findOne({ _id: app.applicationTypeId });
 
-//     const client = await clientPromise;
-//     const db = client.db(DATABASE);
-//     const APPLICATIONS_COLLECTION = "Applications"
-//     const rawApplications = await db
-//         .collection(APPLICATIONS_COLLECTION)
-//         .find({ userId })
-//         .toArray();
-//     const applicationsWithDetails = await Promise.all(
-//         rawApplications.map(async app => {
-//             const APPLICATIONS_TYPE_COLLECTION = "ApplicationTypes"
-//             const applicationType = await db
-//                 .collection(APPLICATIONS_TYPE_COLLECTION)
-//                 .findOne({ _id: app.applicationTypeId });
-
-//             return {
-//                 id: app._id,
-//                 name: app.name,
-//                 type: applicationType,
-//                 createAt: app.createdAt,
-//                 updatedAt: app.updatedAt
-//             };
-//         })
-//     );
-//     return applicationsWithDetails;
-// };
+    //         return {
+    //             id: app._id,
+    //             name: app.name,
+    //             type: applicationType,
+    //             createAt: app.createdAt,
+    //             updatedAt: app.updatedAt
+    //         };
+    //     })
+    // );
+    // return applicationsWithDetails;
+};
 
 // export const getApplicationTypes = async () => {
 //     const client = await clientPromise;
