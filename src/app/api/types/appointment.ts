@@ -1,7 +1,10 @@
-import { Date, Schema } from "mongoose"
+import { Date, Schema } from "mongoose";
 
 export type AppointmentType = {
-  appointmentType: Schema.Types.ObjectId
-  date: Date
-  user: Schema.Types.ObjectId
-}
+  customer: Schema.Types.ObjectId;
+  admin: Schema.Types.ObjectId;
+  appointmentType: Schema.Types.ObjectId;
+  appointmentDate: Date;
+  format: string;
+  description: string;
+};

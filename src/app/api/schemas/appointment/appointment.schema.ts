@@ -5,13 +5,16 @@ type AppointmentModelType = Model<AppointmentType>;
 
 const AppointmentSchema = new Schema<AppointmentType, AppointmentModelType>(
   {
+    customer: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    admin: { type: Schema.Types.ObjectId, ref: "User", required: true },
     appointmentType: {
       type: Schema.Types.ObjectId,
       ref: "AppointmentType",
       required: true,
     },
-    date: { type: Date, required: true },
-    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    appointmentDate: { type: Date, required: true },
+    format: { type: String, required: true },
+    description: { type: String, required: true },
   },
   {
     timestamps: true,
