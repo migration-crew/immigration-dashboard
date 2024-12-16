@@ -58,6 +58,7 @@
   },
   "devDependencies": {
     "@types/d3-ease": "^3.0.2",
+    "@types/mongoose": "^5.11.97",
     "@types/next": "^9.0.0",
     "@types/node": "^20",
     "@types/react": "^18",

@@ -1,16 +1,23 @@
-import { ObjectId } from "mongodb";
-import mongoose, { Schema, model, models } from "mongoose";
+import { Model, Schema, model, models } from "mongoose";
+import { ApplicationType } from "../../types/application";
 
-const ApplicationSchema = new Schema(
-    {
-        userId: { type: String, required: true },
-        name: { type: String, required: true },
-        applicationTypeId: { type: ObjectId, required: true },
+type ApplicationModelType = Model<ApplicationType>
+
+const ApplicationSchema = new Schema<ApplicationType, ApplicationModelType>(
+  {
+    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    name: { type: String, required: true },
+    applicationType: {
+      type: Schema.Types.ObjectId,
+      ref: "ApplicationType",
+      required: true,
     },
-    {
-        timestamps: true
-    }
+  },
+  {
+    timestamps: true, versionKey: false
+  }
 );
 
-const Application = models.Application || model("Application", ApplicationSchema);
+const Application =
+  models.Application || model<ApplicationType, ApplicationModelType>("Application", ApplicationSchema);
 export default Application;
