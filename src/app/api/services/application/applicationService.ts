@@ -2,9 +2,10 @@ import { getUserId } from "../../lib/getUserId";
 import dbConnect from "../../lib/mongoose";
 import Application from "../../schemas/application/application.schema";
 import "../../schemas/application/applicationType.schema";
+import ApplicationType from "../../schemas/application/applicationType.schema";
 
 export const getApplications = async (userId: string) => {
-    await dbConnect()
+    await dbConnect();
     const userIdFromDB = await getUserId(userId)
     console.log('🚀', userIdFromDB);
     
@@ -12,20 +13,12 @@ export const getApplications = async (userId: string) => {
     return applications;
 };
 
-// export const getApplicationTypes = async () => {
-//     const client = await clientPromise;
-//     const db = client.db(DATABASE);
-//     const rawApplicationTypes = await db
-//         .collection("ApplicationTypes")
-//         .find()
-//         .toArray();
-//     return rawApplicationTypes.map(type => ({
-//         id: type._id,
-//         name: type.name,
-//         createdAt: type.createdAt,
-//         updatedAt: type.updatedAt
-//     }));
-// }
+export const getApplicationTypes = async () => {
+    await dbConnect();
+
+    const applicationTypes = await ApplicationType.find();
+    return applicationTypes;
+}
 
 // export const getApplicationTasks = async (applicationId: string, applicationTypeId: string) => {
 //     const client = await clientPromise;
