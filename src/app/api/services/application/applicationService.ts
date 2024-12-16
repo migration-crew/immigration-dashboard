@@ -1,6 +1,7 @@
 import { getUserId } from "../../lib/getUserId";
 import dbConnect from "../../lib/mongoose";
 import Application from "../../schemas/application/application.schema";
+import "../../schemas/application/applicationType.schema";
 
 export const getApplications = async (userId: string) => {
     await dbConnect()
@@ -9,24 +10,6 @@ export const getApplications = async (userId: string) => {
     
     const applications = await Application.find({"user": userIdFromDB}).populate("applicationType");
     return applications;
-
-    // const applicationsWithDetails = await Promise.all(
-    //     rawApplications.map(async app => {
-    //         const APPLICATIONS_TYPE_COLLECTION = "ApplicationTypes"
-    //         const applicationType = await db
-    //             .collection(APPLICATIONS_TYPE_COLLECTION)
-    //             .findOne({ _id: app.applicationTypeId });
-
-    //         return {
-    //             id: app._id,
-    //             name: app.name,
-    //             type: applicationType,
-    //             createAt: app.createdAt,
-    //             updatedAt: app.updatedAt
-    //         };
-    //     })
-    // );
-    // return applicationsWithDetails;
 };
 
 // export const getApplicationTypes = async () => {
