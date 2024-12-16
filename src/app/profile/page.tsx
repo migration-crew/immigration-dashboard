@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/upImmigrationButton";
 import { UserType } from "@/types/User/UserType";
-import axios from "axios";
+import { useAuth } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 import ProfileInput from "./_components/ProfileInput";
 
@@ -28,15 +28,27 @@ type User = {
   dateOfBirth?: string;
 };
 
-export const page = ({}: Props) => {
+export const page = async ({}: Props) => {
   const links = [{ name: "Profile", href: "/profile" }];
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [users, setUsers] = useState<User | null>(null);
+  const { getToken } = useAuth();
+  const token = await getToken();
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/user");
+        const response = await fetch(`http://localhost:3000/api/user`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to add item");
+        }
         setUsers(response.data);
       } catch (error) {
         console.error("Error fetching Users:", error);
@@ -44,6 +56,9 @@ export const page = ({}: Props) => {
     };
     fetchUsers();
   }, []);
+  const handleUpdateUser = (updatedData: User) => {
+    setUsers(updatedData);
+  };
 
   return (
     <PageContainer>
@@ -60,7 +75,9 @@ export const page = ({}: Props) => {
                 Upload Photo
               </Button>
             </div>
-            {users && <ProfileInput users={users} />}
+            {users && (
+              <ProfileInput users={users} onUpdateUser={handleUpdateUser} />
+            )}
             {/* <ProfileInput
               onDateChange={function (): void {
                 throw new Error("Function not implemented.");
