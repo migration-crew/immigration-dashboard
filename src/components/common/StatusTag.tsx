@@ -52,7 +52,10 @@ export default function StatusTag({ status }: Props) {
         setStatusLetter("Not Submitted");
         break;
       default:
-        throw new Error("this status is not excepted");
+        console.log("♣", status);
+        //throw new Error("this status is not excepted");
+        setVariant("gray");
+        setStatusLetter(status);
     }
   }, [status]);
 
