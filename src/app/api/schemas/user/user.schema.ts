@@ -11,7 +11,7 @@ const UserSchema = new Schema<UserType, UserModelType>(
     nationality: { type: String, required: true },
     language: { type: String, required: true },
     address: { type: String, required: true },
-    dateOfBirth: { type: Schema.Types.Date, required: true },
+    birthDate: { type: Schema.Types.Date, required: true },
     gender: { type: String, required: true },
     email: { type: String, required: true },
     imageURL: { type: String, required: true },
