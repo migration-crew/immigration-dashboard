@@ -49,15 +49,41 @@ export const page = async ({}: Props) => {
         if (!response.ok) {
           throw new Error("Failed to add item");
         }
-        setUsers(response.data);
+        const data = await response.json();
+        setUsers(data);
       } catch (error) {
         console.error("Error fetching Users:", error);
       }
     };
     fetchUsers();
-  }, []);
+  }, [token]);
+
   const handleUpdateUser = (updatedData: User) => {
     setUsers(updatedData);
+  };
+
+  const handleSubmitProfile = async (data: User) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/user/${users?.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (response.ok) {
+        const updatedData = await response.json();
+        handleUpdateUser(updatedData);
+      } else {
+        throw new Error("Failed to update user");
+      }
+    } catch (error) {
+      console.error("Error updating user:", error);
+    }
   };
 
   return (
@@ -76,14 +102,14 @@ export const page = async ({}: Props) => {
               </Button>
             </div>
             {users && (
-              <ProfileInput users={users} onUpdateUser={handleUpdateUser} />
+              <ProfileInput
+                users={users}
+                onSubmit={handleSubmitProfile}
+                onDateChange={function (): void {
+                  throw new Error("Function not implemented.");
+                }}
+              />
             )}
-            {/* <ProfileInput
-              onDateChange={function (): void {
-                throw new Error("Function not implemented.");
-              }}
-            /> */}
-            <Button className="w-[249px] h-14">Save</Button>
           </div>
         </Card>
       </div>

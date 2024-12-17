@@ -16,11 +16,10 @@ import {
 import { Button } from "@/components/ui/upImmigrationButton";
 import { Calendar } from "@/components/ui/upImmigrationCalendar";
 import { cn } from "@/lib/utils";
-import axios from "axios";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
 interface DateOfBirthPickerProps {
   onDateChange: (date: Date | undefined) => void;
@@ -34,25 +33,27 @@ type LanguageSelectProps = {
   onChange?: (value: string) => void;
 };
 
+type User = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  address: string;
+  nationality: string;
+  language: string;
+  gender: string;
+  imageURL: string;
+  dateOfBirth?: string;
+};
+
 type ProfileInputProps = {
-  users: {
-    id: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    address: string;
-    nationality: string;
-    language: string;
-    gender: string;
-    imageURL: string;
-    dateOfBirth?: string;
-  };
+  users: User;
+  onSubmit: SubmitHandler<User>;
 };
 
 export default function ProfileInput({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  onChange = () => {},
   users,
+  onSubmit,
 }: CountrySelectProps &
   LanguageSelectProps &
   DateOfBirthPickerProps &
@@ -62,8 +63,6 @@ export default function ProfileInput({
 
   const [date, setDate] = React.useState<Date>();
   const [selectedYear, setSelectedYear] = React.useState<number | undefined>();
-
-  const { control, setValue } = useForm();
 
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 100 }, (_, i) => currentYear - i);
@@ -75,6 +74,12 @@ export default function ProfileInput({
   const handleYearChange = (year: string) => {
     const yearNumber = parseInt(year);
     setSelectedYear(yearNumber);
+  };
+
+  const { control, setValue, handleSubmit } = useForm<User>();
+
+  const handleFormSubmit: SubmitHandler<User> = (data) => {
+    onSubmit(data);
   };
 
   useEffect(() => {
@@ -94,8 +99,13 @@ export default function ProfileInput({
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/countries");
-        setCountries(response.data);
+        const response = await fetch("http://localhost:3000/api/countries");
+        if (response.ok) {
+          const data = await response.json();
+          setCountries(data);
+        } else {
+          throw new Error("Error fetching countries");
+        }
       } catch (error) {
         console.error("Error fetching countries:", error);
       }
@@ -106,8 +116,13 @@ export default function ProfileInput({
   useEffect(() => {
     const fetchLanguages = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/languages");
-        setLanguages(response.data);
+        const response = await fetch("http://localhost:3000/api/languages");
+        if (response.ok) {
+          const data = await response.json();
+          setLanguages(data);
+        } else {
+          throw new Error("Error fetching languages");
+        }
       } catch (error) {
         console.error("Error fetching languages:", error);
       }
@@ -116,7 +131,7 @@ export default function ProfileInput({
   }, []);
 
   return (
-    <>
+    <form onSubmit={handleSubmit(handleFormSubmit)}>
       <Card className="grid gap-[18px] justify-center border-none shadow-none">
         <div className="flex gap-[60px]">
           <div className="w-[360px] h-auto">
@@ -246,7 +261,7 @@ export default function ProfileInput({
               <PopoverContent className="w-auto p-0">
                 <div className="flex justify-center space-x-2 p-2">
                   <Controller
-                    name="year"
+                    name="dateOfBirth"
                     control={control}
                     render={({ field }) => (
                       <Select
@@ -257,8 +272,6 @@ export default function ProfileInput({
                         }}
                         value={users.dateOfBirth}
                       >
-                        {/* onValueChange={(value: string) => } */}
-
                         <SelectTrigger className="w-[120px]">
                           <SelectValue placeholder="Select Year" />
                         </SelectTrigger>
@@ -307,7 +320,7 @@ export default function ProfileInput({
               <SelectContent>
                 <SelectItem value="male">Male</SelectItem>
                 <SelectItem value="female">Female</SelectItem>
-                <SelectItem value="female">Non-birnary</SelectItem>
+                <SelectItem value="female">Non-binary</SelectItem>
                 <SelectItem value="others">Prefer not to say</SelectItem>
               </SelectContent>
             </Select>
@@ -330,6 +343,9 @@ export default function ProfileInput({
           />
         </div>
       </Card>
-    </>
+      <Button className="w-[249px] h-14" type="submit">
+        Save
+      </Button>
+    </form>
   );
 }
