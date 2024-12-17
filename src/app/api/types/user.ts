@@ -7,7 +7,7 @@ export type UserType = {
   nationality: string
   language: string
   address: string
-  birthDate: Date
+  dateOfBirth: Date
   gender: string
   email: string
   imageURL: string
