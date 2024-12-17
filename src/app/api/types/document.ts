@@ -5,4 +5,6 @@ export type DocumentType = {
   application: Schema.Types.ObjectId
   status: string
   dueDate: Date
+  url: string
+  format: string
 }

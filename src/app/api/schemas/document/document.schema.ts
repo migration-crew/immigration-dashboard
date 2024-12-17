@@ -13,6 +13,8 @@ const DocumentSchema = new Schema<DocumentType, DocumentModelType>(
     },
     status: { type: String, required: true },
     dueDate: { type: Date, required: true },
+    format: { type: String, required: true },
+    url: { type: String, required: false },
   },
   {
     timestamps: true,

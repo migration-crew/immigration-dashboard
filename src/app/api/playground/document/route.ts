@@ -12,6 +12,7 @@ export async function POST(): Promise<NextResponse> {
       application: new ObjectId("675cd21adb674b3e14200df8"),
       status: "approved",
       dueDate: new Date("2024/12/30"),
+      format: "00004"
     });
     return NextResponse.json(newDocument, { status: 200 });
   } catch (error) {
