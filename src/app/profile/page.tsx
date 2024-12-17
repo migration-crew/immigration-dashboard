@@ -1,5 +1,5 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
+/* eslint-disable react-hooks/rules-of-hooks */
 
 import { BreadcrumbComponent } from "@/components/common/Breadcrumbs/BreadcrumbComponent";
 import { PageContainer } from "@/components/common/PageContainer";
@@ -28,15 +28,15 @@ type User = {
   dateOfBirth?: string;
 };
 
-export const page = async ({}: Props) => {
+export const page = ({}: Props) => {
   const links = [{ name: "Profile", href: "/profile" }];
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [users, setUsers] = useState<User | null>(null);
   const { getToken } = useAuth();
-  const token = await getToken();
 
   useEffect(() => {
     const fetchUsers = async () => {
+      const token = await getToken();
       try {
         const response = await fetch(`http://localhost:3000/api/user`, {
           method: "GET",
@@ -56,7 +56,7 @@ export const page = async ({}: Props) => {
       }
     };
     fetchUsers();
-  }, [token]);
+  }, []);
 
   const handleUpdateUser = (updatedData: User) => {
     setUsers(updatedData);
