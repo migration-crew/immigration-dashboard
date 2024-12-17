@@ -1,10 +1,24 @@
 // import { NextRequest, NextResponse } from "next/server";
 // import { getUser, NewUserInfo, updateUser } from "../services/user/userService";
 
-import { NextResponse } from "next/server";
 import dbConnect from "../lib/mongoose";
 import User from "../schemas/user/user.schema";
 import { UserType } from "../types/user";
+import { NextRequest, NextResponse } from "next/server";
+import { getUser, NewUserInfo, updateUser } from "../services/user/userService";
+import { getAuth } from "@clerk/nextjs/server";
+
+export async function GET(req: NextRequest) {
+    // Extract userId from the query parameters
+    const { userId } = getAuth(req);
+    
+    // Validate the userId
+    if (!userId || typeof userId !== 'string') {
+        return NextResponse.json(
+            { message: 'Not Authorized' },
+            { status: 400 }
+        );
+    }
 
 export async function POST(): Promise<NextResponse> {
   try {

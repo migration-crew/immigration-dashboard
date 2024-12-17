@@ -1,51 +1,24 @@
+import { getUserId } from "../../lib/getUserId";
 import dbConnect from "../../lib/mongoose";
 import Application from "../../schemas/application/application.schema";
+import "../../schemas/application/applicationType.schema";
+import ApplicationType from "../../schemas/application/applicationType.schema";
 
-// export const getApplications = async (userId: string) => {
-//     await dbConnect()
-//     const applications = await Application.find({"user": userId})
+export const getApplications = async (userId: string) => {
+    await dbConnect();
+    const userIdFromDB = await getUserId(userId)
+    console.log('🚀', userIdFromDB);
+    
+    const applications = await Application.find({"user": userIdFromDB}).populate("applicationType");
+    return applications;
+};
 
+export const getApplicationTypes = async () => {
+    await dbConnect();
 
-//     const client = await clientPromise;
-//     const db = client.db(DATABASE);
-//     const APPLICATIONS_COLLECTION = "Applications"
-//     const rawApplications = await db
-//         .collection(APPLICATIONS_COLLECTION)
-//         .find({ userId })
-//         .toArray();
-//     const applicationsWithDetails = await Promise.all(
-//         rawApplications.map(async app => {
-//             const APPLICATIONS_TYPE_COLLECTION = "ApplicationTypes"
-//             const applicationType = await db
-//                 .collection(APPLICATIONS_TYPE_COLLECTION)
-//                 .findOne({ _id: app.applicationTypeId });
-
-//             return {
-//                 id: app._id,
-//                 name: app.name,
-//                 type: applicationType,
-//                 createAt: app.createdAt,
-//                 updatedAt: app.updatedAt
-//             };
-//         })
-//     );
-//     return applicationsWithDetails;
-// };
-
-// export const getApplicationTypes = async () => {
-//     const client = await clientPromise;
-//     const db = client.db(DATABASE);
-//     const rawApplicationTypes = await db
-//         .collection("ApplicationTypes")
-//         .find()
-//         .toArray();
-//     return rawApplicationTypes.map(type => ({
-//         id: type._id,
-//         name: type.name,
-//         createdAt: type.createdAt,
-//         updatedAt: type.updatedAt
-//     }));
-// }
+    const applicationTypes = await ApplicationType.find();
+    return applicationTypes;
+}
 
 // export const getApplicationTasks = async (applicationId: string, applicationTypeId: string) => {
 //     const client = await clientPromise;
