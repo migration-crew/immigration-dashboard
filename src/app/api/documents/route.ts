@@ -1,19 +1,18 @@
-import { NextRequest, NextResponse } from "next/server";
-import { ObjectId } from "mongodb";
-import dbConnect from "../lib/mongoose";
 import { getAuth } from "@clerk/nextjs/server";
-import { getAllDocuments, NewDocumentInfoType, updateDocumentStatus } from "../services/document/documentService";
+import { NextRequest, NextResponse } from "next/server";
+import {
+  getAllDocuments,
+  NewDocumentInfoType,
+  updateDocumentStatus,
+} from "../services/document/documentService";
 
 export async function GET(req: NextRequest) {
   // Extract userId from the query parameters
   const { userId } = getAuth(req);
-    
+
   // Validate the userId
-  if (!userId || typeof userId !== 'string') {
-      return NextResponse.json(
-          { message: 'Not Authorized' },
-          { status: 400 }
-      );
+  if (!userId || typeof userId !== "string") {
+    return NextResponse.json({ message: "Not Authorized" }, { status: 400 });
   }
 
   // Validate the userId
@@ -24,10 +23,10 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const applicationId = searchParams.get("applicationId");
 
-  if(!applicationId || typeof applicationId !== 'string') {
+  if (!applicationId || typeof applicationId !== "string") {
     return NextResponse.json(
-        { message: 'Invalid Application Id' },
-        { status: 400 }
+      { message: "Invalid Application Id" },
+      { status: 400 }
     );
   }
 
@@ -70,14 +69,17 @@ export async function PUT(req: NextRequest) {
 
   // Validate the payment data
   if (!body || typeof body !== "object") {
-    return NextResponse.json({ message: "Invalid Document Data" }, { status: 400 });
+    return NextResponse.json(
+      { message: "Invalid Document Data" },
+      { status: 400 }
+    );
   }
 
-      // Validate the user data and map it to NewUserInfo
-    const document: NewDocumentInfoType = {
-      url: typeof body.documentURL === "string" ? body.paymentMethod : undefined,
-        status: typeof body.status === "string" ? body.status : undefined
-    };
+  // Validate the user data and map it to NewUserInfo
+  const document: NewDocumentInfoType = {
+    url: typeof body.documentURL === "string" ? body.documentURL : undefined,
+    status: typeof body.status === "string" ? body.status : undefined,
+  };
 
   try {
     // Call the service function to get the application types
@@ -85,7 +87,7 @@ export async function PUT(req: NextRequest) {
 
     // Return the found application types as the response
     return NextResponse.json(
-      { message: `Task ${updates.map(update => update)} updated successfully` },
+      { message: `Task ${updates.toString()} updated successfully` },
       { status: 200 }
     );
   } catch (error) {
