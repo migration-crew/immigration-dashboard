@@ -4,19 +4,17 @@ import { PaymentType } from "@/types/Payment/PaymentType";
 import { DynamicRoundedContainer } from "../DynamicRoundedContainer";
 import PaymentCarousel from "./PaymentCarousel";
 import { MicrotextSemi } from "../text/MicrotextSemi";
+import { getAllPayments } from "@/app/documents/_hooks/getAllPayments";
 
-export type testPaymentType = PaymentType & {
-  application: ApplicationType;
-  feeType: string;
-  dueDate: Date;
-};
 
 type Props = {
-  payments: testPaymentType[];
+  applicationId: string
   singleCard: boolean;
 };
 
-function AwaitingPayment({ payments, singleCard }: Props) {
+const AwaitingPayment = async({ applicationId, singleCard }: Props) => {
+  const payments = await getAllPayments(applicationId)
+  
   return (
     <DynamicRoundedContainer
       title="Awaiting Payment"

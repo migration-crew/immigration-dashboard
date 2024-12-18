@@ -11,11 +11,11 @@ import {
 import { CaptionSemi } from "../text/CaptionSemi";
 import { HeadingLight } from "../text/HeadingLight";
 import { Microtext } from "../text/Microtext";
-import { testPaymentType } from "./AwaitingPayment";
 import Link from "next/link";
+import { PaymentType } from "@/types/Payment/PaymentType";
 
 type Props = {
-  payments: testPaymentType[];
+  payments: PaymentType[];
   singleCard: boolean;
 };
 
@@ -55,7 +55,7 @@ function PaymentCarousel({ payments, singleCard }: Props) {
                       {payment.currency} {payment.amount.toFixed(2)}
                     </HeadingLight>
                     <Microtext>
-                      Due Date: {payment.dueDate.toDateString()}
+                      Due Date: {new Date(payment.dueDate).toLocaleDateString("en-us", {year: "numeric", month: "short", day: "numeric"})}
                     </Microtext>
                   </div>
                 </div>
