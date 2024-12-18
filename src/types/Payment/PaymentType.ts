@@ -1,11 +1,17 @@
+import { ApplicationType } from "@/types/Application/ApplicationType";
+
+
 export type PaymentType = {
-  id: string;
+  _id: string;
   amount: number;
   currency: string;
   status: string;
   paymentMethod: string;
   createdAt: string;
   invoiceURL: string;
+  application: ApplicationType;
+  type: string;
+  dueDate: string;
 };
 
 export type TablePaymentType = Pick<PaymentType, "id" | "status">;

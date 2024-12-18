@@ -8,6 +8,7 @@ export type PaymentType = {
   dueDate: Schema.Types.Date;
   application: Schema.Types.ObjectId;
   type: string;
+  invoiceURL: string
 };
 
 export type defaultType = {
