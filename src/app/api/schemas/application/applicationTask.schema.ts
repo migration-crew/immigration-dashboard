@@ -1,4 +1,4 @@
-import { Model, Schema, model } from "mongoose";
+import { Model, Schema, model, models } from "mongoose";
 import { ApplicationTaskType } from "../../types/applicationTask";
 
 type ApplicationTaskModelType = Model<ApplicationTaskType>;
@@ -18,7 +18,7 @@ ApplicationTaskModelType
   }
 );
 
-const ApplicationTask = model<ApplicationTaskType, ApplicationTaskModelType>(
+const ApplicationTask = models.ApplicationTask || model<ApplicationTaskType, ApplicationTaskModelType>(
   "ApplicationTask",
   ApplicationTaskSchema
 );
