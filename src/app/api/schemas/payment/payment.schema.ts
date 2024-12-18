@@ -16,6 +16,7 @@ const PaymentSchema = new Schema<PaymentType, PaymentModelType>(
       required: true,
     },
     type: { type: String, required: true },
+    invoiceURL:  { type: String, required: true },
   },
   {
     timestamps: true, versionKey: false
