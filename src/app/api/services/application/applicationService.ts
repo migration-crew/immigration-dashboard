@@ -2,7 +2,6 @@ import { ObjectId } from "mongodb";
 import { getUserId } from "../../lib/getUserId";
 import dbConnect from "../../lib/mongoose";
 import Application from "../../schemas/application/application.schema";
-//import "../../schemas/application/applicationType.schema";
 import ApplicationType from "../../schemas/application/applicationType.schema";
 
 export const getApplications = async (userId: string) => {
