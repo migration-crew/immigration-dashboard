@@ -3,6 +3,9 @@ import { getUserId } from "../../lib/getUserId";
 import dbConnect from "../../lib/mongoose";
 import Application from "../../schemas/application/application.schema";
 import ApplicationType from "../../schemas/application/applicationType.schema";
+import ApplicationTask from "../../schemas/application/applicationTask.schema";
+import ApplicationTaskDetail from "../../schemas/application/applicationTaskDetail.schema";
+import ApplicationComment from "../../schemas/application/applicationComment.schema";
 
 export const getApplications = async (userId: string) => {
   await dbConnect();
@@ -31,93 +34,52 @@ export const getApplicationTypes = async () => {
 };
 
 export const getApplicationTasks = async (applicationId: string, applicationTypeId: string) => {
-    await dbConnect();
+  await dbConnect();
 
-    const applicationTypes = await ApplicationType.findOne({ _id: new ObjectId(applicationTypeId) });
-    console.log('🚀', applicationTypes);
+  const applicationTypes = await ApplicationType.findOne({ _id: new ObjectId(applicationTypeId) });
 
-    // const client = await clientPromise;
-    // const db = client.db(DATABASE);
-    // const APPLICATION_TYPES_COLLECTION = "ApplicationTypes"
-    // const rawApplicationTypes = await db
-    //     .collection(APPLICATION_TYPES_COLLECTION)
-    //     .findOne({ _id: new ObjectId(applicationTypeId) });
+  if (!applicationTypes) {
+    return null;
+  }
 
-    // if (!rawApplicationTypes) {
-    //     return null;
-    // }
+  type ApplicationStage = {
+    name: string;
+    applicationTasks: ObjectId[];
+  }
 
-    // type ApplicationStage = {
-    //     name: string;
-    //     applicationTasks: ObjectId[];
-    // }
+  const result: Record<string, object> = {};
+  const applicationTasks = await Promise.all(applicationTypes.applicationStages.map(async (stage: ApplicationStage) => {
+    const tasks = await Promise.all(stage.applicationTasks.map(async (taskId: ObjectId) => {
+      const task = await ApplicationTask.findOne({ _id: taskId });
+      const taskDetail = await ApplicationTaskDetail.findOne({ applicationId: new ObjectId(applicationId), applicationTaskId: new ObjectId(taskId) });
 
-    // console.log('🚀');
+      if (!task || !taskDetail) {
+        return null;
+      }
 
-    // const APPLICATION_TASKS_COLLECTION = "ApplicationTasks"
-    const result: Record<string, any[]> = {};
-    // for (const stage of rawApplicationTypes.applicationStages) {
-    //     const stageTasks = await Promise.all(
-    //         stage.applicationTasks.map(async (taskId: ObjectId) => {
-    //             const taskInfo = await db
-    //                 .collection(APPLICATION_TASKS_COLLECTION)
-    //                 .findOne({ _id: taskId });
-    //             console.log('❤️', taskInfo);
+      const comments = await ApplicationComment.find({ applicationTaskDetailId: taskDetail._id }).populate('sender');
 
-    //             if (!taskInfo) {
-    //                 return null;
-    //             }
-                
-    //             const taskDetail = await db
-    //                 .collection("ApplicationTaskDetails")
-    //                 .findOne({ applicationId: new ObjectId(applicationId), applicationTaskId: new ObjectId(taskInfo?._id) });
-    //             console.log('🎉', taskDetail);
+      return {
+        id: taskId,
+        name: task.name,
+        description: task.description,
+        status: taskDetail.status,
+        dueDate: taskDetail.dueDate,
+        comments: comments,
+        documentURLs: task.documentURLs
+      };
+    }));
+    const progress = tasks.filter(task => task !== null).length / stage.applicationTasks.length * 100;
+    result[stage.name] = {
+      tasks: tasks.filter(task => task !== null),
+      progress: progress,
+    }
+  }));
 
-    //             if (!taskDetail) {
-    //                 return null;
-    //             }
+  console.log('🤩', applicationTasks);
+  console.log('🎉', result);
 
-    //             const APPLICATION_COMMENT_COLLECTION = "ApplicationComments"
-    //             const rawComments = await db
-    //                 .collection(APPLICATION_COMMENT_COLLECTION)
-    //                 .find({ applicationTaskDetailId: taskDetail?._id })
-    //                 .toArray();
-    //             console.log('🎊', rawComments);
-    
-    //             const comments = await Promise.all(
-    //                 rawComments.map(async comment => {
-    //                     const USERS_COLLECTION = "Users"
-    //                     const user = await db
-    //                         .collection(USERS_COLLECTION)
-    //                         .findOne({ userId: comment.senderId });
-    
-    //                     return {
-    //                         id: comment._id,
-    //                         user: user,
-    //                         content: comment.content,
-    //                         createdAt: comment.date,
-    //                     };
-    //                 })
-    //             )
-
-    //             return {
-    //                 id: taskDetail._id,
-    //                 name: taskInfo.name,
-    //                 description: taskInfo.description,
-    //                 status: taskDetail.status,
-    //                 dueDate: taskDetail.dueDate,
-    //                 comments: comments,
-    //                 documentURLs: taskInfo.documents,
-    //                 createdAt: taskDetail.createdAt,
-    //                 updatedAt: taskDetail.updatedAt
-    //             };
-    //         })
-    //     );
-
-    //     result[stage.name] = stageTasks.filter(task => task !== null);
-    // };
-    
-    return result;
+  return result;
 }
 
 // export const updateApplicationStatus = async (taskId: string, status: string) => {
