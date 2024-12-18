@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAppointmentTypes } from "../../services/appointment/appointmentService";
+import { getAllAppointmentTypes } from "../../services/appointment/appointmentService";
 import { getAuth } from "@clerk/nextjs/server";
 
 
@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
 
     try {
         // Call the service function to get the applications
-        const applicationTypes = await getAppointmentTypes();
+        const applicationTypes = await getAllAppointmentTypes();
 
         // Return the found applications as the response
         return NextResponse.json(
