@@ -1,10 +1,21 @@
+import moment from "moment";
 import dbConnect from "../../lib/mongoose";
+import Appointment from "../../schemas/appointment/appointment.schema";
 import AppointmentType from "../../schemas/appointment/appointmentType.schema";
+import  "../../schemas/user/user.schema";
+import  "../../schemas/appointment/appointmentType.schema";
 
 export const getAllAppointmentTypes = async () => {
     await dbConnect()
     const allAppointmentTypes = await AppointmentType.find()
     return allAppointmentTypes
+}
+
+export const getUpcomingAppointments = async () => {
+    await dbConnect()
+    const today = new Date()
+    const upcomingAppointments = await Appointment.find({appointmentDate: {$gt: moment(today).toDate()}}).populate("customer admin appointmentType")
+    return upcomingAppointments
 }
 
 // export type NewAppointment = {
