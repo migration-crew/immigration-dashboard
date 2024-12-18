@@ -13,7 +13,15 @@ export const getApplications = async (userId: string) => {
   const applications = await Application.find({ user: userIdFromDB }).populate(
     "applicationType"
   );
-  return applications;
+
+  const updatedApplications = applications.map((application, index) => ({
+    ...application.toObject(),
+    number: (index + 1).toString().padStart(3, "0"),
+    status: "Completed",
+    progress: 40,
+  }));
+
+  return updatedApplications;
 };
 
 export const getApplicationTypes = async () => {
