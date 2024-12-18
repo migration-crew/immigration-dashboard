@@ -1,44 +1,28 @@
-// import { NextRequest, NextResponse } from "next/server";
-// import { getUser, NewUserInfo, updateUser } from "../services/user/userService";
-
-import dbConnect from "../lib/mongoose";
-import User from "../schemas/user/user.schema";
-import { UserType } from "../types/user";
-import { NextRequest, NextResponse } from "next/server";
-import { getUser, NewUserInfo, updateUser } from "../services/user/userService";
 import { getAuth } from "@clerk/nextjs/server";
+import { NextRequest, NextResponse } from "next/server";
+import { getUser } from "../services/user/userService";
 
 export async function GET(req: NextRequest) {
-    // Extract userId from the query parameters
-    const { userId } = getAuth(req);
-    
-    // Validate the userId
-    if (!userId || typeof userId !== 'string') {
-        return NextResponse.json(
-            { message: 'Not Authorized' },
-            { status: 400 }
-        );
-    }
+  // Extract userId from the query parameters
+  const { userId } = getAuth(req);
 
-export async function POST(): Promise<NextResponse> {
+  // Validate the userId
+  if (!userId || typeof userId !== "string") {
+    return NextResponse.json({ message: "Not Authorized" }, { status: 400 });
+  }
+
   try {
-    await dbConnect();
-    const newUser: UserType = await User.create({
-      userId: "user3",
-      firstName: "Mihawk",
-      lastName: "Dracule",
-      nationality: "Romania",
-      language: "Romanian",
-      address: "random romanian address",
-      dateOfBirth: "1997/3/9",
-      gender: "male",
-      email: "examplemihawl@gmail.com",
-      imageURL: "https://imagesamplemihawk",
-      role: "admin"
-    });
-    return NextResponse.json(newUser, { status: 200 });
+    // Call the service function to get the user
+    const user = await getUser(userId);
+
+    // Return the found user as the response
+    return NextResponse.json(user, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ message: error }, { status: 500 });
+    console.error("Error fetching user:", error);
+    return NextResponse.json(
+      { message: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }
 
