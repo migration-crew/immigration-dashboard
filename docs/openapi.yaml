@@ -115,7 +115,7 @@ paths:
                 items:
                   type: object
                   $ref: "#/components/schemas/Payment"
-  /events:
+  /calendar:
     # post:
     #   summary: Create a new event
     #   tags: [ 'Calendar' ]
@@ -144,8 +144,8 @@ paths:
                 type: array
                 items:
                   type: object
-                  $ref: "#/components/schemas/Event"
-  /events/availability:
+                  $ref: "#/components/schemas/Calendar"
+  /calendar/availability:
     post:
       summary: Register admin user's availability
       tags: [ 'Calendar' ]
@@ -620,23 +620,30 @@ components:
       properties:
         status:
           type: string
-    Event:
+    Calendar:
       properties:
         id:
           type: string
         title:
           type: string
-        startDate:
+        start:
           type: string
           format: date-time
-        duration:
-          type: integer
-        description:
+        end:
           type: string
-        format:
+          format: date-time
+        type:
           type: string
-        appointmentType:
-          $ref: '#/components/schemas/AppointmentType'
+          description: "appointment, payment, document, availability"
+        allDay:
+          type: boolean
+          description: "true if the event is all day such as payment or document due date"
+      required:
+        - id
+        - title
+        - start
+        - type
+        - allDay
     EventPostRequest:
       type: object
       properties:
