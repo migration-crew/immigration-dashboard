@@ -1,8 +1,9 @@
-import { documents } from "@/app/playground/yuki/data/DocumentTable";
+// import { documents } from "@/app/playground/yuki/data/DocumentTable";
 import FilterSection from "@/components/common/FilterSection/FilterSection";
+import { getAllDocument } from "../_hooks/getAllDocument";
 import { DocumentTable } from "./DocumentTable";
 
-export const FilterTable = () => {
+export const FilterTable = async () => {
   const sortOptions = [
     { label: "Date: First to Last", value: "date_asc" },
     { label: "Date: Last to First", value: "date_desc" },
@@ -23,6 +24,8 @@ export const FilterTable = () => {
     { label: "Approved", value: "approved" },
     { label: "Rejected", value: "rejected" },
   ];
+
+  const documents = await getAllDocument("675cd21adb674b3e14200df8");
 
   return (
     <div className="grid gap-4">
