@@ -1,4 +1,4 @@
-import { Model, Schema, model } from "mongoose";
+import { Model, Schema, model, models } from "mongoose";
 import { DocumentType } from "../../types/document";
 
 type DocumentModelType = Model<DocumentType>;
@@ -22,8 +22,7 @@ const DocumentSchema = new Schema<DocumentType, DocumentModelType>(
   }
 );
 
-const Document = model<DocumentType, DocumentModelType>(
-  "Document",
-  DocumentSchema
-);
+const Document =
+  models.Document ||
+  model<DocumentType, DocumentModelType>("Document", DocumentSchema);
 export default Document;

@@ -1,7 +1,7 @@
 import { Model, Schema, model, models } from "mongoose";
 import { ApplicationType } from "../../types/application";
 
-type ApplicationModelType = Model<ApplicationType>
+type ApplicationModelType = Model<ApplicationType>;
 
 const ApplicationSchema = new Schema<ApplicationType, ApplicationModelType>(
   {
@@ -14,10 +14,15 @@ const ApplicationSchema = new Schema<ApplicationType, ApplicationModelType>(
     },
   },
   {
-    timestamps: true, versionKey: false
+    timestamps: true,
+    versionKey: false,
   }
 );
 
 const Application =
-  models.Application || model<ApplicationType, ApplicationModelType>("Application", ApplicationSchema);
+  models.Application ||
+  model<ApplicationType, ApplicationModelType>(
+    "Application",
+    ApplicationSchema
+  );
 export default Application;
