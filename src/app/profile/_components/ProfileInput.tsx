@@ -43,7 +43,7 @@ type User = {
   language: string;
   gender: string;
   imageURL: string;
-  dateOfBirth: Date;
+  dateOfBirth: string;
 };
 
 type ProfileInputProps = {
@@ -268,7 +268,7 @@ export default function ProfileInput({
                         onValueChange={(value) => {
                           field.onChange(value);
                           handleYearChange(value);
-                          setValue("gender", value);
+                          // setValue("gender", value);
                         }}
                         value={
                           users.dateOfBirth
@@ -347,9 +347,11 @@ export default function ProfileInput({
           />
         </div>
       </Card>
-      <Button className="w-[249px] h-14" type="submit">
-        Save
-      </Button>
+      <div className="flex justify-center mt-6">
+        <Button className="w-[249px] h-14 " type="submit">
+          Save
+        </Button>
+      </div>
     </form>
   );
 }
