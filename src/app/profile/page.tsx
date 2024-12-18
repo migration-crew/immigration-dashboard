@@ -25,7 +25,7 @@ type User = {
   language: string;
   gender: string;
   imageURL: string;
-  dateOfBirth?: string;
+  dateOfBirth: Date;
 };
 
 export const page = ({}: Props) => {
@@ -118,7 +118,3 @@ export const page = ({}: Props) => {
 };
 
 export default page;
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function setValue(_arg0: string, _arg1: string) {
-  throw new Error("Function not implemented.");
-}

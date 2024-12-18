@@ -43,7 +43,7 @@ type User = {
   language: string;
   gender: string;
   imageURL: string;
-  dateOfBirth?: string;
+  dateOfBirth: Date;
 };
 
 type ProfileInputProps = {
@@ -270,7 +270,11 @@ export default function ProfileInput({
                           handleYearChange(value);
                           setValue("gender", value);
                         }}
-                        value={users.dateOfBirth}
+                        value={
+                          users.dateOfBirth
+                            ? users.dateOfBirth.getFullYear().toString()
+                            : ""
+                        }
                       >
                         <SelectTrigger className="w-[120px]">
                           <SelectValue placeholder="Select Year" />
@@ -320,7 +324,7 @@ export default function ProfileInput({
               <SelectContent>
                 <SelectItem value="male">Male</SelectItem>
                 <SelectItem value="female">Female</SelectItem>
-                <SelectItem value="female">Non-binary</SelectItem>
+                <SelectItem value="nonBinary">Non-binary</SelectItem>
                 <SelectItem value="others">Prefer not to say</SelectItem>
               </SelectContent>
             </Select>
