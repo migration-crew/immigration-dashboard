@@ -1,5 +1,6 @@
 import { getAuth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
+import { getUser } from "../services/user/userService";
 
 export async function GET(req: NextRequest) {
   // Extract userId from the query parameters
@@ -11,21 +12,18 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-            // Call the service function to get the user
-            const user = await getUser(userId);
-    
-            // Return the found user as the response
-            return NextResponse.json(
-                user,
-                { status: 200 }
-            );
-        } catch (error) {
-            console.error('Error fetching user:', error);
-            return NextResponse.json(
-                { message: 'Internal Server Error' },
-                { status: 500 }
-            );
-        }
+    // Call the service function to get the user
+    const user = await getUser(userId);
+
+    // Return the found user as the response
+    return NextResponse.json(user, { status: 200 });
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    return NextResponse.json(
+      { message: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
 }
 
 // export async function GET(req: NextRequest) {
