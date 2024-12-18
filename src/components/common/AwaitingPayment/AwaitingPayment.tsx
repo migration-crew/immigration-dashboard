@@ -1,4 +1,4 @@
-import { getAllPayments } from "@/app/documents/_hooks/getAllPayments";
+import { getAllPayments } from "@/app/payments/_hooks/getAllPayments";
 import { cn } from "@/lib/utils";
 import { DynamicRoundedContainer } from "../DynamicRoundedContainer";
 import { MicrotextSemi } from "../text/MicrotextSemi";
