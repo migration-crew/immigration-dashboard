@@ -18,7 +18,7 @@ import { Calendar } from "@/components/ui/upImmigrationCalendar";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
 interface DateOfBirthPickerProps {
@@ -61,40 +61,24 @@ export default function ProfileInput({
   const [countries, setCountries] = useState<string[]>([]);
   const [languages, setLanguages] = useState<string[]>([]);
 
-  const [date, setDate] = React.useState<Date>();
-  const [selectedYear, setSelectedYear] = React.useState<number | undefined>();
-
-  const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: 100 }, (_, i) => currentYear - i);
-
-  const handleDateChange = (newDate: Date | undefined) => {
-    setDate(newDate);
-  };
-
-  const handleYearChange = (year: string) => {
-    const yearNumber = parseInt(year);
-    setSelectedYear(yearNumber);
-  };
-
-  const { control, setValue, handleSubmit } = useForm<User>();
-
-  const handleFormSubmit: SubmitHandler<User> = (data) => {
-    onSubmit(data);
-  };
-
-  useEffect(() => {
-    if (selectedYear !== undefined && date) {
-      const newDate = new Date(date);
-      newDate.setFullYear(selectedYear);
-      setDate(newDate);
-    }
-  }, [selectedYear]);
-
-  useEffect(() => {
-    if (!selectedYear && date) {
-      setSelectedYear(date.getFullYear());
-    }
-  }, [date]);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<User>({
+    defaultValues: {
+      firstName: users.firstName,
+      lastName: users.lastName,
+      email: users.email,
+      address: users.address,
+      nationality: users.nationality,
+      language: users.language,
+      gender: users.gender,
+      dateOfBirth: users.dateOfBirth,
+      id: users.id,
+      imageURL: users.imageURL,
+    },
+  });
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -131,24 +115,34 @@ export default function ProfileInput({
   }, []);
 
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Card className="grid gap-[18px] justify-center border-none shadow-none">
         <div className="flex gap-[60px]">
           <div className="w-[360px] h-auto">
             <label
-              htmlFor="first"
-              className=" block text-sm font-medium text-gray-700 pb-2 text-caption"
+              htmlFor="firstName"
+              className="block text-sm font-medium text-gray-700 pb-2 text-caption"
             >
               First Name
             </label>
-            <Input
-              id="first"
-              type="text"
-              placeholder="John"
-              className="h-[45px] bg-secondary-light-gray"
-              value={users.firstName}
-              onChange={(e) => setValue("firstName", e.target.value)}
+            <Controller
+              name="firstName"
+              control={control}
+              rules={{ required: "First name is required" }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  id="firstName"
+                  placeholder="John"
+                  className="h-[45px] bg-secondary-light-gray"
+                />
+              )}
             />
+            {errors.firstName && (
+              <span className="text-red-500 text-sm">
+                {errors.firstName.message}
+              </span>
+            )}
           </div>
           <div className="w-[360px] h-auto">
             <label
@@ -157,14 +151,24 @@ export default function ProfileInput({
             >
               Last Name
             </label>
-            <Input
-              id="last"
-              type="text"
-              placeholder="Smith"
-              className="h-[45px] bg-secondary-light-gray"
-              value={users.lastName}
-              onChange={(e) => setValue("lastName", e.target.value)}
+            <Controller
+              name="lastName"
+              control={control}
+              rules={{ required: "Last name is required" }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  id="lastName"
+                  placeholder="Smith"
+                  className="h-[45px] bg-secondary-light-gray"
+                />
+              )}
             />
+            {errors.lastName && (
+              <span className="text-red-500 text-sm">
+                {errors.lastName.message}
+              </span>
+            )}
           </div>
         </div>
         <div className="flex gap-[60px]">
@@ -175,21 +179,33 @@ export default function ProfileInput({
             >
               Nationality
             </label>
-            <Select
-              onValueChange={(value: string) => setValue("nationality", value)}
-              value={users.nationality}
-            >
-              <SelectTrigger className="SelectTrigger h-[45px] bg-secondary-light-gray">
-                <SelectValue placeholder="Country" className="text-gray-500" />
-              </SelectTrigger>
-              <SelectContent>
-                {countries.map((countryName) => (
-                  <SelectItem key={countryName} value={countryName}>
-                    {countryName}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <Controller
+              name="nationality"
+              control={control}
+              rules={{ required: "Nationality is required" }}
+              render={({ field }) => (
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <SelectTrigger className="SelectTrigger h-[45px] bg-secondary-light-gray">
+                    <SelectValue
+                      placeholder="Country"
+                      className="text-gray-500"
+                    />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {countries.map((countryName) => (
+                      <SelectItem key={countryName} value={countryName}>
+                        {countryName}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+            />
+            {errors.nationality && (
+              <span className="text-red-500 text-sm">
+                {errors.nationality.message}
+              </span>
+            )}
           </div>
           <div className="w-[360px] h-auto ">
             <label
@@ -198,24 +214,33 @@ export default function ProfileInput({
             >
               Language
             </label>
-            <Select
-              onValueChange={(value: string) => setValue("language", value)}
-              value={users.language}
-            >
-              <SelectTrigger className="SelectTrigger h-[45px] bg-secondary-light-gray">
-                <SelectValue
-                  placeholder="Please select language"
-                  className="placeholder-opacity-55 text-caption"
-                />
-              </SelectTrigger>
-              <SelectContent>
-                {languages.map((languageName) => (
-                  <SelectItem key={languageName} value={languageName}>
-                    {languageName}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <Controller
+              name="language"
+              control={control}
+              rules={{ required: "Language is required" }}
+              render={({ field }) => (
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <SelectTrigger className="SelectTrigger h-[45px] bg-secondary-light-gray">
+                    <SelectValue
+                      placeholder="Please select language"
+                      className="placeholder-opacity-55 text-caption"
+                    />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {languages.map((languageName) => (
+                      <SelectItem key={languageName} value={languageName}>
+                        {languageName}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+            />
+            {errors.language && (
+              <span className="text-red-500 text-sm">
+                {errors.language.message}
+              </span>
+            )}
           </div>
         </div>
         <div className="w-[780px]">
@@ -225,14 +250,24 @@ export default function ProfileInput({
           >
             Address
           </label>
-          <Input
-            id="address"
-            type="text"
-            placeholder="1425 10th Avenue, Victoria BC, Canada"
-            className="h-[45px] bg-secondary-light-gray"
-            value={users.address}
-            onChange={(e) => setValue("address", e.target.value)}
+          <Controller
+            name="address"
+            control={control}
+            rules={{ required: "Address is required" }}
+            render={({ field }) => (
+              <Input
+                {...field}
+                id="address"
+                placeholder="1425 10th Avenue, Victoria BC, Canada"
+                className="h-[45px] bg-secondary-light-gray"
+              />
+            )}
           />
+          {errors.address && (
+            <span className="text-red-500 text-sm">
+              {errors.address.message}
+            </span>
+          )}
         </div>
         <div className="flex gap-[60px] h-[64px]">
           <div className="w-[360px] h-auto">
@@ -242,67 +277,45 @@ export default function ProfileInput({
             >
               Date of Birth
             </label>
-            <Popover>
-              <PopoverTrigger
-                asChild
-                className="h-[45px] bg-secondary-light-gray"
-              >
-                <Button
-                  variant={"outline"}
-                  className={cn(
-                    "w-[360px] justify-start text-left font-normal",
-                    !date && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {date ? format(date, "PPP") : <span>Pick a date</span>}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0">
-                <div className="flex justify-center space-x-2 p-2">
-                  <Controller
-                    name="dateOfBirth"
-                    control={control}
-                    render={({ field }) => (
-                      <Select
-                        onValueChange={(value) => {
-                          field.onChange(value);
-                          handleYearChange(value);
-                          // setValue("gender", value);
-                        }}
-                        value={
-                          users.dateOfBirth
-                            ? users.dateOfBirth.getFullYear().toString()
-                            : ""
-                        }
-                      >
-                        <SelectTrigger className="w-[120px]">
-                          <SelectValue placeholder="Select Year" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {years.map((year) => (
-                            <SelectItem key={year} value={year.toString()}>
-                              {year}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    )}
-                  />
-                </div>
-                <Calendar
-                  mode="single"
-                  selected={date}
-                  onSelect={handleDateChange}
-                  initialFocus
-                  month={
-                    selectedYear
-                      ? new Date(selectedYear, date?.getMonth() || 0)
-                      : undefined
-                  }
-                />
-              </PopoverContent>
-            </Popover>
+            <Controller
+              name="dateOfBirth"
+              control={control}
+              rules={{ required: "Date of birth is required" }}
+              render={({ field }) => (
+                <Popover>
+                  <PopoverTrigger
+                    asChild
+                    className="h-[45px] bg-secondary-light-gray"
+                  >
+                    <Button
+                      variant={"outline"}
+                      className={cn(
+                        "w-[360px] justify-start text-left font-normal",
+                        !field.value && "text-muted-foreground"
+                      )}
+                    >
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {field.value ? (
+                        format(new Date(field.value), "PPP")
+                      ) : (
+                        <span>Pick a date</span>
+                      )}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0">
+                    <Calendar
+                      mode="single"
+                      selected={field.value ? new Date(field.value) : undefined}
+                      onSelect={(date) => field.onChange(date?.toISOString())}
+                      defaultMonth={
+                        field.value ? new Date(field.value) : undefined
+                      }
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+              )}
+            />
           </div>
           <div className="w-[360px] h-auto">
             <label
@@ -311,23 +324,27 @@ export default function ProfileInput({
             >
               Gender
             </label>
-            <Select
-              onValueChange={(value: string) => setValue("gender", value)}
-              value={users.gender}
-            >
-              <SelectTrigger className="SelectTrigger  h-[45px] bg-secondary-light-gray">
-                <SelectValue
-                  placeholder="Select Gender"
-                  className="opacity-50 text-caption"
-                />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="male">Male</SelectItem>
-                <SelectItem value="female">Female</SelectItem>
-                <SelectItem value="nonBinary">Non-binary</SelectItem>
-                <SelectItem value="others">Prefer not to say</SelectItem>
-              </SelectContent>
-            </Select>
+            <Controller
+              name="gender"
+              control={control}
+              rules={{ required: "Gender is required" }}
+              render={({ field }) => (
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <SelectTrigger className="SelectTrigger  h-[45px] bg-secondary-light-gray">
+                    <SelectValue
+                      placeholder="Select Gender"
+                      className="opacity-50 text-caption"
+                    />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="male">Male</SelectItem>
+                    <SelectItem value="female">Female</SelectItem>
+                    <SelectItem value="nonBinary">Non-binary</SelectItem>
+                    <SelectItem value="others">Prefer not to say</SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
+            />
           </div>
         </div>
         <div className="w-[780px]">
@@ -337,14 +354,28 @@ export default function ProfileInput({
           >
             E-mail
           </label>
-          <Input
-            id="email"
-            type="text"
-            placeholder="john_smith123@gmail.com"
-            className="h-[45px] bg-secondary-light-gray"
-            value={users.email}
-            onChange={(e) => setValue("email", e.target.value)}
+          <Controller
+            name="email"
+            control={control}
+            rules={{
+              required: "Email is required",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Invalid email address",
+              },
+            }}
+            render={({ field }) => (
+              <Input
+                {...field}
+                id="email"
+                placeholder="john_smith123@gmail.com"
+                className="h-[45px] bg-secondary-light-gray"
+              />
+            )}
           />
+          {errors.email && (
+            <span className="text-red-500 text-sm">{errors.email.message}</span>
+          )}
         </div>
       </Card>
       <div className="flex justify-center mt-6">
