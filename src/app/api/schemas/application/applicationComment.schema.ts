@@ -1,4 +1,4 @@
-import { Model, Schema, model } from "mongoose";
+import { Model, Schema, model, models } from "mongoose";
 import { ApplicationCommentType } from "../../types/applicationComment";
 
 type ApplicationCommentModelType = Model<ApplicationCommentType>;
@@ -32,8 +32,10 @@ const ApplicationCommentSchema = new Schema<
   }
 );
 
-const ApplicationComment = model<
-  ApplicationCommentType,
-  ApplicationCommentModelType
->("ApplicationComment", ApplicationCommentSchema);
+const ApplicationComment =
+  models.ApplicationComment ||
+  model<ApplicationCommentType, ApplicationCommentModelType>(
+    "ApplicationComment",
+    ApplicationCommentSchema
+  );
 export default ApplicationComment;

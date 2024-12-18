@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/upImmigrationTable";
+import { ApplicationTypeType } from "@/types/Application/ApplicationTypeType";
 import { useRouter } from "next/navigation";
 import RoundedProgressBar from "./RoundedProgressBar";
 import { CaptionSemi } from "./text/CaptionSemi";
@@ -16,7 +17,7 @@ type Application = {
   id: string;
   number: string;
   name: string;
-  type: string;
+  applicationType: ApplicationTypeType;
   progress: number;
   status: string;
 };
@@ -25,13 +26,13 @@ type Props = {
   applicationData: Application[];
 };
 
-const visaTypeLabels = {
+/* const visaTypeLabels = {
   student: "Student Visa",
   workPermit: "Work Permit",
   lmia: "LMIA",
   check: "Check",
   visitor: "Visitor",
-};
+}; */
 
 export function Applicationtable({ applicationData }: Props) {
   const router = useRouter();
@@ -76,9 +77,7 @@ export function Applicationtable({ applicationData }: Props) {
             <TableCell className="text-caption-semi">
               {application.name}
             </TableCell>
-            <TableCell>
-              {visaTypeLabels[application.type as keyof typeof visaTypeLabels]}
-            </TableCell>
+            <TableCell>{application.applicationType.name}</TableCell>
             <TableCell>
               <RoundedProgressBar progress={application.progress} />
             </TableCell>

@@ -7,19 +7,13 @@ import {
   TableCell,
   TableRow,
 } from "@/components/ui/upImmigrationTable";
-import { InvoicePaymentType } from "@/types/Payment/PaymentType";
+import { PaymentType } from "@/types/Payment/PaymentType";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { LiaDownloadSolid } from "react-icons/lia";
 
-type InvoiceTable = {
-  invoice: InvoicePaymentType;
-  name: string;
-  type: string;
-};
-
 type Props = {
-  invoiceData: InvoiceTable[];
+  invoiceData: PaymentType[];
 };
 
 export default function Invoices({ invoiceData }: Props) {
@@ -52,26 +46,26 @@ export default function Invoices({ invoiceData }: Props) {
           {currentItems.map((invoiceType, index) => (
             <TableRow key={index} className="h-[49px]">
               <TableCell className="text-caption-semi w-[17%] ">
-                {invoiceType.invoice.id}
+                {invoiceType._id}
               </TableCell>
               <TableCell className="text-caption-semi w-[36%]">
-                {invoiceType.name}
+                {invoiceType.application.name}
               </TableCell>
               <TableCell className="text-caption-semi w-[17%]">
                 {invoiceType.type}
               </TableCell>
               <TableCell
                 className={`text-caption-semi w-[17%] ${
-                  invoiceType.invoice.status === "Paid"
+                  invoiceType.status === "paid"
                     ? "text-secondary-green"
-                    : invoiceType.invoice.status === "Refunded"
+                    : invoiceType.status === "refunded"
                     ? "text-secondary-medium-gray"
-                    : invoiceType.invoice.status === "Unpaid"
+                    : invoiceType.status === "unpaid"
                     ? "text-primary-red"
                     : ""
                 }`}
               >
-                {invoiceType.invoice.status}
+                {invoiceType.status}
               </TableCell>
               <TableCell className="w-[13px] h-[33px] ">
                 <Button className="text-primary-red bg-primary-white text-caption-semi">
