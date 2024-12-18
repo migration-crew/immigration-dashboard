@@ -1,4 +1,4 @@
-import { Model, Schema, model } from "mongoose";
+import { Model, Schema, model, models } from "mongoose";
 import { ChatGroupType } from "../../types/inbox";
 
 type ChatGroupModelType = Model<ChatGroupType>;
@@ -18,8 +18,7 @@ const ChatGroupSchema = new Schema<ChatGroupType, ChatGroupModelType>(
   }
 );
 
-const ChatGroup = model<ChatGroupType, ChatGroupModelType>(
-  "ChatGroup",
-  ChatGroupSchema
-);
+const ChatGroup =
+  models.ChatGroup ||
+  model<ChatGroupType, ChatGroupModelType>("ChatGroup", ChatGroupSchema);
 export default ChatGroup;
