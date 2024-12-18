@@ -25,13 +25,13 @@ type Props = {
   applicationData: Application[];
 };
 
-const visaTypeLabels = {
+/* const visaTypeLabels = {
   student: "Student Visa",
   workPermit: "Work Permit",
   lmia: "LMIA",
   check: "Check",
   visitor: "Visitor",
-};
+}; */
 
 export function Applicationtable({ applicationData }: Props) {
   const router = useRouter();
@@ -76,9 +76,7 @@ export function Applicationtable({ applicationData }: Props) {
             <TableCell className="text-caption-semi">
               {application.name}
             </TableCell>
-            <TableCell>
-              {visaTypeLabels[application.type as keyof typeof visaTypeLabels]}
-            </TableCell>
+            <TableCell>{application.type}</TableCell>
             <TableCell>
               <RoundedProgressBar progress={application.progress} />
             </TableCell>

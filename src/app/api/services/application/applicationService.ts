@@ -1,24 +1,26 @@
 import { getUserId } from "../../lib/getUserId";
 import dbConnect from "../../lib/mongoose";
 import Application from "../../schemas/application/application.schema";
-import "../../schemas/application/applicationType.schema";
+//import "../../schemas/application/applicationType.schema";
 import ApplicationType from "../../schemas/application/applicationType.schema";
 
 export const getApplications = async (userId: string) => {
-    await dbConnect();
-    const userIdFromDB = await getUserId(userId)
-    console.log('🚀', userIdFromDB);
-    
-    const applications = await Application.find({"user": userIdFromDB}).populate("applicationType");
-    return applications;
+  await dbConnect();
+  const userIdFromDB = await getUserId(userId);
+  console.log("🚀", userIdFromDB);
+
+  const applications = await Application.find({ user: userIdFromDB }).populate(
+    "applicationType"
+  );
+  return applications;
 };
 
 export const getApplicationTypes = async () => {
-    await dbConnect();
+  await dbConnect();
 
-    const applicationTypes = await ApplicationType.find();
-    return applicationTypes;
-}
+  const applicationTypes = await ApplicationType.find();
+  return applicationTypes;
+};
 
 // export const getApplicationTasks = async (applicationId: string, applicationTypeId: string) => {
 //     const client = await clientPromise;
@@ -52,7 +54,7 @@ export const getApplicationTypes = async () => {
 //                 if (!taskInfo) {
 //                     return null;
 //                 }
-                
+
 //                 const taskDetail = await db
 //                     .collection("ApplicationTaskDetails")
 //                     .findOne({ applicationId: new ObjectId(applicationId), applicationTaskId: new ObjectId(taskInfo?._id) });
@@ -68,14 +70,14 @@ export const getApplicationTypes = async () => {
 //                     .find({ applicationTaskDetailId: taskDetail?._id })
 //                     .toArray();
 //                 console.log('🎊', rawComments);
-    
+
 //                 const comments = await Promise.all(
 //                     rawComments.map(async comment => {
 //                         const USERS_COLLECTION = "Users"
 //                         const user = await db
 //                             .collection(USERS_COLLECTION)
 //                             .findOne({ userId: comment.senderId });
-    
+
 //                         return {
 //                             id: comment._id,
 //                             user: user,
@@ -101,7 +103,7 @@ export const getApplicationTypes = async () => {
 
 //         result[stage.name] = stageTasks.filter(task => task !== null);
 //     };
-    
+
 //     return result;
 // }
 
