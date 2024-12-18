@@ -8,10 +8,13 @@ import { applications } from "@/data/applications";
 // import { invoices } from "../playground/yui/data/invoice";
 import Invoices from "./_components/Invoices";
 import RefundPolicy from "./_components/RefundPolicy";
+import { getAllPayments } from "@/app/payments/_hooks/getAllPayments";
 
-const page = () => {
+const page = async() => {
   const links = [{ name: "Payment", href: "/payments" }];
   const applicationId: string = "67436dbb9f3002f9d49d5a54";
+  
+  const payments = await getAllPayments(applicationId);
   return (
     <PageContainer>
       <div className="flex justify-between items-center">
@@ -19,11 +22,11 @@ const page = () => {
         <ApplicationSwitcher applications={applications} />
       </div>
       <div className="flex justify-between gap-4">
-        <AwaitingPayment applicationId={applicationId} singleCard={false} />
+        <AwaitingPayment payments={payments} singleCard={false} />
         <RefundPolicy />
       </div>
       <DynamicRoundedContainer title="Invoice">
-        <Invoices invoiceData={invoices} />
+        <Invoices invoiceData={payments} />
       </DynamicRoundedContainer>
     </PageContainer>
   );
