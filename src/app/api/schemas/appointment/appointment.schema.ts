@@ -1,16 +1,27 @@
-import { ObjectId } from "mongodb";
-import { Schema, model, models } from "mongoose";
+import { Model, Schema, model, models } from "mongoose";
+import { AppointmentType } from "../../types/appointment";
 
-const AppointmentSchema = new Schema(
-    {
-        appointmentTypeId: { type: ObjectId, required: true },
-        date: { type: Date, required: true },
-        userId: { type: String, required: true },
+type AppointmentModelType = Model<AppointmentType>;
+
+const AppointmentSchema = new Schema<AppointmentType, AppointmentModelType>(
+  {
+    customer: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    admin: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    appointmentType: {
+      type: Schema.Types.ObjectId,
+      ref: "AppointmentType",
+      required: true,
     },
-    {
-        timestamps: true
-    }
+    appointmentDate: { type: Date, required: true },
+    format: { type: String, required: true },
+    description: { type: String, required: true },
+  },
+  {
+    timestamps: true,
+    versionKey: false,
+  }
 );
 
-const Appointment = models.Appointment || model("Appointment", AppointmentSchema);
+const Appointment =
+  models.Appointment || model<AppointmentType, AppointmentModelType>("Appointment", AppointmentSchema);
 export default Appointment;

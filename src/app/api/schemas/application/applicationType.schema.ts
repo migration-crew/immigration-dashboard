@@ -26,11 +26,11 @@ const ApplicationTypeSchema = new Schema<
   }
 );
 
-//const ApplicationType = model<ApplicationTypeType, ApplicationTypeModelType>("ApplicationType", ApplicationTypeSchema);
 const ApplicationType =
   models.ApplicationType ||
   model<ApplicationTypeType, ApplicationTypeModelType>(
     "ApplicationType",
     ApplicationTypeSchema
   );
+
 export default ApplicationType;
