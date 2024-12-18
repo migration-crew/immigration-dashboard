@@ -4,6 +4,7 @@ import Appointment from "../../schemas/appointment/appointment.schema";
 import AppointmentType from "../../schemas/appointment/appointmentType.schema";
 import  "../../schemas/user/user.schema";
 import  "../../schemas/appointment/appointmentType.schema";
+import User from "../../schemas/user/user.schema";
 
 export const getAllAppointmentTypes = async () => {
     await dbConnect()
@@ -11,10 +12,14 @@ export const getAllAppointmentTypes = async () => {
     return allAppointmentTypes
 }
 
-export const getUpcomingAppointments = async () => {
+export const getUpcomingAppointments = async (userId: string) => {
+    console.log(userId);
+    
     await dbConnect()
     const today = new Date()
-    const upcomingAppointments = await Appointment.find({appointmentDate: {$gt: moment(today).toDate()}}).populate("customer admin appointmentType")
+    const user = await User.findOne({userId: userId}).select("_id")
+
+    const upcomingAppointments = await Appointment.find({appointmentDate: {$gt: moment(today).toDate()}, $or: [{customer: user}, {admin: user}]}).populate("customer admin appointmentType")
     return upcomingAppointments
 }
 

@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
 
   try {
     // Call the service function to get the applications
-    const upcomingAppointments = await getUpcomingAppointments();
+    const upcomingAppointments = await getUpcomingAppointments(userId);
 
     // Return the found applications as the response
     return NextResponse.json(upcomingAppointments, { status: 200 });
