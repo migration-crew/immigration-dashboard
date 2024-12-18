@@ -46,13 +46,13 @@ export default function Invoices({ invoiceData }: Props) {
           {currentItems.map((invoiceType, index) => (
             <TableRow key={index} className="h-[49px]">
               <TableCell className="text-caption-semi w-[17%] ">
-                {invoiceType.id}
+                {invoiceType._id}
               </TableCell>
               <TableCell className="text-caption-semi w-[36%]">
                 {invoiceType.application.name}
               </TableCell>
               <TableCell className="text-caption-semi w-[17%]">
-                {invoiceType.feeType}
+                {invoiceType.type}
               </TableCell>
               <TableCell
                 className={`text-caption-semi w-[17%] ${

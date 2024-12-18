@@ -2,7 +2,7 @@ import { ApplicationType } from "@/types/Application/ApplicationType";
 
 
 export type PaymentType = {
-  id: string;
+  _id: string;
   amount: number;
   currency: string;
   status: string;
@@ -10,7 +10,7 @@ export type PaymentType = {
   createdAt: string;
   invoiceURL: string;
   application: ApplicationType;
-  feeType: string;
+  type: string;
   dueDate: string;
 };
 
