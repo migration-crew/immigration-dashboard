@@ -11,7 +11,7 @@ import RefundPolicy from "./_components/RefundPolicy";
 
 const page = () => {
   const links = [{ name: "Payment", href: "/payments" }];
-  const applicationId: string = "67436dbb9f3002f9d49d5a54"
+  const applicationId: string = "67436dbb9f3002f9d49d5a54";
   return (
     <PageContainer>
       <div className="flex justify-between items-center">

@@ -1,20 +1,17 @@
-import { cn } from "@/lib/utils";
-import { ApplicationType } from "@/types/Application/ApplicationType";
-import { PaymentType } from "@/types/Payment/PaymentType";
-import { DynamicRoundedContainer } from "../DynamicRoundedContainer";
-import PaymentCarousel from "./PaymentCarousel";
-import { MicrotextSemi } from "../text/MicrotextSemi";
 import { getAllPayments } from "@/app/documents/_hooks/getAllPayments";
-
+import { cn } from "@/lib/utils";
+import { DynamicRoundedContainer } from "../DynamicRoundedContainer";
+import { MicrotextSemi } from "../text/MicrotextSemi";
+import PaymentCarousel from "./PaymentCarousel";
 
 type Props = {
-  applicationId: string
+  applicationId: string;
   singleCard: boolean;
 };
 
-const AwaitingPayment = async({ applicationId, singleCard }: Props) => {
-  const payments = await getAllPayments(applicationId)
-  
+const AwaitingPayment = async ({ applicationId, singleCard }: Props) => {
+  const payments = await getAllPayments(applicationId);
+
   return (
     <DynamicRoundedContainer
       title="Awaiting Payment"
@@ -35,13 +32,10 @@ const AwaitingPayment = async({ applicationId, singleCard }: Props) => {
               {payments.length !== 1 ? "s" : ""}.
             </span>
           </MicrotextSemi>
-          <PaymentCarousel
-            payments={payments}
-            singleCard={singleCard}
-          />
+          <PaymentCarousel payments={payments} singleCard={singleCard} />
         </>
       )}
     </DynamicRoundedContainer>
   );
-}
+};
 export default AwaitingPayment;
