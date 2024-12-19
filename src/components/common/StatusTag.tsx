@@ -23,6 +23,13 @@ export default function StatusTag({ status }: Props) {
   const [variant, setVariant] = useState<variantType>(null);
   useEffect(() => {
     switch (status) {
+      case "notStarted":
+        setVariant("gray");
+        setStatusLetter("Not Started");
+        break;
+      case "inProgress":
+        setVariant("blue");
+        setStatusLetter("In Progress");
       case "completed":
         setVariant("green");
         setStatusLetter("Completed");

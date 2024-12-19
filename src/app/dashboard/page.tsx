@@ -9,16 +9,14 @@ import { TaskCard } from "@/components/common/TaskCard/TaskCard";
 import { CaptionSemi } from "@/components/common/text/CaptionSemi";
 import { Paragraph } from "@/components/common/text/Paragraph";
 import { Button } from "@/components/ui/upImmigrationButton";
-import { applications } from "@/data/applications";
 import { currentTasks } from "@/data/currentTasks";
-import { progresses } from "@/data/progresses";
 import { StageProgressType } from "@/types/Application/ApplicationType";
 import QuickCalendar from "../playground/david/QuickCalendar";
 import { events } from "../playground/david/data/events";
-// import { payments } from "../playground/saulo/data/payment";
 import { fetchApplicationTasks } from "@/hooks/getApplicationTasks";
 import { ApplicationTaskType } from "@/types/Application/ApplicationTaskType";
-import { getAllPayments } from "../payments/_hooks/getAllPayments";
+import { getAllPayments } from "@/hooks/getAllPayments";
+import { getAllApplications } from "@/hooks/getAllApplications";
 
 const INITIAL_LINKS = [
   { name: "Dashboard", href: "/dashboard" },
@@ -37,13 +35,13 @@ export default async function DashboardPage() {
     { _id: "4", name: "Pre-Departure", percentage: preDepartureTasks.progress },
   ]
   const payments = await getAllPayments(applicationId);
+  const applications = await getAllApplications();
 
   return (
     <PageContainer>
       <div className="flex justify-between items-center">
         <BreadcrumbComponent links={INITIAL_LINKS} />
-        {/* FIXME: There is an error here, so we're gonna fix it later */}
-        {/* <ApplicationSwitcher applications={applications} /> */}
+        <ApplicationSwitcher applications={applications} />
       </div>
       <div className="flex justify-between">
         <ApplicationProgress progresses={progresses} />
