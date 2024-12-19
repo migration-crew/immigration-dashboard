@@ -17,7 +17,7 @@ export const getAllApplications = async () => {
     if (!response.ok) {
       throw new Error("Failed to fetch applications");
     }
-    return response.json() as unknown as ApplicationType;
+    return response.json() as unknown as ApplicationType[];
   } catch (error) {
     console.log("😮", "failed to fetch applications: ", error);
     return [];
