@@ -1,16 +1,18 @@
 import ApplicationSwitcher from "@/components/common/ApplicationSwitcher";
 import { BreadcrumbComponent } from "@/components/common/Breadcrumbs/BreadcrumbComponent";
 import { PageContainer } from "@/components/common/PageContainer";
-import { applications } from "@/data/applications";
+// import { applications } from "@/data/applications";
 import { FilterTable } from "./_components/FilterTable";
 import { NewDocForm } from "./_components/NewDocForm";
+import { getAllApplications } from "@/hooks/getAllApplications";
 
-const documentPage = () => {
+const documentPage = async() => {
   const isAdmin = true;
   const links = [
     { name: "Documents", href: "/documents" },
     { name: "Maria_CICCC_UX/UI_2", href: "/documents" },
   ];
+  const applications = await getAllApplications()
 
   return (
     <PageContainer className="flex flex-col">
