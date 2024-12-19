@@ -1,5 +1,5 @@
 export type UserType = {
-  id: string;
+  _id: string;
   firstName: string;
   lastName: string;
   nationality: string;
@@ -8,12 +8,11 @@ export type UserType = {
   birthDate: string;
   gender: string;
   email: string;
-  imageUrl: string;
+  imageURL: string;
 };
 
-export type BasicUserType = Pick<UserType, "id" | "firstName" | "imageUrl"> &
-  Partial<Pick<UserType, "lastName">>;
+export type BasicUserType = UserType;
 export type chatUserType = Pick<
   UserType,
-  "id" | "firstName" | "imageUrl" | "lastName" | "email"
+  "_id" | "firstName" | "imageURL" | "lastName" | "email"
 >;

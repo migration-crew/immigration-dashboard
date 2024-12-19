@@ -51,7 +51,7 @@ export const getApplicationTasks = async (applicationId: string, applicationType
   const applicationTasks = await Promise.all(applicationTypes.applicationStages.map(async (stage: ApplicationStage) => {
     const tasks = await Promise.all(stage.applicationTasks.map(async (taskId: ObjectId) => {
       const task = await ApplicationTask.findOne({ _id: taskId });
-      const taskDetail = await ApplicationTaskDetail.findOne({ applicationId: new ObjectId(applicationId), applicationTaskId: new ObjectId(taskId) });
+      const taskDetail = await ApplicationTaskDetail.findOne({ applicationId: new ObjectId(applicationId), applicationTaskId: taskId });
 
       if (!task || !taskDetail) {
         return null;
