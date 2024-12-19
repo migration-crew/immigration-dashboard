@@ -17,6 +17,7 @@ import QuickCalendar from "../playground/david/QuickCalendar";
 import { events } from "../playground/david/data/events";
 import { payments } from "../playground/saulo/data/payment";
 import { fetchApplicationTasks } from "@/hooks/getApplicationTasks";
+import { ApplicationTaskType } from "@/types/Application/ApplicationTaskType";
 
 const INITIAL_LINKS = [
   { name: "Dashboard", href: "/dashboard" },
@@ -54,9 +55,9 @@ export default async function DashboardPage() {
               headerChildren={<CaptionSemi>Visa Application</CaptionSemi>}
               contentChildren={
                 <>
-                  <HorizontalProgressBar progress={50} />
+                  <HorizontalProgressBar progress={visaApplicationTasks.progress} />
                   <div className="overflow-auto h-[275px] rounded-b-2xl hide-scrollbar">
-                    {currentTasks.map((task, index) => {
+                    {visaApplicationTasks.tasks.map((task: ApplicationTaskType, index: number) => {
                       const lastTask = index === currentTasks.length - 1;
                       return (
                         <TaskCard
