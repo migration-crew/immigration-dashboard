@@ -10,6 +10,11 @@ const CalendarSchema = new Schema<CalendarType, CalendarModelType>(
     end: { type: Date, required: false },
     type: { type: String, required: true },
     allDay: { type: Boolean, required: true },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    }
   },
   {
     timestamps: true, versionKey: false

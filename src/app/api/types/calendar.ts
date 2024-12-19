@@ -1,4 +1,4 @@
-import { Date } from "mongoose"
+import { Date, Schema } from "mongoose"
 
 export type CalendarType = {
   title: string
@@ -6,4 +6,5 @@ export type CalendarType = {
   end?: Date
   type: string
   allDay: boolean
+  user: Schema.Types.ObjectId
 }
