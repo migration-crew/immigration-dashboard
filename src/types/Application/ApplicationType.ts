@@ -2,8 +2,11 @@ import { ApplicationTypeType } from "./ApplicationTypeType";
 
 export type ApplicationType = {
   _id: string;
+  number: string;
   name: string;
-  type: ApplicationTypeType;
+  applicationType: ApplicationTypeType;
+  progress: number;
+  status: string;
   createdAt: Date;
   updatedAt: Date;
 };

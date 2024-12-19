@@ -8,22 +8,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/upImmigrationTable";
-import { ApplicationTypeType } from "@/types/Application/ApplicationTypeType";
 import { useRouter } from "next/navigation";
 import RoundedProgressBar from "./RoundedProgressBar";
 import { CaptionSemi } from "./text/CaptionSemi";
-
-type Application = {
-  id: string;
-  number: string;
-  name: string;
-  applicationType: ApplicationTypeType;
-  progress: number;
-  status: string;
-};
+import { ApplicationType } from "@/types/Application/ApplicationType";
 
 type Props = {
-  applicationData: Application[];
+  applicationData: ApplicationType[];
 };
 
 /* const visaTypeLabels = {
@@ -37,11 +28,13 @@ type Props = {
 export function Applicationtable({ applicationData }: Props) {
   const router = useRouter();
 
-  const handleRowClick = (applicationId: string, applicationName: string) => {
+  const handleRowClick = (applicationId: string, applicationName: string, applicationTypeId: string) => {
+    console.log('🚀', applicationId);
+    
     router.push(
       `/applications/${applicationId}?name=${encodeURIComponent(
         applicationName
-      )}`
+      )}&applicationTypeId=${applicationTypeId}`
     );
   };
 
@@ -70,7 +63,7 @@ export function Applicationtable({ applicationData }: Props) {
         {applicationData.map((application, index) => (
           <TableRow
             key={index}
-            onClick={() => handleRowClick(application.id, application.name)}
+            onClick={() => handleRowClick(application._id, application.name, application.applicationType._id)}
             className="cursor-pointer"
           >
             <TableCell className="px-[30px]">{application.number}</TableCell>

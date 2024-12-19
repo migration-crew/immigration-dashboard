@@ -36,7 +36,7 @@ export function TaskCard({ applicationTask, className }: Props) {
           <TaskTitle title={applicationTask.name} />
           <TaskStatus status={applicationTask.status} />
           <div className="flex justify-between">
-            <TaskComments commentsCount={applicationTask.comments.length} />
+            <TaskComments commentsCount={applicationTask.comments?.length} />
             <TaskAttachments
               attachmentsCount={applicationTask.documentURLs.length}
             />

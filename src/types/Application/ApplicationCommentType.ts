@@ -1,7 +1,8 @@
 import { BasicUserType } from "../User/UserType";
 
 export type ApplicationCommentType = {
-  user: BasicUserType;
+  _id: string;
+  sender: BasicUserType;
   content: string;
   createdAt: string;
 };

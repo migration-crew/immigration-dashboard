@@ -2,23 +2,23 @@ import { ApplicationCommentType } from "@/types/Application/ApplicationCommentTy
 import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 
 type Props = {
-  comments: ApplicationCommentType[];
+  comments?: ApplicationCommentType[];
 };
 
 export function TaskAssignedUsers({ comments }: Props) {
   return (
     <ul className="flex gap-1 items-center w-[100px] justify-end">
-      {comments.map((comment) => (
-        <li key={comment.user.id}>
-          <Avatar>
+      {/* {comments.map((comment) => ( */}
+        {/* <li key={comment.sender._id}> */}
+          {/* <Avatar>
             <AvatarImage
-              src={comment.user.imageUrl}
-              alt={comment.user.firstName}
+              src={comment.sender.imageURL}
+              alt={comment.sender.firstName}
             />
-            <AvatarFallback>{comment.user.firstName}</AvatarFallback>
-          </Avatar>
-        </li>
-      ))}
+            <AvatarFallback>{comment.sender.firstName}</AvatarFallback>
+          </Avatar> */}
+        {/* </li> */}
+      {/* ))} */}
     </ul>
   );
 }
