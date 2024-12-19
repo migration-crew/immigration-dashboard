@@ -18,30 +18,18 @@ export type Props = {
   profile: UserType[];
 };
 
-type User = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  address: string;
-  nationality: string;
-  language: string;
-  gender: string;
-  imageURL: string;
-  dateOfBirth: string;
-};
-
 export const page = ({}: Props) => {
   const links = [{ name: "Profile", href: "/profile" }];
-  const [users, setUsers] = useState<User | null>(null);
+  const [users, setUsers] = useState<UserType | null>(null);
   const [imageURL, setImageURL] = useState<string | null>(null);
   const { getToken } = useAuth();
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
     const fetchUsers = async () => {
       const token = await getToken();
       try {
-        const response = await fetch(`http://localhost:3000/api/user`, {
+        const response = await fetch(`${apiUrl}/user`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -61,18 +49,20 @@ export const page = ({}: Props) => {
     fetchUsers();
   }, []);
 
-  const handleUpdateUser = (updatedData: User) => {
+  const handleUpdateUser = (updatedData: UserType) => {
     setUsers(updatedData);
   };
 
-  const handleSubmitProfile = async (data: User) => {
+  const handleSubmitProfile = async (data: UserType) => {
     try {
+      const token = await getToken();
       const response = await fetch(
-        `http://localhost:3000/api/user/${users?.id}`,
+        `${apiUrl}/user`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(data),
         }

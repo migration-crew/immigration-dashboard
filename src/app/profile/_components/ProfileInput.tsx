@@ -16,6 +16,7 @@ import {
 import { Button } from "@/components/ui/upImmigrationButton";
 import { Calendar } from "@/components/ui/upImmigrationCalendar";
 import { cn } from "@/lib/utils";
+import { UserType } from "@/types/User/UserType";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -47,8 +48,8 @@ type User = {
 };
 
 type ProfileInputProps = {
-  users: User;
-  onSubmit: SubmitHandler<User>;
+  users: UserType;
+  onSubmit: SubmitHandler<UserType>;
 };
 
 export default function ProfileInput({
