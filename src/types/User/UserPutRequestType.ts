@@ -4,7 +4,7 @@ export type UserPutRequest = {
   nationality: string;
   language: string;
   address: string;
-  birthDate: string;
+  dateOfBirth: string;
   gender: string;
   email: string;
   imageURl: string;

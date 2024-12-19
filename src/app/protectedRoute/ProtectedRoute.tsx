@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
-import { RedirectToSignIn, useUser } from "@clerk/nextjs";
-import { redirect, useRouter } from 'next/navigation'
-import React, { use } from "react";
+import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
+import React from "react";
 
 type ProtectedRouteProps = {
   children: React.ReactNode;

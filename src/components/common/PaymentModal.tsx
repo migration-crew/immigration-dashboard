@@ -1,6 +1,6 @@
 "use client";
 
-import { paymentModalData } from "@/app/payments/data/PaymentModal";
+// import { paymentModalData } from "@/app/payments/data/PaymentModal";
 import { HeadingSemi } from "@/components/common/text/HeadingSemi";
 import { Paragraph } from "@/components/common/text/Paragraph";
 import { ParagraphRegular } from "@/components/common/text/ParagraphRegular";
@@ -16,14 +16,19 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/upImmigrationBadge";
 import { Button } from "@/components/ui/upImmigrationButton";
+import { PaymentType } from "@/types/Payment/PaymentType";
 import { FileText, X } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { ElementRef, useEffect, useRef } from "react";
-import { RadioGroup, RadioGroupItem } from "../ui/upImmigrationRadio-group";
+// import { RadioGroup, RadioGroupItem } from "../ui/upImmigrationRadio-group";
 
-const PaymentModal = () => {
-  const id = useParams().id;
-  const payment = paymentModalData.filter((pay) => pay.id === id)[0];
+type Props = {
+  payment: PaymentType;
+};
+
+const PaymentModal = ({ payment }: Props) => {
+  console.log("🥩", payment);
+  
   const router = useRouter();
   const dialogRef = useRef<ElementRef<"dialog">>(null);
 

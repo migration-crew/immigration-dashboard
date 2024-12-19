@@ -9,13 +9,14 @@ import { TaskCard } from "@/components/common/TaskCard/TaskCard";
 import { CaptionSemi } from "@/components/common/text/CaptionSemi";
 import { Paragraph } from "@/components/common/text/Paragraph";
 import { Button } from "@/components/ui/upImmigrationButton";
-import { applications } from "@/data/applications";
 import { currentTasks } from "@/data/currentTasks";
-import { progresses } from "@/data/progresses";
 import { StageProgressType } from "@/types/Application/ApplicationType";
 import QuickCalendar from "../playground/david/QuickCalendar";
 import { events } from "../playground/david/data/events";
-import { payments } from "../playground/saulo/data/payment";
+import { fetchApplicationTasks } from "@/hooks/getApplicationTasks";
+import { ApplicationTaskType } from "@/types/Application/ApplicationTaskType";
+import { getAllPayments } from "@/hooks/getAllPayments";
+import { getAllApplications } from "@/hooks/getAllApplications";
 
 const INITIAL_LINKS = [
   { name: "Dashboard", href: "/dashboard" },
@@ -23,18 +24,18 @@ const INITIAL_LINKS = [
   { name: "Maria_CICCC_UX/UI_2", href: "#" },
 ];
 
-async function getProgresses(): Promise<StageProgressType[]> {
-  /* const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  const response = await fetch(`${apiUrl}/api/progresses`);
-  if (!response.ok) {
-    throw new Error("Failed to fetch progresses");
-  } */
-  // return await response.json();
-  return progresses;
-}
-
 export default async function DashboardPage() {
-  const progresses = await getProgresses();
+  const applicationId = "67436dbb9f3002f9d49d5a54";
+  const applicationTypeId = "6756048b74dac7d4eec521e6";
+  const { gettingStartedTasks, schoolAdmissionTasks, visaApplicationTasks, preDepartureTasks} = await fetchApplicationTasks(applicationId, applicationTypeId);
+  const progresses: StageProgressType[] = [
+    { _id: "1", name: "Getting Started", percentage: gettingStartedTasks.progress },
+    { _id: "2", name: "School Admission", percentage: schoolAdmissionTasks.progress },
+    { _id: "3", name: "Visa Application", percentage: visaApplicationTasks.progress },
+    { _id: "4", name: "Pre-Departure", percentage: preDepartureTasks.progress },
+  ]
+  const payments = await getAllPayments(applicationId);
+  const applications = await getAllApplications();
 
   return (
     <PageContainer>
@@ -54,9 +55,9 @@ export default async function DashboardPage() {
               headerChildren={<CaptionSemi>Visa Application</CaptionSemi>}
               contentChildren={
                 <>
-                  <HorizontalProgressBar progress={50} />
+                  <HorizontalProgressBar progress={visaApplicationTasks.progress} />
                   <div className="overflow-auto h-[275px] rounded-b-2xl hide-scrollbar">
-                    {currentTasks.map((task, index) => {
+                    {visaApplicationTasks.tasks.map((task: ApplicationTaskType, index: number) => {
                       const lastTask = index === currentTasks.length - 1;
                       return (
                         <TaskCard

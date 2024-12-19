@@ -16,11 +16,11 @@ import {
 import { Button } from "@/components/ui/upImmigrationButton";
 import { Calendar } from "@/components/ui/upImmigrationCalendar";
 import { cn } from "@/lib/utils";
-import axios from "axios";
+import { UserType } from "@/types/User/UserType";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
-import React, { useEffect, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
 interface DateOfBirthPickerProps {
   onDateChange: (date: Date | undefined) => void;
@@ -34,50 +34,51 @@ type LanguageSelectProps = {
   onChange?: (value: string) => void;
 };
 
+type ProfileInputProps = {
+  users: UserType;
+  onSubmit: SubmitHandler<UserType>;
+};
+
 export default function ProfileInput({
-  onChange = () => {},
-}: // onDateChange,
-CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
+  users,
+  onSubmit,
+}: CountrySelectProps &
+  LanguageSelectProps &
+  DateOfBirthPickerProps &
+  ProfileInputProps) {
   const [countries, setCountries] = useState<string[]>([]);
   const [languages, setLanguages] = useState<string[]>([]);
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-  const [date, setDate] = React.useState<Date>();
-  const [selectedYear, setSelectedYear] = React.useState<number | undefined>();
-
-  const { control } = useForm();
-
-  const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: 100 }, (_, i) => currentYear - i);
-
-  const handleDateChange = (newDate: Date | undefined) => {
-    setDate(newDate);
-    // onDateChange(newDate);
-  };
-
-  const handleYearChange = (year: string) => {
-    const yearNumber = parseInt(year);
-    setSelectedYear(yearNumber);
-  };
-
-  useEffect(() => {
-    if (selectedYear !== undefined && date) {
-      const newDate = new Date(date);
-      newDate.setFullYear(selectedYear);
-      setDate(newDate);
-    }
-  }, [selectedYear]);
-
-  useEffect(() => {
-    if (!selectedYear && date) {
-      setSelectedYear(date.getFullYear());
-    }
-  }, [date]);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<UserType>({
+    defaultValues: {
+      firstName: users.firstName,
+      lastName: users.lastName,
+      email: users.email,
+      address: users.address,
+      nationality: users.nationality,
+      language: users.language,
+      gender: users.gender,
+      dateOfBirth: users.dateOfBirth,
+      _id: users._id,
+      imageURL: users.imageURL,
+    },
+  });
 
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/countries");
-        setCountries(response.data);
+        const response = await fetch(`${apiUrl}/countries`);
+        if (response.ok) {
+          const data = await response.json();
+          setCountries(data);
+        } else {
+          throw new Error("Error fetching countries");
+        }
       } catch (error) {
         console.error("Error fetching countries:", error);
       }
@@ -88,8 +89,13 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
   useEffect(() => {
     const fetchLanguages = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/languages");
-        setLanguages(response.data);
+        const response = await fetch(`${apiUrl}/languages`);
+        if (response.ok) {
+          const data = await response.json();
+          setLanguages(data);
+        } else {
+          throw new Error("Error fetching languages");
+        }
       } catch (error) {
         console.error("Error fetching languages:", error);
       }
@@ -98,22 +104,34 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
   }, []);
 
   return (
-    <>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Card className="grid gap-[18px] justify-center border-none shadow-none">
         <div className="flex gap-[60px]">
           <div className="w-[360px] h-auto">
             <label
-              htmlFor="first"
-              className=" block text-sm font-medium text-gray-700 pb-2 text-caption"
+              htmlFor="firstName"
+              className="block text-sm font-medium text-gray-700 pb-2 text-caption"
             >
               First Name
             </label>
-            <Input
-              id="first"
-              type="text"
-              placeholder="John"
-              className="h-[45px] bg-secondary-light-gray"
+            <Controller
+              name="firstName"
+              control={control}
+              rules={{ required: "First name is required" }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  id="firstName"
+                  placeholder="John"
+                  className="h-[45px] bg-secondary-light-gray"
+                />
+              )}
             />
+            {errors.firstName && (
+              <span className="text-red-500 text-sm">
+                {errors.firstName.message}
+              </span>
+            )}
           </div>
           <div className="w-[360px] h-auto">
             <label
@@ -122,12 +140,24 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
             >
               Last Name
             </label>
-            <Input
-              id="last"
-              type="text"
-              placeholder="Smith"
-              className="h-[45px] bg-secondary-light-gray"
+            <Controller
+              name="lastName"
+              control={control}
+              rules={{ required: "Last name is required" }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  id="lastName"
+                  placeholder="Smith"
+                  className="h-[45px] bg-secondary-light-gray"
+                />
+              )}
             />
+            {errors.lastName && (
+              <span className="text-red-500 text-sm">
+                {errors.lastName.message}
+              </span>
+            )}
           </div>
         </div>
         <div className="flex gap-[60px]">
@@ -138,18 +168,33 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
             >
               Nationality
             </label>
-            <Select onValueChange={(value: string) => onChange(value)}>
-              <SelectTrigger className="SelectTrigger h-[45px] bg-secondary-light-gray">
-                <SelectValue placeholder="Country" className="text-gray-500" />
-              </SelectTrigger>
-              <SelectContent>
-                {countries.map((countryName) => (
-                  <SelectItem key={countryName} value={countryName}>
-                    {countryName}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <Controller
+              name="nationality"
+              control={control}
+              rules={{ required: "Nationality is required" }}
+              render={({ field }) => (
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <SelectTrigger className="SelectTrigger h-[45px] bg-secondary-light-gray">
+                    <SelectValue
+                      placeholder="Country"
+                      className="text-gray-500"
+                    />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {countries.map((countryName) => (
+                      <SelectItem key={countryName} value={countryName}>
+                        {countryName}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+            />
+            {errors.nationality && (
+              <span className="text-red-500 text-sm">
+                {errors.nationality.message}
+              </span>
+            )}
           </div>
           <div className="w-[360px] h-auto ">
             <label
@@ -158,21 +203,33 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
             >
               Language
             </label>
-            <Select onValueChange={(value: string) => onChange(value)}>
-              <SelectTrigger className="SelectTrigger h-[45px] bg-secondary-light-gray">
-                <SelectValue
-                  placeholder="Please select language"
-                  className="placeholder-opacity-55 text-caption"
-                />
-              </SelectTrigger>
-              <SelectContent>
-                {languages.map((languageName) => (
-                  <SelectItem key={languageName} value={languageName}>
-                    {languageName}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <Controller
+              name="language"
+              control={control}
+              rules={{ required: "Language is required" }}
+              render={({ field }) => (
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <SelectTrigger className="SelectTrigger h-[45px] bg-secondary-light-gray">
+                    <SelectValue
+                      placeholder="Please select language"
+                      className="placeholder-opacity-55 text-caption"
+                    />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {languages.map((languageName) => (
+                      <SelectItem key={languageName} value={languageName}>
+                        {languageName}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+            />
+            {errors.language && (
+              <span className="text-red-500 text-sm">
+                {errors.language.message}
+              </span>
+            )}
           </div>
         </div>
         <div className="w-[780px]">
@@ -182,12 +239,24 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
           >
             Address
           </label>
-          <Input
-            id="address"
-            type="text"
-            placeholder="1425 10th Avenue, Victoria BC, Canada"
-            className="h-[45px] bg-secondary-light-gray"
+          <Controller
+            name="address"
+            control={control}
+            rules={{ required: "Address is required" }}
+            render={({ field }) => (
+              <Input
+                {...field}
+                id="address"
+                placeholder="1425 10th Avenue, Victoria BC, Canada"
+                className="h-[45px] bg-secondary-light-gray"
+              />
+            )}
           />
+          {errors.address && (
+            <span className="text-red-500 text-sm">
+              {errors.address.message}
+            </span>
+          )}
         </div>
         <div className="flex gap-[60px] h-[64px]">
           <div className="w-[360px] h-auto">
@@ -197,61 +266,45 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
             >
               Date of Birth
             </label>
-            <Popover>
-              <PopoverTrigger
-                asChild
-                className="h-[45px] bg-secondary-light-gray"
-              >
-                <Button
-                  variant={"outline"}
-                  className={cn(
-                    "w-[360px] justify-start text-left font-normal",
-                    !date && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {date ? format(date, "PPP") : <span>Pick a date</span>}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0">
-                <div className="flex justify-center space-x-2 p-2">
-                  <Controller
-                    name="year"
-                    control={control}
-                    render={({ field }) => (
-                      <Select
-                        onValueChange={(value) => {
-                          field.onChange(value);
-                          handleYearChange(value);
-                        }}
-                      >
-                        <SelectTrigger className="w-[120px]">
-                          <SelectValue placeholder="Select Year" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {years.map((year) => (
-                            <SelectItem key={year} value={year.toString()}>
-                              {year}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    )}
-                  />
-                </div>
-                <Calendar
-                  mode="single"
-                  selected={date}
-                  onSelect={handleDateChange}
-                  initialFocus
-                  month={
-                    selectedYear
-                      ? new Date(selectedYear, date?.getMonth() || 0)
-                      : undefined
-                  }
-                />
-              </PopoverContent>
-            </Popover>
+            <Controller
+              name="dateOfBirth"
+              control={control}
+              rules={{ required: "Date of birth is required" }}
+              render={({ field }) => (
+                <Popover>
+                  <PopoverTrigger
+                    asChild
+                    className="h-[45px] bg-secondary-light-gray"
+                  >
+                    <Button
+                      variant={"outline"}
+                      className={cn(
+                        "w-[360px] justify-start text-left font-normal",
+                        !field.value && "text-muted-foreground"
+                      )}
+                    >
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {field.value ? (
+                        format(new Date(field.value), "PPP")
+                      ) : (
+                        <span>Pick a date</span>
+                      )}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0">
+                    <Calendar
+                      mode="single"
+                      selected={field.value ? new Date(field.value) : undefined}
+                      onSelect={(date) => field.onChange(date?.toISOString())}
+                      defaultMonth={
+                        field.value ? new Date(field.value) : undefined
+                      }
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+              )}
+            />
           </div>
           <div className="w-[360px] h-auto">
             <label
@@ -260,19 +313,27 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
             >
               Gender
             </label>
-            <Select>
-              <SelectTrigger className="SelectTrigger  h-[45px] bg-secondary-light-gray">
-                <SelectValue
-                  placeholder="Select Gender"
-                  className="opacity-50 text-caption"
-                />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="male">Male</SelectItem>
-                <SelectItem value="female">Female</SelectItem>
-                <SelectItem value="others">Others</SelectItem>
-              </SelectContent>
-            </Select>
+            <Controller
+              name="gender"
+              control={control}
+              rules={{ required: "Gender is required" }}
+              render={({ field }) => (
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <SelectTrigger className="SelectTrigger  h-[45px] bg-secondary-light-gray">
+                    <SelectValue
+                      placeholder="Select Gender"
+                      className="opacity-50 text-caption"
+                    />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="male">Male</SelectItem>
+                    <SelectItem value="female">Female</SelectItem>
+                    <SelectItem value="nonBinary">Non-binary</SelectItem>
+                    <SelectItem value="others">Prefer not to say</SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
+            />
           </div>
         </div>
         <div className="w-[780px]">
@@ -282,14 +343,35 @@ CountrySelectProps & LanguageSelectProps & DateOfBirthPickerProps) {
           >
             E-mail
           </label>
-          <Input
-            id="email"
-            type="text"
-            placeholder="john_smith123@gmail.com"
-            className="h-[45px] bg-secondary-light-gray"
+          <Controller
+            name="email"
+            control={control}
+            rules={{
+              required: "Email is required",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Invalid email address",
+              },
+            }}
+            render={({ field }) => (
+              <Input
+                {...field}
+                id="email"
+                placeholder="john_smith123@gmail.com"
+                className="h-[45px] bg-secondary-light-gray"
+              />
+            )}
           />
+          {errors.email && (
+            <span className="text-red-500 text-sm">{errors.email.message}</span>
+          )}
         </div>
       </Card>
-    </>
+      <div className="flex justify-center mt-6">
+        <Button className="w-[249px] h-14 " type="submit">
+          Save
+        </Button>
+      </div>
+    </form>
   );
 }

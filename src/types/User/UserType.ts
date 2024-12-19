@@ -5,7 +5,7 @@ export type UserType = {
   nationality: string;
   language: string;
   address: string;
-  birthDate: string;
+  dateOfBirth: string;
   gender: string;
   email: string;
   imageURL: string;

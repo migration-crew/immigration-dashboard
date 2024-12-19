@@ -24,8 +24,8 @@ export default function ApplicationProgress({ progresses }: Props) {
             width: "70%",
           }}
         />
-        {progresses.map(({ id, name, percentage }, index) => (
-          <li key={id} className="relative flex flex-col items-center gap-8">
+        {progresses.map(({ _id, name, percentage }, index) => (
+          <li key={_id} className="relative flex flex-col items-center gap-8">
             <div
               style={{
                 width: 120,
@@ -35,8 +35,8 @@ export default function ApplicationProgress({ progresses }: Props) {
               }}
             >
               <CircularProgressbar
-                value={percentage}
-                text={`${percentage}%`}
+                value={Math.round(percentage)}
+                text={`${Math.round(percentage)}%`}
                 styles={{
                   path: {
                     stroke: "#0C9986",

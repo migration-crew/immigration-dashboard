@@ -1,6 +1,6 @@
 "use client";
 
-import { testApplicationType } from "@/app/playground/saulo/page";
+// import { testApplicationType } from "@/app/playground/saulo/page";
 import {
   Command,
   CommandEmpty,
@@ -16,21 +16,17 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/upImmigrationButton";
 import { cn } from "@/lib/utils";
+import { ApplicationSwitcherType } from "@/types/Application/ApplicationType";
 import { Check } from "lucide-react";
 import Image from "next/image";
 import * as React from "react";
 import { Caption } from "./text/Caption";
-
-export type globalApplicationsType = {
-  id: string;
-  name: string;
-  updatedAt?: Date;
-};
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export type Props = {
   className?: string;
   containerClassName?: string;
-  applications: testApplicationType[];
+  applications: ApplicationSwitcherType[];
 };
 
 function ApplicationSwitcher({
@@ -38,40 +34,37 @@ function ApplicationSwitcher({
   containerClassName,
   className,
 }: Props) {
-  const sortedApplications = React.useMemo(
-    () =>
-      [...(applications || [])].sort(
-        (a, b) =>
-          b.application[0].updatedAt.getTime() -
-          a.application[0].updatedAt.getTime()
-      ),
-    [applications]
-  );
-
-  const allApplications: globalApplicationsType = {
-    id: "All Applications",
+  const allApplications: ApplicationSwitcherType = {
+    _id: "allApplications",
     name: "All Applications",
   };
 
   const isAdmin = false;
   // fake admin user is active
-
-  const globalApplications: globalApplicationsType[] = applications.map(
-    (app) => ({
-      id: app.application[0].id,
-      name: app.application[0].name,
-      date: app.application[0].updatedAt,
-    })
-  );
   if (isAdmin) {
-    globalApplications.push(allApplications);
+    applications.unshift(allApplications);
   }
+
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState(
-    isAdmin
-      ? globalApplications[globalApplications.length - 1].id
-      : sortedApplications[0].application[0].id
-  );
+  const [value, setValue] = React.useState(applications[0]._id);
+
+  const searchParams = useSearchParams();
+  const pathname = usePathname()
+  const {replace} = useRouter()
+
+  React.useEffect(()=> {
+    setValue(searchParams.get("applicationId") || applications[0]._id)
+  }, [searchParams, applications])
+
+  const onApplicationChange = (value: string | null) => {
+    setValue(value || applications[0]._id)
+    setOpen(false)
+    const params = new URLSearchParams(searchParams)
+    params.delete("applicationId")
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    params.append("applicationId", value || applications[0]._id)
+    replace(`${pathname}?${params.toString()}`)
+  }
 
   return (
     <div className={containerClassName}>
@@ -88,9 +81,8 @@ function ApplicationSwitcher({
             )}
           >
             <div className="flex justify-start">
-              {globalApplications.find(
-                (application) => application.id === value
-              )?.name || <Caption>Loading...</Caption>}
+              {applications.find((application) => application._id === value)
+                ?.name || <Caption>Loading...</Caption>}
             </div>
             <div className="flex align-middle justify-center">
               <Image
@@ -114,47 +106,21 @@ function ApplicationSwitcher({
                 <Caption>No application found.</Caption>
               </CommandEmpty>
               <CommandGroup>
-                {isAdmin && (
+                {applications.map((application) => (
                   <CommandItem
-                    value={allApplications.id}
+                    key={application._id}
+                    value={application._id}
                     onSelect={(currentValue) => {
                       if (currentValue !== value) {
-                        setValue(currentValue);
-                        setOpen(false);
+                        onApplicationChange(currentValue);
                       }
                     }}
                   >
-                    <Caption>All Applications</Caption>
+                    <Caption className="">{application.name}</Caption>
                     <Check
                       className={cn(
                         "ml-auto",
-                        value === allApplications.id
-                          ? "opacity-100"
-                          : "opacity-0"
-                      )}
-                    />
-                  </CommandItem>
-                )}
-                {sortedApplications.map((application) => (
-                  <CommandItem
-                    key={application.application[0].id}
-                    value={application.application[0].id}
-                    onSelect={(currentValue) => {
-                      if (currentValue !== value) {
-                        setValue(currentValue);
-                        setOpen(false);
-                      }
-                    }}
-                  >
-                    <Caption className="">
-                      {application.application[0].name}
-                    </Caption>
-                    <Check
-                      className={cn(
-                        "ml-auto",
-                        value === application.application[0].id
-                          ? "opacity-100"
-                          : "opacity-0"
+                        value === application._id ? "opacity-100" : "opacity-0"
                       )}
                     />
                   </CommandItem>

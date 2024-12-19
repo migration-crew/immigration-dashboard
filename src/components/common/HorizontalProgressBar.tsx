@@ -14,7 +14,7 @@ export default function HorizontalProgressBar({ progress }: Props) {
         >
           {progress > 0 && (
             <Caption className="text-center text-primary-white ">
-              {progress}%
+              {Math.round(progress)}%
             </Caption>
           )}
         </div>
