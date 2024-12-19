@@ -67,7 +67,7 @@ export default function MessageComposer() {
           <ChatContainer
             key={index}
             message={{
-              id: "",
+              id: String(index),
               user: { id: "userId", imageUrl: "", firstName: "" },
               content: msg,
               createdAt: new Date().toString(),
