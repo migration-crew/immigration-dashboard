@@ -30,18 +30,18 @@ export default function TaskDetail({ applicationTask }: Props) {
       <div className="flex flex-col gap-1">
         <MicrotextSemi>Messages:</MicrotextSemi>
         <ul className="flex flex-col gap-2">
-          {applicationTask.comments.map((comment, index) => (
+          {applicationTask.comments?.map((comment, index) => (
             <li key={index} className="flex items-start gap-2">
               <Avatar>
                 <AvatarImage
-                  src={comment.user.imageUrl}
-                  alt={`${comment.user.firstName}`}
+                  src={comment.sender?.imageURL}
+                  alt={`${comment.sender?.firstName}`}
                 />
               </Avatar>
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
                   <MicrotextSemi>
-                    {comment.user.firstName} {comment.user.lastName}
+                    {comment.sender?.firstName} {comment.sender?.lastName}
                   </MicrotextSemi>
                   <Microtext className="text-secondary-medium-gray">
                     {new Date(comment.createdAt)
