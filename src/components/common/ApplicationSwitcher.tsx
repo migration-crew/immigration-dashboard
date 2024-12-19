@@ -21,6 +21,7 @@ import { Check } from "lucide-react";
 import Image from "next/image";
 import * as React from "react";
 import { Caption } from "./text/Caption";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export type Props = {
   className?: string;
@@ -34,7 +35,7 @@ function ApplicationSwitcher({
   className,
 }: Props) {
   const allApplications: ApplicationSwitcherType = {
-    _id: "All Applications",
+    _id: "allApplications",
     name: "All Applications",
   };
 
@@ -46,6 +47,24 @@ function ApplicationSwitcher({
 
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(applications[0]._id);
+
+  const searchParams = useSearchParams();
+  const pathname = usePathname()
+  const {replace} = useRouter()
+
+  React.useEffect(()=> {
+    setValue(searchParams.get("applicationId") || applications[0]._id)
+  }, [searchParams, applications])
+
+  const onApplicationChange = (value: string | null) => {
+    setValue(value || applications[0]._id)
+    setOpen(false)
+    const params = new URLSearchParams(searchParams)
+    params.delete("applicationId")
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    params.append("applicationId", value || applications[0]._id)
+    replace(`${pathname}?${params.toString()}`)
+  }
 
   return (
     <div className={containerClassName}>
@@ -93,8 +112,7 @@ function ApplicationSwitcher({
                     value={application._id}
                     onSelect={(currentValue) => {
                       if (currentValue !== value) {
-                        setValue(currentValue);
-                        setOpen(false);
+                        onApplicationChange(currentValue);
                       }
                     }}
                   >

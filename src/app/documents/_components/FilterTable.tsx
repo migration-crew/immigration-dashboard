@@ -3,7 +3,11 @@ import FilterSection from "@/components/common/FilterSection/FilterSection";
 import { getAllDocument } from "../_hooks/getAllDocument";
 import { DocumentTable } from "./DocumentTable";
 
-export const FilterTable = async () => {
+type Props = {
+  applicationId: string
+}
+
+export const FilterTable = async ({applicationId}: Props) => {
   const sortOptions = [
     { label: "Date: First to Last", value: "date_asc" },
     { label: "Date: Last to First", value: "date_desc" },
@@ -25,7 +29,7 @@ export const FilterTable = async () => {
     { label: "Rejected", value: "rejected" },
   ];
 
-  const documents = await getAllDocument("675cd21adb674b3e14200df8");
+  const documents = await getAllDocument(applicationId);
 
   return (
     <div className="grid gap-4">
