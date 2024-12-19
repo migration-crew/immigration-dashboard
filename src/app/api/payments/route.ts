@@ -3,7 +3,7 @@ import { ObjectId } from "mongodb";
 import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "../lib/mongoose";
 import Payment from "../schemas/payment/payment.schema";
-import { getAllPayments, NewPaymentInfoType, updatePaymentStatus } from "../services/payment/paymentService";
+import { getAllPayments, getOnePayment, NewPaymentInfoType, updatePaymentStatus } from "../services/payment/paymentService";
 
 export async function POST(): Promise<NextResponse> {
   try {
@@ -34,20 +34,30 @@ export async function GET(req: NextRequest) {
 
   const { searchParams } = new URL(req.url);
   const applicationId = searchParams.get("applicationId");
+  const paymentId = searchParams.get("paymentId")
 
-  if (!applicationId || typeof applicationId !== "string") {
+  if ((!applicationId && !paymentId) || (typeof applicationId !== "string" && typeof paymentId !== "string")) {
     return NextResponse.json(
-      { message: "Invalid Application Id" },
+      { message: "Invalid Id" },
       { status: 400 }
     );
   }
 
   try {
     // Call the service function to get the application types
-    const payments = await getAllPayments(applicationId);
+    if(applicationId && typeof applicationId === "string"){
+      const payments = await getAllPayments(applicationId);
+  
+      // Return the found application types as the response
+      return NextResponse.json(payments, { status: 200 });
+    }
 
-    // Return the found application types as the response
-    return NextResponse.json(payments, { status: 200 });
+    if(paymentId && typeof paymentId === "string"){
+      const payment = await getOnePayment(paymentId);
+  
+      // Return the found application types as the response
+      return NextResponse.json(payment, { status: 200 });
+    }
   } catch (error) {
     console.error("Error fetching payments:", error);
     return NextResponse.json(

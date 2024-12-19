@@ -19,10 +19,11 @@ import { Button } from "@/components/ui/upImmigrationButton";
 import { FileText, X } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { ElementRef, useEffect, useRef } from "react";
-import { RadioGroup, RadioGroupItem } from "../ui/upImmigrationRadio-group";
+// import { RadioGroup, RadioGroupItem } from "../ui/upImmigrationRadio-group";
 
 const PaymentModal = () => {
   const id = useParams().id;
+  
   const payment = paymentModalData.filter((pay) => pay.id === id)[0];
   const router = useRouter();
   const dialogRef = useRef<ElementRef<"dialog">>(null);

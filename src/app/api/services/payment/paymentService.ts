@@ -8,6 +8,12 @@ export const getAllPayments = async (applicationId: string) => {
   return payments;
 };
 
+export const getOnePayment = async (paymentId: string) => {
+  await dbConnect();
+  const payments = await Payment.findById(paymentId).populate("application");
+  return payments;
+};
+
 export type NewPaymentInfoType = {
   paymentMethod: string
   status: string
