@@ -18,7 +18,7 @@ import { events } from "../playground/david/data/events";
 // import { payments } from "../playground/saulo/data/payment";
 import { fetchApplicationTasks } from "@/hooks/getApplicationTasks";
 import { ApplicationTaskType } from "@/types/Application/ApplicationTaskType";
-import { getAllPayments } from "../payments/_hooks/getAllPayments";
+import { getAllPayments } from "@/hooks/getAllPayments";
 
 const INITIAL_LINKS = [
   { name: "Dashboard", href: "/dashboard" },
