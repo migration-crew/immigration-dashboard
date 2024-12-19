@@ -34,19 +34,6 @@ type LanguageSelectProps = {
   onChange?: (value: string) => void;
 };
 
-type User = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  address: string;
-  nationality: string;
-  language: string;
-  gender: string;
-  imageURL: string;
-  dateOfBirth: string;
-};
-
 type ProfileInputProps = {
   users: UserType;
   onSubmit: SubmitHandler<UserType>;
@@ -61,12 +48,13 @@ export default function ProfileInput({
   ProfileInputProps) {
   const [countries, setCountries] = useState<string[]>([]);
   const [languages, setLanguages] = useState<string[]>([]);
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<User>({
+  } = useForm<UserType>({
     defaultValues: {
       firstName: users.firstName,
       lastName: users.lastName,
@@ -76,7 +64,7 @@ export default function ProfileInput({
       language: users.language,
       gender: users.gender,
       dateOfBirth: users.dateOfBirth,
-      id: users.id,
+      _id: users._id,
       imageURL: users.imageURL,
     },
   });
@@ -84,7 +72,7 @@ export default function ProfileInput({
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/countries");
+        const response = await fetch(`${apiUrl}/countries`);
         if (response.ok) {
           const data = await response.json();
           setCountries(data);
@@ -101,7 +89,7 @@ export default function ProfileInput({
   useEffect(() => {
     const fetchLanguages = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/languages");
+        const response = await fetch(`${apiUrl}/languages`);
         if (response.ok) {
           const data = await response.json();
           setLanguages(data);
