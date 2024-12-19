@@ -8,7 +8,7 @@ import { applications } from "@/data/applications";
 // import { invoices } from "../playground/yui/data/invoice";
 import Invoices from "./_components/Invoices";
 import RefundPolicy from "./_components/RefundPolicy";
-import { getAllPayments } from "@/app/payments/_hooks/getAllPayments";
+import { getAllPayments } from "@/hooks/getAllPayments";
 
 const page = async() => {
   const links = [{ name: "Payment", href: "/payments" }];
