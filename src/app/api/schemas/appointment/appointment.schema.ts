@@ -23,5 +23,9 @@ const AppointmentSchema = new Schema<AppointmentType, AppointmentModelType>(
 );
 
 const Appointment =
-  models.Appointment || model<AppointmentType, AppointmentModelType>("Appointment", AppointmentSchema);
+  models.Appointment ||
+  model<AppointmentType, AppointmentModelType>(
+    "Appointment",
+    AppointmentSchema
+  );
 export default Appointment;

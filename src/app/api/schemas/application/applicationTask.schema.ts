@@ -4,13 +4,13 @@ import { ApplicationTaskType } from "../../types/applicationTask";
 type ApplicationTaskModelType = Model<ApplicationTaskType>;
 
 const ApplicationTaskSchema = new Schema<
-ApplicationTaskType,
-ApplicationTaskModelType
+  ApplicationTaskType,
+  ApplicationTaskModelType
 >(
   {
     name: { type: String, required: true },
     description: { type: String, required: true },
-    documentURLs: [String]
+    documentURLs: [String],
   },
   {
     timestamps: true,
@@ -18,8 +18,10 @@ ApplicationTaskModelType
   }
 );
 
-const ApplicationTask = models.ApplicationTask || model<ApplicationTaskType, ApplicationTaskModelType>(
-  "ApplicationTask",
-  ApplicationTaskSchema
-);
+const ApplicationTask =
+  models.ApplicationTask ||
+  model<ApplicationTaskType, ApplicationTaskModelType>(
+    "ApplicationTask",
+    ApplicationTaskSchema
+  );
 export default ApplicationTask;

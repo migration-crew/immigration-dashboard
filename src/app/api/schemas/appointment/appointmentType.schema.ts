@@ -1,4 +1,4 @@
-import { Model, Schema, model } from "mongoose";
+import { Model, Schema, model, models } from "mongoose";
 import { AppointmentTypeType } from "../../types/appointmentType";
 
 type AppointmentTypeModelType = Model<AppointmentTypeType>;
@@ -20,8 +20,10 @@ const AppointmentTypeSchema = new Schema<
   }
 );
 
-const AppointmentType = model<AppointmentTypeType, AppointmentTypeModelType>(
-  "AppointmentType",
-  AppointmentTypeSchema
-);
+const AppointmentType =
+  models.AppointmentType ||
+  model<AppointmentTypeType, AppointmentTypeModelType>(
+    "AppointmentType",
+    AppointmentTypeSchema
+  );
 export default AppointmentType;

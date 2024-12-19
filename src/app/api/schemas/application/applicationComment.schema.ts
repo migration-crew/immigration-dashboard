@@ -32,8 +32,10 @@ const ApplicationCommentSchema = new Schema<
   }
 );
 
-const ApplicationComment = models.ApplicationComment || model<
-  ApplicationCommentType,
-  ApplicationCommentModelType
->("ApplicationComment", ApplicationCommentSchema);
+const ApplicationComment =
+  models.ApplicationComment ||
+  model<ApplicationCommentType, ApplicationCommentModelType>(
+    "ApplicationComment",
+    ApplicationCommentSchema
+  );
 export default ApplicationComment;
