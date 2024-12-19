@@ -1,6 +1,6 @@
 // import { documents } from "@/app/playground/yuki/data/DocumentTable";
 import FilterSection from "@/components/common/FilterSection/FilterSection";
-import { getAllDocument } from "../_hooks/getAllDocument";
+import { getAllDocument } from "@/hooks/getAllDocument";
 import { DocumentTable } from "./DocumentTable";
 
 type Props = {
