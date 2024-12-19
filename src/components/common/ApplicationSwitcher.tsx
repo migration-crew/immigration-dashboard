@@ -1,6 +1,6 @@
 "use client";
 
-import { testApplicationType } from "@/app/playground/saulo/page";
+// import { testApplicationType } from "@/app/playground/saulo/page";
 import {
   Command,
   CommandEmpty,
@@ -20,17 +20,13 @@ import { Check } from "lucide-react";
 import Image from "next/image";
 import * as React from "react";
 import { Caption } from "./text/Caption";
+import { ApplicationSwitcherType, ApplicationType } from "@/types/Application/ApplicationType";
 
-export type globalApplicationsType = {
-  id: string;
-  name: string;
-  updatedAt?: Date;
-};
 
 export type Props = {
   className?: string;
   containerClassName?: string;
-  applications: testApplicationType[];
+  applications: ApplicationSwitcherType[];
 };
 
 function ApplicationSwitcher({
@@ -38,40 +34,19 @@ function ApplicationSwitcher({
   containerClassName,
   className,
 }: Props) {
-  const sortedApplications = React.useMemo(
-    () =>
-      [...(applications || [])].sort(
-        (a, b) =>
-          b.application[0].updatedAt.getTime() -
-          a.application[0].updatedAt.getTime()
-      ),
-    [applications]
-  );
-
-  const allApplications: globalApplicationsType = {
+  const allApplications: ApplicationSwitcherType = {
     id: "All Applications",
     name: "All Applications",
   };
 
   const isAdmin = false;
   // fake admin user is active
-
-  const globalApplications: globalApplicationsType[] = applications.map(
-    (app) => ({
-      id: app.application[0].id,
-      name: app.application[0].name,
-      date: app.application[0].updatedAt,
-    })
-  );
   if (isAdmin) {
-    globalApplications.push(allApplications);
+    applications.unshift(allApplications);
   }
+
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState(
-    isAdmin
-      ? globalApplications[globalApplications.length - 1].id
-      : sortedApplications[0].application[0].id
-  );
+  const [value, setValue] = React.useState(applications[0]);
 
   return (
     <div className={containerClassName}>
@@ -88,8 +63,8 @@ function ApplicationSwitcher({
             )}
           >
             <div className="flex justify-start">
-              {globalApplications.find(
-                (application) => application.id === value
+              {applications.find(
+                (application) => application._id === value
               )?.name || <Caption>Loading...</Caption>}
             </div>
             <div className="flex align-middle justify-center">
