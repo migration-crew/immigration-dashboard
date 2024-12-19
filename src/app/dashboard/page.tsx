@@ -15,7 +15,10 @@ import { progresses } from "@/data/progresses";
 import { StageProgressType } from "@/types/Application/ApplicationType";
 import QuickCalendar from "../playground/david/QuickCalendar";
 import { events } from "../playground/david/data/events";
-import { payments } from "../playground/saulo/data/payment";
+// import { payments } from "../playground/saulo/data/payment";
+import { fetchApplicationTasks } from "@/hooks/getApplicationTasks";
+import { ApplicationTaskType } from "@/types/Application/ApplicationTaskType";
+import { getAllPayments } from "../payments/_hooks/getAllPayments";
 
 const INITIAL_LINKS = [
   { name: "Dashboard", href: "/dashboard" },
@@ -23,24 +26,24 @@ const INITIAL_LINKS = [
   { name: "Maria_CICCC_UX/UI_2", href: "#" },
 ];
 
-async function getProgresses(): Promise<StageProgressType[]> {
-  /* const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  const response = await fetch(`${apiUrl}/api/progresses`);
-  if (!response.ok) {
-    throw new Error("Failed to fetch progresses");
-  } */
-  // return await response.json();
-  return progresses;
-}
-
 export default async function DashboardPage() {
-  const progresses = await getProgresses();
+  const applicationId = "67436dbb9f3002f9d49d5a54";
+  const applicationTypeId = "6756048b74dac7d4eec521e6";
+  const { gettingStartedTasks, schoolAdmissionTasks, visaApplicationTasks, preDepartureTasks} = await fetchApplicationTasks(applicationId, applicationTypeId);
+  const progresses: StageProgressType[] = [
+    { _id: "1", name: "Getting Started", percentage: gettingStartedTasks.progress },
+    { _id: "2", name: "School Admission", percentage: schoolAdmissionTasks.progress },
+    { _id: "3", name: "Visa Application", percentage: visaApplicationTasks.progress },
+    { _id: "4", name: "Pre-Departure", percentage: preDepartureTasks.progress },
+  ]
+  const payments = await getAllPayments(applicationId);
 
   return (
     <PageContainer>
       <div className="flex justify-between items-center">
         <BreadcrumbComponent links={INITIAL_LINKS} />
-        <ApplicationSwitcher applications={applications} />
+        {/* FIXME: There is an error here, so we're gonna fix it later */}
+        {/* <ApplicationSwitcher applications={applications} /> */}
       </div>
       <div className="flex justify-between">
         <ApplicationProgress progresses={progresses} />
@@ -54,9 +57,9 @@ export default async function DashboardPage() {
               headerChildren={<CaptionSemi>Visa Application</CaptionSemi>}
               contentChildren={
                 <>
-                  <HorizontalProgressBar progress={50} />
+                  <HorizontalProgressBar progress={visaApplicationTasks.progress} />
                   <div className="overflow-auto h-[275px] rounded-b-2xl hide-scrollbar">
-                    {currentTasks.map((task, index) => {
+                    {visaApplicationTasks.tasks.map((task: ApplicationTaskType, index: number) => {
                       const lastTask = index === currentTasks.length - 1;
                       return (
                         <TaskCard
