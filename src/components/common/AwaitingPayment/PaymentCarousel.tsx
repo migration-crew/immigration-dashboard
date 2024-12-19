@@ -38,7 +38,7 @@ function PaymentCarousel({ payments, singleCard }: Props) {
         <CarouselContent className={cn("-ml-1", !singleCard && "w-[700px]")}>
           {payments.map((payment) => (
             <CarouselItem
-              key={payment.id}
+              key={payment._id}
               className={cn(`pl-2`, !singleCard && "basis-1/3")}
             >
               <Card className="border h-full w-[220px] overflow-hidden">
@@ -47,7 +47,7 @@ function PaymentCarousel({ payments, singleCard }: Props) {
                     <Microtext>{payment.application.name}</Microtext>
                   </div>
                   <div className="pl-1 pt-2 pb-2">
-                    <Microtext>{payment.feeType}</Microtext>
+                    <Microtext>{payment.type}</Microtext>
                   </div>
                   <div className="pl-1">
                     <HeadingLight>
@@ -67,7 +67,7 @@ function PaymentCarousel({ payments, singleCard }: Props) {
                   className="rounded-none w-full h-[41px] py-[10px]"
                   asChild
                 >
-                  <Link href={`/payments/${payment.id}`}>
+                  <Link href={`/payments/${payment._id}`}>
                     <CaptionSemi>Make Payment</CaptionSemi>
                   </Link>
                 </Button>
