@@ -15,9 +15,10 @@ import { progresses } from "@/data/progresses";
 import { StageProgressType } from "@/types/Application/ApplicationType";
 import QuickCalendar from "../playground/david/QuickCalendar";
 import { events } from "../playground/david/data/events";
-import { payments } from "../playground/saulo/data/payment";
+// import { payments } from "../playground/saulo/data/payment";
 import { fetchApplicationTasks } from "@/hooks/getApplicationTasks";
 import { ApplicationTaskType } from "@/types/Application/ApplicationTaskType";
+import { getAllPayments } from "../payments/_hooks/getAllPayments";
 
 const INITIAL_LINKS = [
   { name: "Dashboard", href: "/dashboard" },
@@ -35,6 +36,7 @@ export default async function DashboardPage() {
     { _id: "3", name: "Visa Application", percentage: visaApplicationTasks.progress },
     { _id: "4", name: "Pre-Departure", percentage: preDepartureTasks.progress },
   ]
+  const payments = await getAllPayments(applicationId);
 
   return (
     <PageContainer>
