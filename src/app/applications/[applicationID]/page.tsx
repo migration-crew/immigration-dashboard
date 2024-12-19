@@ -39,7 +39,7 @@ export default function ApplicationDetailPage() {
           headerChildren={<CaptionSemi>Getting Started</CaptionSemi>}
           contentChildren={
             <>
-              <HorizontalProgressBar progress={100} />
+              <HorizontalProgressBar progress={gettingStartedTasks?.progress || 0} />
               {gettingStartedTasks?.tasks.map((task, index) => {
                 const lastTask = index === gettingStartedTasks.tasks.length - 1;
                 return (
@@ -58,7 +58,7 @@ export default function ApplicationDetailPage() {
           headerChildren={<CaptionSemi>School Admission</CaptionSemi>}
           contentChildren={
             <>
-              <HorizontalProgressBar progress={100} />
+              <HorizontalProgressBar progress={schoolAdmissionTasks?.progress || 0} />
               {schoolAdmissionTasks?.tasks.map((task, index) => {
                 const lastTask = index === schoolAdmissionTasks.tasks.length - 1;
                 return (
@@ -77,7 +77,7 @@ export default function ApplicationDetailPage() {
           headerChildren={<CaptionSemi>Visa Application</CaptionSemi>}
           contentChildren={
             <>
-              <HorizontalProgressBar progress={50} />
+              <HorizontalProgressBar progress={visaApplicationTasks?.progress || 0} />
               {visaApplicationTasks?.tasks.map((task, index) => {
                 const lastTask = index === visaApplicationTasks.tasks.length - 1;
                 return (
@@ -96,7 +96,7 @@ export default function ApplicationDetailPage() {
           headerChildren={<CaptionSemi>Pre-Departure</CaptionSemi>}
           contentChildren={
             <>
-              <HorizontalProgressBar progress={25} />
+              <HorizontalProgressBar progress={preDepartureTasks?.progress || 0} />
               {preDepartureTasks?.tasks.map((task, index) => {
                 const lastTask = index === preDepartureTasks.tasks.length - 1;
                 return (
