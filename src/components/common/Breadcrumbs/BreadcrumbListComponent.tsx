@@ -8,6 +8,7 @@ import {
 import { BreadCrumbType } from "@/types/BreadCrumbType";
 import React from "react";
 import { HeadingSemi } from "../text/HeadingSemi";
+import Link from "next/link";
 
 type Props = {
   links: BreadCrumbType[];
@@ -27,8 +28,9 @@ export function BreadcrumbListComponent({ links }: Props) {
                   <HeadingSemi>{link.name}</HeadingSemi>
                 </BreadcrumbPage>
               ) : (
-                <BreadcrumbLink href={link.href}>
-                  <HeadingSemi>{link.name}</HeadingSemi>
+                <BreadcrumbLink>
+                <Link href={link.href}><HeadingSemi>{link.name}</HeadingSemi></Link>
+                  
                 </BreadcrumbLink>
               )}
             </BreadcrumbItem>
