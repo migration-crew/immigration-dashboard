@@ -6,22 +6,30 @@ import HorizontalProgressBar from "@/components/common/HorizontalProgressBar";
 import { PageContainer } from "@/components/common/PageContainer";
 import { TaskCard } from "@/components/common/TaskCard/TaskCard";
 import { CaptionSemi } from "@/components/common/text/CaptionSemi";
-import {
-  gettingStartedTasks,
-  preDepartureTasks,
-  schoolAdmissionTasks,
-  visaApplicationTasks,
-} from "@/data/stages";
 import { useSearchParams } from "next/navigation";
+import { useFetchApplicationTasks } from "../_hooks/useFetchApplications";
+import { useParams } from "next/navigation";
 
 export default function ApplicationDetailPage() {
   const searchParams = useSearchParams();
   const applicationName = searchParams.get("name") || "Unknown Application";
+  const applicationTypeId = searchParams.get("applicationTypeId") || "Unknown Application Type";
+  const params = useParams();
+  const applicationId = params.applicationID as string;
+  const { gettingStartedTasks, schoolAdmissionTasks, visaApplicationTasks, preDepartureTasks, loading, error} = useFetchApplicationTasks(applicationId, applicationTypeId);
 
   const links = [
     { name: "Applications", href: "/applications" },
     { name: applicationName, href: "" },
   ];
+
+  if (loading) {
+    return <div>Loading applications...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <PageContainer className="h-full">
@@ -32,8 +40,8 @@ export default function ApplicationDetailPage() {
           contentChildren={
             <>
               <HorizontalProgressBar progress={100} />
-              {gettingStartedTasks.map((task, index) => {
-                const lastTask = index === gettingStartedTasks.length - 1;
+              {gettingStartedTasks?.tasks.map((task, index) => {
+                const lastTask = index === gettingStartedTasks.tasks.length - 1;
                 return (
                   <TaskCard
                     key={task.id}
@@ -51,8 +59,8 @@ export default function ApplicationDetailPage() {
           contentChildren={
             <>
               <HorizontalProgressBar progress={100} />
-              {schoolAdmissionTasks.map((task, index) => {
-                const lastTask = index === schoolAdmissionTasks.length - 1;
+              {schoolAdmissionTasks?.tasks.map((task, index) => {
+                const lastTask = index === schoolAdmissionTasks.tasks.length - 1;
                 return (
                   <TaskCard
                     key={task.id}
@@ -70,8 +78,8 @@ export default function ApplicationDetailPage() {
           contentChildren={
             <>
               <HorizontalProgressBar progress={50} />
-              {visaApplicationTasks.map((task, index) => {
-                const lastTask = index === visaApplicationTasks.length - 1;
+              {visaApplicationTasks?.tasks.map((task, index) => {
+                const lastTask = index === visaApplicationTasks.tasks.length - 1;
                 return (
                   <TaskCard
                     key={task.id}
@@ -89,8 +97,8 @@ export default function ApplicationDetailPage() {
           contentChildren={
             <>
               <HorizontalProgressBar progress={25} />
-              {preDepartureTasks.map((task, index) => {
-                const lastTask = index === preDepartureTasks.length - 1;
+              {preDepartureTasks?.tasks.map((task, index) => {
+                const lastTask = index === preDepartureTasks.tasks.length - 1;
                 return (
                   <TaskCard
                     key={task.id}

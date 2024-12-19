@@ -6,6 +6,6 @@ export type ApplicationTaskType = {
   description: string;
   status: string;
   dueDate: string;
-  comments: ApplicationCommentType[];
+  comments?: ApplicationCommentType[];
   documentURLs: string[];
 };
