@@ -33,32 +33,32 @@ export default function FilterSection({
   statusOptions,
   className = "",
 }: FilterSectionProps) {
-  const serchParams = useSearchParams();
+  const searchParams = useSearchParams();
   const pathname = usePathname()
   const {replace} = useRouter()
 
   const [selectedSort, setSelectedSort] = React.useState<string>(
-    serchParams.get("sort") || ""
+    searchParams.get("sort") || ""
   );
   const [selectedVisaTypes, setSelectedVisaTypes] = React.useState<string[]>(
-    serchParams.getAll("visa") || []
+    searchParams.getAll("visa") || []
   );
   const [selectedStatus, setSelectedStatus] = React.useState<string[]>(
-    serchParams.getAll("status") || []
+    searchParams.getAll("status") || []
   );
   const [sortOpen, setSortOpen] = React.useState(false);
   const [visaTypeOpen, setVisaTypeOpen] = React.useState(false);
   const [statusOpen, setStatusOpen] = React.useState(false);
 
   useEffect(()=> {
-    setSelectedSort(serchParams.get("sort") || "")
-    setSelectedVisaTypes(serchParams.getAll("visa") || [])
-    setSelectedStatus(serchParams.getAll("status") || [])
-  }, [serchParams])
+    setSelectedSort(searchParams.get("sort") || "")
+    setSelectedVisaTypes(searchParams.getAll("visa") || [])
+    setSelectedStatus(searchParams.getAll("status") || [])
+  }, [searchParams])
 
   const onSortChange = (value: string | null) => {
     setSelectedSort(value || "")
-    const params = new URLSearchParams(serchParams)
+    const params = new URLSearchParams(searchParams)
     params.delete("sort")
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     value && params.append("sort", value)
@@ -66,14 +66,14 @@ export default function FilterSection({
   }
   const onVisaTypeChange = (values: string[]) => {
     setSelectedVisaTypes(values)
-    const params = new URLSearchParams(serchParams)
+    const params = new URLSearchParams(searchParams)
     params.delete("visa")
     values.forEach((value) => params.append("visa", value))
     replace(`${pathname}?${params.toString()}`)
   }
   const onStatusChange = (values: string[]) => {
     setSelectedStatus(values)
-    const params = new URLSearchParams(serchParams)
+    const params = new URLSearchParams(searchParams)
     params.delete("status")
     values.forEach((value) => params.append("status", value))
     replace(`${pathname}?${params.toString()}`)
