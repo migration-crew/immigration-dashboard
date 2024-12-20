@@ -34,7 +34,8 @@ export default function TaskDetail({ applicationTask }: Props) {
             <li key={index} className="flex items-start gap-2">
               <Avatar>
                 <AvatarImage
-                  src={comment.sender?.imageURL}
+                  // src={comment.sender?.imageURL}
+                  src="/images/OliveiraAnderson.jpg"
                   alt={`${comment.sender?.firstName}`}
                 />
               </Avatar>
