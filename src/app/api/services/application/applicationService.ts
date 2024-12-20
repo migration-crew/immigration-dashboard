@@ -71,7 +71,7 @@ export const getApplicationTasks = async (applicationId: string, applicationType
         documentURLs: task.documentURLs
       };
     }));
-    const progress = tasks.filter(task => task !== null).length / stage.applicationTasks.length * 100;
+    const progress = tasks.filter(task => task?.status == "completed").length / tasks.filter(task => task != null).length * 100;
     result[stage.name] = {
       tasks: tasks.filter(task => task !== null),
       progress: progress,
