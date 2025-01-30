@@ -18,7 +18,7 @@ const documentPage = async ({
 
   const links = [
     { name: 'Documents', href: '/documents' },
-    { name: 'João_CICCC_ESL', href: '/documents' },
+    { name: 'João_CICCC_ESL', href: '#' },
   ];
 
   return (
