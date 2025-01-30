@@ -30,6 +30,7 @@ export default function StatusTag({ status }: Props) {
       case "inProgress":
         setVariant("blue");
         setStatusLetter("In Progress");
+        break;
       case "completed":
         setVariant("green");
         setStatusLetter("Completed");

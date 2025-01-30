@@ -17,15 +17,15 @@ export const getApplications = async (userId: string) => {
   );
 
   // FIXME: This is a temporary solution to add a number, status, and progress to the applications
-  const statuses = ["rejected", "processing", "onHold", "completed"];
-  const updatedApplications = applications.map((application, index) => ({
-    ...application.toObject(),
-    number: (index + 1).toString().padStart(3, "0"),
-    status: statuses[Math.floor(Math.random() * statuses.length)], 
-    progress: Math.floor(Math.random() * 101)
-  }));
+  // const statuses = ["rejected", "processing", "onHold", "completed"];
+  // const updatedApplications = applications.map((application, index) => ({
+  //   ...application.toObject(),
+  //   number: (index + 1).toString().padStart(3, "0"),
+  //   status: statuses[Math.floor(Math.random() * statuses.length)], 
+  //   progress: Math.floor(Math.random() * 101)
+  // }));
 
-  return updatedApplications;
+  return applications;
 };
 
 export const getApplicationTypes = async () => {
@@ -71,7 +71,9 @@ export const getApplicationTasks = async (applicationId: string, applicationType
         documentURLs: task.documentURLs
       };
     }));
+    
     const progress = tasks.filter(task => task?.status == "completed").length / tasks.filter(task => task != null).length * 100;
+    
     result[stage.name] = {
       tasks: tasks.filter(task => task !== null),
       progress: progress,
