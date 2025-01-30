@@ -12,6 +12,9 @@ const ApplicationSchema = new Schema<ApplicationType, ApplicationModelType>(
       ref: "ApplicationType",
       required: true,
     },
+    progress: { type: Number },
+    status: { type: String },
+    number: {type: String}
   },
   {
     timestamps: true,
