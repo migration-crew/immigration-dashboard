@@ -2,7 +2,7 @@
 
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 
 type ProtectedRouteProps = {
   children: React.ReactNode;
@@ -12,8 +12,10 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const { isLoaded, isSignedIn } = useUser();
   const router = useRouter();
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
   if (!isLoaded) {
-    return <div>Loading...</div>;
+    return
   }
 
   if (!isSignedIn) {
@@ -23,6 +25,12 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     console.log("User is signed in");
     router.push("/dashboard");
   }
+}, [isLoaded, isSignedIn, router]);
+
+
+if (!isLoaded) {
+  return <div>Loading...</div>;
+}
 
   return <>{children}</>;
 };
