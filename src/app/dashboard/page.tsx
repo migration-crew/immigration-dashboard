@@ -21,7 +21,7 @@ import { events } from '../playground/david/data/events';
 const INITIAL_LINKS = [
   { name: 'Dashboard', href: '/dashboard' },
   //FIXME: Make the name dynamic depending on the application
-  { name: 'João_CICCC_ESL', href: '#' },
+  { name: 'Saulo_CICCC_ESL', href: '#' },
 ];
 
 export default async function DashboardPage() {
