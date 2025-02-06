@@ -27,7 +27,7 @@ export default function TaskDetail({ applicationTask }: Props) {
       </div>
       <div className='flex flex-col gap-1'>
         <MicrotextSemi>Task Description:</MicrotextSemi>
-        <SheetDescription className='text-microtext'>
+        <SheetDescription className='text-microtext' asChild>
           <Microtext>{applicationTask.description}</Microtext>
         </SheetDescription>
       </div>
