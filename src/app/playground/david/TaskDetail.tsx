@@ -1,7 +1,11 @@
 import { Microtext } from '@/components/common/text/Microtext';
 import { MicrotextSemi } from '@/components/common/text/MicrotextSemi';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { SheetContent, SheetTitle } from '@/components/ui/upImmigrationSheet';
+import {
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+} from '@/components/ui/upImmigrationSheet';
 import { ApplicationTaskType } from '@/types/Application/ApplicationTaskType';
 
 type Props = {
@@ -23,7 +27,9 @@ export default function TaskDetail({ applicationTask }: Props) {
       </div>
       <div className='flex flex-col gap-1'>
         <MicrotextSemi>Task Description:</MicrotextSemi>
-        <Microtext>{applicationTask.description}</Microtext>
+        <SheetDescription className='text-microtext'>
+          <Microtext>{applicationTask.description}</Microtext>
+        </SheetDescription>
       </div>
       <div className='flex flex-col gap-1'>
         <MicrotextSemi>Attachments:</MicrotextSemi>
