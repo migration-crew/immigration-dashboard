@@ -10,7 +10,6 @@ import { DynamicRoundedContainer } from '@/components/common/DynamicRoundedConta
 const localizer = momentLocalizer(moment); // or globalizeLocalizer
 
 // const now = new Date() (why is this here??)
-
 //dummy events data
 const events = [
   /* {
@@ -259,7 +258,7 @@ export const DetailedCalendar = () => (
   <>
     <DynamicRoundedContainer
       title=""
-      className="w-[800px] h-[850px]"
+      className="w-[900px] h-[850px]"
       childrenDivClassName="w-full h-full"
     >
       <Calendar
@@ -268,6 +267,7 @@ export const DetailedCalendar = () => (
         startAccessor="start"
         endAccessor="end"
         defaultView="month"
+        views={['month', 'week', 'day']}
         eventPropGetter={({ type }) => {
           switch (type) {
             case 'record':

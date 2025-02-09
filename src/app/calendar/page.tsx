@@ -1,3 +1,4 @@
+'use client';
 import { Button } from '@/components/ui/upImmigrationButton';
 import { DetailedCalendar } from '../calendar/_components/DetailedCalendar';
 import Link from 'next/link';
@@ -6,9 +7,18 @@ import { BreadcrumbComponent } from '@/components/common/Breadcrumbs/BreadcrumbC
 import { AppointmentCard } from '@/components/common/AppointmentCard';
 import { AppointmentType } from '@/types/Appointment/AppointmentType';
 import { DynamicRoundedContainer } from '@/components/common/DynamicRoundedContainer';
+import { useSearchParams } from 'next/navigation';
+import { Separator } from '@/components/ui/separator';
 
 export default function CalendarPage() {
-  const links = [{ name: 'Calendar', href: '/calendar' }];
+  const searchParams = useSearchParams();
+
+  const applicationName = searchParams.get('name') || 'Unknown Application';
+
+  const links = [
+    { name: 'Applications', href: '/applications' },
+    { name: applicationName, href: '' },
+  ];
 
   const appointments: AppointmentType[] = [
     {
@@ -91,17 +101,20 @@ export default function CalendarPage() {
             <Link href={'/appointment'}>appointment</Link>
           </Button>
         </div>
-        <div className="flex gap-4 justify-between">
+        <div className="flex gap-4 items-center align-middle">
           <DynamicRoundedContainer
             title="Upcoming Appointments"
-            className="w-[350px] h-[850px]"
+            className="w-[280px] h-[850px]"
           >
             {appointments.map((appointment) => (
-              <AppointmentCard
-                key={appointment.id}
-                appointment={appointment}
-                attendees={[]}
-              />
+              <>
+                <AppointmentCard
+                  key={appointment.id}
+                  appointment={appointment}
+                  attendees={[]}
+                />
+                <Separator className="w-[250px] justify-self-center" />
+              </>
             ))}
           </DynamicRoundedContainer>
           <DetailedCalendar />
