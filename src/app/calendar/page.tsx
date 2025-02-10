@@ -106,7 +106,7 @@ export default function CalendarPage() {
         <div className="flex gap-4 items-center align-middle">
           <DynamicRoundedContainer
             title="Upcoming Appointments"
-            className="w-[280px] h-[850px]"
+            className="w-1/4 h-full"
           >
             {appointments.map((appointment) => (
               <>
@@ -115,7 +115,7 @@ export default function CalendarPage() {
                   appointment={appointment}
                   attendees={[]}
                 />
-                <Separator className="w-[250px] justify-self-center" />
+                <Separator className="w-11/12 justify-self-center" />
               </>
             ))}
           </DynamicRoundedContainer>

@@ -1,6 +1,6 @@
-import { Card } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
-import { Paragraph } from "./text/Paragraph";
+import { Card } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
+import { Paragraph } from './text/Paragraph';
 
 type Props = {
   title: string;
@@ -25,9 +25,9 @@ export function DynamicRoundedContainer({
   childrenDivClassName,
 }: Props) {
   return (
-    <Card className={cn(`rounded-lg bg-white p-6`, className)}>
+    <Card className={cn(`rounded-lg bg-white p-3 lg:p-6`, className)}>
       <Paragraph>{title}</Paragraph>
-      <div className={`${childrenDivClassName}`}>{children}</div>
+      <div className={`${childrenDivClassName} h-full`}>{children}</div>
     </Card>
   );
 }
