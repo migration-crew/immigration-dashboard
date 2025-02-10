@@ -1,6 +1,6 @@
 'use client';
 import { Button } from '@/components/ui/upImmigrationButton';
-import { DetailedCalendar } from '../calendar/_components/DetailedCalendar';
+// import { DetailedCalendar } from '../calendar/_components/DetailedCalendar';
 import Link from 'next/link';
 import { PageContainer } from '@/components/common/PageContainer';
 import { BreadcrumbComponent } from '@/components/common/Breadcrumbs/BreadcrumbComponent';
@@ -9,6 +9,8 @@ import { AppointmentType } from '@/types/Appointment/AppointmentType';
 import { DynamicRoundedContainer } from '@/components/common/DynamicRoundedContainer';
 import { useSearchParams } from 'next/navigation';
 import { Separator } from '@/components/ui/separator';
+import { MyCalendar } from './_components/JoaoCalendar';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 export default function CalendarPage() {
   const searchParams = useSearchParams();
@@ -117,7 +119,8 @@ export default function CalendarPage() {
               </>
             ))}
           </DynamicRoundedContainer>
-          <DetailedCalendar />
+          {/* <DetailedCalendar /> */}
+          <MyCalendar />
         </div>
       </PageContainer>
     </>
