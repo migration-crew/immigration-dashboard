@@ -1,0 +1,15 @@
+.rbc-event {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  align-self: baseline;
+}
+
+.rbc-event-content {
+  align-items: baseline;
+  align-self: baseline;
+}
+
+.rbc-row {
+  align-items: self-end;
+}

@@ -4,13 +4,51 @@ import moment from 'moment';
 import { events2 } from '../events';
 import { useState } from 'react';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import '../index.css';
 
 const localizer = momentLocalizer(moment); // or globalizeLocalizer
+
+const components = {
+  // event: (props) => {
+  //   return (
+  //     <div>
+  //       <strong>{props.event.title}</strong>
+  //       {props.event.desc && <p>{props.event.desc}</p>}
+  //     </div>
+  //   );
+  // },
+  event: (props: { event: { type: string; title: string; desc?: string } }) => {
+    const eventType = props.event.type;
+    switch (eventType) {
+      case 'appointment':
+        return (
+          <div className="bg-blue-100 opacity-95 p-1 flex flex-wrap">
+            <p className="text-blue-800 text-sm">{props.event.title}</p>
+            {props.event.desc && <p>{props.event.desc}</p>}
+          </div>
+        );
+      case 'record':
+        return (
+          <div>
+            <strong>{props.event.title}</strong>
+            {props.event.desc && <p>{props.event.desc}</p>}
+          </div>
+        );
+      case 'document':
+        return (
+          <div className="bg-red-200 opacity-95 p-1 flex flex-wrap">
+            <p className="text-red-800 text-sm">{props.event.title}</p>
+            {props.event.desc && <p>{props.event.desc}</p>}
+          </div>
+        );
+    }
+  },
+};
 
 export function MyCalendar() {
   const [view, setView] = useState<
     'month' | 'week' | 'work_week' | 'day' | 'agenda'
-  >(Views.WEEK);
+  >(Views.MONTH);
   const [date, setDate] = useState(new Date());
 
   return (
@@ -25,6 +63,7 @@ export function MyCalendar() {
         onNavigate={(date) => {
           setDate(new Date(date));
         }}
+        components={components}
         startAccessor="start"
         endAccessor="end"
       />
