@@ -13,7 +13,7 @@ export const events = [
     title: 'Long Event',
     start: new Date(2015, 3, 7),
     end: new Date(2015, 3, 10),
-    resource: 'record',
+    type: 'record',
   },
 
   {
@@ -249,17 +249,20 @@ export const events2 = [
     end: moment('2025-02-10T15:00:00').toDate(),
     title: 'document',
     type: 'document',
+    desc: 'blablabla',
   },
   {
     start: moment('2025-02-14T14:00:00').toDate(),
     end: moment('2025-02-14T15:00:00').toDate(),
     title: 'appointment',
     type: 'appointment',
+    desc: 'blablabla',
   },
   {
     start: moment('2025-02-12T14:00:00').toDate(),
     end: moment('2025-02-12T15:00:00').toDate(),
     title: 'record Type',
     type: 'record',
+    desc: 'blablabla',
   },
 ];

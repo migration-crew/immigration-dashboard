@@ -19,8 +19,11 @@ const components = {
   // },
   event: (props: {
     event: {
-      type: string;
+      id?: number;
       title: string;
+      start: Date;
+      end: Date;
+      type: string;
       desc?: string;
     };
   }) => {
@@ -28,23 +31,23 @@ const components = {
     switch (eventType) {
       case 'appointment':
         return (
-          <div className="bg-blue-100 opacity-95 p-1 flex flex-wrap justify-end">
+          <div className="bg-blue-100 opacity-95 p-1 flex flex-wrap flex-col items-end justify-end h-full">
             <p className="text-blue-800 text-sm">{props.event.title}</p>
-            {props.event.desc && <p>{props.event.desc}</p>}
+            <p className="text-black text-sm">{props.event.desc}</p>
           </div>
         );
       case 'record':
         return (
-          <div className="bg-green-200 p-1 flex justify-end">
+          <div className="bg-green-200 p-1 flex flex-wrap  flex-col items-end justify-end h-full">
             <p className="text-green-800 text-sm">{props.event.title}</p>
-            {props.event.desc && <p>{props.event.desc}</p>}
+            <p className="text-black text-sm">{props.event.desc}</p>
           </div>
         );
       case 'document':
         return (
-          <div className="bg-red-200 opacity-95 p-1 flex flex-wrap justify-end">
-            <p className="text-red-800 text-sm">{props.event.title}</p>
-            {props.event.desc && <p>{props.event.desc}</p>}
+          <div className="bg-red-200 opacity-95 p-1 flex flex-wrap flex-col items-end justify-end h-full">
+            <p className="text-red-800 text-sm">{props.event.title} </p>
+            <p className="text-black text-sm">{props.event.desc}</p>
           </div>
         );
     }
