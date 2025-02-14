@@ -17,26 +17,32 @@ const components = {
   //     </div>
   //   );
   // },
-  event: (props: { event: { type: string; title: string; desc?: string } }) => {
+  event: (props: {
+    event: {
+      type: string;
+      title: string;
+      desc?: string;
+    };
+  }) => {
     const eventType = props.event.type;
     switch (eventType) {
       case 'appointment':
         return (
-          <div className="bg-blue-100 opacity-95 p-1 flex flex-wrap">
+          <div className="bg-blue-100 opacity-95 p-1 flex flex-wrap justify-end">
             <p className="text-blue-800 text-sm">{props.event.title}</p>
             {props.event.desc && <p>{props.event.desc}</p>}
           </div>
         );
       case 'record':
         return (
-          <div>
-            <strong>{props.event.title}</strong>
+          <div className="bg-green-200 p-1 flex justify-end">
+            <p className="text-green-800 text-sm">{props.event.title}</p>
             {props.event.desc && <p>{props.event.desc}</p>}
           </div>
         );
       case 'document':
         return (
-          <div className="bg-red-200 opacity-95 p-1 flex flex-wrap">
+          <div className="bg-red-200 opacity-95 p-1 flex flex-wrap justify-end">
             <p className="text-red-800 text-sm">{props.event.title}</p>
             {props.event.desc && <p>{props.event.desc}</p>}
           </div>

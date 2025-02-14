@@ -13,3 +13,7 @@
 .rbc-row {
   align-items: self-end;
 }
+
+.rbc-btn-group {
+  background-color: white;
+}

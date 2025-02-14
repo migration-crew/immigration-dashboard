@@ -247,13 +247,19 @@ export const events2 = [
   {
     start: moment('2025-02-10T14:00:00').toDate(),
     end: moment('2025-02-10T15:00:00').toDate(),
-    title: 'Meeting with John',
+    title: 'document',
     type: 'document',
   },
   {
     start: moment('2025-02-14T14:00:00').toDate(),
     end: moment('2025-02-14T15:00:00').toDate(),
-    title: 'Meeting with Mary',
+    title: 'appointment',
     type: 'appointment',
+  },
+  {
+    start: moment('2025-02-12T14:00:00').toDate(),
+    end: moment('2025-02-12T15:00:00').toDate(),
+    title: 'record Type',
+    type: 'record',
   },
 ];
