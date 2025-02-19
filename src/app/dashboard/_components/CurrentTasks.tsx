@@ -5,10 +5,10 @@ import HorizontalProgressBar from '@/components/common/HorizontalProgressBar';
 import { TaskCard } from '@/components/common/TaskCard/TaskCard';
 import { CaptionSemi } from '@/components/common/text/CaptionSemi';
 import { Paragraph } from '@/components/common/text/Paragraph';
+import { Button } from '@/components/ui/upImmigrationButton';
 import { currentTasks } from '@/data/currentTasks';
 import { visaApplicationTasks } from '@/data/stages';
 import { ApplicationTaskType } from '@/types/Application/ApplicationTaskType';
-import { Button } from 'react-day-picker';
 
 export function CurrentTasks() {
   return (
@@ -21,7 +21,7 @@ export function CurrentTasks() {
             <>
               <HorizontalProgressBar progress={visaApplicationTasks.progress} />
               <div className='overflow-auto h-[275px] rounded-b-2xl hide-scrollbar'>
-                {visaApplicationTasks.tasks?.map(
+                {visaApplicationTasks?.tasks?.map(
                   (task: ApplicationTaskType, index: number) => {
                     const lastTask = index === currentTasks.length - 1;
                     return (

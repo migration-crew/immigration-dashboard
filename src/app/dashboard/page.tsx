@@ -11,10 +11,10 @@ import { getAllApplications } from '@/hooks/getAllApplications';
 import { getAllPayments } from '@/hooks/getAllPayments';
 import { fetchApplicationTasks } from '@/hooks/getApplicationTasks';
 import { StageProgressType } from '@/types/Application/ApplicationType';
-import QuickCalendar from '../playground/david/QuickCalendar';
 import { events } from '../playground/david/data/events';
 import { CurrentTasks } from './_components/CurrentTasks';
 import { LatestUpdates } from './_components/LatestUpdates';
+import QuickCalendar from './_components/QuickCalendar';
 
 const INITIAL_LINKS = [
   { name: 'Dashboard', href: '/dashboard' },
