@@ -58,7 +58,7 @@ export default async function DashboardPage() {
         <AwaitingPayment payments={payments} singleCard={true} />
       </div>
       <div className='flex pt-2 gap-4 h-[490px]'>
-        <CurrentTasks />
+        <CurrentTasks visaApplicationTasks={visaApplicationTasks} />
         <LatestUpdates />
         <YourSchedule />
       </div>

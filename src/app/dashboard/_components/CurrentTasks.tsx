@@ -7,10 +7,16 @@ import { CaptionSemi } from '@/components/common/text/CaptionSemi';
 import { Paragraph } from '@/components/common/text/Paragraph';
 import { Button } from '@/components/ui/upImmigrationButton';
 import { currentTasks } from '@/data/currentTasks';
-import { visaApplicationTasks } from '@/data/stages';
 import { ApplicationTaskType } from '@/types/Application/ApplicationTaskType';
 
-export function CurrentTasks() {
+type Props = {
+  visaApplicationTasks: {
+    progress: number;
+    tasks: ApplicationTaskType[];
+  };
+};
+
+export function CurrentTasks({ visaApplicationTasks }: Props) {
   return (
     <div className='flex flex-col gap-2 w-[390px]'>
       <Paragraph>Current Tasks</Paragraph>
@@ -19,7 +25,9 @@ export function CurrentTasks() {
           headerChildren={<CaptionSemi>Visa Application</CaptionSemi>}
           contentChildren={
             <>
-              <HorizontalProgressBar progress={visaApplicationTasks.progress} />
+              <HorizontalProgressBar
+                progress={visaApplicationTasks?.progress}
+              />
               <div className='overflow-auto h-[275px] rounded-b-2xl hide-scrollbar'>
                 {visaApplicationTasks?.tasks?.map(
                   (task: ApplicationTaskType, index: number) => {
