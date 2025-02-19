@@ -9,6 +9,7 @@ import { fetchApplicationTasks } from '@/hooks/getApplicationTasks';
 import { StageProgressType } from '@/types/Application/ApplicationType';
 import { CurrentTasks } from './_components/CurrentTasks';
 import { LatestUpdates } from './_components/LatestUpdates';
+import { YourSchedule } from './_components/YourSchedule';
 
 const INITIAL_LINKS = [
   { name: 'Dashboard', href: '/dashboard' },
@@ -59,6 +60,7 @@ export default async function DashboardPage() {
       <div className='flex pt-2 gap-4 h-[490px]'>
         <CurrentTasks />
         <LatestUpdates />
+        <YourSchedule />
       </div>
     </PageContainer>
   );

@@ -2,7 +2,7 @@ import { events } from '@/app/playground/david/data/events';
 import DynamicHeaderContainer from '@/components/common/DynamicHeaderContainer';
 import { CaptionSemi } from '@/components/common/text/CaptionSemi';
 import { Paragraph } from '@/components/common/text/Paragraph';
-import { Button } from 'react-day-picker';
+import { Button } from '@/components/ui/upImmigrationButton';
 import QuickCalendar from './QuickCalendar';
 
 export function YourSchedule() {
