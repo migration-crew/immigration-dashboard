@@ -7,17 +7,14 @@ import HorizontalProgressBar from '@/components/common/HorizontalProgressBar';
 import { PageContainer } from '@/components/common/PageContainer';
 import { TaskCard } from '@/components/common/TaskCard/TaskCard';
 import { CaptionSemi } from '@/components/common/text/CaptionSemi';
-import { Microtext } from '@/components/common/text/Microtext';
 import { Paragraph } from '@/components/common/text/Paragraph';
 import { Button } from '@/components/ui/upImmigrationButton';
 import { currentTasks } from '@/data/currentTasks';
-import { UPDATES } from '@/data/updates';
 import { getAllApplications } from '@/hooks/getAllApplications';
 import { getAllPayments } from '@/hooks/getAllPayments';
 import { fetchApplicationTasks } from '@/hooks/getApplicationTasks';
 import { ApplicationTaskType } from '@/types/Application/ApplicationTaskType';
 import { StageProgressType } from '@/types/Application/ApplicationType';
-import { UpdateType } from '@/types/UpdateType';
 import QuickCalendar from '../playground/david/QuickCalendar';
 import { events } from '../playground/david/data/events';
 
@@ -101,32 +98,7 @@ export default async function DashboardPage() {
             <Button className='bg-secondary-green'>See Your Tasks</Button>
           </div>
         </div>
-        <div className='flex flex-col gap-2 w-[390px]'>
-          <Paragraph>Latest Updates</Paragraph>
-          <div className='flex flex-col w-full'>
-            <DynamicHeaderContainer
-              className='w-full'
-              headerChildren={<CaptionSemi>Updates</CaptionSemi>}
-              contentChildren={
-                <>
-                  <ul className='flex flex-col h-[340px] overflow-auto hide-scrollbar rounded-b-2xl'>
-                    {UPDATES.map((update: UpdateType) => (
-                      <li
-                        key={update.id}
-                        className='flex justify-between items-center self-stretch py-3 px-6 border border-primary-gray bg-primary-white'
-                      >
-                        <Microtext>{update.description}</Microtext>
-                        <Microtext className='text-secondary-medium-gray'>
-                          {update.date}
-                        </Microtext>
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              }
-            ></DynamicHeaderContainer>
-          </div>
-        </div>
+
         <div className='flex flex-col gap-2 w-[340px]'>
           <Paragraph>Your schedule</Paragraph>
           <div className='flex flex-col w-full gap-2'>
