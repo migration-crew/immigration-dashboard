@@ -4,10 +4,10 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/upImmigrationButton";
 import { useState } from "react";
-import { CiImageOn } from "react-icons/ci";
-import { FaMicrophone } from "react-icons/fa6";
+// import { CiImageOn } from "react-icons/ci";
+// import { FaMicrophone } from "react-icons/fa6";
 import { FiSend } from "react-icons/fi";
-import { GrAttachment } from "react-icons/gr";
+// import { GrAttachment } from "react-icons/gr";
 import ChatContainer from "./ChatContainer";
 
 export default function MessageComposer() {
@@ -30,7 +30,7 @@ export default function MessageComposer() {
               className="w-[24px] h-[24px] text-secondary-dark-gray flex items-center"
               aria-label="Start Voice Input"
             >
-              <FaMicrophone />
+              {/* <FaMicrophone /> */}
             </button>
             <Input
               type="text"
@@ -44,13 +44,13 @@ export default function MessageComposer() {
             className="w-[24px] h-[24px] text-secondary-dark-gray flex justify-center items-center mr-4"
             aria-label="Start Voice Input"
           >
-            <GrAttachment />
+            {/* <GrAttachment /> */}
           </button>
           <button
             className="w-[24px] h-[24px] text-secondary-dark-gray  flex justify-center items-center mr-4"
             aria-label="Start Voice Input"
           >
-            <CiImageOn />
+            {/* <CiImageOn /> */}
           </button>
           <Button
             onClick={handleSendMessage}
@@ -68,7 +68,18 @@ export default function MessageComposer() {
             key={index}
             message={{
               id: String(index),
-              user: { id: "userId", imageUrl: "", firstName: "" },
+              user: {
+                _id: "userId",
+                imageURL: "",
+                firstName: "",
+                lastName: "",
+                nationality: "",
+                language: "",
+                address: "",
+                dateOfBirth: "",
+                gender: "",
+                email: "",
+              },
               content: msg,
               createdAt: new Date().toString(),
             }}
