@@ -1,7 +1,7 @@
 "use client";
 
-import { AppointmentTypeContainer } from "@/app/appointment/_components/AppoinmentTypeContainer";
-import { AppointmentDatePicker } from "@/app/appointment/_components/AppoinementDatePicker";
+import { AppointmentDatePicker } from "@/app/appointment/_components/AppointmentDatePicker";
+import { AppointmentTypeContainer } from "@/app/appointment/_components/AppointmentTypeContainer";
 import ApplicationSwitcher from "@/components/common/ApplicationSwitcher";
 import { AppointmentCard } from "@/components/common/AppointmentCard";
 import AwaitingPayment from "@/components/common/AwaitingPayment/AwaitingPayment";

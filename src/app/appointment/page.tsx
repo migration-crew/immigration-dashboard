@@ -1,9 +1,8 @@
-import { PageContainer } from '@/components/common/PageContainer'
-import React from 'react'
-import { AppointmentDatePicker } from './_components/AppoinementDatePicker'
-import { AppointmentTypeContainer } from './_components/AppoinmentTypeContainer'
-import { BreadcrumbComponent } from '@/components/common/Breadcrumbs/BreadcrumbComponent'
-import { Button } from '@/components/ui/upImmigrationButton'
+import { BreadcrumbComponent } from "@/components/common/Breadcrumbs/BreadcrumbComponent";
+import { PageContainer } from "@/components/common/PageContainer";
+import { Button } from "@/components/ui/upImmigrationButton";
+import { AppointmentDatePicker } from "./_components/AppointmentDatePicker";
+import { AppointmentTypeContainer } from "./_components/AppointmentTypeContainer";
 
 const page = () => {
   const links = [
@@ -15,12 +14,11 @@ const page = () => {
       <BreadcrumbComponent links={links} />
       <AppointmentTypeContainer />
       <AppointmentDatePicker />
-      <div className='flex justify-end'>
-      <Button>Confilm Date & Time</Button>
-
+      <div className="flex justify-end">
+        <Button>Confilm Date & Time</Button>
       </div>
     </PageContainer>
-  )
-}
+  );
+};
 
-export default page
+export default page;
