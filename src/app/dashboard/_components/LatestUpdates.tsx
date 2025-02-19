@@ -4,7 +4,7 @@ import { Microtext } from '@/components/common/text/Microtext';
 import { Paragraph } from '@/components/common/text/Paragraph';
 import { UPDATES } from '@/data/updates';
 
-export default function LatestUpdates() {
+export function LatestUpdates() {
   return (
     <div className='flex flex-col gap-2 w-[390px]'>
       <Paragraph>Latest Updates</Paragraph>

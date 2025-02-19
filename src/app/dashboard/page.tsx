@@ -13,7 +13,8 @@ import { fetchApplicationTasks } from '@/hooks/getApplicationTasks';
 import { StageProgressType } from '@/types/Application/ApplicationType';
 import QuickCalendar from '../playground/david/QuickCalendar';
 import { events } from '../playground/david/data/events';
-import LatestUpdates from './_components/LatestUpdates';
+import { CurrentTasks } from './_components/CurrentTasks';
+import { LatestUpdates } from './_components/LatestUpdates';
 
 const INITIAL_LINKS = [
   { name: 'Dashboard', href: '/dashboard' },
@@ -62,6 +63,7 @@ export default async function DashboardPage() {
         <AwaitingPayment payments={payments} singleCard={true} />
       </div>
       <div className='flex pt-2 gap-4 h-[490px]'>
+        <CurrentTasks />
         <LatestUpdates />
         <div className='flex flex-col gap-2 w-[340px]'>
           <Paragraph>Your schedule</Paragraph>
