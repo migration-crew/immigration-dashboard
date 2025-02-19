@@ -17,6 +17,7 @@ import { ApplicationTaskType } from '@/types/Application/ApplicationTaskType';
 import { StageProgressType } from '@/types/Application/ApplicationType';
 import QuickCalendar from '../playground/david/QuickCalendar';
 import { events } from '../playground/david/data/events';
+import LatestUpdates from './_components/LatestUpdates';
 
 const INITIAL_LINKS = [
   { name: 'Dashboard', href: '/dashboard' },
@@ -98,7 +99,7 @@ export default async function DashboardPage() {
             <Button className='bg-secondary-green'>See Your Tasks</Button>
           </div>
         </div>
-
+        <LatestUpdates />
         <div className='flex flex-col gap-2 w-[340px]'>
           <Paragraph>Your schedule</Paragraph>
           <div className='flex flex-col w-full gap-2'>
