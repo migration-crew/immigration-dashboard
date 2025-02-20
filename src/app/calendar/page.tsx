@@ -109,14 +109,14 @@ export default function CalendarPage() {
             className="w-1/4 h-full"
           >
             {appointments.map((appointment) => (
-              <>
+              <div key={appointment.id}>
                 <AppointmentCard
                   key={appointment.id}
                   appointment={appointment}
                   attendees={[]}
                 />
                 <Separator className="w-11/12 justify-self-center" />
-              </>
+              </div>
             ))}
           </DynamicRoundedContainer>
           {/* <DetailedCalendar /> */}

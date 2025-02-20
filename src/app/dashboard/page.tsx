@@ -25,7 +25,7 @@ const INITIAL_LINKS = [
 ];
 
 export default async function DashboardPage() {
-  const applicationId = '67436dbb9f3002f9d49d5a54';
+  const applicationId = '67b52097f63d38ef76a278b5';
   const applicationTypeId = '6756048b74dac7d4eec521e6';
   const {
     gettingStartedTasks,
@@ -56,18 +56,18 @@ export default async function DashboardPage() {
 
   return (
     <PageContainer>
-      <div className='flex justify-between items-center'>
+      <div className="flex justify-between items-center">
         <BreadcrumbComponent links={INITIAL_LINKS} />
         <ApplicationSwitcher applications={applications} />
       </div>
-      <div className='flex justify-between'>
+      <div className="flex justify-between">
         <ApplicationProgress progresses={progresses} />
         <AwaitingPayment payments={payments} singleCard={true} />
       </div>
-      <div className='flex pt-2 gap-4 h-[490px]'>
-        <div className='flex flex-col gap-2 w-[390px]'>
+      <div className="flex pt-2 gap-4 h-[490px]">
+        <div className="flex flex-col gap-2 w-[390px]">
           <Paragraph>Current Tasks</Paragraph>
-          <div className='flex flex-col w-full gap-2'>
+          <div className="flex flex-col w-full gap-2">
             <DynamicHeaderContainer
               headerChildren={<CaptionSemi>Visa Application</CaptionSemi>}
               contentChildren={
@@ -75,7 +75,7 @@ export default async function DashboardPage() {
                   <HorizontalProgressBar
                     progress={visaApplicationTasks.progress}
                   />
-                  <div className='overflow-auto h-[275px] rounded-b-2xl hide-scrollbar'>
+                  <div className="overflow-auto h-[275px] rounded-b-2xl hide-scrollbar">
                     {visaApplicationTasks.tasks.map(
                       (task: ApplicationTaskType, index: number) => {
                         const lastTask = index === currentTasks.length - 1;
@@ -93,20 +93,20 @@ export default async function DashboardPage() {
                   </div>
                 </>
               }
-              className='w-full'
+              className="w-full"
             ></DynamicHeaderContainer>
-            <Button className='bg-secondary-green'>See Your Tasks</Button>
+            <Button className="bg-secondary-green">See Your Tasks</Button>
           </div>
         </div>
-        <div className='flex flex-col gap-2 w-[340px]'>
+        <div className="flex flex-col gap-2 w-[340px]">
           <Paragraph>Your schedule</Paragraph>
-          <div className='flex flex-col w-full gap-2'>
+          <div className="flex flex-col w-full gap-2">
             <DynamicHeaderContainer
               headerChildren={<CaptionSemi>Mon Dec 16</CaptionSemi>}
               contentChildren={<QuickCalendar events={events} />}
-              className='w-full '
+              className="w-full "
             ></DynamicHeaderContainer>
-            <Button className='bg-secondary-green'>See Your Calendar</Button>
+            <Button className="bg-secondary-green">See Your Calendar</Button>
           </div>
         </div>
       </div>
