@@ -108,7 +108,7 @@ export const getApplicationTasks = async (applicationId: string) => {
   };
 
   const result: StageProgressType[] = [];
-  const applicationTasks = await Promise.all(
+  await Promise.all(
     applicationTypes.applicationStages.map(async (stage: ApplicationStage) => {
       const tasks = await Promise.all(
         stage.applicationTasks.map(async (taskId: ObjectId) => {
@@ -150,9 +150,6 @@ export const getApplicationTasks = async (applicationId: string) => {
       });
     })
   );
-
-  console.log("🤩", applicationTasks);
-  console.log("🎉", result);
 
   return result;
 };
