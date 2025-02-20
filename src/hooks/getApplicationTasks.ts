@@ -27,8 +27,5 @@ export async function fetchApplicationTasks(applicationId: string) {
   
     const data = await response.json() as ApplicationTaskStageType[];
 
-    console.log(data);
-    
-
     return data
   }
