@@ -1,3 +1,5 @@
+"use client";
+
 import TaskDetail from "@/app/playground/david/TaskDetail";
 import { Sheet, SheetTrigger } from "@/components/ui/upImmigrationSheet";
 import { cn } from "@/lib/utils";
@@ -23,8 +25,6 @@ type Props = {
  */
 
 export function TaskCard({ applicationTask, className }: Props) {
-  console.log("😎applicationTask", applicationTask);
-  
   return (
     <Sheet>
       <SheetTrigger asChild>
