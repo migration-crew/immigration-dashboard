@@ -14,7 +14,7 @@ import { getAllApplications } from '@/hooks/getAllApplications';
 import { getAllPayments } from '@/hooks/getAllPayments';
 import { fetchApplicationTasks } from '@/hooks/getApplicationTasks';
 import { ApplicationTaskType } from '@/types/Application/ApplicationTaskType';
-import { StageProgressType } from '@/types/Application/ApplicationType';
+import { ApplicationTaskStageType } from '@/types/Application/ApplicationType';
 import QuickCalendar from '../playground/david/QuickCalendar';
 import { events } from '../playground/david/data/events';
 
@@ -25,32 +25,15 @@ const INITIAL_LINKS = [
 ];
 
 export default async function DashboardPage() {
-  const applicationId = '67436dbb9f3002f9d49d5a54';
-  const applicationTypeId = '6756048b74dac7d4eec521e6';
-  const {
-    gettingStartedTasks,
-    schoolAdmissionTasks,
-    visaApplicationTasks,
-    preDepartureTasks,
-  } = await fetchApplicationTasks(applicationId, applicationTypeId);
-  const progresses: StageProgressType[] = [
-    {
-      _id: '1',
-      name: 'Getting Started',
-      percentage: gettingStartedTasks.progress,
-    },
-    {
-      _id: '2',
-      name: 'School Admission',
-      percentage: schoolAdmissionTasks.progress,
-    },
-    {
-      _id: '3',
-      name: 'Visa Application',
-      percentage: visaApplicationTasks.progress,
-    },
-    { _id: '4', name: 'Pre-Departure', percentage: preDepartureTasks.progress },
-  ];
+  const applicationId = '67b52097f63d38ef76a278b5';
+  const applicationTaskSteps = await fetchApplicationTasks(applicationId);
+  const currentTaskIndex = applicationTaskSteps.findIndex((task) => task.progress < 100)
+
+  const currentTaskStep = applicationTaskSteps[currentTaskIndex <0? applicationTaskSteps.length -1 : currentTaskIndex];
+
+  console.log("🤷‍♂️", currentTaskStep);
+  
+
   const payments = await getAllPayments(applicationId);
   const applications = await getAllApplications();
 
@@ -61,7 +44,7 @@ export default async function DashboardPage() {
         <ApplicationSwitcher applications={applications} />
       </div>
       <div className='flex justify-between'>
-        <ApplicationProgress progresses={progresses} />
+        <ApplicationProgress progresses={applicationTaskSteps} />
         <AwaitingPayment payments={payments} singleCard={true} />
       </div>
       <div className='flex pt-2 gap-4 h-[490px]'>
@@ -69,19 +52,21 @@ export default async function DashboardPage() {
           <Paragraph>Current Tasks</Paragraph>
           <div className='flex flex-col w-full gap-2'>
             <DynamicHeaderContainer
-              headerChildren={<CaptionSemi>Visa Application</CaptionSemi>}
+              headerChildren={<CaptionSemi>{currentTaskStep.name}</CaptionSemi>}
               contentChildren={
                 <>
                   <HorizontalProgressBar
-                    progress={visaApplicationTasks.progress}
+                    progress={currentTaskStep.progress}
                   />
                   <div className='overflow-auto h-[275px] rounded-b-2xl hide-scrollbar'>
-                    {visaApplicationTasks.tasks.map(
+                    {currentTaskStep.tasks.map(
                       (task: ApplicationTaskType, index: number) => {
-                        const lastTask = index === currentTasks.length - 1;
+                        const lastTask = index === currentTaskStep.tasks.length - 1;
+                        console.log("😒", task);
+                        
                         return (
                           <TaskCard
-                            key={task.id}
+                            // key={task._id}
                             applicationTask={task}
                             className={`w-full p-4 gap-1  ${
                               lastTask ? 'rounded-b-2xl' : ''

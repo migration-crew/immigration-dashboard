@@ -1,13 +1,13 @@
 "use client";
 
-import { StageProgressType } from "@/types/Application/ApplicationType";
+import { ApplicationTaskStageType } from "@/types/Application/ApplicationType";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { DynamicRoundedContainer } from "../DynamicRoundedContainer";
 import { CaptionSemi } from "../text/CaptionSemi";
 
 type Props = {
-  progresses: StageProgressType[];
+  progresses: ApplicationTaskStageType[];
 };
 
 export default function ApplicationProgress({ progresses }: Props) {
@@ -24,8 +24,8 @@ export default function ApplicationProgress({ progresses }: Props) {
             width: "70%",
           }}
         />
-        {progresses.map(({ _id, name, percentage }, index) => (
-          <li key={_id} className="relative flex flex-col items-center gap-8">
+        {progresses.map(({ name, progress }, index) => (
+          <li key={index} className="relative flex flex-col items-center gap-8">
             <div
               style={{
                 width: 120,
@@ -35,8 +35,8 @@ export default function ApplicationProgress({ progresses }: Props) {
               }}
             >
               <CircularProgressbar
-                value={Math.round(percentage)}
-                text={`${Math.round(percentage)}%`}
+                value={Math.round(progress)}
+                text={`${Math.round(progress)}%`}
                 styles={{
                   path: {
                     stroke: "#0C9986",
