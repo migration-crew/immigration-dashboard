@@ -1,4 +1,5 @@
-import { AppointmentDatePicker } from "@/app/appointment/_components/AppoinementDatePicker";
+import { AppointmentDatePicker } from "@/app/appointment/_components/AppointmentDatePicker";
+import { AppointmentTypeContainer } from "@/app/appointment/_components/AppointmentTypeContainer";
 import { DocumentTable } from "@/app/documents/_components/DocumentTable";
 import { NewDocForm } from "@/app/documents/_components/NewDocForm";
 import { UploadDocumentModal } from "@/app/documents/_components/UploadDocumentModal";
@@ -26,7 +27,6 @@ import { Title } from "@/components/common/text/Title";
 import { TitleLight } from "@/components/common/text/TitleLight";
 import { Button } from "@/components/ui/upImmigrationButton";
 import { documents } from "./data/DocumentTable";
-import { AppointmentTypeContainer } from "@/app/appointment/_components/AppoinmentTypeContainer";
 
 const YukiPage = () => {
   return (
