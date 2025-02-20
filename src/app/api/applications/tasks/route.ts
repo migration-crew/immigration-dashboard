@@ -18,7 +18,6 @@ export async function GET(req: NextRequest) {
     // Extract applicationId from the query parameters
     const { searchParams } = new URL(req.url);
     const applicationId = searchParams.get('applicationId');
-    const applicationTypeId = searchParams.get('applicationTypeId');
 
     // Validate the applicationId
     if (!applicationId || typeof applicationId !== 'string') {
@@ -28,17 +27,16 @@ export async function GET(req: NextRequest) {
         );
     }
 
-    // Validate the applicationTypeId
-    if (!applicationTypeId || typeof applicationTypeId !== 'string') {
-        return NextResponse.json(
-            { message: 'Invalid Application Type Id' },
-            { status: 400 }
-        );
-    }
-
     try {
         // Call the service function to get the applications
-        const applications = await getApplicationTasks(applicationId, applicationTypeId);
+        const applications = await getApplicationTasks(applicationId);
+
+        if(!applications) {
+            return NextResponse.json(
+                { message: 'No tasks found' },
+                { status: 404 }
+            );
+        }
 
         // Return the found applications as the response
         return NextResponse.json(
