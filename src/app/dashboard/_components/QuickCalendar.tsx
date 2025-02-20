@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { Calendar } from "@/components/ui/upImmigrationCalendar";
-import { QuickCalendarType } from "@/types/Calendar/EventType";
-import React from "react";
+import { Calendar } from '@/components/ui/upImmigrationCalendar';
+import { QuickCalendarType } from '@/types/Calendar/EventType';
+import React from 'react';
 
 type Props = {
   events: QuickCalendarType[];
@@ -26,21 +26,21 @@ export default function QuickCalendar({ events }: Props) {
   }, [events]);
 
   const modifiersClassNames = {
-    appointment: "border border-secondary-green rounded-3xl",
-    payment: "border border-primary-red rounded-3xl",
-    document: "border border-secondary-blue rounded-3xl",
+    appointment: 'border border-secondary-green rounded-3xl',
+    payment: 'border border-primary-red rounded-3xl',
+    document: 'border border-secondary-blue rounded-3xl',
   };
 
   return (
-    <div className="flex w-[340px]  justify-center">
+    <div className='flex w-[340px]  justify-center'>
       <Calendar
-        mode="single"
+        mode='single'
         selected={date}
         onSelect={setDate}
         modifiers={modifiers}
         modifiersClassNames={modifiersClassNames}
-        captionLayout="dropdown"
-        className=" flex items-center justify-center bg-primary-white py-4 px-8 rounded-bl-[14px] rounded-br-[14px]"
+        captionLayout='dropdown'
+        className=' flex items-center justify-center bg-primary-white py-4 px-8 rounded-bl-[14px] rounded-br-[14px]'
       />
     </div>
   );
