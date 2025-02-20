@@ -1,5 +1,5 @@
 import { Model, Schema, model, models } from "mongoose";
-import { ChatGroupType } from "../../types/inbox";
+import { ChatGroupType } from "../../types/chatGroup";
 
 type ChatGroupModelType = Model<ChatGroupType>;
 
