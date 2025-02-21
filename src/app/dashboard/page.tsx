@@ -10,14 +10,10 @@ import { CurrentTasks } from "./_components/CurrentTasks";
 import { LatestUpdates } from "./_components/LatestUpdates";
 import { YourSchedule } from "./_components/YourSchedule";
 
-const INITIAL_LINKS = [
-  { name: "Dashboard", href: "/dashboard" },
-  //FIXME: Make the name dynamic depending on the application
-  { name: "Saulo_CICCC_ESL", href: "#" },
-];
-
-export default async function DashboardPage() {
-  const applicationId = "67b52097f63d38ef76a278b5";
+export default async function DashboardPage({ searchParams }: { searchParams: { applicationId: string } }) {
+  const applications = await getAllApplications();
+  const applicationId = searchParams.applicationId || applications[0]._id;
+  
   const applicationTaskSteps = await fetchApplicationTasks(applicationId);
   const currentTaskIndex = applicationTaskSteps.findIndex(
     (task) => task.progress < 100
@@ -29,7 +25,11 @@ export default async function DashboardPage() {
     ];
 
   const payments = await getAllPayments(applicationId);
-  const applications = await getAllApplications();
+
+  const INITIAL_LINKS = [
+    { name: "Dashboard", href: "/dashboard" },
+    { name: applications.find(value => value._id === applicationId)?.name || "loading...", href: "#" },
+  ];
 
   return (
     <PageContainer>
