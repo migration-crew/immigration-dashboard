@@ -8,33 +8,31 @@ import { Paragraph } from '@/components/common/text/Paragraph';
 import { Button } from '@/components/ui/upImmigrationButton';
 import { currentTasks } from '@/data/currentTasks';
 import { ApplicationTaskType } from '@/types/Application/ApplicationTaskType';
+import { ApplicationTaskStageType } from '@/types/Application/ApplicationType';
 
 type Props = {
-  visaApplicationTasks: {
-    progress: number;
-    tasks: ApplicationTaskType[];
-  };
+  currentTaskStep: ApplicationTaskStageType
 };
 
-export function CurrentTasks({ visaApplicationTasks }: Props) {
+export function CurrentTasks({ currentTaskStep }: Props) {
   return (
     <div className='flex flex-col gap-2 w-[390px]'>
       <Paragraph>Current Tasks</Paragraph>
       <div className='flex flex-col w-full gap-2'>
         <DynamicHeaderContainer
-          headerChildren={<CaptionSemi>Visa Application</CaptionSemi>}
+          headerChildren={<CaptionSemi>{currentTaskStep.name}</CaptionSemi>}
           contentChildren={
             <>
               <HorizontalProgressBar
-                progress={visaApplicationTasks?.progress}
+                progress={currentTaskStep.progress}
               />
               <div className='overflow-auto h-[275px] rounded-b-2xl hide-scrollbar'>
-                {visaApplicationTasks?.tasks?.map(
+                {currentTaskStep?.tasks?.map(
                   (task: ApplicationTaskType, index: number) => {
                     const lastTask = index === currentTasks.length - 1;
                     return (
                       <TaskCard
-                        key={task.id}
+                        key={task._id}
                         applicationTask={task}
                         className={`w-full p-4 gap-1  ${
                           lastTask ? 'rounded-b-2xl' : ''

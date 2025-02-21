@@ -6,6 +6,7 @@ import ApplicationComment from "../../schemas/application/applicationComment.sch
 import ApplicationTask from "../../schemas/application/applicationTask.schema";
 import ApplicationTaskDetail from "../../schemas/application/applicationTaskDetail.schema";
 import ApplicationType from "../../schemas/application/applicationType.schema";
+import { UserType } from "../../types/user";
 
 export const getApplications = async (userId: string) => {
   await dbConnect();
@@ -16,36 +17,39 @@ export const getApplications = async (userId: string) => {
     "applicationType"
   );
 
-  const updatedApplications = Promise.all(applications.map(async (application) => {
-    const applicationTaskDetails = await ApplicationTaskDetail.find({
-      application: { $in: application._id },
-    });
+  const updatedApplications = Promise.all(
+    applications.map(async (application) => {
+      const applicationTaskDetails = await ApplicationTaskDetail.find({
+        application: { $in: application._id },
+      });
 
-    const completedTasks = applicationTaskDetails.filter(
-      (task) => task.status === "completed"
-    );
+      const completedTasks = applicationTaskDetails.filter(
+        (task) => task.status === "completed"
+      );
 
-    const progress = completedTasks.length > 0
-      ? Math.floor(
-          (completedTasks.length / applicationTaskDetails.length) * 100
-        )
-      : 0;
+      const progress =
+        completedTasks.length > 0
+          ? Math.floor(
+              (completedTasks.length / applicationTaskDetails.length) * 100
+            )
+          : 0;
 
-    const status = application.isRejected
-      ? "rejected"
-      : progress === 0
-      ? "onHold"
-      : progress === 100
-      ? "completed"
-      : "processing";
+      const status = application.isRejected
+        ? "rejected"
+        : progress === 0
+        ? "onHold"
+        : progress === 100
+        ? "completed"
+        : "processing";
 
-    return {
-      ...application.toObject(),
-      number: application._id.toString().padStart(3, "0"),
-      status: status,
-      progress: progress,
-    };
-  }));
+      return {
+        ...application.toObject(),
+        number: application._id.toString().padStart(3, "0"),
+        status: status,
+        progress: progress,
+      };
+    })
+  );
 
   return updatedApplications;
 };
@@ -57,17 +61,21 @@ export const getApplicationTypes = async () => {
   return applicationTypes;
 };
 
-export const getApplicationTasks = async (
-  applicationId: string,
-  applicationTypeId: string
-) => {
+export const getApplicationTasks = async (applicationId: string) => {
   await dbConnect();
 
-  const applicationTypes = await ApplicationType.findOne({
-    _id: new ObjectId(applicationTypeId),
-  });
+  const application = await Application.findById(applicationId);
+  if (!application) {
+    console.log("🫢 no application found");
+    return null;
+  }
+
+  const applicationTypes = await ApplicationType.findById(
+    application.applicationType
+  );
 
   if (!applicationTypes) {
+    console.log("🫢 no application types found");
     return null;
   }
 
@@ -76,15 +84,38 @@ export const getApplicationTasks = async (
     applicationTasks: ObjectId[];
   };
 
-  const result: Record<string, object> = {};
-  const applicationTasks = await Promise.all(
+  type commentsType = {
+    _id: ObjectId;
+    applicationTaskDetail: ObjectId;
+    application: ObjectId;
+    content: string;
+    date: Date;
+    sender: UserType;
+  };
+
+  type StageProgressType = {
+    name: string;
+    tasks: {
+      _id: ObjectId;
+      name: string;
+      description: string;
+      status: string;
+      dueDate: Date;
+      comments: commentsType[];
+      attachments: string[];
+    }[];
+    progress: number;
+  };
+
+  const result: StageProgressType[] = [];
+  await Promise.all(
     applicationTypes.applicationStages.map(async (stage: ApplicationStage) => {
       const tasks = await Promise.all(
         stage.applicationTasks.map(async (taskId: ObjectId) => {
-          const task = await ApplicationTask.findOne({ _id: taskId });
+          const task = await ApplicationTask.findById(taskId);
           const taskDetail = await ApplicationTaskDetail.findOne({
-            applicationId: new ObjectId(applicationId),
-            applicationTaskId: taskId,
+            application: new ObjectId(applicationId),
+            applicationTask: taskId,
           });
 
           if (!task || !taskDetail) {
@@ -92,17 +123,17 @@ export const getApplicationTasks = async (
           }
 
           const comments = await ApplicationComment.find({
-            applicationTaskDetailId: taskDetail._id,
+            applicationTaskDetail: taskDetail._id,
           }).populate("sender");
 
           return {
-            id: taskId,
+            _id: taskId,
             name: task.name,
             description: task.description,
             status: taskDetail.status,
             dueDate: taskDetail.dueDate,
             comments: comments,
-            documentURLs: task.documentURLs,
+            attachments: task.attachments,
           };
         })
       );
@@ -112,15 +143,13 @@ export const getApplicationTasks = async (
           tasks.filter((task) => task != null).length) *
         100;
 
-      result[stage.name] = {
+      result.push({
+        name: stage.name,
         tasks: tasks.filter((task) => task !== null),
         progress: progress,
-      };
+      });
     })
   );
-
-  console.log("🤩", applicationTasks);
-  console.log("🎉", result);
 
   return result;
 };
