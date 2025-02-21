@@ -13,7 +13,7 @@ const documentPage = async ({
 }) => {
   const isAdmin = true;
   const applications = await getAllApplications();
-  const applicationId = searchParams.applicationId || applications[0]._id;
+  const applicationId = await searchParams.applicationId || applications[0]._id;
 
   const links = [
     { name: 'Documents', href: '/documents' },

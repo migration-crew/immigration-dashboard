@@ -10,8 +10,8 @@ import { getAllApplications } from "@/hooks/getAllApplications";
 
 const PaymentPage = async({ searchParams }: { searchParams: { applicationId: string } }) => {
   const applications = await getAllApplications();
-  const applicationId = searchParams.applicationId || applications[0]._id;
-  // const applicationId: string = "67436dbb9f3002f9d49d5a54";
+  const applicationId = await searchParams.applicationId || applications[0]._id;
+
   const payments = await getAllPayments(applicationId);
   
   const links = [{ name: "Payment", href: "/payments" },

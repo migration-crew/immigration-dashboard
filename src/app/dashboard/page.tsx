@@ -12,7 +12,7 @@ import { YourSchedule } from "./_components/YourSchedule";
 
 export default async function DashboardPage({ searchParams }: { searchParams: { applicationId: string } }) {
   const applications = await getAllApplications();
-  const applicationId = searchParams.applicationId || applications[0]._id;
+  const applicationId =  await searchParams.applicationId || applications[0]._id;
   
   const applicationTaskSteps = await fetchApplicationTasks(applicationId);
   const currentTaskIndex = applicationTaskSteps.findIndex(
