@@ -1,4 +1,11 @@
-import { testApplication, testPayment1, testPayment2, testPayment3, testPayment4, testPayment5 } from "@/app/payments/data/paymentTable";
+import {
+  testApplication,
+  testPayment1,
+  testPayment2,
+  testPayment3,
+  testPayment4,
+  testPayment5,
+} from "@/app/playground/saulo/data/paymentTable";
 import { testPaymentType } from "@/components/common/AwaitingPayment/AwaitingPayment";
 
 export const payments: testPaymentType[] = [
