@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MessageType } from "@/types/Inbox/MessageType";
 import { EllipsisVertical } from "lucide-react";
-
 const currentUserId = "userId";
 
 type Props = {
@@ -23,13 +22,13 @@ type Props = {
 export default function ChatContainer({ message }: Props) {
   const isRight = message.user._id === currentUserId;
   const cardRight = isRight
-    ? "bg-secondary-white rounded-bl-none"
-    : "mt-0 mb-40px mr-0 ml-auto bg-secondary-green text-primary-white rounded-br-none";
+    ? "mt-0 mb-40px mr-0 ml-auto bg-secondary-green text-primary-white rounded-br-none"
+    : "bg-secondary-white rounded-bl-none";
 
   return (
     <div className={`w-[846px] flex px-4 py-10 bg-primary-white`}>
       <div className="mx-0 mt-auto mb-0">
-        {message.user._id === currentUserId && (
+        {message.user._id !== currentUserId && (
           <Avatar className="w-9 h-9 border-secondary-light-gray mr-[15px]">
             <AvatarImage src={message.user.imageURL} alt={message.user._id} />
             <AvatarFallback>CN</AvatarFallback>
@@ -41,24 +40,15 @@ export default function ChatContainer({ message }: Props) {
       >
         <Caption>{message.content}</Caption>
         <div className="flex justify-end h-6">
-          <Microtext className="">{message.createdAt}</Microtext>
+          <Microtext>{message.createdAt}</Microtext>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              {/* <Button variant="outline">Open</Button> */}
               <EllipsisVertical />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="">
-              {/* <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator /> */}
+            <DropdownMenuContent className="w-56">
               <DropdownMenuGroup>
-                <DropdownMenuItem>
-                  Delete
-                  {/* <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut> */}
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  Edit
-                  {/* <DropdownMenuShortcut>⌘B</DropdownMenuShortcut> */}
-                </DropdownMenuItem>
+                <DropdownMenuItem>Edit</DropdownMenuItem>
+                <DropdownMenuItem>Delete</DropdownMenuItem>
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
