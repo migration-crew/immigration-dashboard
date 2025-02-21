@@ -11,9 +11,9 @@ import { useFetchApplicationTasks } from "../_hooks/useFetchApplications";
 import { useParams } from "next/navigation";
 
 export default function ApplicationDetailPage() {
-  const searchParams = useSearchParams();
-  const applicationName = searchParams.get("name") || "Unknown Application";
-  const applicationTypeId = searchParams.get("applicationTypeId") || "Unknown Application Type";
+  // const searchParams = useSearchParams();
+  // const applicationName = searchParams.get("name") || "Unknown Application";
+  // const applicationTypeId = searchParams.get("applicationTypeId") || "Unknown Application Type";
   const params = useParams();
   const applicationId = params.applicationID as string;
   const { gettingStartedTasks, schoolAdmissionTasks, visaApplicationTasks, preDepartureTasks, loading, error} = useFetchApplicationTasks(applicationId, applicationTypeId);
