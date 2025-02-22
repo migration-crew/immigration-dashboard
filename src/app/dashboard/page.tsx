@@ -15,7 +15,20 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
   searchParams = await searchParams
   const applicationId =  await searchParams.applicationId || applications[0]._id;
   
-  const applicationTaskSteps = await fetchApplicationTasks(applicationId);
+  const {applicationTaskSteps, loading, errorMessage} = await fetchApplicationTasks(applicationId);
+
+  if (loading) {
+    return <div>Loading applications...</div>;
+  }
+
+  if (errorMessage) {
+    return <div>Error: {errorMessage.message}</div>;
+  }
+
+  if (!applicationTaskSteps) {
+    return <div>Error: Failed to fetch application tasks</div>;
+  }
+
   const currentTaskIndex = applicationTaskSteps.findIndex(
     (task) => task.progress < 100
   );
