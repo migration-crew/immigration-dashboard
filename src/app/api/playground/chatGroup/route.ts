@@ -2,7 +2,7 @@ import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 import dbConnect from "../../lib/mongoose";
 import ChatGroup from "../../schemas/inbox/chatGroup.schema";
-import { ChatGroupType } from "../../types/inbox";
+import { ChatGroupType } from "../../types/chatGroup";
 
 export async function POST(): Promise<NextResponse> {
   try {

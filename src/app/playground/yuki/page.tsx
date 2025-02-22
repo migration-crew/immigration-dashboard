@@ -1,11 +1,12 @@
-import { AppointmentDatePicker } from "@/app/appointment/_components/AppoinementDatePicker";
+import { AppointmentDatePicker } from "@/app/appointment/_components/AppointmentDatePicker";
+import { AppointmentTypeContainer } from "@/app/appointment/_components/AppointmentTypeContainer";
 import { DocumentTable } from "@/app/documents/_components/DocumentTable";
 import { NewDocForm } from "@/app/documents/_components/NewDocForm";
 import { UploadDocumentModal } from "@/app/documents/_components/UploadDocumentModal";
 import { PaymentTable } from "@/app/payments/_components/PaymentTable";
 import RefundPolicy from "@/app/payments/_components/RefundPolicy";
-import { paymentTableData } from "@/app/payments/data/paymentTable";
 import { payments } from "@/app/playground/saulo/data/payment";
+import { paymentTableData } from "@/app/playground/saulo/data/paymentTable";
 import AwaitingPayment from "@/components/common/AwaitingPayment/AwaitingPayment";
 import { Caption } from "@/components/common/text/Caption";
 import { CaptionSemi } from "@/components/common/text/CaptionSemi";
@@ -26,7 +27,6 @@ import { Title } from "@/components/common/text/Title";
 import { TitleLight } from "@/components/common/text/TitleLight";
 import { Button } from "@/components/ui/upImmigrationButton";
 import { documents } from "./data/DocumentTable";
-import { AppointmentTypeContainer } from "@/app/appointment/_components/AppoinmentTypeContainer";
 
 const YukiPage = () => {
   return (

@@ -25,6 +25,11 @@ const ApplicationTaskDetailSchema = new Schema<
       ref: "Payment",
       required: false,
     },
+    documents: {
+      type: [Schema.Types.ObjectId],
+      ref: "Document",
+      required: false,
+    },
   },
   {
     timestamps: true,

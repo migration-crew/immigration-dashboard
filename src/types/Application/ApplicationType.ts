@@ -1,3 +1,4 @@
+import { ApplicationTaskType } from "./ApplicationTaskType";
 import { ApplicationTypeType } from "./ApplicationTypeType";
 
 export type ApplicationType = {
@@ -11,10 +12,10 @@ export type ApplicationType = {
   updatedAt: Date;
 };
 
-export type StageProgressType = {
-  _id: string; // applicationStageId
+export type ApplicationTaskStageType = {
   name: string;
-  percentage: number;
+  tasks: ApplicationTaskType[];
+  progress: number;
 };
 
 export type ApplicationSwitcherType = {

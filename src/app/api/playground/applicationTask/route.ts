@@ -11,7 +11,7 @@ export async function POST(): Promise<NextResponse> {
       await ApplicationTask.create({
         name: "Test Introduction",
         description: "Read the portal introduction and get familiar with the system",
-        documentURLs: ["https://documents/1", "https://documents/2", "https://documents/3"]
+        attachments: ["https://documents/1", "https://documents/2", "https://documents/3"]
       });
     return NextResponse.json(newApplicationTask, { status: 200 });
   } catch (error) {

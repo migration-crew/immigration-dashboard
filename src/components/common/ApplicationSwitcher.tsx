@@ -53,8 +53,14 @@ function ApplicationSwitcher({
   const {replace} = useRouter()
 
   React.useEffect(()=> {
-    setValue(searchParams.get("applicationId") || applications[0]._id)
-  }, [searchParams, applications])
+    const currentApplicationId = searchParams.get("applicationId")
+    setValue(currentApplicationId || applications[0]._id)
+    if(!currentApplicationId){
+      const params = new URLSearchParams(searchParams)
+      params.append("applicationId", applications[0]._id)
+      replace(`${pathname}?${params.toString()}`)
+    }
+  }, [searchParams, applications, replace, pathname])
 
   const onApplicationChange = (value: string | null) => {
     setValue(value || applications[0]._id)

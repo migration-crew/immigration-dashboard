@@ -8,13 +8,15 @@ import RefundPolicy from "./_components/RefundPolicy";
 import { getAllPayments } from "@/hooks/getAllPayments";
 import { getAllApplications } from "@/hooks/getAllApplications";
 
-const page = async() => {
-  const links = [{ name: "Payment", href: "/payments" }];
-  const applicationId: string = "67436dbb9f3002f9d49d5a54";
-  
-  const payments = await getAllPayments(applicationId);
+const PaymentPage = async({ searchParams }: { searchParams: { applicationId: string } }) => {
   const applications = await getAllApplications();
-
+  searchParams = await searchParams
+  const applicationId = await searchParams.applicationId || applications[0]._id;
+  const payments = await getAllPayments(applicationId);
+  
+  const links = [{ name: "Payment", href: "/payments" },
+    { name: applications.find(value => value._id === applicationId)?.name || "loading...", href: "#" },];
+    
   return (
     <PageContainer>
       <div className="flex justify-between items-center">
@@ -32,4 +34,4 @@ const page = async() => {
   );
 };
 
-export default page;
+export default PaymentPage;

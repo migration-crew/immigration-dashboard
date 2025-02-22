@@ -1,6 +1,5 @@
 "use client";
 
-// import { paymentModalData } from "@/app/payments/data/PaymentModal";
 import { HeadingSemi } from "@/components/common/text/HeadingSemi";
 import { Paragraph } from "@/components/common/text/Paragraph";
 import { ParagraphRegular } from "@/components/common/text/ParagraphRegular";

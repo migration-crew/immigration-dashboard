@@ -1,3 +1,5 @@
+"use client";
+
 import TaskDetail from "@/app/playground/david/TaskDetail";
 import { Sheet, SheetTrigger } from "@/components/ui/upImmigrationSheet";
 import { cn } from "@/lib/utils";
@@ -27,7 +29,7 @@ export function TaskCard({ applicationTask, className }: Props) {
     <Sheet>
       <SheetTrigger asChild>
         <Card
-          key={applicationTask.id}
+          key={applicationTask._id}
           className={cn(
             `${"flex flex-col gap-3 p-6 w-[280px] rounded-none cursor-pointer hover:border-2 hover:border-task-red duration-100"}`,
             className
@@ -38,7 +40,7 @@ export function TaskCard({ applicationTask, className }: Props) {
           <div className="flex justify-between">
             <TaskComments commentsCount={applicationTask.comments?.length} />
             <TaskAttachments
-              attachmentsCount={applicationTask.documentURLs.length}
+              attachmentsCount={applicationTask.attachments.length}
             />
             <TaskAssignedUsers comments={applicationTask.comments} />
           </div>
