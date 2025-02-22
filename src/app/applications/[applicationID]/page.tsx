@@ -1,116 +1,51 @@
-"use client";
-
 import { BreadcrumbComponent } from "@/components/common/Breadcrumbs/BreadcrumbComponent";
-import DynamicHeaderContainer from "@/components/common/DynamicHeaderContainer";
-import HorizontalProgressBar from "@/components/common/HorizontalProgressBar";
 import { PageContainer } from "@/components/common/PageContainer";
-import { TaskCard } from "@/components/common/TaskCard/TaskCard";
-import { CaptionSemi } from "@/components/common/text/CaptionSemi";
-import { useSearchParams } from "next/navigation";
-import { useFetchApplicationTasks } from "../_hooks/useFetchApplications";
-import { useParams } from "next/navigation";
+import { TaskStep } from "@/components/common/TaskStep";
+import { getAllApplications } from "@/hooks/getAllApplications";
+import { fetchApplicationTasks } from "@/hooks/getApplicationTasks";
 
-export default function ApplicationDetailPage() {
-  const searchParams = useSearchParams();
-  const applicationName = searchParams.get("name") || "Unknown Application";
-  const applicationTypeId = searchParams.get("applicationTypeId") || "Unknown Application Type";
-  const params = useParams();
-  const applicationId = params.applicationID as string;
-  const { gettingStartedTasks, schoolAdmissionTasks, visaApplicationTasks, preDepartureTasks, loading, error} = useFetchApplicationTasks(applicationId, applicationTypeId);
+export default async function ApplicationDetailPage({
+  params,
+}: {
+  params: { applicationID: string };
+}) {
+  const { applications } = await getAllApplications();
+  if (!applications) {
+    return <div>Error: Failed to fetch application</div>;
+  }
+  params = await params;
+  const applicationId = await params.applicationID || applications[0]._id;
+  const { applicationTaskSteps, taskLoading, taskError} =
+    await fetchApplicationTasks(applicationId);
 
   const links = [
     { name: "Applications", href: "/applications" },
-    { name: applicationName, href: "" },
+    {
+      name:
+        applications.find((value) => value._id === applicationId)?.name ||
+        "loading...",
+      href: "",
+    },
   ];
 
-  if (loading) {
+  if (taskLoading) {
     return <div>Loading applications...</div>;
   }
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
+  if (taskError) {
+    return <div>Error: {taskError.message}</div>;
+  }
+  if (!applicationTaskSteps) {
+    return <div>Error: Failed to fetch application tasks</div>;
   }
 
   return (
     <PageContainer className="h-full">
       <BreadcrumbComponent links={links} />
-      <div className="grid grid-cols-4">
-        <DynamicHeaderContainer
-          headerChildren={<CaptionSemi>Getting Started</CaptionSemi>}
-          contentChildren={
-            <>
-              <HorizontalProgressBar progress={gettingStartedTasks?.progress || 0} />
-              {gettingStartedTasks?.tasks.map((task, index) => {
-                const lastTask = index === gettingStartedTasks.tasks.length - 1;
-                return (
-                  <TaskCard
-                    key={task.id}
-                    applicationTask={task}
-                    className={`p-4 gap-1 ${lastTask ? "rounded-b-2xl" : ""}`}
-                  />
-                );
-              })}
-            </>
-          }
-          className="flex flex-col h-fit"
-        ></DynamicHeaderContainer>
-        <DynamicHeaderContainer
-          headerChildren={<CaptionSemi>School Admission</CaptionSemi>}
-          contentChildren={
-            <>
-              <HorizontalProgressBar progress={schoolAdmissionTasks?.progress || 0} />
-              {schoolAdmissionTasks?.tasks.map((task, index) => {
-                const lastTask = index === schoolAdmissionTasks.tasks.length - 1;
-                return (
-                  <TaskCard
-                    key={task.id}
-                    applicationTask={task}
-                    className={`p-4 gap-1 ${lastTask ? "rounded-b-2xl" : ""}`}
-                  />
-                );
-              })}
-            </>
-          }
-          className="flex flex-col h-fit"
-        ></DynamicHeaderContainer>
-        <DynamicHeaderContainer
-          headerChildren={<CaptionSemi>Visa Application</CaptionSemi>}
-          contentChildren={
-            <>
-              <HorizontalProgressBar progress={visaApplicationTasks?.progress || 0} />
-              {visaApplicationTasks?.tasks.map((task, index) => {
-                const lastTask = index === visaApplicationTasks.tasks.length - 1;
-                return (
-                  <TaskCard
-                    key={task.id}
-                    applicationTask={task}
-                    className={`p-4 gap-1 ${lastTask ? "rounded-b-2xl" : ""}`}
-                  />
-                );
-              })}
-            </>
-          }
-          className="flex flex-col h-fit"
-        ></DynamicHeaderContainer>
-        <DynamicHeaderContainer
-          headerChildren={<CaptionSemi>Pre-Departure</CaptionSemi>}
-          contentChildren={
-            <>
-              <HorizontalProgressBar progress={preDepartureTasks?.progress || 0} />
-              {preDepartureTasks?.tasks.map((task, index) => {
-                const lastTask = index === preDepartureTasks.tasks.length - 1;
-                return (
-                  <TaskCard
-                    key={task.id}
-                    applicationTask={task}
-                    className={`p-4 gap-1 ${lastTask ? "rounded-b-2xl" : ""}`}
-                  />
-                );
-              })}
-            </>
-          }
-          className="flex flex-col h-fit"
-        ></DynamicHeaderContainer>
+      <div className="flex">
+        {applicationTaskSteps.map((taskStep, index) => (
+          <TaskStep key={index} TaskStep={taskStep} isCurrentTask={false} />
+        ))}
       </div>
     </PageContainer>
   );
