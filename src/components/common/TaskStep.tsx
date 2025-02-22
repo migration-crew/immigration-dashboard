@@ -20,8 +20,8 @@ export function TaskStep({ TaskStep, isCurrentTask }: Props) {
         <>
           <HorizontalProgressBar progress={TaskStep.progress} />
           <div
-            className={`overflow-hidden h-full rounded-b-2xl hide-scrollbar ${
-              isCurrentTask && "h-[275px]"
+            className={`overflow-auto rounded-b-2xl hide-scrollbar ${
+              isCurrentTask ? "h-[275px]": "h-full"
             }`}
           >
             {TaskStep?.tasks?.map((task: ApplicationTaskType) => {
