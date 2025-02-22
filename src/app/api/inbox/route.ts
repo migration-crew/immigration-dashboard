@@ -1,6 +1,6 @@
 import { getAuth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
-import { getChannels } from "../services/inbox/channelsService";
+import { getChannels } from "../services/inbox/getChannelsService";
 
 export async function GET(req: NextRequest) {
   // Extract userId from the query parameters
