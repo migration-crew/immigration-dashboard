@@ -9,10 +9,13 @@ export default async function ApplicationDetailPage({
 }: {
   params: { applicationID: string };
 }) {
-  const applications = await getAllApplications();
+  const { applications } = await getAllApplications();
+  if (!applications) {
+    return <div>Error: Failed to fetch application</div>;
+  }
   params = await params;
-  const applicationId = await params.applicationID;
-  const { applicationTaskSteps, loading, errorMessage } =
+  const applicationId = await params.applicationID || applications[0]._id;
+  const { applicationTaskSteps, taskLoading, taskError} =
     await fetchApplicationTasks(applicationId);
 
   const links = [
@@ -25,12 +28,12 @@ export default async function ApplicationDetailPage({
     },
   ];
 
-  if (loading) {
+  if (taskLoading) {
     return <div>Loading applications...</div>;
   }
 
-  if (errorMessage) {
-    return <div>Error: {errorMessage.message}</div>;
+  if (taskError) {
+    return <div>Error: {taskError.message}</div>;
   }
   if (!applicationTaskSteps) {
     return <div>Error: Failed to fetch application tasks</div>;

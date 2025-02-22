@@ -6,8 +6,8 @@ export async function fetchApplicationTasks(applicationId: string) {
     const { getToken } = await auth();
     const token = await getToken();
 
-    let errorMessage = null
-    let loading = true
+    let taskError = null
+    let taskLoading = true
     let applicationTaskSteps = null
   
     if (!token) {
@@ -33,10 +33,9 @@ export async function fetchApplicationTasks(applicationId: string) {
       applicationTaskSteps = await response.json() as ApplicationTaskStageType[];
     } catch (error) {
       console.log(`Failed to fetch application tasks: ${error}`);
-      errorMessage = error as Error
+      taskError = error as Error
     } finally {
-      loading = false
+      taskLoading = false
     }
-    console.log(applicationTaskSteps);
-    return {applicationTaskSteps, loading, errorMessage}
+    return {applicationTaskSteps, taskLoading, taskError}
   }

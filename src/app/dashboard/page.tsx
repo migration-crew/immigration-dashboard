@@ -11,18 +11,21 @@ import { LatestUpdates } from "./_components/LatestUpdates";
 import { YourSchedule } from "./_components/YourSchedule";
 
 export default async function DashboardPage({ searchParams }: { searchParams: { applicationId: string } }) {
-  const applications = await getAllApplications();
+  const {applications} = await getAllApplications();
+  if (!applications) {
+    return <div>Error: Failed to fetch application</div>;
+  }
   searchParams = await searchParams
   const applicationId =  await searchParams.applicationId || applications[0]._id;
   
-  const {applicationTaskSteps, loading, errorMessage} = await fetchApplicationTasks(applicationId);
+  const {applicationTaskSteps, taskLoading, taskError} = await fetchApplicationTasks(applicationId);
 
-  if (loading) {
+  if (taskLoading) {
     return <div>Loading applications...</div>;
   }
 
-  if (errorMessage) {
-    return <div>Error: {errorMessage.message}</div>;
+  if (taskError) {
+    return <div>Error: {taskError.message}</div>;
   }
 
   if (!applicationTaskSteps) {

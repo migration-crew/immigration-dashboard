@@ -5,6 +5,15 @@ export const getAllApplications = async () => {
   const { getToken } = await auth();
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const token = await getToken();
+  console.log(token);
+
+  let applicationError = null;
+  let applicationLoading = true;
+  let applications = null;
+
+  if (!token) {
+    throw new Error("Failed to get authentication token");
+  }
 
   try {
     const response = await fetch(`${apiUrl}/applications`, {
@@ -17,9 +26,12 @@ export const getAllApplications = async () => {
     if (!response.ok) {
       throw new Error("Failed to fetch applications");
     }
-    return response.json() as unknown as ApplicationType[];
+    applications = (await response.json()) as ApplicationType[];
   } catch (error) {
     console.log("😮", "failed to fetch applications: ", error);
-    return [];
+    applicationError = error as Error;
+  } finally {
+    applicationLoading = false;
   }
+  return { applications, applicationLoading, applicationError };
 };
