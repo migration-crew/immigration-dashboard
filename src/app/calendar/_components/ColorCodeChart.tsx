@@ -1,3 +1,4 @@
+import { ParagraphRegular } from '@/components/common/text/ParagraphRegular';
 import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import { ColorCode } from '@/types/Calendar/ColorCodeType';
@@ -21,7 +22,7 @@ export default function ColorCodeChart({ colorCodes }: Props) {
             <div
               className={`w-4 h-4 rounded-full ${colorCode.colorClass}`}
             ></div>
-            <span>{colorCode.description}</span>
+            <ParagraphRegular>{colorCode.description}</ParagraphRegular>
           </li>
         ))}
       </ul>
