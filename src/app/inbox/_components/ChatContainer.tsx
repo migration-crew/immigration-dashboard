@@ -41,17 +41,19 @@ export default function ChatContainer({ message }: Props) {
         <Caption>{message.content}</Caption>
         <div className="flex justify-end h-6">
           <Microtext>{message.createdAt}</Microtext>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <EllipsisVertical />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56">
-              <DropdownMenuGroup>
-                <DropdownMenuItem>Edit</DropdownMenuItem>
-                <DropdownMenuItem>Delete</DropdownMenuItem>
-              </DropdownMenuGroup>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          {isRight && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <EllipsisVertical />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56">
+                <DropdownMenuGroup>
+                  <DropdownMenuItem>Edit</DropdownMenuItem>
+                  <DropdownMenuItem>Delete</DropdownMenuItem>
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
         </div>
       </Card>
     </div>
