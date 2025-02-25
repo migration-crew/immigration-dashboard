@@ -6,6 +6,12 @@ type Props = {
   colorCodes: ColorCode[];
 };
 
+/**
+ * ColorCodeChart
+ * @param colorCodes: pass the color and description of the color code
+ * @returns
+ */
+
 export default function ColorCodeChart({ colorCodes }: Props) {
   return (
     <Card className={cn('rounded-lg bg-white p-4')}>
