@@ -17,9 +17,15 @@ const currentUserId = "userId";
 
 type Props = {
   message: MessageType;
+  editMessage: (messageId: string) => void;
+  deleteMessage: (messageId: string) => void;
 };
 
-export default function ChatContainer({ message }: Props) {
+export default function ChatContainer({
+  message,
+  editMessage,
+  deleteMessage,
+}: Props) {
   const isRight = message.user._id === currentUserId;
   const cardRight = isRight
     ? "mt-0 mb-40px mr-0 ml-auto bg-secondary-green text-primary-white rounded-br-none"
@@ -48,8 +54,12 @@ export default function ChatContainer({ message }: Props) {
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56">
                 <DropdownMenuGroup>
-                  <DropdownMenuItem>Edit</DropdownMenuItem>
-                  <DropdownMenuItem>Delete</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => editMessage(message.id)}>
+                    Edit
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => deleteMessage(message.id)}>
+                    Delete
+                  </DropdownMenuItem>
                 </DropdownMenuGroup>
               </DropdownMenuContent>
             </DropdownMenu>
