@@ -20,7 +20,7 @@ export default function ColorCodeChart({ colorCodes }: Props) {
         {colorCodes.map((colorCode, index) => (
           <li key={index} className='flex gap-2 items-center'>
             <div
-              className={`w-4 h-4 rounded-full ${colorCode.colorClass}`}
+              className={`w-3 h-3 rounded-full ${colorCode.colorClass}`}
             ></div>
             <Caption>{colorCode.description}</Caption>
           </li>
