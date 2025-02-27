@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { AppointmentCard } from '@/components/common/AppointmentCard';
 import { BreadcrumbComponent } from '@/components/common/Breadcrumbs/BreadcrumbComponent';
 import { DynamicRoundedContainer } from '@/components/common/DynamicRoundedContainer';
@@ -8,16 +7,6 @@ import { AppointmentType } from '@/types/Appointment/AppointmentType';
 import Link from 'next/link';
 import { DetailedCalendar } from '../calendar/_components/DetailedCalendar';
 import ColorCodeChart from './_components/ColorCodeChart';
-=======
-import { Button } from '@/components/ui/upImmigrationButton';
-import { DetailedCalendar } from '../calendar/_components/DetailedCalendar';
-import Link from 'next/link';
-import { PageContainer } from '@/components/common/PageContainer';
-import { BreadcrumbComponent } from '@/components/common/Breadcrumbs/BreadcrumbComponent';
-import { AppointmentCard } from '@/components/common/AppointmentCard';
-import { AppointmentType } from '@/types/Appointment/AppointmentType';
-import { DynamicRoundedContainer } from '@/components/common/DynamicRoundedContainer';
->>>>>>> main
 
 export default function CalendarPage() {
   const links = [{ name: 'Calendar', href: '/calendar' }];
@@ -34,27 +23,16 @@ export default function CalendarPage() {
       },
       date: new Date('2024-01-28T16:00:00'),
       user: {
-<<<<<<< HEAD
-        id: '1',
-=======
         _id: '1',
->>>>>>> main
         firstName: 'John',
         lastName: 'Doe',
         nationality: 'US',
         language: 'English',
         address: '123 Main St, Anytown, USA',
-<<<<<<< HEAD
-        birthDate: '1990-01-01',
-        gender: 'Male',
-        email: 'john.doe@example.com',
-        imageUrl: '/placeholder.svg',
-=======
         dateOfBirth: '1990-01-01',
         gender: 'Male',
         email: 'john.doe@example.com',
         imageURL: '/placeholder.svg',
->>>>>>> main
       },
     },
     {
@@ -68,27 +46,16 @@ export default function CalendarPage() {
       },
       date: new Date('2024-01-28T16:00:00'),
       user: {
-<<<<<<< HEAD
-        id: '1',
-=======
         _id: '1',
->>>>>>> main
         firstName: 'John',
         lastName: 'Doe',
         nationality: 'US',
         language: 'English',
         address: '123 Main St, Anytown, USA',
-<<<<<<< HEAD
-        birthDate: '1990-01-01',
-        gender: 'Male',
-        email: 'john.doe@example.com',
-        imageUrl: '/placeholder.svg',
-=======
         dateOfBirth: '1990-01-01',
         gender: 'Male',
         email: 'john.doe@example.com',
         imageURL: '/placeholder.svg',
->>>>>>> main
       },
     },
     {
@@ -102,27 +69,16 @@ export default function CalendarPage() {
       },
       date: new Date('2024-01-28T16:00:00'),
       user: {
-<<<<<<< HEAD
-        id: '1',
-=======
         _id: '1',
->>>>>>> main
         firstName: 'John',
         lastName: 'Doe',
         nationality: 'US',
         language: 'English',
         address: '123 Main St, Anytown, USA',
-<<<<<<< HEAD
-        birthDate: '1990-01-01',
-        gender: 'Male',
-        email: 'john.doe@example.com',
-        imageUrl: '/placeholder.svg',
-=======
         dateOfBirth: '1990-01-01',
         gender: 'Male',
         email: 'john.doe@example.com',
         imageURL: '/placeholder.svg',
->>>>>>> main
       },
     },
   ];
@@ -130,34 +86,26 @@ export default function CalendarPage() {
   return (
     <>
       <PageContainer>
-        <BreadcrumbComponent links={links} />
-<<<<<<< HEAD
-        <div className='flex justify-between items-center'>
-          <Button asChild>
-            <Link href={'/appointment'}>appointment</Link>
-          </Button>
-          <ColorCodeChart
-            colorCodes={[
-              { colorClass: 'bg-secondary-blue', description: 'Appointment' },
-              { colorClass: 'bg-primary-red', description: 'Tasks' },
-            ]}
-          />
+        <div className='flex justify-between'>
+          <div className='flex flex-col gap-4'>
+            <BreadcrumbComponent links={links} />
+            <Button asChild>
+              <Link href={'/appointment'}>Appointment</Link>
+            </Button>
+          </div>
+          <div>
+            <ColorCodeChart
+              colorCodes={[
+                { colorClass: 'bg-secondary-blue', description: 'Appointment' },
+                { colorClass: 'bg-primary-red', description: 'Tasks' },
+              ]}
+            />
+          </div>
         </div>
         <div className='flex gap-4 justify-between'>
           <DynamicRoundedContainer
             title='Upcoming Appointments'
             className='w-[350px] h-[850px]'
-=======
-        <div>
-          <Button asChild>
-            <Link href={'/appointment'}>appointment</Link>
-          </Button>
-        </div>
-        <div className="flex gap-4 justify-between">
-          <DynamicRoundedContainer
-            title="Upcoming Appointments"
-            className="w-[350px] h-[850px]"
->>>>>>> main
           >
             {appointments.map((appointment) => (
               <AppointmentCard
