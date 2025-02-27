@@ -1,0 +1,44 @@
+.rbc-month-header {
+  background-color: #f3f3f3;
+  border-radius: 10px 10px 0 0;
+  text-transform: uppercase;
+  font-size: smaller;
+}
+
+.rbc-header {
+  padding: 8px;
+}
+
+.rbc-month-view {
+  border-radius: 10px;
+}
+
+.rbc-off-range-bg {
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(0, 0, 0, 0.1) 0px,
+    rgba(0, 0, 0, 0.1) 5px,
+    transparent 5px,
+    transparent 15px
+  );
+}
+
+.rbc-event {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  align-self: baseline;
+}
+
+.rbc-event-content {
+  align-items: baseline;
+  align-self: baseline;
+}
+
+.rbc-row {
+  align-items: self-end;
+}
+
+.rbc-btn-group {
+  background-color: white;
+}

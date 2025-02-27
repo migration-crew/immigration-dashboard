@@ -1,11 +1,8 @@
-"use client";
-
 import { Applicationtable } from "@/components/common/ApplicationTable";
 import { BreadcrumbComponent } from "@/components/common/Breadcrumbs/BreadcrumbComponent";
 import FilterSection from "@/components/common/FilterSection/FilterSection";
 import { PageContainer } from "@/components/common/PageContainer";
-import { useState } from "react";
-import { useFetchApplications } from "./_hooks/useFetchApplications";
+import { getAllApplications } from "@/hooks/getAllApplications";
 
 const links = [
   {
@@ -14,38 +11,43 @@ const links = [
   },
 ];
 
-export default function ApplicationsPage() {
-  const { applications, loading, error } = useFetchApplications();
+export default async function ApplicationsPage() {
+  const { applications, applicationLoading, applicationError } =
+    await getAllApplications();
 
-  const [sortOptions] = useState([
+  const sortOptions = [
     { label: "Date: First to Last", value: "date_asc" },
     { label: "Date: Last to First", value: "date_desc" },
     { label: "Progress: Low to High", value: "progress_asc" },
     { label: "Progress: High to Low", value: "progress_desc" },
     { label: "A-Z", value: "alpha_asc" },
-  ]);
+  ];
 
-  const [visaTypes] = useState([
+  const visaTypes = [
     { label: "Student Visa", value: "student" },
     { label: "Work Permit", value: "workPermit" },
     { label: "LMIA", value: "lmia" },
     { label: "Check", value: "check" },
     { label: "Visitor", value: "visitor" },
-  ]);
+  ];
 
-  const [statusOptions] = useState([
+  const statusOptions = [
     { label: "Processing", value: "processing" },
     { label: "On hold", value: "onHold" },
     { label: "Completed", value: "completed" },
     { label: "Rejected", value: "rejected" },
-  ]);
+  ];
 
-  if (loading) {
+  if (applicationLoading) {
     return <div>Loading applications...</div>;
   }
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
+  if (applicationError) {
+    return <div>Error: {applicationError.message}</div>;
+  }
+
+  if (!applications) {
+    return <div>Error: Failed to fetch application</div>;
   }
 
   return (
