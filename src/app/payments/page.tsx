@@ -9,7 +9,13 @@ import { getAllPayments } from "@/hooks/getAllPayments";
 import { getAllApplications } from "@/hooks/getAllApplications";
 
 const PaymentPage = async({ searchParams }: { searchParams: { applicationId: string } }) => {
-  const applications = await getAllApplications();
+  const {applications, applicationError} = await getAllApplications();
+  if (applicationError) {
+    return <div>Error: {applicationError.message}</div>;
+  }
+  if (!applications) {
+    return <div>Error: Failed to fetch application</div>;
+  }
   searchParams = await searchParams
   const applicationId = await searchParams.applicationId || applications[0]._id;
   const payments = await getAllPayments(applicationId);
