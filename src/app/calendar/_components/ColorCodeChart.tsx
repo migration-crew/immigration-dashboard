@@ -15,7 +15,7 @@ type Props = {
 
 export default function ColorCodeChart({ colorCodes }: Props) {
   return (
-    <Card className={cn('rounded-lg bg-white p-4')}>
+    <Card className={cn('rounded-lg bg-white px-4 py-3')}>
       <ul className='list-none space-y-2'>
         {colorCodes.map((colorCode, index) => (
           <li key={index} className='flex gap-2 items-center'>
