@@ -87,7 +87,7 @@ export default function CalendarPage() {
     <>
       <PageContainer>
         <div className='flex justify-between'>
-          <div className='flex flex-col gap-4'>
+          <div className='flex flex-col justify-between items-center'>
             <BreadcrumbComponent links={links} />
             <Button asChild>
               <Link href={'/appointment'}>Appointment</Link>
