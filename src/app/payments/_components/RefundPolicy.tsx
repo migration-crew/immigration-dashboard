@@ -12,8 +12,8 @@ const RefundPolicyButton = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant='secondary' className='w-full'>
-          <CaptionSemi>Read more</CaptionSemi>
+        <Button variant='secondary' className='w-fit'>
+          <CaptionSemi>Refund Policy</CaptionSemi>
         </Button>
       </DialogTrigger>
       <DialogContent className='sm:max-w-[425px]'>
