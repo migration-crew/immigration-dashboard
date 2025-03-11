@@ -20,7 +20,7 @@ const RefundPolicyButton = () => {
         <DialogHeader>
           <DialogTitle>Refund Policy</DialogTitle>
         </DialogHeader>
-        <div>
+        <div className='max-h-96 overflow-y-auto hide-scrollbar'>
           At [Your Company Name], customer satisfaction is our top priority. If
           you are not entirely satisfied with your purchase, we’re here to help.
           To be eligible for a refund, the item must be unused and in the same
