@@ -1,23 +1,23 @@
-import { DynamicRoundedContainer } from "@/components/common/DynamicRoundedContainer";
-import { Caption } from "@/components/common/text/Caption";
-import { CaptionSemi } from "@/components/common/text/CaptionSemi";
+import { DynamicRoundedContainer } from '@/components/common/DynamicRoundedContainer';
+import { Caption } from '@/components/common/text/Caption';
+import { CaptionSemi } from '@/components/common/text/CaptionSemi';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/upImmigrationButton";
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/upImmigrationButton';
 
-const RefundPolicy = () => {
+const RefundPolicyButton = () => {
   return (
     <DynamicRoundedContainer
-      title="Refund Policy"
-      className="w-[500px] h-[320px] flex flex-col"
-      childrenDivClassName="grid content-between flex-1 pt-1"
+      title='Refund Policy'
+      className='w-[500px] h-[320px] flex flex-col'
+      childrenDivClassName='grid content-between flex-1 pt-1'
     >
-      <Caption className="text-secondary-dark-gray opacity-70">
+      <Caption className='text-secondary-dark-gray opacity-70'>
         At [Your Company Name], customer satisfaction is our top priority. If
         you are not entirely satisfied with your purchase, we’re here to help.
         To be eligible for a refund, the item must be unused and in the same
@@ -30,11 +30,11 @@ const RefundPolicy = () => {
 
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant="secondary" className="w-full">
+          <Button variant='secondary' className='w-full'>
             <CaptionSemi>Read more</CaptionSemi>
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className='sm:max-w-[425px]'>
           <DialogHeader>
             <DialogTitle>Refund Policy</DialogTitle>
           </DialogHeader>
@@ -64,4 +64,4 @@ const RefundPolicy = () => {
   );
 };
 
-export default RefundPolicy;
+export default RefundPolicyButton;
