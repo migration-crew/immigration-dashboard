@@ -28,16 +28,16 @@ const RefundPolicyButton = () => {
           original packaging. Refund requests must be made within [X days] of
           the purchase date. Please note that certain items are not eligible for
           refunds, including gift cards, downloadable software products, and
-          items marked as "final sale" or "non-returnable." To request a refund,
-          you will need to contact our customer support team at [Insert Contact
-          Information], provide proof of purchase such as a receipt or order
-          number, and, if required, ship the item to the address provided by our
-          team. Refunds will be processed to the original method of payment
-          within [X days] after we receive and inspect the returned item, and
-          you will receive an email notification once the refund has been
-          issued. Please note that shipping costs are non-refundable, and the
-          cost of return shipping will be deducted from your refund unless the
-          return is due to a defect or error on our part.
+          items marked as &quot;final sale&quot; or &quot;non-returnable.&quot;
+          To request a refund, you will need to contact our customer support
+          team at [Insert Contact Information], provide proof of purchase such
+          as a receipt or order number, and, if required, ship the item to the
+          address provided by our team. Refunds will be processed to the
+          original method of payment within [X days] after we receive and
+          inspect the returned item, and you will receive an email notification
+          once the refund has been issued. Please note that shipping costs are
+          non-refundable, and the cost of return shipping will be deducted from
+          your refund unless the return is due to a defect or error on our part.
         </div>
       </DialogContent>
     </Dialog>
