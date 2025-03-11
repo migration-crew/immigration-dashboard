@@ -6,7 +6,6 @@ import { PageContainer } from '@/components/common/PageContainer';
 import { getAllApplications } from '@/hooks/getAllApplications';
 import { getAllPayments } from '@/hooks/getAllPayments';
 import Invoices from './_components/Invoices';
-import RefundPolicyButton from './_components/RefundPolicy';
 
 const PaymentPage = async ({
   searchParams,
@@ -43,7 +42,6 @@ const PaymentPage = async ({
       </div>
       <div className='flex justify-between gap-4'>
         <AwaitingPayment payments={payments} singleCard={false} />
-        <RefundPolicyButton />
       </div>
       <DynamicRoundedContainer title='Invoice'>
         <Invoices invoiceData={payments} />
