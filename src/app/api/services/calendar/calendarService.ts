@@ -1,19 +1,62 @@
 import { toDate } from "date-fns";
 import { getUserId } from "../../lib/getUserId";
 import dbConnect from "../../lib/mongoose";
+import Application from "../../schemas/application/application.schema";
+import ApplicationTaskDetail from "../../schemas/application/applicationTaskDetail.schema";
 import Calendar from "../../schemas/calendar/calendar.schema";
-import { log } from "console";
 
+type applicationTaskDetailType = {
+  applicationTask: {
+    name: string;
+    description: string;
+  };
+  dueDate: Date;
+  _id: string;
+};
 
-export const getAllEvents = async (userId: string, currentMonth: Date, nextMonth: Date) => {
+type applicationType = {
+  _id: string;
+  name: string;
+};
+
+export const getAllEvents = async (
+  userId: string,
+  currentMonth: Date,
+  nextMonth: Date
+) => {
   await dbConnect();
   const userIdFromDB = await getUserId(userId);
   console.log("🚀", userIdFromDB);
-  console.log("🚀", currentMonth);
-  console.log("🚀", nextMonth);
-  
+  const applications = (await Application.find({ user: userIdFromDB }).select(
+    "name _id"
+  )) as applicationType[];
 
-  const events = await Calendar.find({ user: userIdFromDB, start: {"$gte": currentMonth, "$lte": nextMonth} }).select("-user")
+  const appointments = await Calendar.find({
+    user: userIdFromDB,
+    start: { $gte: currentMonth, $lte: nextMonth },
+  }).select("-user");
 
-  return events;
+  const taskDueDates = await Promise.all(
+    applications.map(async (application) => {
+      const applicationTaskDetails = (await ApplicationTaskDetail.find({
+        application: application._id,
+      })
+        .select("_id dueDate applicationTask")
+        .populate("applicationTask")
+        .select("name description")) as applicationTaskDetailType[];
+
+      return applicationTaskDetails.map((taskDetail) => {
+        return {
+          _id: taskDetail._id,
+          title: `${application.name} - ${taskDetail.applicationTask.name}`,
+          start: toDate(taskDetail.dueDate),
+          type: "task",
+          desc: taskDetail.applicationTask.description,
+          isAllDay: true,
+        };
+      });
+    })
+  );
+
+  return [...appointments, ...taskDueDates.flat()];
 };
