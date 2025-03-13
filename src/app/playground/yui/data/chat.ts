@@ -2,9 +2,9 @@ import { ChannelType } from "@/types/Inbox/ChannelType";
 
 export const chatsData: ChannelType[] = [
   {
-    id: "0",
+    _id: "0",
     name: "Yuki",
-    members: [
+    users: [
       {
         _id: "0",
         firstName: "Yuki",
@@ -32,9 +32,9 @@ export const chatsData: ChannelType[] = [
     ],
   },
   {
-    id: "0",
+    _id: "1",
     name: "All Students",
-    members: [
+    users: [
       {
         _id: "0",
         firstName: "Yuki",
@@ -74,9 +74,9 @@ export const chatsData: ChannelType[] = [
     ],
   },
   {
-    id: "0",
+    _id: "immigration",
     name: "Immigration",
-    members: [
+    users: [
       {
         _id: "0",
         firstName: "Yuki",
@@ -128,9 +128,9 @@ export const chatsData: ChannelType[] = [
     ],
   },
   {
-    id: "0",
+    _id: "student",
     name: "Students",
-    members: [
+    users: [
       {
         _id: "0",
         firstName: "Yuki",
@@ -206,9 +206,9 @@ export const chatsData: ChannelType[] = [
     ],
   },
   {
-    id: "0",
+    _id: "3",
     name: "Zoro",
-    members: [
+    users: [
       {
         _id: "0",
         firstName: "Yuki",
