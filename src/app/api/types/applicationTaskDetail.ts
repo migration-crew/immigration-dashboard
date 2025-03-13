@@ -6,4 +6,5 @@ export type ApplicationTaskDetailType = {
   status: string
   dueDate: Date
   payments?: Schema.Types.ObjectId[]
+  documents?: Schema.Types.ObjectId[]
 }

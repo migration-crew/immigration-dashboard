@@ -1,11 +1,11 @@
 import { ApplicationCommentType } from "./ApplicationCommentType";
 
 export type ApplicationTaskType = {
-  id: string;
+  _id: string;
   name: string;
   description: string;
   status: string;
   dueDate: string;
   comments?: ApplicationCommentType[];
-  documentURLs: string[];
+  attachments: string[];
 };

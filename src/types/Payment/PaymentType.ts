@@ -11,15 +11,15 @@ export type PaymentType = {
   invoiceURL: string;
   application: ApplicationType;
   type: string;
-  dueDate: string;
+  dueDate: Date;
 };
 
-export type TablePaymentType = Pick<PaymentType, "id" | "status">;
+export type TablePaymentType = Pick<PaymentType, "_id" | "status">;
 export type PaymentModalType = Pick<
   PaymentType,
-  "id" | "amount" | "currency" | "status"
+  "_id" | "amount" | "currency" | "status"
 >;
 export type InvoicePaymentType = Pick<
   PaymentType,
-  "id" | "status" | "invoiceURL"
+  "_id" | "status" | "invoiceURL"
 >;

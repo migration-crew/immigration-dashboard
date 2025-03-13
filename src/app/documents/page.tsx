@@ -12,13 +12,20 @@ const documentPage = async ({
   searchParams: { applicationId: string };
 }) => {
   const isAdmin = true;
-  const applications = await getAllApplications();
+  const {applications, applicationError} = await getAllApplications();
+  if (applicationError) {
+    return <div>Error: {applicationError.message}</div>;
+  }
+  if (!applications) {
+    return <div>Error: Failed to fetch application</div>;
+  }
 
-  const applicationId = searchParams.applicationId || applications[0]._id;
+  searchParams = await searchParams
+  const applicationId = await searchParams.applicationId || applications[0]._id;
 
   const links = [
     { name: 'Documents', href: '/documents' },
-    { name: 'Saulo_CICCC_ESL', href: '#' },
+    { name: applications.find(value => value._id === applicationId)?.name || "loading...", href: '#' },
   ];
 
   return (

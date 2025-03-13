@@ -8,10 +8,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/upImmigrationTable";
-import { testPaymentType } from "../data/paymentTable";
+import { PaymentType } from "@/types/Payment/PaymentType";
 
 type Props = {
-  payments: testPaymentType[];
+  payments: PaymentType[];
 };
 
 export const PaymentTable = ({ payments }: Props) => {

@@ -28,13 +28,9 @@ type Props = {
 export function Applicationtable({ applicationData }: Props) {
   const router = useRouter();
 
-  const handleRowClick = (applicationId: string, applicationName: string, applicationTypeId: string) => {
-    console.log('🚀', applicationId);
-    
+  const handleRowClick = (applicationId: string) => {
     router.push(
-      `/applications/${applicationId}?name=${encodeURIComponent(
-        applicationName
-      )}&applicationTypeId=${applicationTypeId}`
+      `/applications/${applicationId}`
     );
   };
 
@@ -63,7 +59,7 @@ export function Applicationtable({ applicationData }: Props) {
         {applicationData.map((application, index) => (
           <TableRow
             key={index}
-            onClick={() => handleRowClick(application._id, application.name, application.applicationType._id)}
+            onClick={() => handleRowClick(application._id)}
             className="cursor-pointer"
           >
             <TableCell className="px-[30px]">{application.number}</TableCell>
