@@ -1,7 +1,7 @@
 import { BasicUserType } from "../User/UserType";
 
 export type ChannelType = {
-  id: string;
+  _id: string;
   name: string;
-  members: BasicUserType[];
+  users: BasicUserType[];
 };

@@ -10,7 +10,20 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { chatsData } from "../playground/yui/data/chat";
 import { messages } from "../playground/yui/data/message";
 import { newChatUsers } from "../playground/yui/data/newChatModal";
-const page = () => {
+const page = async ({
+  searchParams,
+}: {
+  searchParams: { messageId: string };
+}) => {
+  searchParams = await searchParams;
+  const messageId = (await searchParams.messageId) || chatsData[0]._id;
+  const currentChat = chatsData.find((d) => {
+    return d._id === messageId;
+  });
+  if (!currentChat) {
+    return <div>Error:Failed to find current chat</div>;
+  }
+  const title = currentChat.name;
   const links = [{ name: "Inbox", href: "/inbox" }];
 
   return (
@@ -23,7 +36,7 @@ const page = () => {
         <div className="flex gap-2">
           <ChatSideBar chats={chatsData} />
           <div>
-            <ChatHeader title={"All Students"} />
+            <ChatHeader title={title} />
             <ScrollArea className="h-[723px]">
               <div className="">
                 {messages.map((message) => (
