@@ -1,12 +1,12 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { formatDate } from "@/lib/utils";
-import { AppointmentType } from "@/types/Appointment/AppointmentType";
-import { BasicUserType } from "@/types/User/UserType";
-import { Video } from "lucide-react";
-import { Separator } from "../ui/separator";
-import { Caption } from "./text/Caption";
-import { CaptionSemi } from "./text/CaptionSemi";
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { formatDate } from '@/lib/utils';
+import { AppointmentType } from '@/types/Appointment/AppointmentType';
+import { BasicUserType } from '@/types/User/UserType';
+import { Video } from 'lucide-react';
+import { Separator } from '../ui/separator';
+import { Caption } from './text/Caption';
+import { CaptionSemi } from './text/CaptionSemi';
 
 export type AppointmentCardProps = {
   appointment: AppointmentType;
@@ -21,7 +21,7 @@ export function AppointmentCard({
 
   return (
     <>
-      <Card className="w-[300px] border-none shadow-none">
+      <Card className="w-full border-none shadow-none">
         <CardHeader className="pb-2">
           <CardTitle className="text-lg font-semibold text-primary-red">
             <CaptionSemi>{appointmentType.name}</CaptionSemi>
@@ -55,7 +55,7 @@ export function AppointmentCard({
           </div>
         </CardContent>
       </Card>
-      <Separator className="my-1 w-[300px]" />
+      <Separator className="my-1 w-full" />
     </>
   );
 }

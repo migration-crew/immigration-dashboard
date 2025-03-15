@@ -86,8 +86,8 @@ export default function CalendarPage() {
   return (
     <>
       <PageContainer>
-        <div className='flex justify-between'>
-          <div className='flex flex-col justify-between items-center'>
+        <div className="flex justify-between">
+          <div className="flex flex-col justify-between items-center">
             <BreadcrumbComponent links={links} />
             <Button asChild>
               <Link href={'/appointment'}>Appointment</Link>
@@ -102,10 +102,10 @@ export default function CalendarPage() {
             />
           </div>
         </div>
-        <div className='flex gap-4 justify-between'>
+        <div className="flex gap-4 justify-between">
           <DynamicRoundedContainer
-            title='Upcoming Appointments'
-            className='w-[350px] h-[850px]'
+            title="Upcoming Appointments"
+            className="w-1/4 h-full"
           >
             {appointments.map((appointment) => (
               <AppointmentCard

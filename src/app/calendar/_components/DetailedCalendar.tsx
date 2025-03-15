@@ -9,14 +9,6 @@ import './index.css';
 const localizer = momentLocalizer(moment); // or globalizeLocalizer
 
 const components = {
-  // event: (props) => {
-  //   return (
-  //     <div>
-  //       <strong>{props.event.title}</strong>
-  //       {props.event.desc && <p>{props.event.desc}</p>}
-  //     </div>
-  //   );
-  // },
   event: (props: {
     event: {
       id?: number;

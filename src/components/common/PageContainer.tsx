@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
 type Props = {
   children: React.ReactNode;
@@ -16,7 +16,7 @@ export function PageContainer({ children, className }: Props) {
   return (
     <div
       className={cn(
-        "flex flex-col gap-[18px] grow p-6 bg-primary-gray",
+        'flex flex-col gap-[18px] grow p-6 bg-primary-gray',
         className
       )}
     >
