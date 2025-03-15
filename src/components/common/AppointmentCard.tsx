@@ -44,9 +44,9 @@ export function AppointmentCard({
           )}
           <div className="flex -space-x-2">
             {attendees.map((attendee) => (
-              <Avatar key={attendee.id} className="border-2 border-background">
+              <Avatar key={attendee._id} className="border-2 border-background">
                 <AvatarImage
-                  src={attendee.imageUrl}
+                  src={attendee.imageURL}
                   alt={`${attendee.firstName}'s avatar`}
                 />
                 <AvatarFallback>{attendee.firstName[0]}</AvatarFallback>
