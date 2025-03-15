@@ -23,8 +23,8 @@ const components = {
     switch (eventType) {
       case 'appointment':
         return (
-          <div className="bg-blue-100 opacity-95 p-1 flex flex-wrap flex-col items-end justify-end h-full">
-            <p className="text-blue-800 text-sm">{props.event.title}</p>
+          <div className="bg-secondary-blue opacity-95 p-1 flex flex-wrap flex-col items-end justify-end h-full">
+            <p className="text-blue-950 text-sm">{props.event.title}</p>
             <p className="text-black text-sm">{props.event.desc}</p>
           </div>
         );
@@ -38,6 +38,13 @@ const components = {
       case 'document':
         return (
           <div className="bg-red-200 opacity-95 p-1 flex flex-wrap flex-col items-end justify-end h-full">
+            <p className="text-red-800 text-sm">{props.event.title} </p>
+            <p className="text-black text-sm">{props.event.desc}</p>
+          </div>
+        );
+      case 'task':
+        return (
+          <div className="bg-primary-red opacity-95 p-1 flex flex-wrap flex-col items-end justify-end h-full">
             <p className="text-red-800 text-sm">{props.event.title} </p>
             <p className="text-black text-sm">{props.event.desc}</p>
           </div>
