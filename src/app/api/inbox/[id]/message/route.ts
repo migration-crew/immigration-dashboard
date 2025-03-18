@@ -1,3 +1,4 @@
+import { deleteMessage } from "@/app/api/services/inbox/deleteMessageService";
 import { getMessages } from "@/app/api/services/inbox/getMessageService";
 import { postMessage } from "@/app/api/services/inbox/postMessageService";
 import { getAuth } from "@clerk/nextjs/server";
@@ -5,18 +6,18 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { channelId: string } }
+  { params }: { params: { id: string } }
 ) {
   params = await params;
-  const { channelId } = await params;
-  if (!channelId) {
+  const { id } = await params;
+  if (!id) {
     return NextResponse.json(
       { message: "Channel ID is required" },
       { status: 400 }
     );
   }
   try {
-    const messages = await getMessages(channelId);
+    const messages = await getMessages(id);
     return NextResponse.json(messages, { status: 200 });
   } catch (error) {
     console.error("Error fetching messages:", error);
@@ -29,12 +30,12 @@ export async function GET(
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { channelId: string } }
+  { params }: { params: { id: string } }
 ) {
   // Extract channelId from the parameters
   params = await params;
-  const { channelId } = await params;
-  if (!channelId) {
+  const { id } = await params;
+  if (!id) {
     return NextResponse.json(
       { message: "Channel ID is required" },
       { status: 400 }
@@ -59,12 +60,38 @@ export async function POST(
     );
   }
   try {
-    const messages = await postMessage(channelId, userId, content);
+    const messages = await postMessage(id, userId, content);
     return NextResponse.json(messages, { status: 200 });
   } catch (error) {
     console.error("Error: error posting message:", error);
     return NextResponse.json(
       { message: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    // Extract the message ID from the parameters
+    params = await params;
+    const { id } = await params;
+    if (!id) {
+      return NextResponse.json(
+        { message: "Message ID is required" },
+        { status: 400 }
+      );
+    }
+    // Delete the message
+    const messages = await deleteMessage(id);
+    return NextResponse.json(messages, { status: 200 });
+  } catch (error) {
+    console.error("Error deleting the message:", error);
+    return NextResponse.json(
+      { messages: "Internal Server Error" },
       { status: 500 }
     );
   }
