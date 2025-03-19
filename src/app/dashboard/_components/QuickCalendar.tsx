@@ -26,14 +26,13 @@ export default function QuickCalendar() {
       const token = await getToken();   
       const thisMonthEvents = (await getAllEvents(
         token,
-        currentMonth,
-        currentYear
+        currentYear,
+        currentMonth
       ))
       if (!thisMonthEvents) {
         return <div>Failed to fetch events</div>;
       }
       setEvents(thisMonthEvents);
-      console.log(thisMonthEvents);
       
     };
     fetchEvents();
@@ -63,7 +62,7 @@ export default function QuickCalendar() {
 
   const modifiersClassNames = {
     // appointment: "border border-secondary-green rounded-3xl",
-    tasks: "border border-primary-red rounded-3xl",
+    task: "border border-primary-red rounded-3xl",
     appointment: "border border-secondary-blue rounded-3xl",
   };
 

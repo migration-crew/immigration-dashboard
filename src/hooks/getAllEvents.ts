@@ -2,8 +2,8 @@ import { EventType } from "@/types/Calendar/EventType";
 
 export const getAllEvents = async (
   token: string | null,
-  year: string,
-  month: number
+  year: number,
+  month: string
 ) => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
