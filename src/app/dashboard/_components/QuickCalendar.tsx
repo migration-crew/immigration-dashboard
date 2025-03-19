@@ -4,7 +4,6 @@ import { Calendar } from "@/components/ui/upImmigrationCalendar";
 import { getAllEvents } from "@/hooks/getAllEvents";
 import { EventType } from "@/types/Calendar/EventType";
 import { useAuth } from "@clerk/nextjs";
-// import { QuickCalendarType } from '@/types/Calendar/EventType';
 
 import { format, getYear } from "date-fns";
 import React, { useEffect, useState } from "react";

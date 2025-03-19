@@ -1,4 +1,3 @@
-// import { events } from '@/app/playground/david/data/events';
 import DynamicHeaderContainer from '@/components/common/DynamicHeaderContainer';
 import { CaptionSemi } from '@/components/common/text/CaptionSemi';
 import { Paragraph } from '@/components/common/text/Paragraph';
