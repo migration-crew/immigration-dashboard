@@ -1,4 +1,3 @@
-"use client";
 import ChatContainer from "@/app/inbox/_components/ChatContainer";
 import ChatHeader from "@/app/inbox/_components/ChatHeader";
 import ChatSideBar from "@/app/inbox/_components/ChatSideBar";
@@ -16,7 +15,11 @@ const page = async ({
   searchParams: { messageId: string };
 }) => {
   searchParams = await searchParams;
-  const messageId = (await searchParams.messageId) || chatsData[0]._id;
+  const messageId =
+    (await searchParams.messageId) ||
+    chatsData.find((chat) => chat.users.length > 2)?._id ||
+    chatsData[0]._id;
+
   const currentChat = chatsData.find((d) => {
     return d._id === messageId;
   });
