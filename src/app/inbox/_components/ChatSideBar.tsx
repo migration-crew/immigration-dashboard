@@ -95,7 +95,6 @@ export default function ChatSideBar({ chats }: Props) {
                 )} active:bg-secondary-dark-gray active:text-primary-white
                 `}
                 onClick={() => onMessageChange(channel._id)}
-                autoFocus={index === 0 && true}
               >
                 {channel.name}
               </Button>
