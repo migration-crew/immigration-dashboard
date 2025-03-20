@@ -59,7 +59,7 @@ export function PaymentSummary({ payments }: Props) {
     <DynamicRoundedContainer
       title='Payment Summary'
       className='flex flex-col gap-6 flex-1'
-      childrenDivClassName='flex items-center justify-center gap-6'
+      childrenDivClassName='flex items-center justify-center gap-6 h-full w-full'
     >
       {hasPayments ? (
         <HasPayments
