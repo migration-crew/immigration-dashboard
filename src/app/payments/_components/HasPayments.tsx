@@ -20,13 +20,13 @@ const HasPayments = ({
   paidAmount,
   totalAmount,
 }: HasPaymentsType) => (
-  <Card className='grid grid-cols-2 place-items-center border-none shadow-none h-full w-full gap-6'>
-    <CardContent className='w-full'>
+  <Card className='grid grid-cols-2 place-items-center border-none shadow-none h-full w-full'>
+    <CardContent className='w-full p-0'>
       <ChartContainer
         config={chartConfig}
         className='mx-auto aspect-square max-h-[250px]'
       >
-        <PieChart width={250} height={250}>
+        <PieChart className='w-full h-full'>
           <ChartTooltip
             cursor={false}
             content={<ChartTooltipContent hideLabel />}
@@ -36,7 +36,7 @@ const HasPayments = ({
             dataKey='amount'
             nameKey='status'
             innerRadius={70}
-            outerRadius={80}
+            outerRadius={90}
             strokeWidth={5}
             startAngle={90}
             endAngle={-270}
