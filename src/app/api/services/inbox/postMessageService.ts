@@ -1,4 +1,3 @@
-import { Types } from "mongoose";
 import { getUserId } from "../../lib/getUserId";
 import dbConnect from "../../lib/mongoose";
 import Message from "../../schemas/inbox/message.schema";
@@ -13,9 +12,8 @@ export const postMessage = async (
   const userIdFromDB = await getUserId(userId);
 
   try {
-    const objectId = new Types.ObjectId(channelId);
     await Message.create({
-      channel: objectId,
+      channel: channelId,
       user: userIdFromDB,
       content,
     });

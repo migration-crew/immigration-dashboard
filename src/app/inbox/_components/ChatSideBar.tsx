@@ -25,7 +25,10 @@ export default function ChatSideBar({ chats }: Props) {
     const currentMessageId = searchParams.get("messageId");
     if (!currentMessageId) {
       const params = new URLSearchParams(searchParams);
-      params.append("messageId", chats[0]._id);
+      params.append(
+        "messageId",
+        chats.find((chat) => chat.users.length > 2)?._id || chats[0]._id
+      );
       replace(`${pathname}?${params.toString()}`);
     }
   }, [searchParams, chats, replace, pathname]);
@@ -57,6 +60,12 @@ export default function ChatSideBar({ chats }: Props) {
     message.name.toLowerCase().includes(searchText.toLowerCase())
   );
 
+  const currentChannelDesign = (channelId: string) => {
+    return channelId === searchParams.get("messageId")
+      ? "bg-secondary-green text-primary-white"
+      : "text-black bg-inherit hover:bg-primary-gray hover:text-primary-black";
+  };
+
   return (
     <div className="w-[290px] h-full">
       <Card className="flex flex-col gap-6 py-10 px-5 h-[840px]">
@@ -80,9 +89,12 @@ export default function ChatSideBar({ chats }: Props) {
               <Button
                 key={index}
                 // value={channel._id}
-                className=" text-black shadow-none text-caption bg-inherit hover:bg-primary-gray hover:text-primary-black active:bg-secondary-dark-gray active:text-primary-white focus:bg-secondary-green focus:text-primary-white justify-start"
+                className={`shadow-none text-caption
+                justify-start ${currentChannelDesign(
+                  channel._id
+                )} active:bg-secondary-dark-gray active:text-primary-white
+                `}
                 onClick={() => onMessageChange(channel._id)}
-                autoFocus={index === 0 && true}
               >
                 {channel.name}
               </Button>
@@ -95,7 +107,11 @@ export default function ChatSideBar({ chats }: Props) {
             {filteredMessages.map((message, index) => (
               <Button
                 key={index}
-                className="text-black shadow-none text-caption bg-inherit hover:bg-primary-gray hover:text-primary-black active:bg-secondary-dark-gray active:text-primary-white focus:bg-secondary-green focus:text-primary-white justify-start"
+                className={`shadow-none text-caption
+                justify-start ${currentChannelDesign(
+                  message._id
+                )} active:bg-secondary-dark-gray active:text-primary-white
+                `}
                 onClick={() => onMessageChange(message._id)}
               >
                 {message.name}
