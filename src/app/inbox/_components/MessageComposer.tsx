@@ -8,12 +8,20 @@ import { Button } from "@/components/ui/upImmigrationButton";
 import { FiSend } from "react-icons/fi";
 // import { GrAttachment } from "react-icons/gr";
 // import { messages } from "@/app/playground/yui/data/message";
+import { messages } from "@/app/playground/yui/data/message";
 import { MessageType } from "@/types/Inbox/MessageType";
 import { useState } from "react";
 
+type Props = {
+  message: string;
+  messages: MessageType[];
+  setMessage: () => void;
+  setMessages: () => void;
+};
+
 export default function MessageComposer() {
-  const [message, setMessage] = useState<string>(""); // メッセージの状態
-  const [messages, setMessages] = useState<MessageType[]>([]); // メッセージのリスト
+  // const [message, setMessage] = useState<string>(""); // メッセージの状態
+  // const [messages, setMessages] = useState<MessageType[]>([]); // メッセージのリスト
   const [editingMessageId, setEditingMessageId] = useState<string | null>(null);
 
   const handleSendMessage = () => {
