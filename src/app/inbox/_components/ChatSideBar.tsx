@@ -22,11 +22,11 @@ export default function ChatSideBar({ chats }: Props) {
   // const [value, setValue] = useState(chats[0]._id);
 
   useEffect(() => {
-    const currentMessageId = searchParams.get("messageId");
-    if (!currentMessageId) {
+    const currentChannelId = searchParams.get("channelId");
+    if (!currentChannelId) {
       const params = new URLSearchParams(searchParams);
       params.append(
-        "messageId",
+        "channelId",
         chats.find((chat) => chat.users.length > 2)?._id || chats[0]._id
       );
       replace(`${pathname}?${params.toString()}`);
@@ -36,9 +36,9 @@ export default function ChatSideBar({ chats }: Props) {
   const onMessageChange = (value: string | null) => {
     // setValue(value || chats[0]._id);
     const params = new URLSearchParams(searchParams);
-    params.delete("messageId");
+    params.delete("channelId");
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    params.append("messageId", value || chats[0]._id);
+    params.append("channelId", value || chats[0]._id);
     replace(`${pathname}?${params.toString()}`);
   };
 
@@ -61,7 +61,7 @@ export default function ChatSideBar({ chats }: Props) {
   );
 
   const currentChannelDesign = (channelId: string) => {
-    return channelId === searchParams.get("messageId")
+    return channelId === searchParams.get("channelId")
       ? "bg-secondary-green text-primary-white"
       : "text-black bg-inherit hover:bg-primary-gray hover:text-primary-black";
   };

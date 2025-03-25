@@ -1,7 +1,10 @@
 import { MessageType } from "@/types/Inbox/MessageType";
+import { auth } from "@clerk/nextjs/server";
 
-export const getAllMessages = async (channelId: string, token: string) => {
+export const getAllMessages = async (channelId: string) => {
+  const { getToken } = await auth();
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const token = await getToken();
 
   try {
     const response = await fetch(`${apiUrl}/messages?channelId=${channelId}`, {
