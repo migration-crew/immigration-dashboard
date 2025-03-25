@@ -34,7 +34,7 @@ const documentPage = async ({
         <BreadcrumbComponent links={links} />
         <ApplicationSwitcher applications={applications} />
       </div>
-      <div className='flex-1 flex flex-col justify-between gap-6'>
+      <div className='flex flex-col justify-between gap-6 w-full'>
         <FilterTable applicationId={applicationId} />
         {isAdmin && <NewDocForm />}
       </div>
