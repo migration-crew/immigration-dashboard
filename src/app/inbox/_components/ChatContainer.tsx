@@ -54,10 +54,10 @@ export default function ChatContainer({
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56">
                 <DropdownMenuGroup>
-                  <DropdownMenuItem onClick={() => editMessage(message.id)}>
+                  <DropdownMenuItem onClick={() => editMessage(message._id)}>
                     Edit
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => deleteMessage(message.id)}>
+                  <DropdownMenuItem onClick={() => deleteMessage(message._id)}>
                     Delete
                   </DropdownMenuItem>
                 </DropdownMenuGroup>

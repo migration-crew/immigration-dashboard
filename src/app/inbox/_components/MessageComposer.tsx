@@ -3,24 +3,31 @@
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/upImmigrationButton";
-import { useState } from "react";
 // import { CiImageOn } from "react-icons/ci";
 // import { FaMicrophone } from "react-icons/fa6";
 import { FiSend } from "react-icons/fi";
 // import { GrAttachment } from "react-icons/gr";
+// import { messages } from "@/app/playground/yui/data/message";
+import { messages } from "@/app/playground/yui/data/message";
 import { MessageType } from "@/types/Inbox/MessageType";
-import ChatContainer from "./ChatContainer";
+import { useState } from "react";
+
+type Props = {
+  message: string;
+  messages: MessageType[];
+  setMessage: () => void;
+  setMessages: () => void;
+};
 
 export default function MessageComposer() {
-  const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState<MessageType[]>([]);
-
+  // const [message, setMessage] = useState<string>(""); // メッセージの状態
+  // const [messages, setMessages] = useState<MessageType[]>([]); // メッセージのリスト
   const [editingMessageId, setEditingMessageId] = useState<string | null>(null);
 
   const handleSendMessage = () => {
     if (message.trim()) {
       const newMessage: MessageType = {
-        id: String(messages.length), // メッセージのID
+        _id: String(messages.length), // メッセージのID
         content: message,
         createdAt: new Date().toString(),
         user: {
@@ -41,31 +48,15 @@ export default function MessageComposer() {
     }
   };
 
-  // メッセージ編集
-  const handleEditMessage = (messageId: string) => {
-    const messageToEdit = messages.find((msg) => msg.id === messageId);
-    if (messageToEdit) {
-      setMessage(messageToEdit.content); // 編集モードでメッセージ内容を設定
-      setEditingMessageId(messageId); // 編集中のメッセージIDを設定
-    }
-  };
-
-  // メッセージ保存（編集後）
   const handleSaveEdit = () => {
     if (editingMessageId && message.trim()) {
       const updatedMessages = messages.map((msg) =>
-        msg.id === editingMessageId ? { ...msg, content: message } : msg
+        msg._id === editingMessageId ? { ...msg, content: message } : msg
       );
-      setMessages(updatedMessages); // 更新されたメッセージリストをセット
+      setMessages(updatedMessages); // メッセージを更新
       setEditingMessageId(null); // 編集モードを終了
       setMessage(""); // 入力欄をリセット
     }
-  };
-
-  // メッセージ削除
-  const handleDeleteMessage = (messageId: string) => {
-    const updatedMessages = messages.filter((msg) => msg.id !== messageId);
-    setMessages(updatedMessages); // 削除後のメッセージリストをセット
   };
 
   return (
@@ -116,36 +107,6 @@ export default function MessageComposer() {
             <FiSend />
           </Button> */}
         </Card>
-      </div>
-      <div className="mt-4">
-        {messages.map((msg, index) => (
-          <ChatContainer
-            key={index}
-            message={msg}
-            deleteMessage={handleDeleteMessage}
-            editMessage={handleEditMessage}
-          />
-          // <ChatContainer
-          //   key={index}
-          //   message={{
-          //     id: String(index),
-          //     user: {
-          //       _id: "userId",
-          //       imageURL: "",
-          //       firstName: "",
-          //       lastName: "",
-          //       nationality: "",
-          //       language: "",
-          //       address: "",
-          //       dateOfBirth: "",
-          //       gender: "",
-          //       email: "",
-          //     },
-          //     content: msg,
-          //     createdAt: new Date().toString(),
-          //   }}
-          // />
-        ))}
       </div>
     </>
   );
