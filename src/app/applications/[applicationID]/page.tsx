@@ -1,8 +1,8 @@
-import { BreadcrumbComponent } from "@/components/common/Breadcrumbs/BreadcrumbComponent";
-import { PageContainer } from "@/components/common/PageContainer";
-import { TaskStep } from "@/components/common/TaskStep";
-import { getAllApplications } from "@/hooks/getAllApplications";
-import { fetchApplicationTasks } from "@/hooks/getApplicationTasks";
+import { BreadcrumbComponent } from '@/components/common/Breadcrumbs/BreadcrumbComponent';
+import { PageContainer } from '@/components/common/PageContainer';
+import { TaskStep } from '@/components/common/TaskStep';
+import { getAllApplications } from '@/hooks/getAllApplications';
+import { fetchApplicationTasks } from '@/hooks/getApplicationTasks';
 
 export default async function ApplicationDetailPage({
   params,
@@ -14,17 +14,17 @@ export default async function ApplicationDetailPage({
     return <div>Error: Failed to fetch application</div>;
   }
   params = await params;
-  const applicationId = await params.applicationID || applications[0]._id;
-  const { applicationTaskSteps, taskLoading, taskError} =
+  const applicationId = (await params.applicationID) || applications[0]._id;
+  const { applicationTaskSteps, taskLoading, taskError } =
     await fetchApplicationTasks(applicationId);
 
   const links = [
-    { name: "Applications", href: "/applications" },
+    { name: 'Applications', href: '/applications' },
     {
       name:
         applications.find((value) => value._id === applicationId)?.name ||
-        "loading...",
-      href: "",
+        'loading...',
+      href: '',
     },
   ];
 
@@ -40,9 +40,9 @@ export default async function ApplicationDetailPage({
   }
 
   return (
-    <PageContainer className="h-full">
+    <PageContainer className='h-full'>
       <BreadcrumbComponent links={links} />
-      <div className="flex">
+      <div className='grid grid-cols-[1fr_1fr_1fr_1fr] gap-4'>
         {applicationTaskSteps.map((taskStep, index) => (
           <TaskStep key={index} TaskStep={taskStep} isCurrentTask={false} />
         ))}
