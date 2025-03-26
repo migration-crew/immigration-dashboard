@@ -1,9 +1,10 @@
+"use client";
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { MessageType } from "@/types/Inbox/MessageType";
 import { useState } from "react";
 import ChatContainer from "./ChatContainer";
-import MessageComposer from "./MessageComposer";
 
 type Props = {
   msg: MessageType[];
@@ -11,7 +12,7 @@ type Props = {
 
 export const ChatArea = ({ msg }: Props) => {
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState<MessageType[]>([]);
+  const [messages, setMessages] = useState<MessageType[]>(msg);
 
   const [editingMessageId, setEditingMessageId] = useState<string | null>(null);
   // メッセージ編集
@@ -25,10 +26,12 @@ export const ChatArea = ({ msg }: Props) => {
 
   // メッセージ保存（編集後）
   const handleSaveEdit = () => {
-    if (editingMessageId && message.trim()) {
-      const updatedMessages = messages.map((msg) =>
-        msg.id === editingMessageId ? { ...msg, content: message } : msg
-      );
+    if (editingMessageId && message !== "") {
+      // FIXME: call hook here to update message later
+      const updatedMessages = msg;
+
+      // call hook here and make updated messages maybe need to call useEffect
+
       setMessages(updatedMessages); // 更新されたメッセージリストをセット
       setEditingMessageId(null); // 編集モードを終了
       setMessage(""); // 入力欄をリセット
@@ -40,6 +43,8 @@ export const ChatArea = ({ msg }: Props) => {
     const updatedMessages = messages.filter((msg) => msg._id !== messageId);
     setMessages(updatedMessages); // 削除後のメッセージリストをセット
   };
+
+  console.log("messages", messages);
 
   return (
     <div>
@@ -55,7 +60,7 @@ export const ChatArea = ({ msg }: Props) => {
           ))}
         </div>
       </ScrollArea>
-      <MessageComposer />
+      {/* <MessageComposer /> */}
     </div>
   );
 };
