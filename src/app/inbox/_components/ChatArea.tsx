@@ -2,9 +2,11 @@
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { patchAllMessages } from "@/hooks/patchAllMessages";
 import { MessageType } from "@/types/Inbox/MessageType";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ChatContainer from "./ChatContainer";
+import MessageComposer from "./MessageComposer";
 
 type Props = {
   msg: MessageType[];
@@ -13,6 +15,7 @@ type Props = {
 export const ChatArea = ({ msg }: Props) => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<MessageType[]>(msg);
+  const [editMessage, setEditMessage] = useState<string | null>(null);
 
   const [editingMessageId, setEditingMessageId] = useState<string | null>(null);
   // メッセージ編集
@@ -24,25 +27,25 @@ export const ChatArea = ({ msg }: Props) => {
     }
   };
 
-  // メッセージ保存（編集後）
-  const handleSaveEdit = () => {
-    if (editingMessageId && message !== "") {
-      // FIXME: call hook here to update message later
-      const updatedMessages = msg;
+  const setNewMessages = (newMessages: MessageType[]) => {
+    setMessages(newMessages);
+  };
 
-      // call hook here and make updated messages maybe need to call useEffect
+  const setEditMessage = (newMessage: string) => {
+    setEditMessage(newMessage);
+  };
 
-      setMessages(updatedMessages); // 更新されたメッセージリストをセット
+  useEffect(() => {
+    const handleEdit = async () => {
+      if (editingMessageId && message !== "") {
+        const editMessages = await patchAllMessages(editingMessageId, message);
+        setMessages(editMessages); // 更新されたメッセージリストをセット
+      }
       setEditingMessageId(null); // 編集モードを終了
       setMessage(""); // 入力欄をリセット
-    }
-  };
-
-  // メッセージ削除
-  const handleDeleteMessage = (messageId: string) => {
-    const updatedMessages = messages.filter((msg) => msg._id !== messageId);
-    setMessages(updatedMessages); // 削除後のメッセージリストをセット
-  };
+    };
+    handleEdit();
+  }, []);
 
   console.log("messages", messages);
 
@@ -55,12 +58,17 @@ export const ChatArea = ({ msg }: Props) => {
               key={message._id}
               message={message}
               editMessage={handleEditMessage}
-              deleteMessage={handleDeleteMessage}
+              setNewMessages={setNewMessages}
             />
           ))}
         </div>
       </ScrollArea>
-      {/* <MessageComposer /> */}
+      <MessageComposer
+        messages={}
+        setNewMessages={}
+        editingMessageId={}
+        setNewMessage={}
+      />
     </div>
   );
 };
