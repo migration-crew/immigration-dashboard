@@ -1,6 +1,10 @@
 import { Model, Schema, model, models } from "mongoose";
 import { AppointmentType as appointmentType } from "../../types/appointment";
 
+// eslint-disable-next-line
+import AppointmentType from "./appointmentType.schema";
+AppointmentType
+
 type AppointmentModelType = Model<appointmentType>;
 
 const AppointmentSchema = new Schema<appointmentType, AppointmentModelType>(
