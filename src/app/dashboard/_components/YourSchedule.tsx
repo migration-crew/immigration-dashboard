@@ -1,4 +1,3 @@
-import { events } from '@/app/playground/david/data/events';
 import DynamicHeaderContainer from '@/components/common/DynamicHeaderContainer';
 import { CaptionSemi } from '@/components/common/text/CaptionSemi';
 import { Paragraph } from '@/components/common/text/Paragraph';
@@ -15,7 +14,7 @@ export function YourSchedule() {
       <div className='flex flex-col w-full gap-2'>
         <DynamicHeaderContainer
           headerChildren={<CaptionSemi>{currentDate}</CaptionSemi>}
-          contentChildren={<QuickCalendar events={events} />}
+          contentChildren={<QuickCalendar />}
           className='w-full '
         ></DynamicHeaderContainer>
         <Button className='bg-secondary-green'>See Your Calendar</Button>

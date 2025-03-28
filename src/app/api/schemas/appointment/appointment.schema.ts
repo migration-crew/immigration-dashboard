@@ -1,9 +1,13 @@
 import { Model, Schema, model, models } from "mongoose";
-import { AppointmentType } from "../../types/appointment";
+import { AppointmentType as appointmentType } from "../../types/appointment";
 
-type AppointmentModelType = Model<AppointmentType>;
+// eslint-disable-next-line
+import AppointmentType from "./appointmentType.schema";
+AppointmentType
 
-const AppointmentSchema = new Schema<AppointmentType, AppointmentModelType>(
+type AppointmentModelType = Model<appointmentType>;
+
+const AppointmentSchema = new Schema<appointmentType, AppointmentModelType>(
   {
     customer: { type: Schema.Types.ObjectId, ref: "User", required: true },
     admin: { type: Schema.Types.ObjectId, ref: "User", required: true },
@@ -24,7 +28,7 @@ const AppointmentSchema = new Schema<AppointmentType, AppointmentModelType>(
 
 const Appointment =
   models.Appointment ||
-  model<AppointmentType, AppointmentModelType>(
+  model<appointmentType, AppointmentModelType>(
     "Appointment",
     AppointmentSchema
   );
