@@ -1,14 +1,14 @@
-import ChatContainer from "@/app/inbox/_components/ChatContainer";
-import ChatHeader from "@/app/inbox/_components/ChatHeader";
-import ChatSideBar from "@/app/inbox/_components/ChatSideBar";
-import MessageComposer from "@/app/inbox/_components/MessageComposer";
-import NewChatModal from "@/app/inbox/_components/NewChatModal";
-import { BreadcrumbComponent } from "@/components/common/Breadcrumbs/BreadcrumbComponent";
-import { PageContainer } from "@/components/common/PageContainer";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { chatsData } from "../playground/yui/data/chat";
-import { messages } from "../playground/yui/data/message";
-import { newChatUsers } from "../playground/yui/data/newChatModal";
+import ChatContainer from '@/app/inbox/_components/ChatContainer';
+import ChatHeader from '@/app/inbox/_components/ChatHeader';
+import ChatSideBar from '@/app/inbox/_components/ChatSideBar';
+import MessageComposer from '@/app/inbox/_components/MessageComposer';
+import NewChatModal from '@/app/inbox/_components/NewChatModal';
+import { BreadcrumbComponent } from '@/components/common/Breadcrumbs/BreadcrumbComponent';
+import { PageContainer } from '@/components/common/PageContainer';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { chatsData } from '../playground/yui/data/chat';
+import { messages } from '../playground/yui/data/message';
+import { newChatUsers } from '../playground/yui/data/newChatModal';
 const page = async ({
   searchParams,
 }: {
@@ -27,21 +27,21 @@ const page = async ({
     return <div>Error:Failed to find current chat</div>;
   }
   const title = currentChat.name;
-  const links = [{ name: "Inbox", href: "/inbox" }];
+  const links = [{ name: 'Inbox', href: '/inbox' }];
 
   return (
-    <PageContainer className="grid items-center">
+    <PageContainer className='grid items-center'>
       <div>
-        <div className="flex justify-between mb-[18px] top-0">
-          <BreadcrumbComponent links={links} className="flex items-center" />
+        <div className='flex justify-between mb-[18px] top-0'>
+          <BreadcrumbComponent links={links} className='flex items-center' />
           <NewChatModal users={newChatUsers} />
         </div>
-        <div className="grid grid-cols-[2fr_3fr] gap-4">
+        <div className='flex gap-4'>
           <ChatSideBar chats={chatsData} />
-          <div>
+          <div className='flex-1'>
             <ChatHeader title={title} />
-            <ScrollArea className="h-[723px]">
-              <div className="">
+            <ScrollArea className='h-[723px]'>
+              <div className=''>
                 {messages.map((message) => (
                   <ChatContainer key={message.id} message={message} />
                 ))}
