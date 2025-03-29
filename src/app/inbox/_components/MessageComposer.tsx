@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/upImmigrationButton";
-import { useState } from "react";
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/upImmigrationButton';
+import { useState } from 'react';
 // import { CiImageOn } from "react-icons/ci";
 // import { FaMicrophone } from "react-icons/fa6";
-import { FiSend } from "react-icons/fi";
+import { FiSend } from 'react-icons/fi';
 // import { GrAttachment } from "react-icons/gr";
-import { MessageType } from "@/types/Inbox/MessageType";
-import ChatContainer from "./ChatContainer";
+import { MessageType } from '@/types/Inbox/MessageType';
+import ChatContainer from './ChatContainer';
 
 export default function MessageComposer() {
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const [messages, setMessages] = useState<MessageType[]>([]);
 
   const [editingMessageId, setEditingMessageId] = useState<string | null>(null);
@@ -24,20 +24,20 @@ export default function MessageComposer() {
         content: message,
         createdAt: new Date().toString(),
         user: {
-          _id: "userId", // 現在のユーザーID
-          imageURL: "",
-          firstName: "",
-          lastName: "",
-          nationality: "",
-          language: "",
-          address: "",
-          dateOfBirth: "",
-          gender: "",
-          email: "",
+          _id: 'userId', // 現在のユーザーID
+          imageURL: '',
+          firstName: '',
+          lastName: '',
+          nationality: '',
+          language: '',
+          address: '',
+          dateOfBirth: '',
+          gender: '',
+          email: '',
         },
       };
       setMessages((prevMessages) => [...prevMessages, newMessage]);
-      setMessage(""); // 送信後、入力欄をリセット
+      setMessage(''); // 送信後、入力欄をリセット
     }
   };
 
@@ -58,7 +58,7 @@ export default function MessageComposer() {
       );
       setMessages(updatedMessages); // 更新されたメッセージリストをセット
       setEditingMessageId(null); // 編集モードを終了
-      setMessage(""); // 入力欄をリセット
+      setMessage(''); // 入力欄をリセット
     }
   };
 
@@ -70,29 +70,29 @@ export default function MessageComposer() {
 
   return (
     <>
-      <div className="w-[846px] h-[65px] border-t ">
-        <Card className="p-[16px] rounded-t-none border-none shadow-none flex items-center justify-center">
-          <div className="flex mr-[18px]">
+      <div className='h-[65px] border-t '>
+        <Card className='p-4 rounded-t-none border-none shadow-none flex items-center justify-between'>
+          <div className='flex mr-[18px]'>
             <button
-              className="w-[24px] h-[24px] text-secondary-dark-gray flex items-center"
-              aria-label="Start Voice Input"
+              className='w-[24px] h-[24px] text-secondary-dark-gray flex items-center'
+              aria-label='Start Voice Input'
             >
               {/* <FaMicrophone /> */}
             </button>
             <Input
-              type="text"
+              type='text'
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              placeholder="Write Message"
-              className="border-none shadow-none w-[607px] h-[24px] focus-visible:ring-0"
+              placeholder='Write Message'
+              className='border-none shadow-none w-[607px] h-[24px] focus-visible:ring-0'
             />
           </div>
           <Button
             onClick={editingMessageId ? handleSaveEdit : handleSendMessage} // 編集中か送信かで処理を分ける
-            className="w-[86px] h-[33px] text-caption text-primary-white flex justify-center items-center"
-            variant={"green"}
+            className='w-[86px] h-[33px] text-caption text-primary-white flex justify-center items-center'
+            variant={'green'}
           >
-            {editingMessageId ? "Save" : "Send"}
+            {editingMessageId ? 'Save' : 'Send'}
             <FiSend />
           </Button>
           {/* <button
@@ -117,7 +117,7 @@ export default function MessageComposer() {
           </Button> */}
         </Card>
       </div>
-      <div className="mt-4">
+      <div className='mt-4'>
         {messages.map((msg, index) => (
           <ChatContainer
             key={index}

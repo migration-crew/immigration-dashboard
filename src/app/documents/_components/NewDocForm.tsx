@@ -53,7 +53,7 @@ export function NewDocForm() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex items-center"
       >
-        <Card className="flex w-[1000px] justify-between mr-5  px-6 py-4 rounded-sm">
+        <Card className="flex justify-between px-6 py-4 rounded-sm w-full">
           <FormField
             control={form.control}
             name="form"

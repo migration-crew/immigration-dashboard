@@ -19,7 +19,7 @@ export const DocumentTable = ({ documents }: Props) => {
   console.log("🐉", documents);
   
   return (
-    <Table className="w-[1152px] bg-primary-white">
+    <Table className="bg-primary-white">
       <TableHeader className="bg-secondary-medium-gray text-primary-white text-caption-semi">
         <TableRow className="">
           <TableHead className="text-primary-white w-[11%] h-[21px] px-[30px]">

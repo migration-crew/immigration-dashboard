@@ -97,9 +97,8 @@ export const page = ({}: Props) => {
 
   return (
     <PageContainer>
-      <div>
-        <BreadcrumbComponent links={links} className="mb-[18px]" />
-        <Card className="w-[1152px] h-[802px] py-[32px] ">
+        <BreadcrumbComponent links={links} />
+        <Card className="w-full h-[802px] py-[32px]">
           <div className="grid gap-9 justify-items-center">
             <div className="grid justify-center">
               <Avatar className="w-[120px] h-[120px] border-secondary-light-gray mb-4">
@@ -129,7 +128,6 @@ export const page = ({}: Props) => {
             )}
           </div>
         </Card>
-      </div>
     </PageContainer>
   );
 };
