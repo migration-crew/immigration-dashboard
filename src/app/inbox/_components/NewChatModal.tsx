@@ -81,7 +81,7 @@ export default function NewChatModal({ users }: Props) {
                   className="flex items-center bg-primary-light-blue text-primary-dark-blue rounded-full px-3 py-1"
                 >
                   <Avatar className="h-6 w-6 mr-2">
-                    <AvatarImage src={user.imageUrl} alt={user.firstName} />
+                    <AvatarImage src={user.imageURL} alt={user.firstName} />
                     <AvatarFallback className="text-caption-semi">
                       {user.firstName[0]}
                     </AvatarFallback>
@@ -135,7 +135,7 @@ export default function NewChatModal({ users }: Props) {
               >
                 <div className="flex items-center">
                   <Avatar>
-                    <AvatarImage src={user.imageUrl} alt={user.firstName} />
+                    <AvatarImage src={user.imageURL} alt={user.firstName} />
                     <AvatarFallback>{user.firstName[0]}</AvatarFallback>
                   </Avatar>
 

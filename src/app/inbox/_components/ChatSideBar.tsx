@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/upImmigrationButton";
 import { ChannelType } from "@/types/Inbox/ChannelType";
 import { Search } from "lucide-react";
-import { useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 type Props = {
   chats: ChannelType[];
@@ -15,11 +16,37 @@ type Props = {
 export default function ChatSideBar({ chats }: Props) {
   const [searchText, setSearchText] = useState("");
 
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+  // const [value, setValue] = useState(chats[0]._id);
+
+  useEffect(() => {
+    const currentMessageId = searchParams.get("messageId");
+    if (!currentMessageId) {
+      const params = new URLSearchParams(searchParams);
+      params.append(
+        "messageId",
+        chats.find((chat) => chat.users.length > 2)?._id || chats[0]._id
+      );
+      replace(`${pathname}?${params.toString()}`);
+    }
+  }, [searchParams, chats, replace, pathname]);
+
+  const onMessageChange = (value: string | null) => {
+    // setValue(value || chats[0]._id);
+    const params = new URLSearchParams(searchParams);
+    params.delete("messageId");
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    params.append("messageId", value || chats[0]._id);
+    replace(`${pathname}?${params.toString()}`);
+  };
+
   const channels: ChannelType[] = [];
   const messages: ChannelType[] = [];
 
   chats.forEach((chat) => {
-    if (chat.members.length > 2) {
+    if (chat.users.length > 2) {
       channels.push(chat);
     } else {
       messages.push(chat);
@@ -32,6 +59,12 @@ export default function ChatSideBar({ chats }: Props) {
   const filteredMessages = messages.filter((message) =>
     message.name.toLowerCase().includes(searchText.toLowerCase())
   );
+
+  const currentChannelDesign = (channelId: string) => {
+    return channelId === searchParams.get("messageId")
+      ? "bg-secondary-green text-primary-white"
+      : "text-black bg-inherit hover:bg-primary-gray hover:text-primary-black";
+  };
 
   return (
     <div className="w-[290px] h-full">
@@ -55,8 +88,13 @@ export default function ChatSideBar({ chats }: Props) {
             {filteredChannels.map((channel, index) => (
               <Button
                 key={index}
-                className=" text-black shadow-none text-caption bg-inherit hover:bg-primary-gray hover:text-primary-black active:bg-secondary-dark-gray active:text-primary-white focus:bg-secondary-green focus:text-primary-white justify-start"
-                autoFocus={index === 0 && true}
+                // value={channel._id}
+                className={`shadow-none text-caption
+                justify-start ${currentChannelDesign(
+                  channel._id
+                )} active:bg-secondary-dark-gray active:text-primary-white
+                `}
+                onClick={() => onMessageChange(channel._id)}
               >
                 {channel.name}
               </Button>
@@ -69,7 +107,12 @@ export default function ChatSideBar({ chats }: Props) {
             {filteredMessages.map((message, index) => (
               <Button
                 key={index}
-                className="text-black shadow-none text-caption bg-inherit hover:bg-primary-gray hover:text-primary-black active:bg-secondary-dark-gray active:text-primary-white focus:bg-secondary-green focus:text-primary-white justify-start"
+                className={`shadow-none text-caption
+                justify-start ${currentChannelDesign(
+                  message._id
+                )} active:bg-secondary-dark-gray active:text-primary-white
+                `}
+                onClick={() => onMessageChange(message._id)}
               >
                 {message.name}
               </Button>

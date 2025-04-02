@@ -1,4 +1,3 @@
-"use client";
 import ChatContainer from "@/app/inbox/_components/ChatContainer";
 import ChatHeader from "@/app/inbox/_components/ChatHeader";
 import ChatSideBar from "@/app/inbox/_components/ChatSideBar";
@@ -10,7 +9,24 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { chatsData } from "../playground/yui/data/chat";
 import { messages } from "../playground/yui/data/message";
 import { newChatUsers } from "../playground/yui/data/newChatModal";
-const page = () => {
+const page = async ({
+  searchParams,
+}: {
+  searchParams: { messageId: string };
+}) => {
+  searchParams = await searchParams;
+  const messageId =
+    (await searchParams.messageId) ||
+    chatsData.find((chat) => chat.users.length > 2)?._id ||
+    chatsData[0]._id;
+
+  const currentChat = chatsData.find((d) => {
+    return d._id === messageId;
+  });
+  if (!currentChat) {
+    return <div>Error:Failed to find current chat</div>;
+  }
+  const title = currentChat.name;
   const links = [{ name: "Inbox", href: "/inbox" }];
 
   return (
@@ -20,10 +36,10 @@ const page = () => {
           <BreadcrumbComponent links={links} className="flex items-center" />
           <NewChatModal users={newChatUsers} />
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-4">
           <ChatSideBar chats={chatsData} />
-          <div>
-            <ChatHeader title={"All Students"} />
+          <div className="flex-1">
+            <ChatHeader title={title} />
             <ScrollArea className="h-[723px]">
               <div className="">
                 {messages.map((message) => (
