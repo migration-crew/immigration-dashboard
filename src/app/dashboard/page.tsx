@@ -1,28 +1,34 @@
-import ApplicationProgress from "@/components/common/ApplicationProgress/ApplicationProgress";
-import ApplicationSwitcher from "@/components/common/ApplicationSwitcher";
-import AwaitingPayment from "@/components/common/AwaitingPayment/AwaitingPayment";
-import { BreadcrumbComponent } from "@/components/common/Breadcrumbs/BreadcrumbComponent";
-import { PageContainer } from "@/components/common/PageContainer";
-import { getAllApplications } from "@/hooks/getAllApplications";
-import { getAllPayments } from "@/hooks/getAllPayments";
-import { fetchApplicationTasks } from "@/hooks/getApplicationTasks";
-import { CurrentTasks } from "./_components/CurrentTasks";
-import { LatestUpdates } from "./_components/LatestUpdates";
-import { YourSchedule } from "./_components/YourSchedule";
+import ApplicationProgress from '@/components/common/ApplicationProgress/ApplicationProgress';
+import ApplicationSwitcher from '@/components/common/ApplicationSwitcher';
+import AwaitingPayment from '@/components/common/AwaitingPayment/AwaitingPayment';
+import { BreadcrumbComponent } from '@/components/common/Breadcrumbs/BreadcrumbComponent';
+import { PageContainer } from '@/components/common/PageContainer';
+import { getAllApplications } from '@/hooks/getAllApplications';
+import { getAllPayments } from '@/hooks/getAllPayments';
+import { fetchApplicationTasks } from '@/hooks/getApplicationTasks';
+import { CurrentTasks } from './_components/CurrentTasks';
+import { LatestUpdates } from './_components/LatestUpdates';
+import { YourSchedule } from './_components/YourSchedule';
 
-export default async function DashboardPage({ searchParams }: { searchParams: { applicationId: string } }) {
-  const {applications, applicationError} = await getAllApplications();
+export default async function DashboardPage({
+  searchParams,
+}: {
+  searchParams: { applicationId: string };
+}) {
+  const { applications, applicationError } = await getAllApplications();
   if (applicationError) {
     return <div>Error: {applicationError.message}</div>;
   }
   if (!applications) {
     return <div>Error: Failed to fetch application</div>;
   }
-  
-  searchParams = await searchParams
-  const applicationId =  await searchParams.applicationId || applications[0]._id;
-  
-  const {applicationTaskSteps, taskLoading, taskError} = await fetchApplicationTasks(applicationId);
+
+  searchParams = await searchParams;
+  const applicationId =
+    (await searchParams.applicationId) || applications[0]._id;
+
+  const { applicationTaskSteps, taskLoading, taskError } =
+    await fetchApplicationTasks(applicationId);
 
   if (taskLoading) {
     return <div>Loading applications...</div>;
@@ -48,23 +54,30 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
   const payments = await getAllPayments(applicationId);
 
   const INITIAL_LINKS = [
-    { name: "Dashboard", href: "/dashboard" },
-    { name: applications.find(value => value._id === applicationId)?.name || "loading...", href: "#" },
+    { name: 'Dashboard', href: '/dashboard' },
+    {
+      name:
+        applications.find((value) => value._id === applicationId)?.name ||
+        'loading...',
+      href: '#',
+    },
   ];
 
   return (
-    <PageContainer>
-      <div className="flex justify-between items-center">
+    <PageContainer className=''>
+      <div className='grid grid-cols-[3fr_1fr] gap-[18px] items-center'>
         <BreadcrumbComponent links={INITIAL_LINKS} />
         <ApplicationSwitcher applications={applications} />
       </div>
-      <div className="flex justify-between">
+      <div className='grid grid-cols-[3fr_1fr] gap-[18px]'>
         <ApplicationProgress progresses={applicationTaskSteps} />
         <AwaitingPayment payments={payments} singleCard={true} />
       </div>
-      <div className="flex pt-2 gap-4 h-[490px]">
-        <CurrentTasks currentTaskStep={currentTaskStep} />
-        <LatestUpdates />
+      <div className='grid grid-cols-[3fr_1fr] gap-[18px] h-[490px]'>
+        <div className='grid grid-cols-2 gap-4'>
+          <CurrentTasks currentTaskStep={currentTaskStep} />
+          <LatestUpdates />
+        </div>
         <YourSchedule />
       </div>
     </PageContainer>

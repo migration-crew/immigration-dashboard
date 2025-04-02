@@ -10,74 +10,91 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/upImmigrationBadge";
 import { Button } from "@/components/ui/upImmigrationButton";
 import { PaymentType } from "@/types/Payment/PaymentType";
-import { FileText, X } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { ElementRef, useEffect, useRef } from "react";
+import { FileText } from "lucide-react";
+import { useState } from "react";
 // import { RadioGroup, RadioGroupItem } from "../ui/upImmigrationRadio-group";
+
+import {
+  PaymentElement,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
 
 type Props = {
   payment: PaymentType;
+  clientSecret: string;
 };
 
-const PaymentModal = ({ payment }: Props) => {
-  console.log("🥩", payment);
-  
-  const router = useRouter();
-  const dialogRef = useRef<ElementRef<"dialog">>(null);
+const PaymentModal = ({ payment, clientSecret }: Props) => {
+  const stripe = useStripe();
+  const elements = useElements();
 
-  useEffect(() => {
-    if (!dialogRef.current?.open) {
-      dialogRef.current?.showModal();
+  const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    if (!stripe || !elements) {
+      // Stripe.js hasn't yet loaded.
+      // Make sure to disable form submission until Stripe.js has loaded.
+      return;
     }
-  }, []);
 
-  const onDismiss = () => {
-    router.back();
+    const {error: submitError} = await elements.submit()
+
+    if (submitError) {
+      if(submitError.message) {
+        setMessage(submitError.message);
+      } else {
+        setMessage("An unexpected error occurred while submitting.");
+      }
+      setIsLoading(false);
+      return
+    }
+
+    const { error } = await stripe.confirmPayment({
+      elements,
+      clientSecret,
+      confirmParams: {
+        // Make sure to change this to your payment completion page
+        return_url: "http://localhost:3000/success",
+      },
+    });
+
+    // This point will only be reached if there is an immediate error when
+    // confirming the payment. Otherwise, your customer will be redirected to
+    // your `return_url`. For some payment methods like iDEAL, your customer will
+    // be redirected to an intermediate site first to authorize the payment, then
+    // redirected to the `return_url`.
+    if (
+      (error.type === "card_error" || error.type === "validation_error") &&
+      error.message
+    ) {
+      setMessage(error.message);
+    } else {
+      setMessage("An unexpected error occurred.");
+    }
+
+    setIsLoading(false);
   };
+
+  const paymentElementOptions: { layout: "tabs" | "accordion" | "auto" } = {
+    layout: "tabs",
+  };
+
   return (
-    <dialog
-      ref={dialogRef}
-      className="border bg-background p-[60px] shadow-lg rounded-lg backdrop:bg-black/80 grid grid-cols-2 gap-x-20"
-    >
-      <div className="col-span-2 grid justify-end">
-        <Button
-          onClick={onDismiss}
-          variant="ghost"
-          className="h-fit w-fit [&_svg]:size-8"
-        >
-          <X />
-        </Button>
-      </div>
+    <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-x-20">
+      <PaymentElement options={paymentElementOptions} />
+      {/*
       <div className="w-[362px]">
         <HeadingSemi className="mb-2">Payment Method</HeadingSemi>
         <Separator className="mb-9" />
-        {/* <div>
-          <ParagraphRegular>Pay With:</ParagraphRegular>
-          <RadioGroup defaultValue="card" className="flex justify-between">
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="card" id="card" />
-              <Label htmlFor="card">Card</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="bankTransfer" id="bankTransfer" />
-              <Label htmlFor="bankTransfer">Bank Transfer</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="paypal" id="paypal" />
-              <Label htmlFor="paypal">Paypal</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="wise" id="wise" />
-              <Label htmlFor="wise">Wise</Label>
-            </div>
-          </RadioGroup>
-        </div> */}
         <div className="grid gap-6">
           <div className="grid gap-4">
             <Label htmlFor="cardNumber">
@@ -110,7 +127,7 @@ const PaymentModal = ({ payment }: Props) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="w-[480px]">
         <HeadingSemi className="mb-2">Amount</HeadingSemi>
         <Separator />
@@ -141,13 +158,17 @@ const PaymentModal = ({ payment }: Props) => {
             </HeadingSemi>
           </CardFooter>
         </Card>
-        <Button className="w-full py-4 h-fit">
+        <Button
+          className="w-full py-4 h-fit"
+          disabled={isLoading || !stripe || !elements}
+        >
           <Paragraph>
-            Pay {payment.currency} {payment.amount.toFixed(2)}
+            {!isLoading ? `Pay ${payment.currency} ${payment.amount.toFixed(2)}` : "Processing..."}
           </Paragraph>
         </Button>
+        {message && <div>{message}</div>}
       </div>
-    </dialog>
+    </form>
   );
 };
 

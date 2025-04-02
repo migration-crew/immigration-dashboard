@@ -70,8 +70,8 @@ export default function MessageComposer() {
 
   return (
     <>
-      <div className="w-[846px] h-[65px] border-t ">
-        <Card className="p-[16px] rounded-t-none border-none shadow-none flex items-center justify-center">
+      <div className="h-[65px] border-t ">
+        <Card className="p-4 rounded-t-none border-none shadow-none flex items-center justify-between">
           <div className="flex mr-[18px]">
             <button
               className="w-[24px] h-[24px] text-secondary-dark-gray flex items-center"

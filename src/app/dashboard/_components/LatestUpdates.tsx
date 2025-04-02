@@ -6,7 +6,7 @@ import { UPDATES } from '@/data/updates';
 
 export function LatestUpdates() {
   return (
-    <div className='flex flex-col gap-2 w-[390px]'>
+    <div className='flex flex-col gap-2'>
       <Paragraph>Latest Updates</Paragraph>
       <div className='flex flex-col w-full'>
         <DynamicHeaderContainer

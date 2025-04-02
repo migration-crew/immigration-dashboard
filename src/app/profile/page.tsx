@@ -56,17 +56,14 @@ export const page = ({}: Props) => {
   const handleSubmitProfile = async (data: UserType) => {
     try {
       const token = await getToken();
-      const response = await fetch(
-        `${apiUrl}/user`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(data),
-        }
-      );
+      const response = await fetch(`${apiUrl}/user`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      });
 
       if (response.ok) {
         const updatedData = await response.json();
@@ -97,39 +94,37 @@ export const page = ({}: Props) => {
 
   return (
     <PageContainer>
-      <div>
-        <BreadcrumbComponent links={links} className="mb-[18px]" />
-        <Card className="w-[1152px] h-[802px] py-[32px] ">
-          <div className="grid gap-9 justify-items-center">
-            <div className="grid justify-center">
-              <Avatar className="w-[120px] h-[120px] border-secondary-light-gray mb-4">
-                <AvatarImage src={imageURL ?? ""} alt="User Avatar" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
+      <BreadcrumbComponent links={links} />
+      <Card className="w-full h-[802px] py-[32px]">
+        <div className="grid gap-9 justify-items-center">
+          <div className="grid justify-center">
+            <Avatar className="w-[120px] h-[120px] border-secondary-light-gray mb-4">
+              <AvatarImage src={imageURL ?? ""} alt="User Avatar" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
 
-              <Button
-                onClick={handleClick}
-                className="text-secondary-blue bg-transparent shadow-none"
-              >
-                Upload File
-              </Button>
-              <Input
-                ref={fileInputRef}
-                type="file"
-                className="hidden"
-                onChange={handleChange}
-              />
-            </div>
-            {users && (
-              <ProfileInput
-                users={users}
-                onSubmit={handleSubmitProfile}
-                onDateChange={() => {}}
-              />
-            )}
+            <Button
+              onClick={handleClick}
+              className="text-secondary-blue bg-transparent shadow-none"
+            >
+              Upload File
+            </Button>
+            <Input
+              ref={fileInputRef}
+              type="file"
+              className="hidden"
+              onChange={handleChange}
+            />
           </div>
-        </Card>
-      </div>
+          {users && (
+            <ProfileInput
+              users={users}
+              onSubmit={handleSubmitProfile}
+              onDateChange={() => {}}
+            />
+          )}
+        </div>
+      </Card>
     </PageContainer>
   );
 };

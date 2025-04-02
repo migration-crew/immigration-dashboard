@@ -36,9 +36,9 @@ const page = async ({
           <BreadcrumbComponent links={links} className="flex items-center" />
           <NewChatModal users={newChatUsers} />
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-4">
           <ChatSideBar chats={chatsData} />
-          <div>
+          <div className="flex-1">
             <ChatHeader title={title} />
             <ScrollArea className="h-[723px]">
               <div className="">

@@ -1,16 +1,9 @@
-import { AppointmentTypeType } from "../Appointment/AppointmentTypeType";
-
 export type EventType = {
-  id: string;
+  _id: string;
   title: string;
-  startDate: string;
-  duration: number;
-  description: string;
-  format: string;
-  appointmentType: AppointmentTypeType;
-};
-
-export type QuickCalendarType = {
-  events: "appointment" | "payment" | "document";
-  date: Date;
+  start: Date;
+  end?: Date;
+  type: "appointment" | "tasks"
+  desc: string;
+  isAllDay: boolean;
 };
