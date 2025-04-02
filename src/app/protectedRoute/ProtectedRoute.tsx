@@ -44,6 +44,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
           router.push("/dashboard");
         }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoaded, isSignedIn, router]);
 
   if (!isLoaded) {

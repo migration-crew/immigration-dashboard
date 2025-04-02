@@ -51,7 +51,7 @@ function PaymentCarousel({ payments, singleCard }: Props) {
                   </div>
                   <div className="pl-1">
                     <HeadingLight>
-                      {payment.currency} {payment.amount.toFixed(2)}
+                      {payment.currency.toUpperCase()} {payment.amount.toFixed(2)}
                     </HeadingLight>
                     <Microtext>
                       Due Date:{" "}
