@@ -79,7 +79,7 @@ export default function AppSidebar() {
                   className={clsx(
                     "flex gap-2 h-full w-[80%] rounded mx-auto pl-10 transition-colors",
                     pathname === item.href
-                      ? "bg-primary-red text-primary-white hover:bg-primary-red"
+                      ? "bg-primary-red text-primary-white hover:!bg-primary-red hover:!text-primary-white"
                       : "hover:bg-primary-gray"
                   )}
                 >
