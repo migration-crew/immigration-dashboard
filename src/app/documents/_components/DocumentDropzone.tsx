@@ -2,16 +2,23 @@
 
 import { CaptionSemi } from "@/components/common/text/CaptionSemi";
 import { ParagraphRegular } from "@/components/common/text/ParagraphRegular";
+import { DialogClose } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/upImmigrationButton";
+import { submitDocument } from "@/hooks/submitDocument";
+import { useAuth } from "@clerk/nextjs";
 import { File, Loader, Plus, Trash } from "lucide-react";
-import type { NextPage } from "next";
-import { useCallback, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 import type { FileRejection } from "react-dropzone";
 import { useDropzone } from "react-dropzone";
+type Props = {
+  applicationId: string;
+  documentId: string;
+};
 
-export const DocumentDropzone: NextPage = () => {
+export const DocumentDropzone = ({ applicationId, documentId }: Props) => {
   const [currentShowFiles, setCurrentShowFiles] = useState<
     { file: File; isUploaded: boolean }[]
   >([]);
@@ -119,6 +126,22 @@ export const DocumentDropzone: NextPage = () => {
     setCurrentShowFiles(filteringFiles);
   };
 
+  const { getToken } = useAuth();
+  const [isSubmit, setIsSubmit] = useState(false);
+  const router = useRouter();
+  useEffect(() => {
+    const handleSubmit = async () => {
+      const token = await getToken();
+      if (isSubmit) {
+        await submitDocument(applicationId, documentId, token);
+        setIsSubmit(false);
+        console.log("submit");
+        router.push(`/documents?applicationId=${applicationId}`);
+      }
+    };
+    handleSubmit();
+  }, [isSubmit]);
+
   return (
     <div className="w-full flex-1 flex">
       <div
@@ -143,7 +166,7 @@ export const DocumentDropzone: NextPage = () => {
       </div>
       <aside className="w-1/2 pl-5 h-full grid">
         <CaptionSemi>Uploaded files</CaptionSemi>
-        <div className=" flex items-end">
+        <div className=" flex flex-col justify-between">
           <ScrollArea className="w-full h-[270px] rounded-md border">
             {currentShowFiles && (
               <ul className="p-4">
@@ -183,6 +206,9 @@ export const DocumentDropzone: NextPage = () => {
               </ul>
             )}
           </ScrollArea>
+          <DialogClose asChild>
+            <Button onClick={() => setIsSubmit(true)}>Submit</Button>
+          </DialogClose>
         </div>
       </aside>
     </div>

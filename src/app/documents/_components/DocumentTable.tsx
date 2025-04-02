@@ -13,11 +13,12 @@ import { UploadDocumentModal } from "./UploadDocumentModal";
 
 type Props = {
   documents: DocumentType[];
+  applicationId: string;
 };
 
-export const DocumentTable = ({ documents }: Props) => {
+export const DocumentTable = ({ documents, applicationId }: Props) => {
   console.log("🐉", documents);
-  
+
   return (
     <Table className="bg-primary-white">
       <TableHeader className="bg-secondary-medium-gray text-primary-white text-caption-semi">
@@ -44,9 +45,19 @@ export const DocumentTable = ({ documents }: Props) => {
           <TableRow key={index}>
             <TableCell className="px-[30px]">{document.format}</TableCell>
             <TableCell className="text-caption-semi">{document.name}</TableCell>
-            <TableCell>{new Date(document.dueDate).toLocaleDateString("en-us", {year: "numeric", month: "short", day: "numeric"})}</TableCell>
             <TableCell>
-              <UploadDocumentModal status={document.status} />
+              {new Date(document.dueDate).toLocaleDateString("en-us", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
+            </TableCell>
+            <TableCell>
+              <UploadDocumentModal
+                status={document.status}
+                applicationId={applicationId}
+                documentId={document._id}
+              />
             </TableCell>
             <TableCell className="">
               <StatusTag status={document.status} />
