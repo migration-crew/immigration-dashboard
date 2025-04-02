@@ -4,10 +4,10 @@ import { getAllDocument } from "@/hooks/getAllDocument";
 import { DocumentTable } from "./DocumentTable";
 
 type Props = {
-  applicationId: string
-}
+  applicationId: string;
+};
 
-export const FilterTable = async ({applicationId}: Props) => {
+export const FilterTable = async ({ applicationId }: Props) => {
   const sortOptions = [
     { label: "Date: First to Last", value: "date_asc" },
     { label: "Date: Last to First", value: "date_desc" },
@@ -38,7 +38,7 @@ export const FilterTable = async ({applicationId}: Props) => {
         visaTypes={visaTypes}
         statusOptions={statusOptions}
       />
-      <DocumentTable documents={documents} />
+      <DocumentTable documents={documents} applicationId={applicationId} />
     </div>
   );
 };
