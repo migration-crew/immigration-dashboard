@@ -163,7 +163,7 @@ const PaymentModal = ({ payment, clientSecret }: Props) => {
           disabled={isLoading || !stripe || !elements}
         >
           <Paragraph>
-            {!isLoading ? `Pay ${payment.currency} ${payment.amount.toFixed(2)}` : "Processing..."}
+            {!isLoading ? `Pay ${payment.currency.toUpperCase()} ${payment.amount.toFixed(2)}` : "Processing..."}
           </Paragraph>
         </Button>
         {message && <div>{message}</div>}
