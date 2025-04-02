@@ -1,5 +1,6 @@
 "use client";
 
+import { LogoImage } from "@/components/common/Logo";
 import {
   Sidebar,
   SidebarContent,
@@ -22,7 +23,6 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Caption } from "../text/Caption";
-import { LogoImage } from "@/components/common/Logo";
 
 const sidebarItems = [
   {
@@ -67,7 +67,7 @@ export default function AppSidebar() {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className="flex mx-auto mb-8">
-        <LogoImage width={134} height={58}/>
+        <LogoImage width={134} height={58} />
       </SidebarHeader>
       <SidebarContent>
         <SidebarMenu>
@@ -77,7 +77,7 @@ export default function AppSidebar() {
                 <Link
                   href={item.href}
                   className={` ${clsx(
-                    "flex gap-2 h-full w-[80%] hover:bg-primary-gray rounded mx-auto pl-10",
+                    "flex gap-2 h-full w-[80%] rounded mx-auto pl-10",
                     {
                       "bg-primary-red text-primary-white":
                         pathname === item.href,
