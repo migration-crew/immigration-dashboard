@@ -76,13 +76,12 @@ export default function AppSidebar() {
               <SidebarMenuButton asChild className="w-[240px] h-[50px]">
                 <Link
                   href={item.href}
-                  className={` ${clsx(
-                    "flex gap-2 h-full w-[80%] rounded mx-auto pl-10",
-                    {
-                      "bg-primary-red text-primary-white":
-                        pathname === item.href,
-                    }
-                  )}`}
+                  className={clsx(
+                    "flex gap-2 h-full w-[80%] rounded mx-auto pl-10 transition-colors",
+                    pathname === item.href
+                      ? "bg-primary-red text-primary-white hover:bg-primary-red"
+                      : "hover:bg-primary-gray"
+                  )}
                 >
                   <item.icon className="w-[24px] h-[24px]" />
                   <Caption>{item.label}</Caption>
