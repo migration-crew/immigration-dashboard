@@ -154,7 +154,7 @@ const PaymentModal = ({ payment, clientSecret }: Props) => {
           <CardFooter className="flex justify-end pt-4">
             <SubheadingLeadLight>Total:</SubheadingLeadLight>
             <HeadingSemi className="pl-4 text-primary-red">
-              {payment.currency} {payment.amount.toFixed(2)}
+              {payment.currency.toUpperCase()} {payment.amount.toFixed(2)}
             </HeadingSemi>
           </CardFooter>
         </Card>
