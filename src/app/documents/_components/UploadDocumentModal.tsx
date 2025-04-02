@@ -14,9 +14,14 @@ import { SubmitDocumentButton } from "./SubmitDocumentButton";
 
 type Props = {
   status: string;
+  documentId: string;
 };
 
-export const UploadDocumentModal = ({ status }: Props) => {
+export const UploadDocumentModal = ({ status, documentId }: Props) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+  }
   return (
     <Dialog>
       {/* Button to open upload document modal */}
@@ -25,6 +30,7 @@ export const UploadDocumentModal = ({ status }: Props) => {
       </DialogTrigger>
       {/* upload document modal */}
       <DialogContent className="max-w-[700px] h-[500px] flex flex-col">
+        <form onSubmit={handleSubmit}>
       <DialogHeader>
         <DialogTitle>Documents</DialogTitle>
         <DialogDescription>You can choose several file types. (.pdf .png .jpg .jpeg .doc .docx .xls .xlsx .ppt .pptx)</DialogDescription>
@@ -36,6 +42,7 @@ export const UploadDocumentModal = ({ status }: Props) => {
             <Button type="button">Submit</Button>
           </DialogClose>
         </DialogFooter>
+        </form>
       </DialogContent>
     </Dialog>
   );

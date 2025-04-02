@@ -46,7 +46,7 @@ export const DocumentTable = ({ documents }: Props) => {
             <TableCell className="text-caption-semi">{document.name}</TableCell>
             <TableCell>{new Date(document.dueDate).toLocaleDateString("en-us", {year: "numeric", month: "short", day: "numeric"})}</TableCell>
             <TableCell>
-              <UploadDocumentModal status={document.status} />
+              <UploadDocumentModal status={document.status} documentId={document._id} />
             </TableCell>
             <TableCell className="">
               <StatusTag status={document.status} />
