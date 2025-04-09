@@ -1,6 +1,6 @@
 'use client';
 
-import { TaskStep } from '@/components/common/TaskStep';
+import { TaskStep } from '@/components/common/Task/TaskStep';
 import { Paragraph } from '@/components/common/text/Paragraph';
 import { Button } from '@/components/ui/upImmigrationButton';
 import { ApplicationTaskStageType } from '@/types/Application/ApplicationType';
