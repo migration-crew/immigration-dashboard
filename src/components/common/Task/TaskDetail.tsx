@@ -33,7 +33,8 @@ export default function TaskDetail({ applicationTask }: Props) {
       </div>
       <div className='flex flex-col gap-1'>
         <MicrotextSemi>Attachments:</MicrotextSemi>
-        <Microtext>{applicationTask.documentURLs}</Microtext>
+        {applicationTask.attachments.map((attachment, index) => (<Microtext key={index}>{attachment}</Microtext>))}
+        
       </div>
       <div className='flex flex-col gap-1'>
         <MicrotextSemi>Messages:</MicrotextSemi>
