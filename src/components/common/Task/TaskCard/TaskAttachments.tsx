@@ -1,5 +1,5 @@
 import { Paperclip } from "lucide-react";
-import { Microtext } from "../text/Microtext";
+import { Microtext } from "../../text/Microtext";
 
 type Props = {
   attachmentsCount: number;

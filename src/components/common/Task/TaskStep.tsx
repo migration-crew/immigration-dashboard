@@ -2,7 +2,7 @@
 
 import DynamicHeaderContainer from "@/components/common/DynamicHeaderContainer";
 import HorizontalProgressBar from "@/components/common/HorizontalProgressBar";
-import { TaskCard } from "@/components/common/TaskCard/TaskCard";
+import { TaskCard } from "@/components/common/Task/TaskCard/TaskCard";
 import { CaptionSemi } from "@/components/common/text/CaptionSemi";
 import { ApplicationTaskType } from "@/types/Application/ApplicationTaskType";
 import { ApplicationTaskStageType } from "@/types/Application/ApplicationType";
@@ -21,7 +21,7 @@ export function TaskStep({ TaskStep, isCurrentTask }: Props) {
           <HorizontalProgressBar progress={TaskStep.progress} />
           <div
             className={`overflow-auto rounded-b-2xl hide-scrollbar ${
-              isCurrentTask ? "h-[275px]": "h-full"
+              isCurrentTask ? "h-[275px]" : "h-full"
             }`}
           >
             {TaskStep?.tasks?.map((task: ApplicationTaskType) => {
