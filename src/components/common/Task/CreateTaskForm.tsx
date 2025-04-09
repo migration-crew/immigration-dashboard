@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/upImmigrationButton";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { DatePicker } from "./DatePicker";
+import { DatePicker } from "@/components/ui/DatePicker";
 
 const formSchema = z.object({
   title: z.string({ required_error: "Title is required" }),
