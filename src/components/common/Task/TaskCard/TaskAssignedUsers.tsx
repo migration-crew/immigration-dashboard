@@ -3,7 +3,8 @@ import { ApplicationCommentType } from "@/types/Application/ApplicationCommentTy
 type Props = {
   comments?: ApplicationCommentType[];
 };
-
+// CHECK LATER
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function TaskAssignedUsers({ comments }: Props) {
   return (
     <ul className="flex gap-1 items-center w-[100px] justify-end">
