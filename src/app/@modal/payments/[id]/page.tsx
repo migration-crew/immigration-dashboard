@@ -3,7 +3,9 @@ import { getPayment } from "@/hooks/getPayment";
 import { stripe } from "@/lib/stripe";
 import { PaymentType } from "@/types/Payment/PaymentType";
 
-const page = async ({ params }: { params: { id: string } }) => {
+// CHECK LATER
+// delete type
+export default async function Page ({ params }) {
   const paymentId = params.id;
   const payment = (await getPayment(paymentId)) as PaymentType;
 
@@ -21,5 +23,3 @@ const page = async ({ params }: { params: { id: string } }) => {
 
   return <PaymentModalElement payment={payment} clientSecret={clientSecret} />;
 };
-
-export default page;
