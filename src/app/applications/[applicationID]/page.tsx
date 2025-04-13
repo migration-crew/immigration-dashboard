@@ -1,6 +1,6 @@
 import { BreadcrumbComponent } from '@/components/common/Breadcrumbs/BreadcrumbComponent';
 import { PageContainer } from '@/components/common/PageContainer';
-import { TaskStep } from '@/components/common/TaskStep';
+import { TaskStep } from '@/components/common/Task/TaskStep';
 import { getAllApplications } from '@/hooks/getAllApplications';
 import { fetchApplicationTasks } from '@/hooks/getApplicationTasks';
 

@@ -17,7 +17,7 @@ export const updateDocumentStatus = async (
   document: NewDocumentInfoType
 ) => {
   await dbConnect();
-  let updates: string[] = [];
+  const updates: string[] = [];
 
   if (document.status) {
     await Document.findByIdAndUpdate(documentId, {

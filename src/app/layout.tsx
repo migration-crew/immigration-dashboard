@@ -5,7 +5,7 @@ import AppSidebar from "@/components/common/Sidebar/AppSidebar";
 import TopNavbar from "@/components/common/TopNavbar/TopNavbar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { Poppins } from "next/font/google";
-import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { ClerkProvider, SignedIn, SignedOut } from '@clerk/nextjs'
 import ProtectedRoute from "./protectedRoute/ProtectedRoute";
 
 export const poppins = Poppins({

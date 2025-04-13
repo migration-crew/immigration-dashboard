@@ -1,4 +1,4 @@
-import { MicrotextSemi } from "../text/MicrotextSemi";
+import { MicrotextSemi } from "../../text/MicrotextSemi";
 
 type Props = {
   title: string;

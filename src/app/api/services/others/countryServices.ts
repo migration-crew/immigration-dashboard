@@ -3,6 +3,8 @@ import { writeFile, readFile, access, constants } from 'fs/promises'
 const REST_COUNTRIES_BASE_URL = 'https://restcountries.com/v3.1/all';
 const CACHE_FILE_PATH = './src/app/api/services/others/countries_cache.json';
 
+// CHECK LATER
+// change all any to unknown
 export const getAllCountries = async () => {
     // Check if we have the data cached
     if (await hasCache()) {
@@ -16,13 +18,13 @@ export const getAllCountries = async () => {
     return extractOnlyCommonCountries(countries);
 }
 
-const extractOnlyCommonCountries = (countries: any) => {
+const extractOnlyCommonCountries = (countries: unknown) => {
     console.log('Extracting common names of countries...');
     if (!Array.isArray(countries)) {
         throw new TypeError('Expected an array of countries');
     }
 
-    const allCountries = countries.map((country: any) => {
+    const allCountries = countries.map((country: unknown) => {
         if (country.name && country.name.common) {
             return country.name.common;
         } else {
@@ -46,13 +48,13 @@ export const getAllLanguages = async () => {
     return extractOnlyLanguages(countries);
 }
 
-const extractOnlyLanguages = (countries: any) => {
+const extractOnlyLanguages = (countries: unknown) => {
     console.log('Extracting languages...');
     if (!Array.isArray(countries)) {
         throw new TypeError('Expected an array of countries');
     }
 
-    const allLanguages = countries.map((country: any) => {
+    const allLanguages = countries.map((country: unknown) => {
         if (country.languages) {
             return Object.values(country.languages);
         } else {
@@ -86,7 +88,7 @@ const getCountriesFromCache = async () => {
     }
 }
 
-const saveCountriesToFile = async (countries: any) => {
+const saveCountriesToFile = async (countries: unknown) => {
     try {
         console.log('Saving data to countries.json...');
         await writeFile(CACHE_FILE_PATH, JSON.stringify(countries, null, 2));

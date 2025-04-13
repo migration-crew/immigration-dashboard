@@ -1,5 +1,5 @@
 import { MessageSquareMore } from "lucide-react";
-import { Microtext } from "../text/Microtext";
+import { Microtext } from "../../text/Microtext";
 
 type Props = {
   commentsCount?: number;

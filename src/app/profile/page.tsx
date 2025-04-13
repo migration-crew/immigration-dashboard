@@ -47,6 +47,8 @@ export const page = ({}: Props) => {
       }
     };
     fetchUsers();
+    // CHECK LATER
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleUpdateUser = (updatedData: UserType) => {

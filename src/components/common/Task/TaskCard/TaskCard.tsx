@@ -1,10 +1,10 @@
 "use client";
 
-import TaskDetail from "@/app/playground/david/TaskDetail";
+import TaskDetail from "@/components/common/Task/TaskDetail";
 import { Sheet, SheetTrigger } from "@/components/ui/upImmigrationSheet";
 import { cn } from "@/lib/utils";
 import { ApplicationTaskType } from "@/types/Application/ApplicationTaskType";
-import { Card } from "../../ui/card";
+import { Card } from "../../../ui/card";
 import { TaskAssignedUsers } from "./TaskAssignedUsers";
 import { TaskAttachments } from "./TaskAttachments";
 import { TaskComments } from "./TaskComments";
