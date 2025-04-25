@@ -7,9 +7,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  params = await params;
   const { id } = await params;
   if (!id) {
     return NextResponse.json(
@@ -31,10 +30,9 @@ export async function GET(
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   // Extract channelId from the parameters
-  params = await params;
   const { id } = await params;
   if (!id) {
     return NextResponse.json(
@@ -74,11 +72,10 @@ export async function POST(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Extract the message ID from the parameters
-    params = await params;
     const { id } = await params;
     if (!id) {
       return NextResponse.json(
@@ -100,11 +97,10 @@ export async function DELETE(
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Extract the message ID and content from the parameters and body
-    params = await params;
     const { id } = await params;
     const body = await req.json();
     const { content } = body;
