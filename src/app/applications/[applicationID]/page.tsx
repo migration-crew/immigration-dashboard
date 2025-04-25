@@ -7,14 +7,14 @@ import { fetchApplicationTasks } from '@/hooks/getApplicationTasks';
 export default async function ApplicationDetailPage({
   params,
 }: {
-  params: { applicationID: string };
+  params: Promise<{ applicationID: string }>;
 }) {
   const { applications } = await getAllApplications();
   if (!applications) {
     return <div>Error: Failed to fetch application</div>;
   }
-  params = await params;
-  const applicationId = (await params.applicationID) || applications[0]._id;
+  const { applicationID } = await params
+  const applicationId = applicationID || applications[0]._id;
   const { applicationTaskSteps, taskLoading, taskError } =
     await fetchApplicationTasks(applicationId);
 
