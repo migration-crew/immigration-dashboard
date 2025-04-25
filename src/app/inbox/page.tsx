@@ -12,13 +12,14 @@ import { newChatUsers } from "../playground/yui/data/newChatModal";
 const page = async ({
   searchParams,
 }: {
-  searchParams: { messageId: string };
+  searchParams: Promise<{ messageId: string }>;
 }) => {
-  searchParams = await searchParams;
-  const messageId =
-    (await searchParams.messageId) ||
-    chatsData.find((chat) => chat.users.length > 2)?._id ||
+  let { messageId } = await searchParams
+  if(!messageId){
+    messageId = chatsData.find((chat) => chat.users.length > 2)?._id ||
     chatsData[0]._id;
+
+  }
 
   const currentChat = chatsData.find((d) => {
     return d._id === messageId;
