@@ -43,7 +43,7 @@ const STATUS_CONTENT_MAP: STATUS_CONTENT_MAP_type = {
 export default async function SuccessPage({
   searchParams,
 }: {
-  searchParams: { payment_intent: string };
+  searchParams: Promise<{ payment_intent: string }>;
 }) {
   const { payment_intent: paymentIntentId } = await searchParams;
 
