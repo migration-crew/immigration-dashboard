@@ -5,8 +5,13 @@ import { PaymentType } from "@/types/Payment/PaymentType";
 
 // CHECK LATER
 // delete type
-export default async function Page ({ params }) {
-  const paymentId = params.id;
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const paymentId = id;
   const payment = (await getPayment(paymentId)) as PaymentType;
 
   const { client_secret: clientSecret } = await stripe.paymentIntents.create({
