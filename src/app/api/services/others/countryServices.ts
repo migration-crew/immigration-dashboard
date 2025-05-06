@@ -3,6 +3,13 @@ import { writeFile, readFile, access, constants } from 'fs/promises'
 const REST_COUNTRIES_BASE_URL = 'https://restcountries.com/v3.1/all';
 const CACHE_FILE_PATH = './src/app/api/services/others/countries_cache.json';
 
+
+type CountryType = {
+    name: {
+        common: string;
+    }
+    languages: object;
+}
 // CHECK LATER
 // change all any to unknown
 export const getAllCountries = async () => {
@@ -24,7 +31,7 @@ const extractOnlyCommonCountries = (countries: unknown) => {
         throw new TypeError('Expected an array of countries');
     }
 
-    const allCountries = countries.map((country: unknown) => {
+    const allCountries = countries.map((country: CountryType) => {
         if (country.name && country.name.common) {
             return country.name.common;
         } else {
@@ -54,7 +61,7 @@ const extractOnlyLanguages = (countries: unknown) => {
         throw new TypeError('Expected an array of countries');
     }
 
-    const allLanguages = countries.map((country: unknown) => {
+    const allLanguages = countries.map((country: CountryType) => {
         if (country.languages) {
             return Object.values(country.languages);
         } else {
