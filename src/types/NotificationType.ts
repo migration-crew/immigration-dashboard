@@ -1,5 +1,5 @@
 export type NotificationType = {
-  id: string;
+  _id: string;
   content: string;
   timestamp: Date;
   read: boolean;
