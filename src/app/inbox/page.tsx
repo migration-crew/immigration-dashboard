@@ -30,6 +30,16 @@ const page = async ({
   const title = currentChat.name;
   const links = [{ name: "Inbox", href: "/inbox" }];
 
+  const deleteMessage = (messageId: string) => {
+    // メッセージを削除する処理をここに追加
+    console.log("Deleting message with ID:", messageId);
+  }
+
+  const editMessage = (messageId: string) => {
+    // メッセージを編集する処理をここに追加
+    console.log("Editing message with ID:", messageId);
+  }
+
   return (
     <PageContainer className="grid items-center">
       <div>
@@ -44,7 +54,7 @@ const page = async ({
             <ScrollArea className="h-[723px]">
               <div className="">
                 {messages.map((message) => (
-                  <ChatContainer key={message.id} message={message} />
+                  <ChatContainer key={message._id} message={message} deleteMessage={deleteMessage} editMessage={editMessage} />
                 ))}
               </div>
             </ScrollArea>
