@@ -11,51 +11,51 @@ import { SearchBar } from './SearchBar';
 
 const messages: MessageType[] = [
   {
-    id: '1',
+    _id: '1',
     content: 'This is a message',
     createdAt: new Date().toISOString(),
     user: {
-      id: '1',
+      _id: '1',
       firstName: 'John',
       lastName: 'Doe',
       nationality: 'USA',
       language: 'en',
       address: '1234 Main St',
-      birthDate: '01/01/1990',
+      dateOfBirth: '01/01/1990',
       gender: 'male',
       email: 'johndoe@test.com',
-      imageUrl: 'https://randomuser.me/api/port',
+      imageURL: 'https://randomuser.me/api/port',
     },
   },
   {
-    id: '2',
+    _id: '2',
     content: 'This is another message',
     createdAt: new Date().toISOString(),
     user: {
-      id: '2',
+      _id: '2',
       firstName: 'Jane',
       lastName: 'Doe',
       nationality: 'USA',
       language: 'en',
       address: '1234 Main St',
-      birthDate: '01/01/1990',
+      dateOfBirth: '01/01/1990',
       gender: 'male',
       email: 'johndoe@test.com',
-      imageUrl: 'https://randomuser.me/api/port',
+      imageURL: 'https://randomuser.me/api/port',
     },
   },
 ];
 
 const notifications: NotificationType[] = [
   {
-    id: '1',
+    _id: '1',
     content: 'This is a notification',
     timestamp: new Date(),
     read: false,
     redirectUrl: '/',
   },
   {
-    id: '2',
+    _id: '2',
     content: 'This is another notification',
     timestamp: new Date(),
     read: true,
