@@ -1,4 +1,3 @@
-import ChatContainer from "@/app/inbox/_components/ChatContainer";
 import ChatHeader from "@/app/inbox/_components/ChatHeader";
 import ChatSideBar from "@/app/inbox/_components/ChatSideBar";
 import MessageComposer from "@/app/inbox/_components/MessageComposer";
@@ -9,16 +8,16 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { chatsData } from "../playground/yui/data/chat";
 import { messages } from "../playground/yui/data/message";
 import { newChatUsers } from "../playground/yui/data/newChatModal";
+import ChatArea from "./_components/ChatArea";
 const page = async ({
   searchParams,
 }: {
   searchParams: Promise<{ messageId: string }>;
 }) => {
-  let { messageId } = await searchParams
-  if(!messageId){
-    messageId = chatsData.find((chat) => chat.users.length > 2)?._id ||
-    chatsData[0]._id;
-
+  let { messageId } = await searchParams;
+  if (!messageId) {
+    messageId =
+      chatsData.find((chat) => chat.users.length > 2)?._id || chatsData[0]._id;
   }
 
   const currentChat = chatsData.find((d) => {
@@ -29,16 +28,6 @@ const page = async ({
   }
   const title = currentChat.name;
   const links = [{ name: "Inbox", href: "/inbox" }];
-
-  const deleteMessage = (messageId: string) => {
-    // メッセージを削除する処理をここに追加
-    console.log("Deleting message with ID:", messageId);
-  }
-
-  const editMessage = (messageId: string) => {
-    // メッセージを編集する処理をここに追加
-    console.log("Editing message with ID:", messageId);
-  }
 
   return (
     <PageContainer className="grid items-center">
@@ -52,11 +41,7 @@ const page = async ({
           <div className="flex-1">
             <ChatHeader title={title} />
             <ScrollArea className="h-[723px]">
-              <div className="">
-                {messages.map((message) => (
-                  <ChatContainer key={message._id} message={message} deleteMessage={deleteMessage} editMessage={editMessage} />
-                ))}
-              </div>
+              <ChatArea messages={messages} />
             </ScrollArea>
             <MessageComposer />
           </div>
