@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/upImmigrationButton";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ErrorIcon, InfoIcon, SuccessIcon } from "public/svg/paymentIcon";
-import { stripe } from "../../lib/stripe";
+import { stripe } from "@/lib/stripe";
 
 type STATUS_CONTENT_MAP_type = {
   [key: string]: {
