@@ -14,7 +14,7 @@ export const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Up Immigration Dashboard",
+  title: "Dashboard - Up Immigration",
   description: "Immigration Dashboard is a full-featured platform designed to streamline the immigration process. Users can submit documents, track applications, make payments, and schedule meetings with administrators—all in one place. The platform ensures secure, seamless, and scalable experiences for both clients and admins",
 };
 
