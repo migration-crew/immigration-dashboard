@@ -1,39 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# [Immigration Dashboard](https://immigration-dashboard.vercel.app)
 
-## Getting Started
+![opengraph-image](https://github.com/user-attachments/assets/7b4550a9-21ec-40de-8911-9ba41d95e949)
 
-First, run the development server:
+A full-stack web application designed to streamline immigration workflows for both clients and administrators. It features centralized document handling, real-time status tracking, secure messaging, and payment processing.
+
+---
+
+## 📚 Overview
+
+This dashboard was developed as part of a school capstone project by a 5-member team using a modern web tech stack. It provides:
+
+- Role-based dashboards for clients and admins
+- Centralized document upload and review
+- Real-time immigration status tracking
+- Messaging system for inquiries and responses
+- Stripe integration for secure online payments
+- Clerk-based authentication and user management
+
+---
+
+## 🧑‍💻 Tech Stack
+
+- **Frontend**: Next.js, React, TypeScript, Tailwind CSS, Shadcn UI
+- **Backend**: Node.js, Express
+- **Database**: MongoDB (via Mongoose)
+- **Authentication**: Clerk
+- **Payments**: Stripe
+- **API**: REST
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the Repository
 
 ```bash
-npm run dev
+git clone https://github.com/your-org/immigration-dashboard.git
+cd immigration-dashboard
+````
+
+### 2. Install Dependencies
+
+bash
+npm install
+
+### 3. Set Environment Variables
+
+Create a .env.local file in the root directory and add the following:
+
+```env
+MONGODB_URI=YOUR_MONGODB_URI
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=YOUR_NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+CLERK_SECRET_KEY=YOUR_CLERK_SECRET_KEY
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_API_URL=LOCAL_HOST_URL/api
+STRIPE_SECRET_KEY=YOUR_STRIPE_SECRET_KEY
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=YOUR_NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 4. Start the Development Server
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+bash
+npm run dev
 
-## How to make a component
+Open your browser and go to [http://localhost:3000](http://localhost:3000)
 
-### Where to make a component
+---
 
-1. Make a component in each feature folder
-2. Put the component in `playground/<your name>/page.tsx` (DON’T call the component from page.tsx in each feature folder for now)
-3. Make sure every component is working properly
-4. Put those components together to make one page
+## 🧩 Features
 
-### 🎨 Design 🎨
-- Use defined colors (If you find a color which is not defined in tailwind.config, Let’s ask members)
+* 🔐 **Authentication** with Clerk for secure user access
+* 👥 **Role-Based Access Control** for users and admins
+* 📁 **Document Management**: upload, review, and organize immigration documents
+* 📊 **Status Tracking**: view and update application progress
+* 💬 **Messaging System**: handle client-admin communication
+* 💳 **Stripe Integration**: seamless online payments
 
-### Changeable Data
-- This data will vary depending on a response from outside of a component like server side, so Let’s make this data changeable (NOT use static data)
+---
 
-### Did you find something that doesn’t make sense?
-- Let’s discuss before changing!
+## 📁 Folder Structure
 
-## Deploy on Vercel
+```text
+.
+├── public/               # Static assets
+└── src/
+    ├── app/
+    │   ├── api/          # API routes
+    │   └── ...           # Route-based pages
+    ├── components/       # Reusable UI components
+    ├── data/             # Static datas
+    ├── hooks/            # Calling api functions
+    ├── lib/              # Utility functions and services
+    ├── types/            # Data types for frontend
+    └── ...
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🏆 Highlights
+
+* Delivered as a capstone project by a 5-person team
+* Selected as the school’s representative project
+* Won the **Implementation Award** from external judges
+* Reduced admin-client turnaround time by approximately 40%
+
+---
+
+## 📄 License
+
+This project is for educational purposes only.
+Please contact the team for any commercial or production use.
