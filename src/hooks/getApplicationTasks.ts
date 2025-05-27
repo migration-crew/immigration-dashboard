@@ -2,7 +2,7 @@ import { ApplicationTaskStageType } from "@/types/Application/ApplicationType";
 import { auth } from "@clerk/nextjs/server";
 
 export async function fetchApplicationTasks(applicationId: string) {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    const apiUrl = process.env.API_URL;
     const { getToken } = await auth();
     const token = await getToken();
 

@@ -4,7 +4,7 @@ export const submitDocument = async (
   documentId: string,
   token: string | null
 ) => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const apiUrl = process.env.API_URL;
 
   if (!token) {
     throw new Error("Failed to get authentication token");
