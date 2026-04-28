@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
 
-export async function post(req: NextRequest) {
+export async function POST(req: NextRequest) {
   try {
     const { payment } = await req.json();
 

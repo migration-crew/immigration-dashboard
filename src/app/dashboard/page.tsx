@@ -13,7 +13,7 @@ import { YourSchedule } from './_components/YourSchedule';
 export default async function DashboardPage({
   searchParams,
 }: {
-  searchParams: { applicationId: string };
+  searchParams: Promise<{ applicationId: string }>;
 }) {
   const { applications, applicationError } = await getAllApplications();
   if (applicationError) {
@@ -23,9 +23,10 @@ export default async function DashboardPage({
     return <div>Error: Failed to fetch application</div>;
   }
 
-  searchParams = await searchParams;
-  const applicationId =
-    (await searchParams.applicationId) || applications[0]._id;
+  let { applicationId } = await searchParams
+  if(!applicationId){
+    applicationId = applications[0]._id
+  }
 
   const { applicationTaskSteps, taskLoading, taskError } =
     await fetchApplicationTasks(applicationId);

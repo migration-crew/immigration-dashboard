@@ -1,4 +1,3 @@
-import ChatContainer from "@/app/inbox/_components/ChatContainer";
 import ChatHeader from "@/app/inbox/_components/ChatHeader";
 import ChatSideBar from "@/app/inbox/_components/ChatSideBar";
 import MessageComposer from "@/app/inbox/_components/MessageComposer";
@@ -9,16 +8,17 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { chatsData } from "../playground/yui/data/chat";
 import { messages } from "../playground/yui/data/message";
 import { newChatUsers } from "../playground/yui/data/newChatModal";
+import ChatArea from "./_components/ChatArea";
 const page = async ({
   searchParams,
 }: {
-  searchParams: { messageId: string };
+  searchParams: Promise<{ messageId: string }>;
 }) => {
-  searchParams = await searchParams;
-  const messageId =
-    (await searchParams.messageId) ||
-    chatsData.find((chat) => chat.users.length > 2)?._id ||
-    chatsData[0]._id;
+  let { messageId } = await searchParams;
+  if (!messageId) {
+    messageId =
+      chatsData.find((chat) => chat.users.length > 2)?._id || chatsData[0]._id;
+  }
 
   const currentChat = chatsData.find((d) => {
     return d._id === messageId;
@@ -41,11 +41,7 @@ const page = async ({
           <div className="flex-1">
             <ChatHeader title={title} />
             <ScrollArea className="h-[723px]">
-              <div className="">
-                {messages.map((message) => (
-                  <ChatContainer key={message.id} message={message} />
-                ))}
-              </div>
+              <ChatArea messages={messages} />
             </ScrollArea>
             <MessageComposer />
           </div>

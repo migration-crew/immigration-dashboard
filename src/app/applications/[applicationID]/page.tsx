@@ -1,20 +1,20 @@
 import { BreadcrumbComponent } from '@/components/common/Breadcrumbs/BreadcrumbComponent';
 import { PageContainer } from '@/components/common/PageContainer';
-import { TaskStep } from '@/components/common/TaskStep';
+import { TaskStep } from '@/components/common/Task/TaskStep';
 import { getAllApplications } from '@/hooks/getAllApplications';
 import { fetchApplicationTasks } from '@/hooks/getApplicationTasks';
 
 export default async function ApplicationDetailPage({
   params,
 }: {
-  params: { applicationID: string };
+  params: Promise<{ applicationID: string }>;
 }) {
   const { applications } = await getAllApplications();
   if (!applications) {
     return <div>Error: Failed to fetch application</div>;
   }
-  params = await params;
-  const applicationId = (await params.applicationID) || applications[0]._id;
+  const { applicationID } = await params
+  const applicationId = applicationID || applications[0]._id;
   const { applicationTaskSteps, taskLoading, taskError } =
     await fetchApplicationTasks(applicationId);
 

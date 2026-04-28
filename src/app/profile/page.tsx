@@ -14,11 +14,11 @@ import { useAuth } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 import ProfileInput from "./_components/ProfileInput";
 
-export type Props = {
-  profile: UserType[];
-};
+// export type Props = {
+//   profile: UserType[];
+// };
 
-export const page = ({}: Props) => {
+export default function ProfilePage () {
   const links = [{ name: "Profile", href: "/profile" }];
   const [users, setUsers] = useState<UserType | null>(null);
   const [imageURL, setImageURL] = useState<string | null>(null);
@@ -47,6 +47,8 @@ export const page = ({}: Props) => {
       }
     };
     fetchUsers();
+    // CHECK LATER
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleUpdateUser = (updatedData: UserType) => {
@@ -128,5 +130,3 @@ export const page = ({}: Props) => {
     </PageContainer>
   );
 };
-
-export default page;

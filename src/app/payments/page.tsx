@@ -12,7 +12,7 @@ import RefundPolicyButton from './_components/RefundPolicy';
 const PaymentPage = async ({
   searchParams,
 }: {
-  searchParams: { applicationId: string };
+  searchParams: Promise<{ applicationId: string }>;
 }) => {
   const { applications, applicationError } = await getAllApplications();
   if (applicationError) {
@@ -21,9 +21,10 @@ const PaymentPage = async ({
   if (!applications) {
     return <div>Error: Failed to fetch application</div>;
   }
-  searchParams = await searchParams;
-  const applicationId =
-    (await searchParams.applicationId) || applications[0]._id;
+  let { applicationId } = await searchParams
+  if(!applicationId){
+    applicationId = applications[0]._id
+  }
   const payments = await getAllPayments(applicationId);
 
   const links = [

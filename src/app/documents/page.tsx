@@ -9,7 +9,7 @@ import { NewDocForm } from "./_components/NewDocForm";
 const documentPage = async ({
   searchParams,
 }: {
-  searchParams: { applicationId: string };
+  searchParams: Promise<{ applicationId: string }>;
 }) => {
   const isAdmin = true;
   const { applications, applicationError } = await getAllApplications();
@@ -20,9 +20,10 @@ const documentPage = async ({
     return <div>Error: Failed to fetch application</div>;
   }
 
-  searchParams = await searchParams;
-  const applicationId =
-    (await searchParams.applicationId) || applications[0]._id;
+  let { applicationId } = await searchParams
+  if(!applicationId){
+    applicationId = applications[0]._id
+  }
 
   const links = [
     { name: "Documents", href: "/documents" },

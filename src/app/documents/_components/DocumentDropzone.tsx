@@ -140,6 +140,8 @@ export const DocumentDropzone = ({ applicationId, documentId }: Props) => {
       }
     };
     handleSubmit();
+    // CHECK LATER
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSubmit]);
 
   return (

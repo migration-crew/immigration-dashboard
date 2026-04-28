@@ -3,6 +3,7 @@ import { AppointmentType as appointmentType } from "../../types/appointment";
 
 // eslint-disable-next-line
 import AppointmentType from "./appointmentType.schema";
+// eslint-disable-next-line
 AppointmentType
 
 type AppointmentModelType = Model<appointmentType>;

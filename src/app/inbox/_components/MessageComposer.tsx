@@ -20,7 +20,7 @@ export default function MessageComposer() {
   const handleSendMessage = () => {
     if (message.trim()) {
       const newMessage: MessageType = {
-        id: String(messages.length), // メッセージのID
+        _id: String(messages.length), // メッセージのID
         content: message,
         createdAt: new Date().toString(),
         user: {
@@ -43,7 +43,7 @@ export default function MessageComposer() {
 
   // メッセージ編集
   const handleEditMessage = (messageId: string) => {
-    const messageToEdit = messages.find((msg) => msg.id === messageId);
+    const messageToEdit = messages.find((msg) => msg._id === messageId);
     if (messageToEdit) {
       setMessage(messageToEdit.content); // 編集モードでメッセージ内容を設定
       setEditingMessageId(messageId); // 編集中のメッセージIDを設定
@@ -54,7 +54,7 @@ export default function MessageComposer() {
   const handleSaveEdit = () => {
     if (editingMessageId && message.trim()) {
       const updatedMessages = messages.map((msg) =>
-        msg.id === editingMessageId ? { ...msg, content: message } : msg
+        msg._id === editingMessageId ? { ...msg, content: message } : msg
       );
       setMessages(updatedMessages); // 更新されたメッセージリストをセット
       setEditingMessageId(null); // 編集モードを終了
@@ -64,7 +64,7 @@ export default function MessageComposer() {
 
   // メッセージ削除
   const handleDeleteMessage = (messageId: string) => {
-    const updatedMessages = messages.filter((msg) => msg.id !== messageId);
+    const updatedMessages = messages.filter((msg) => msg._id !== messageId);
     setMessages(updatedMessages); // 削除後のメッセージリストをセット
   };
 

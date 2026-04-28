@@ -53,7 +53,7 @@ export default function NavbarIcon({
             <div>
               {items.map((item) => (
                 <div
-                  key={item.id}
+                  key={item._id}
                   className="px-4 py-2 border-solid border-b border-primary-white hover:bg-primary-dark-red cursor-pointer"
                 >
                   <p className="text-microtext">{item.content}</p>

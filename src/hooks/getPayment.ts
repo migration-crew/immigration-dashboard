@@ -3,7 +3,7 @@ import { auth } from "@clerk/nextjs/server";
 
 export const getPayment = async (paymentId: string) => {
   const { getToken } = await auth();
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const apiUrl = process.env.API_URL;
   const token = await getToken();
 
   try {

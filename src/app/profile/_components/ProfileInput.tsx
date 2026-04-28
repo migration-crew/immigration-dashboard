@@ -84,6 +84,8 @@ export default function ProfileInput({
       }
     };
     fetchCountries();
+    // CHECK LATER
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -101,6 +103,8 @@ export default function ProfileInput({
       }
     };
     fetchLanguages();
+    // CHECK LATER
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
